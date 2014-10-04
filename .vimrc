@@ -3,17 +3,17 @@
 set nocompatible
 set rtp+=~/.vim/bundle/vundle.vim
 call vundle#begin()
-	Plugin 'gmarik/vundle.vim'
-	Plugin 'scrooloose/nerdcommenter'
-	Plugin 'tpope/vim-surround'
-	Plugin 'scrooloose/syntastic'
-    Plugin 'Lokaltog/vim-easymotion'
-	Plugin 'terryma/vim-multiple-cursors'
-	Plugin 'majutsushi/tagbar'
-    Plugin 'sjl/gundo.vim'
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'Valloric/YouCompleteMe'
+Plugin 'gmarik/vundle.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/syntastic'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'majutsushi/tagbar'
+Plugin 'sjl/gundo.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on
 
