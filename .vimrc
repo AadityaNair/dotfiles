@@ -3,17 +3,17 @@
 set nocompatible
 set rtp+=~/.vim/bundle/vundle.vim
 call vundle#begin()
-Plugin 'gmarik/vundle.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'majutsushi/tagbar'
-Plugin 'sjl/gundo.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
+	Plugin 'gmarik/vundle.vim'
+	Plugin 'scrooloose/nerdcommenter'
+	Plugin 'tpope/vim-surround'
+	Plugin 'scrooloose/syntastic'
+    Plugin 'Lokaltog/vim-easymotion'
+	Plugin 'terryma/vim-multiple-cursors'
+	Plugin 'majutsushi/tagbar'
+    Plugin 'sjl/gundo.vim'
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on
 
@@ -66,7 +66,7 @@ filetype plugin indent on
     let g:tagbar_autofocus=1
     let g:tagbar_sort=0
 
-    "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+    "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
     let g:ycm_min_num_of_chars_for_completion=2
     let g:ycm_min_num_identifier_candidate_chars=4
     let g:ycm_show_diagnostics_ui=1
