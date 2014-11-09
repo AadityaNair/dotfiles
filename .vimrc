@@ -11,7 +11,7 @@ call vundle#begin()
 	Plugin 'terryma/vim-multiple-cursors'
 	Plugin 'majutsushi/tagbar'
     Plugin 'sjl/gundo.vim'
-    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'dstrunk/atom-dark-vim'
     Plugin 'scrooloose/nerdtree'
     Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
@@ -35,7 +35,7 @@ filetype plugin indent on
     nnoremap = <C-w>=
 
     set background=dark
-    colorscheme solarized
+    colorscheme atom_dark
 
 " Behaviour
     set timeoutlen=200
@@ -81,7 +81,7 @@ filetype plugin indent on
     let g:ycm_autoclose_preview_window_after_completion=1
     let g:ycm_autoclose_preview_window_after_insertion =0
     autocmd BufRead *.c,*.h  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
-    autocmd BufRead *.cpp    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
+    autocmd BufRead *.cpp,*.hpp    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
     " Unable to seperate c and c++ header files
 
     "let g:neocomplete#enable_at_startup = 1
@@ -115,6 +115,13 @@ filetype plugin indent on
     inoremap kj <Esc>
 
     noremap <Leader>c <Leader>ci
-    noremap ; :
+    noremap ; : 
 
     noremap <silent> u :GundoToggle<CR>
+
+    nnoremap <C-k> :m .+1<CR>==
+    nnoremap <C-j> :m .-2<CR>==
+    inoremap <C-k> <Esc>:m .+1<CR>==gi
+    inoremap <C-j> <Esc>:m .-2<CR>==gi
+    vnoremap <C-k> :m '>+1<CR>gv=gv
+    vnoremap <C-j> :m '<-2<CR>gv=gv
