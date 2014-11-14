@@ -37,9 +37,9 @@ filetype plugin indent on   " Enable filetype specific plugins
     set laststatus=2        " Show two-line status bar
     set t_Co=256            " Make terminal to 256 colour mode
 
-    nnoremap + <C-w>+       " Increase split size
-    nnoremap - <C-w>-       " Decrease split size 
-    nnoremap = <C-w>=       " Equalise all splits
+    nnoremap + <C-w>+|       " Increase split size
+    nnoremap - <C-w>-|       " Decrease split size 
+    nnoremap = <C-w>=|       " Equalise all splits
 
     set background=dark     " Colorscheme mode
     colorscheme atom_dark   " Set colourscheme
@@ -112,14 +112,15 @@ filetype plugin indent on   " Enable filetype specific plugins
     vnoremap k j
     vnoremap j k
 
-    map <Leader>w H<Leader><Leader>w                    " Macro for Easy Motion
-    nnoremap <silent> <leader><space> :nohlsearch<CR>   " Clear all searches
+    
+    map <Leader>w <Leader><Leader>w |                   " Macro for Easy Motion
+    nnoremap <silent> <leader><space> :nohlsearch<CR>|  " Clear all searches
 
-    nnoremap <silent> <F8> :TagbarToggle<CR>            " Tagbar Mapping
-    nnoremap <silent> <F4> :NERDTreeToggle<CR>          " Directory Tree Mapping
+    nnoremap <silent> <F8> :TagbarToggle<CR>|           " Tagbar Mapping
+    nnoremap <silent> <F4> :NERDTreeToggle<CR>|         " Directory Tree Mapping
 
 " Editing
-    nnoremap <silent> <F2> :set invpaste paste?<CR>     " Open Paste Mode
+    nnoremap <silent> <F2> :set invpaste paste?<CR>|    " Open Paste Mode
     set pastetoggle=<F2>                                " HotKey for Paste Mode
     set showmode                                        " Display Present Mode
 
@@ -133,13 +134,12 @@ filetype plugin indent on   " Enable filetype specific plugins
         return ""
     endfunction
 
-    map :hs :sp        " To create similar mapping for horiz or verti split (thoroughly useless)
-    inoremap kj <Esc>  " Go to escape mode faster ( who uses `kj` in a word anyway ?) 
+    map :hs :sp|                              " To create similar mapping for horiz or verti split (thoroughly useless)
+    inoremap kj <Esc>|                        " Go to escape mode faster ( who uses `kj` in a word anyway ?) 
     
-    " Map `:` to `;` for command mode (Best Macro Ever !!!)
-    nnoremap ; :
+    nnoremap ; :|                             " Map `:` to `;` for command mode (Best Macro Ever !!!)
 
-    nnoremap <silent> u :GundoToggle<CR>     " Replace default undo with GUndo
+    nnoremap <silent> u :GundoToggle<CR>|     " Replace default undo with GUndo
 
     " Macro to shift a line by one (up/down)
     nnoremap <C-k> :m .+1<CR>==
