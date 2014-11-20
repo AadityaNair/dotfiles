@@ -2,16 +2,26 @@
 "   Created and maintained by Aaditya M Nair
 " 
 "   Use or modify freely at your own risk.
+"   
+"   The vimrc consists of following parts:
+"       -> Plugin Management
+"       -> UI Config and Colours
+"       -> Behaviour
+"       -> Spaces and Tabs
+"       -> AutoComplete Behaviour
+"       -> Search and Navigation
+"       -> Editing
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "                                                        Plugin Manager
 
-set nocompatible
-set rtp+=~/.vim/bundle/vundle.vim
+set nocompatible                                    " Make VIM incompatible with VI
+set rtp+=/home/Prometheus/.vim/bundle/vundle.vim    " Append Plugin Manager's location to run time path (rtp)
 call vundle#begin()     " List of All Plugins
 
-    Plugin 'gmarik/vundle.vim'              " Plugin Manager
+    Plugin 'gmarik/vundle.vim'              " Plugin Manager manages itself !!
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
     Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
     Plugin 'scrooloose/syntastic'           " Syntax Checking ( more hassle than useful)
@@ -23,9 +33,11 @@ call vundle#begin()     " List of All Plugins
     Plugin 'dstrunk/atom-dark-vim'              " Personal Favourite 
     Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most  
     
+    Plugin 'jade.vim'                       " Jade synatx highlighting
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'FredKSchott/CoVim'              " Collaborative Editing
+    Plugin 'Raimondi/delimitMate'           " Auto delimiting surrounding char like [], etc.
 
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
@@ -37,8 +49,10 @@ filetype plugin indent on   " Enable filetype specific plugins
     set number              " Show Numbers
     syntax enable           " Syntax Highlighting
     set wildmenu            " Escape mode command autocompletion
+    set textwidth=0         " Turn off physical line wrapping
+    set wrapmargin=0        " same as above
 
-"Configuration for powerline
+" Configuration for powerline
     python from powerline.vim import setup as powerline_setup   
     python powerline_setup()                              
     python del powerline_setup                                  
@@ -52,8 +66,16 @@ filetype plugin indent on   " Enable filetype specific plugins
 
     set background=dark     " Colorscheme mode
     colorscheme atom_dark   " Set colourscheme
-    "colorscheme solarized
-    
+  
+    function! SwitchScheme()    " Function to switch color schemes
+        if g:colors_name == "atom_dark"
+            colorscheme solarized
+        else
+            colorscheme atom_dark
+        endif
+    endfunction
+    map <F3> :call SwitchScheme()<CR>|
+       
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     
@@ -120,7 +142,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:tagbar_autofocus=1
     let g:tagbar_sort=0
 
-    map <Leader>w <Leader><Leader>w |                   " Macro for Easy Motion
+    map <Leader>w H<Leader><Leader>w|                   " Macro for Easy Motion
     nnoremap <silent> <leader><space> :nohlsearch<CR>|  " Clear all searches
 
     nnoremap <silent> <F8> :TagbarToggle<CR>|           " Tagbar Mapping
