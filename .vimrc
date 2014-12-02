@@ -33,11 +33,15 @@ call vundle#begin()     " List of All Plugins
     Plugin 'dstrunk/atom-dark-vim'              " Personal Favourite 
     Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most  
     
-    Plugin 'jade.vim'                       " Jade synatx highlighting
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'FredKSchott/CoVim'              " Collaborative Editing
     Plugin 'Raimondi/delimitMate'           " Auto delimiting surrounding char like [], etc.
+    
+    Plugin 'godlygeek/tabular'              " Vim text alingment
+    Plugin 'SirVer/ultisnips'               " User defined autocomplete
+    Plugin 'luochen1990/rainbow'            " Colour Code Braces
+    Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
 
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
@@ -65,7 +69,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     nnoremap = <C-w>=|       " Equalise all splits
 
     set background=dark     " Colorscheme mode
-    colorscheme atom_dark   " Set colourscheme
+    colorscheme solarized   " Set colourscheme
   
     function! SwitchScheme()    " Function to switch color schemes
         if g:colors_name == "atom_dark"
@@ -75,9 +79,9 @@ filetype plugin indent on   " Enable filetype specific plugins
         endif
     endfunction
     map <F3> :call SwitchScheme()<CR>|
+    let g:rainbow_active = 1 
        
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
     
 "                                                            Behaviour
     
@@ -123,6 +127,11 @@ filetype plugin indent on   " Enable filetype specific plugins
     autocmd BufRead *.c,*.h  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
     autocmd BufRead *.cpp,*.hpp    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
 
+    let g:UltiSnipsExpandTrigger="<c-Tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    let g:UltiSnipsEditSplit="vertical"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
 "                                                       Searching and Navigation
@@ -135,7 +144,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     nnoremap k j        
     nnoremap j k
     vnoremap k j
-    vnoremap j k
+    vnoremap j k   
    
     let NERDTreeDirArrows=1
     let g:tagbar_autoclose=1
@@ -156,16 +165,6 @@ filetype plugin indent on   " Enable filetype specific plugins
     set pastetoggle=<F2>                                " HotKey for Paste Mode
     set showmode                                        " Display Present Mode
 
-" Auto Paste mode (Untested)    
-    let &t_SI .= "\<Esc>[?2004h"
-    let &t_EI .= "\<Esc>[?2004l"
-    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-    function! XTermPasteBegin()
-        set pastetoggle=<Esc>[201~
-        set paste
-        return ""
-    endfunction
-
     nnoremap :hs :sp|                         " To create similar mapping for horiz or verti split (thoroughly useless)
     inoremap kj <Esc>|                        " Go to escape mode faster ( who uses `kj` in a word anyway ?) 
     nnoremap ; :|                             " Map `:` to `;` for command mode (Best Macro Ever !!!)
@@ -181,6 +180,9 @@ filetype plugin indent on   " Enable filetype specific plugins
 
     let NERDCommentWholeLinesInVMode=1     " NERDCommenter Configuration
     let g:gundo_close_on_revert=1          " GUndo auto-close
+
+    let delimitMate_expand_cr = 1
+    let delimitMate_expand_space = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
