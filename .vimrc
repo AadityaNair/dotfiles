@@ -171,12 +171,12 @@ filetype plugin indent on   " Enable filetype specific plugins
     nnoremap <silent> u :GundoToggle<CR>|     " Replace default undo with GUndo
 
 "Macro to shift a line by one (up/down)
-    nnoremap <C-k> :m .+1<CR>==
-    nnoremap <C-j> :m .-2<CR>==
-    inoremap <C-k> <Esc>:m .+1<CR>==gi
-    inoremap <C-j> <Esc>:m .-2<CR>==gi
-    vnoremap <C-k> :m '>+1<CR>gv=gv
-    vnoremap <C-j> :m '<-2<CR>gv=gv
+    nnoremap <silent> <C-k> :m .+1<CR>==
+    nnoremap <silent> <C-j> :m .-2<CR>==
+    inoremap <silent> <C-k> <Esc>:m .+1<CR>==gi
+    inoremap <silent> <C-j> <Esc>:m .-2<CR>==gi
+    vnoremap <silent> <C-k> :m '>+1<CR>gv=gv
+    vnoremap <silent> <C-j> :m '<-2<CR>gv=gv
 
     let NERDCommentWholeLinesInVMode=1     " NERDCommenter Configuration
     let g:gundo_close_on_revert=1          " GUndo auto-close
