@@ -24,7 +24,6 @@ call vundle#begin()     " List of All Plugins
     Plugin 'gmarik/vundle.vim'              " Plugin Manager manages itself !!
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
     Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
-    Plugin 'scrooloose/syntastic'           " Syntax Checking ( more hassle than useful)
     Plugin 'Lokaltog/vim-easymotion'        " Faster File Navigation (like really fast)
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
@@ -127,10 +126,10 @@ filetype plugin indent on   " Enable filetype specific plugins
     autocmd BufRead *.c,*.h  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
     autocmd BufRead *.cpp,*.hpp    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
 
-    let g:UltiSnipsExpandTrigger="<c-Tab>"
+    let g:UltiSnipsExpandTrigger="<c-b>"
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-    let g:UltiSnipsEditSplit="vertical"
+    let g:UltiSnipsEditSplit="context"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
@@ -181,8 +180,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     let NERDCommentWholeLinesInVMode=1     " NERDCommenter Configuration
     let g:gundo_close_on_revert=1          " GUndo auto-close
 
-    let delimitMate_expand_cr = 1
     let delimitMate_expand_space = 1
-
-
+    let delimitMate_expand_cr = 1
+    
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
