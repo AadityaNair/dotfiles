@@ -9,29 +9,52 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+export HISTCONTROL=ignoredups:erasedups  
+shopt -s histappend
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080"
+# VARIABLES
+SUBLIME_LOCATION="/home/Prometheus/Public/IDE/sublime_text_3/"
+TABLE_LOCATION="/home/Prometheus/Public/IDE/LightTable/"
+# ALIASES
+
+#export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080"
 numlockx on
 alias sl='ls'
 alias tst='ping www.google.com'
 alias la='ll -a'
 
 alias jcc='javac'
-alias python="ipython --autoindent --classic --automagic --banner --pprint"
+alias python="ipython --autoindent --automagic --banner --pprint"
 alias storm="bash ~/Downloads/WebStorm-135.1063/bin/webstorm.sh &"
-alias bashrc='vim ~/.bashrc;source ~/.bashrc'
-alias vimrc='vim ~/.vimrc'
+alias brc='vim ~/.bashrc;source ~/.bashrc'
+alias vrc='vim ~/.vimrc'
 
 alias noproxy='export {http,https,ftp,socks}_proxy=""'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080"'
 
-alias proj="cd ~/Projects/ssad26/source/BeaconServer/"
+alias proj="cd ~/projects/ssad26/source/BeaconServer/"
 alias err='echo $?'
+
+alias svi="sudo vim"
+alias dc="sudo /home/Prometheus/Downloads/linuxdcpp-1.0.3/linuxdcpp"
+
+
+# FUNCTIONS
+
+
 mk () {
     mkdir -p "$*"
     cd "$*"
 }
 
+sublime () {
+    $SUBLIME_LOCATION/sublime_text $@ &
+}
+
+table () {
+    $TABLE_LOCATION/LightTable $@ &
+}
 
 start() {
     for serv in "$@"
