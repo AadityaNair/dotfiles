@@ -27,8 +27,8 @@ alias la='ll -a'
 alias jcc='javac'
 alias python="ipython --autoindent --automagic --banner --pprint"
 alias storm="bash ~/Downloads/WebStorm-135.1063/bin/webstorm.sh &"
-alias brc='vim ~/.bashrc;source ~/.bashrc'
-alias vrc='vim ~/.vimrc'
+alias brc='vim ~/projects/dotfiles/.bashrc;source ~/.bashrc'
+alias vrc='vim ~/projects/dotfiles/.vimrc'
 
 alias noproxy='export {http,https,ftp,socks}_proxy=""'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080"'
