@@ -19,6 +19,8 @@
 
 set nocompatible                                    " Make VIM incompatible with VI
 set rtp+=/home/Prometheus/.vim/bundle/vundle.vim    " Append Plugin Manager's location to run time path (rtp)
+filetype off
+
 call vundle#begin()     " List of All Plugins
 
     Plugin 'gmarik/vundle.vim'              " Plugin Manager manages itself !!
