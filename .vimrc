@@ -44,6 +44,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
 
+    Plugin 'beyondmarc/opengl.vim'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -56,7 +57,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     set wildmenu            " Escape mode command autocompletion
     set textwidth=0         " Turn off physical line wrapping
     set wrapmargin=0        " same as above
-
+    "set wildmode=longest
 " Configuration for powerline
     python from powerline.vim import setup as powerline_setup   
     python powerline_setup()                              
@@ -95,6 +96,8 @@ filetype plugin indent on   " Enable filetype specific plugins
     let CoVim_default_name = "Prometheus"   " CoVim default username
     let CoVim_default_port = "2048"         " CoVim default port
 
+    set mouse=a                             " Enable Mouse Support
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "                                                          Space and Tabs
@@ -126,8 +129,8 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:ycm_add_preview_to_completeopt=0
     let g:ycm_autoclose_preview_window_after_completion=1
     let g:ycm_autoclose_preview_window_after_insertion =0
-    autocmd BufEnter  *.c,*.h  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
-    autocmd BufEnter  *.cpp,*.hpp    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
+    autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
+    autocmd BufEnter  *.cpp,*.h    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
 
     let g:UltiSnipsExpandTrigger="<c-b>"
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -170,12 +173,12 @@ filetype plugin indent on   " Enable filetype specific plugins
     nnoremap <silent> u :GundoToggle<CR>|     " Replace default undo with GUndo
 
 "Macro to shift a line by one (up/down)
-    nnoremap <silent> <C-k> :m .+1<CR>==
-    nnoremap <silent> <C-j> :m .-2<CR>==
-    inoremap <silent> <C-k> <Esc>:m .+1<CR>==gi
-    inoremap <silent> <C-j> <Esc>:m .-2<CR>==gi
-    vnoremap <silent> <C-k> :m '>+1<CR>gv=gv
-    vnoremap <silent> <C-j> :m '<-2<CR>gv=gv
+    nnoremap <silent> <C-j> :m .+1<CR>==
+    nnoremap <silent> <C-k> :m .-2<CR>==
+    inoremap <silent> <C-j> <Esc>:m .+1<CR>==gi
+    inoremap <silent> <C-k> <Esc>:m .-2<CR>==gi
+    vnoremap <silent> <C-j> :m '>+1<CR>gv=gv
+    vnoremap <silent> <C-k> :m '<-2<CR>gv=gv
 
     let NERDCommentWholeLinesInVMode=1     " NERDCommenter Configuration
     let g:gundo_close_on_revert=1          " GUndo auto-close

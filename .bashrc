@@ -25,20 +25,31 @@ alias tst='ping www.google.com'
 alias la='ll -a'
 
 alias jcc='javac'
-alias python="ipython --autoindent --automagic --banner --pprint"
+alias python="ipython --autoindent --automagic --banner --pprint --no-confirm-exit"
 alias storm="bash ~/Downloads/WebStorm-135.1063/bin/webstorm.sh &"
 alias brc='vim ~/projects/dotfiles/.bashrc;source ~/.bashrc'
 alias vrc='vim ~/projects/dotfiles/.vimrc'
 
 alias noproxy='export {http,https,ftp,socks}_proxy=""'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080"'
-
+setproxy
 alias proj="cd ~/projects/ssad26/source/BeaconServer/"
 alias err='echo $?'
 
 alias svi="sudo vim"
 alias dc="sudo /home/Prometheus/Downloads/linuxdcpp-1.0.3/linuxdcpp"
 
+# --- COLOUR ABSTRACTIONS --- #
+
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 76)
+tan=$(tput setaf 3)
+blue=$(tput setaf 38)
 
 # FUNCTIONS
 
