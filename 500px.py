@@ -54,7 +54,9 @@ def set_wallpaper():
 
     filename = path.abspath( 'wallpaper.jpg' )
     gsettings = Gio.Settings.new(SCHEMA)
+    gsettings.set_string(KEY, "file://" + filename)
     gsettings.apply()
+    #print gsettings.get_string(KEY)
 
 download_image()
 set_wallpaper()

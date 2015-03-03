@@ -18,12 +18,12 @@
 "                                                        Plugin Manager
 
 set nocompatible                                    " Make VIM incompatible with VI
-set rtp+=/home/Prometheus/.vim/bundle/vundle.vim    " Append Plugin Manager's location to run time path (rtp)
+set rtp+=/home/Prometheus/.vim/bundle/Vundle.vim    " Append Plugin Manager's location to run time path (rtp)
 filetype off
 
 call vundle#begin()     " List of All Plugins
 
-    Plugin 'gmarik/vundle.vim'              " Plugin Manager manages itself !!
+    Plugin 'gmarik/Vundle.vim'              " Plugin Manager manages itself !!
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
     Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
     Plugin 'Lokaltog/vim-easymotion'        " Faster File Navigation (like really fast)
@@ -44,7 +44,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
 
-    Plugin 'beyondmarc/opengl.vim'
+    "Plugin 'beyondmarc/opengl.vim'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -96,7 +96,8 @@ filetype plugin indent on   " Enable filetype specific plugins
     let CoVim_default_name = "Prometheus"   " CoVim default username
     let CoVim_default_port = "2048"         " CoVim default port
 
-    set mouse=a                             " Enable Mouse Support
+    "set mouse=a                             " Enable Mouse Support
+    set tabpagemax=30
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
