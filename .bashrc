@@ -11,6 +11,9 @@ fi
 # User specific aliases and functions
 export HISTCONTROL=ignoredups:erasedups  
 shopt -s histappend
+shopt -s autocd
+shopt -s cdspell
+
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # VARIABLES

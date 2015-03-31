@@ -98,6 +98,8 @@ filetype plugin indent on   " Enable filetype specific plugins
 
     "set mouse=a                             " Enable Mouse Support
     set tabpagemax=30
+    vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+    imap <C-v> <Esc><C-v>a
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
