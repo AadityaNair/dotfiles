@@ -18,7 +18,7 @@
 "                                                        Plugin Manager
 
 set nocompatible                                    " Make VIM incompatible with VI
-set rtp+=/home/Prometheus/.vim/bundle/Vundle.vim    " Append Plugin Manager's location to run time path (rtp)
+set rtp+=/home/Nair/.vim/bundle/Vundle.vim    " Append Plugin Manager's location to run time path (rtp)
 filetype off
 
 call vundle#begin()     " List of All Plugins
