@@ -42,13 +42,13 @@ eval `dircolors /home/Nair/Public/dircolors-solarized/dircolors.ansi-dark`
  HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ ZSH_CUSTOM=/home/Nair/projects/dotfiles/
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump common-aliases compleat dircycle dirhistory gitfast git-extras sudo yum)
+plugins=(git common-aliases compleat dircycle dirhistory gitfast git-extras sudo yum)
 
 # User configuration
 
@@ -83,3 +83,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source /home/Nair/projects/dotfiles/shell_commons
+source /home/Nair/.autojump/share/autojump/autojump.zsh
