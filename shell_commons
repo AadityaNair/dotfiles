@@ -63,4 +63,4 @@ stop() {
         fi
     done 
 }
-
+. /etc/profile.d/vte.sh

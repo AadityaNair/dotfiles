@@ -7,7 +7,8 @@ export ZSH=/home/Nair/.zsh/oh-my-zsh
 # time that oh-my-zsh is loaded.
 
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+#export DEFAULT_USER="Nair"
+ZSH_THEME="agnoster-new"
 eval `dircolors /home/Nair/Public/dircolors-solarized/dircolors.ansi-dark`
 
 # Uncomment the following line to use case-sensitive completion.
@@ -43,7 +44,7 @@ eval `dircolors /home/Nair/Public/dircolors-solarized/dircolors.ansi-dark`
 
 # Would you like to use another custom folder than $ZSH/custom?
  ZSH_CUSTOM=/home/Nair/projects/dotfiles/
-
+ 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
