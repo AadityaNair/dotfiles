@@ -2,7 +2,7 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
-SEGMENT_SEPARATOR='➤➤'
+SEGMENT_SEPARATOR='➤'
 
 prompt_segment() {
   local bg fg
@@ -20,7 +20,7 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n " %{%k%F{white}%}$SEGMENT_SEPARATOR"
   else
     echo -n "%{%k%}"
   fi
@@ -69,7 +69,7 @@ prompt_git() {
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
-    echo -n "[ ${ref/refs\/heads\// }${vcs_info_msg_0_%% }${mode} ]"
+    echo -n " ${ref/refs\/heads\// }${vcs_info_msg_0_%% }${mode} "
   fi
 }
 
@@ -96,8 +96,6 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_status
-  prompt_context
-  #prompt_git
   prompt_dir
   prompt_end
 }
