@@ -24,6 +24,7 @@ filetype off
 call vundle#begin()     " List of All Plugins
 
     Plugin 'gmarik/Vundle.vim'              " Plugin Manager manages itself !!
+    
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
     Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
     Plugin 'Lokaltog/vim-easymotion'        " Faster File Navigation (like really fast)
@@ -31,20 +32,17 @@ call vundle#begin()     " List of All Plugins
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    Plugin 'dstrunk/atom-dark-vim'              " Personal Favourite 
+    Plugin 'goatslacker/mango.vim'              " Personal Favourite 
     Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most  
     
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
-    Plugin 'FredKSchott/CoVim'              " Collaborative Editing
     Plugin 'Raimondi/delimitMate'           " Auto delimiting surrounding char like [], etc.
     
-    Plugin 'godlygeek/tabular'              " Vim text alingment
     Plugin 'SirVer/ultisnips'               " User defined autocomplete
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
 
-    "Plugin 'beyondmarc/opengl.vim'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -74,10 +72,10 @@ filetype plugin indent on   " Enable filetype specific plugins
     colorscheme solarized   " Set colourscheme
   
     function! SwitchScheme()    " Function to switch color schemes
-        if g:colors_name == "atom_dark"
+        if g:colors_name == "mango"
             colorscheme solarized
         else
-            colorscheme atom_dark
+            colorscheme mango
         endif
     endfunction
     map <F3> :call SwitchScheme()<CR>|
@@ -93,8 +91,8 @@ filetype plugin indent on   " Enable filetype specific plugins
     let mapleader =','                      " Set default leader to a button nearby
     autocmd BufWritePost .vimrc source %    " autoupdate vimrc on change
 
-    let CoVim_default_name = "Prometheus"   " CoVim default username
-    let CoVim_default_port = "2048"         " CoVim default port
+    "let CoVim_default_name = 'Prometheus'   " CoVim default username
+    "let CoVim_default_port = '2048'         " CoVim default port
 
     "set mouse=a                             " Enable Mouse Support
     set tabpagemax=30
