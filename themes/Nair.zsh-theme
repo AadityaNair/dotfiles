@@ -78,6 +78,14 @@ prompt_dir() {
   prompt_segment default blue '%2~' 
 }
 
+prompt_virtualenv() {
+  local virtualenv_path="$VIRTUAL_ENV"
+  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
+    prompt_segment blue black "(`basename $virtualenv_path`)"
+  fi
+}
+
+
 # Status:
 # - was there an error
 # - am I root
@@ -96,6 +104,7 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_status
+  prompt_virtualenv
   prompt_dir
   prompt_end
 }

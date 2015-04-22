@@ -32,7 +32,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    Plugin 'goatslacker/mango.vim'              " Personal Favourite 
+    Plugin 'xoria256.vim'              " Personal Favourite 
     Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most  
     
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
@@ -42,7 +42,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'SirVer/ultisnips'               " User defined autocomplete
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
-
+    Plugin 'beyondmarc/opengl.vim'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -72,10 +72,11 @@ filetype plugin indent on   " Enable filetype specific plugins
     colorscheme solarized   " Set colourscheme
   
     function! SwitchScheme()    " Function to switch color schemes
-        if g:colors_name == "mango"
+        if g:colors_name == "xoria256"
             colorscheme solarized
+            set background=dark
         else
-            colorscheme mango
+            colorscheme xoria256
         endif
     endfunction
     map <F3> :call SwitchScheme()<CR>|

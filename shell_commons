@@ -17,7 +17,8 @@ setproxy
 alias err='echo $?'
 
 alias svi="sudo vim"
-
+alias tmux="tmux -2"
+alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 # --- COLOUR ABSTRACTIONS --- #
 
 bold=$(tput bold)
