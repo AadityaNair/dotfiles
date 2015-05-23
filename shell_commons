@@ -1,6 +1,7 @@
 # Contains aliases common to all shells.
 
 numlockx on
+alias ls='ls --color -h --group-directories-first'
 alias sl='ls'
 alias tst='ping www.google.com'
 alias la='ll -a'
@@ -65,3 +66,4 @@ stop() {
     done 
 }
 . /etc/profile.d/vte.sh
+. /home/Aaditya/Public/z/z.sh
