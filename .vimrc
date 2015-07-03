@@ -32,17 +32,19 @@ call vundle#begin()     " List of All Plugins
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    Plugin 'xoria256.vim'              " Personal Favourite 
+    "Plugin 'xoria256.vim'              " Personal Favourite 
     Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most  
     
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
-    Plugin 'Raimondi/delimitMate'           " Auto delimiting surrounding char like [], etc.
+    "Plugin 'Raimondi/delimitMate'           " Auto delimiting surrounding char like [], etc.
+    "Plugin 'krisajenkins/vim-pipe'
     
-    Plugin 'SirVer/ultisnips'               " User defined autocomplete
+    "Plugin 'SirVer/ultisnips'               " User defined autocomplete
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
-    Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
-    Plugin 'beyondmarc/opengl.vim'
+    "Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
+    "Plugin 'beyondmarc/opengl.vim'
+    Plugin 'LaTeX-Box-Team/LaTeX-Box'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
