@@ -32,19 +32,12 @@ call vundle#begin()     " List of All Plugins
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    "Plugin 'xoria256.vim'              " Personal Favourite 
-    Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most  
+    Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most
+    Plugin 'lyxell/pride.vim'
     
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
-    "Plugin 'Raimondi/delimitMate'           " Auto delimiting surrounding char like [], etc.
-    "Plugin 'krisajenkins/vim-pipe'
-    
-    "Plugin 'SirVer/ultisnips'               " User defined autocomplete
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
-    "Plugin 'tpope/vim-fugitive'             " Git wrapper for vim
-    "Plugin 'beyondmarc/opengl.vim'
-    Plugin 'LaTeX-Box-Team/LaTeX-Box'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -71,14 +64,14 @@ filetype plugin indent on   " Enable filetype specific plugins
     nnoremap = <C-w>=|       " Equalise all splits
 
     set background=dark     " Colorscheme mode
-    colorscheme solarized   " Set colourscheme
+    colorscheme pride   " Set colourscheme
   
     function! SwitchScheme()    " Function to switch color schemes
-        if g:colors_name == "xoria256"
+        if g:colors_name == "pride"
             colorscheme solarized
             set background=dark
         else
-            colorscheme xoria256
+            colorscheme pride
         endif
     endfunction
     map <F3> :call SwitchScheme()<CR>|
@@ -94,10 +87,6 @@ filetype plugin indent on   " Enable filetype specific plugins
     let mapleader =','                      " Set default leader to a button nearby
     autocmd BufWritePost .vimrc source %    " autoupdate vimrc on change
 
-    "let CoVim_default_name = 'Prometheus'   " CoVim default username
-    "let CoVim_default_port = '2048'         " CoVim default port
-
-    "set mouse=a                             " Enable Mouse Support
     set tabpagemax=30
     vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
     imap <C-v> <Esc><C-v>a
