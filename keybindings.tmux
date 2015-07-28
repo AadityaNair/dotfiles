@@ -5,7 +5,7 @@ bind a send-prefix
 
 # ------------------------------------------- User-defined 
 
-bind-key -n S-F1 new-window -k -n help "sh -c '$BYOBU_PAGER help.tmux.txt'"
+bind-key -n S-F1 new-window -k -n help "sh -c 'less help.tmux.txt'"
 unbind-key -n F2
 
 bind-key -n M-a new-window -c "#{pane_current_path}" \; rename-window "-"

@@ -14,7 +14,6 @@ alias vrc='vim ~/projects/dotfiles/.vimrc'
 
 alias noproxy='export {http,https,ftp,socks}_proxy=""'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080"'
-setproxy
 alias err='echo $?'
 
 alias svi="sudo vim"
