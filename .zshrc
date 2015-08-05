@@ -1,6 +1,6 @@
 export ZSH=/home/Aaditya/.oh-my-zsh
 
-ZSH_THEME="random"
+ZSH_THEME="Nair"
 COMPLETION_WAITING_DOTS="true"
 ZSH_CUSTOM=/home/Aaditya/projects/dotfiles
 
