@@ -38,6 +38,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
+    Plugin 'SirVer/ultisnips'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
