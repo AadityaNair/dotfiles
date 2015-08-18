@@ -4,6 +4,18 @@
 
 priority -50
 
+snippet sign "Description" b
+/*
+	${1:Title}
+	Author: Aaditya M Nair
+	Created On: `date`
+
+	${2:Description}
+ */
+$0
+endsnippet
+
+
 snippet def "#define ..."
 #define ${1}
 endsnippet
@@ -61,13 +73,11 @@ snippet enum "Enumeration"
 enum ${1:name} { $0 };
 endsnippet
 
-snippet once "Include header once only guard"
+snippet guard "Include header once only guard"
 #ifndef ${1:`!p
 if not snip.c:
-	import random, string
 	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
-	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
-	snip.rv = ('%s_%s' % (name,rand)).upper()
+	snip.rv = name.upper()
 else:
 	snip.rv = snip.c`}
 #define $1
@@ -75,6 +85,11 @@ else:
 ${VISUAL}${0}
 
 #endif /* end of include guard: $1 */
+endsnippet
+
+snippet once "Include guard using pragma"
+#pragma once
+$0
 endsnippet
 
 snippet td "Typedef"
