@@ -37,7 +37,7 @@ bind-key -n M-d run-shell 'exec touch $BYOBU_RUN_DIR/no-logout' \; detach
 bind-key -n M-q kill-pane
 
 unbind-key -n F8
-# bind-key -n M-r command-prompt -p "(rename-window) " "rename-window '%%'"
+bind-key -n M-t command-prompt -p "(rename-window) " "rename-window '%%'"
 bind-key -n M-r command-prompt -p "(rename-session) " "rename-session '%%'"
 
 # try zooms
