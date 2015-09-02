@@ -7,7 +7,7 @@ alias tst='ping www.google.com'
 alias la='ll -a'
 
 alias py="ipython --autoindent --automagic --banner --pprint --no-confirm-exit"
-alias brc='vim ~/projects/dotfiles/.zshrc;source ~/.zshrc'
+alias zrc='vim ~/projects/dotfiles/.zshrc;source ~/.zshrc'
 alias vrc='vim ~/projects/dotfiles/.vimrc'
 
 
