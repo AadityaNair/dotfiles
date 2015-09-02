@@ -34,6 +34,7 @@ call vundle#begin()     " List of All Plugins
 
     Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most
     Plugin 'lyxell/pride.vim'
+    Plugin 'scrooloose/syntastic'
     
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
@@ -130,6 +131,10 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:UltiSnipsJumpForwardTrigger="<c-b>"
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
     let g:UltiSnipsEditSplit="context"
+
+    let g:syntastic_quiet_messages = { "type": "style", "level": "warnings" }
+    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_aggregate_errors = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
