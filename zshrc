@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/Aaditya/.zsh
+export ZSH=/home/Aaditya/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bullet"
+ZSH_THEME="bullet-train"
 BULLETTRAIN_STATUS_EXIT_SHOW="true"
 BULLETTRAIN_TIME_SHOW="true"
 BULLETTRAIN_STATUS_BG="black"
@@ -41,8 +41,8 @@ eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
 setopt EXTENDED_GLOB
 source /home/Aaditya/projects/dotfiles/shell_commons
 
-plugins=(gitfast, colorize, zsh-completions)
-autoload -U compinit && compinit
+plugins=(gitfast, colored-man, zsh-completions)
+autoload -U compinit -u && compinit -u
 
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
