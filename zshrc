@@ -41,7 +41,7 @@ eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
 setopt EXTENDED_GLOB
 source /home/Aaditya/projects/dotfiles/shell_commons
 
-plugins=(gitfast, colored-man, zsh-completions)
+# plugins=(gitfast, colored-man, zsh-completions)
 autoload -U compinit -u && compinit -u
 
 zstyle ':completion:*:*:*:*:*' menu select
@@ -92,7 +92,7 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 
 source /home/Aaditya/Public/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor line)
 
 source /home/Aaditya/Public/zsh-history-substring-search/zsh-history-substring-search.zsh
 # bind UP and DOWN arrow keys
