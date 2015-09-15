@@ -1,0 +1,11 @@
+snippet host "Set up config" b
+Host $1
+	User ${2:root}
+	Port 22
+	Hostname $3
+	TCPKeepAlive yes
+	IdentityFile "$4"
+	IdentitiesOnly yes
+
+$0
+endsnippet
