@@ -7,8 +7,8 @@ alias tst='ping www.google.com'
 alias la='ll -a'
 
 alias py="ipython --autoindent --automagic --banner --pprint --no-confirm-exit"
-alias zrc='vim ~/projects/dotfiles/.zshrc;source ~/.zshrc'
-alias vrc='vim ~/projects/dotfiles/.vimrc'
+alias zrc='vim ~/projects/dotfiles/zshrc;source ~/.zshrc'
+alias vrc='vim ~/projects/dotfiles/vimrc'
 
 
 alias noproxy='export {http,https,ftp,socks}_proxy=""'
