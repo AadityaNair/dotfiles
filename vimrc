@@ -26,13 +26,13 @@ call vundle#begin()     " List of All Plugins
     Plugin 'gmarik/Vundle.vim'              " Plugin Manager manages itself !!
     
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
-    Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
-    Plugin 'Lokaltog/vim-easymotion'        " Faster File Navigation (like really fast)
+    "Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
+    "Plugin 'Lokaltog/vim-easymotion'        " Faster File Navigation (like really fast)
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    Plugin 'altercation/vim-colors-solarized'   " Scheme Standard for most
+    "Plugin 'hewo/vim-colorscheme-deepsea'   " Scheme Standard for most
     Plugin 'lyxell/pride.vim'
     Plugin 'scrooloose/syntastic'
     
@@ -40,6 +40,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'SirVer/ultisnips'
+    Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -66,11 +67,11 @@ filetype plugin indent on   " Enable filetype specific plugins
     nnoremap = <C-w>=|       " Equalise all splits
 
     set background=dark     " Colorscheme mode
-    colorscheme pride   " Set colourscheme
+    colorscheme pride       " Set colourscheme
   
     function! SwitchScheme()    " Function to switch color schemes
         if g:colors_name == "pride"
-            colorscheme solarized
+            colorscheme deepsea
             set background=dark
         else
             colorscheme pride
@@ -87,7 +88,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     set autoread                            " Update files changed outside vim
     set lazyredraw                          " No redraw while executing macros
     let mapleader =','                      " Set default leader to a button nearby
-    autocmd BufWritePost .vimrc source %    " autoupdate vimrc on change
+    autocmd BufWritePost vimrc source %    " autoupdate vimrc on change
 
     set tabpagemax=30
     vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
