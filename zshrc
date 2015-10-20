@@ -5,13 +5,13 @@ export ZSH=/home/Aaditya/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bullet-train"
-BULLETTRAIN_STATUS_EXIT_SHOW="true"
-BULLETTRAIN_TIME_SHOW="true"
-BULLETTRAIN_STATUS_BG="black"
-BULLETTRAIN_GIT_BG="green"
-BULLETTRAIN_GIT_MODIFIED="%F{black}M%F{yellow}"   
-
+ZSH_THEME="9k"
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="->"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
