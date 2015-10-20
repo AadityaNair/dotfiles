@@ -41,7 +41,7 @@ eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
 setopt EXTENDED_GLOB
 source /home/Aaditya/projects/dotfiles/shell_commons
 
-# plugins=(gitfast, colored-man, zsh-completions)
+source /home/Aaditya/.oh-my-zsh/plugins/git/git.plugin.zsh
 autoload -U compinit -u && compinit -u
 
 zstyle ':completion:*:*:*:*:*' menu select
@@ -99,4 +99,3 @@ source /home/Aaditya/Public/zsh-history-substring-search/zsh-history-substring-s
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
- 
