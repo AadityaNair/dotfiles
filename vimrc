@@ -26,13 +26,10 @@ call vundle#begin()     " List of All Plugins
     Plugin 'gmarik/Vundle.vim'              " Plugin Manager manages itself !!
     
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
-    "Plugin 'tpope/vim-surround'             " Faster working on surrounding tags (braces, HTML, etc)
-    "Plugin 'Lokaltog/vim-easymotion'        " Faster File Navigation (like really fast)
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    "Plugin 'hewo/vim-colorscheme-deepsea'   " Scheme Standard for most
     Plugin 'lyxell/pride.vim'
     Plugin 'scrooloose/syntastic'
     
