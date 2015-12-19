@@ -15,7 +15,7 @@ bind-key -n M-s new-session
 
 unbind-key -n F3
 unbind-key -n F4
-
+bind-key -n F5 source $BYOBU_PREFIX/share/byobu/profiles/tmuxrc
 #--------- try moving using h j k l ----------------------
 # bind-key -n z-h previous-window
 # bind-key -n M-l next-window
@@ -37,7 +37,7 @@ bind-key -n M-d run-shell 'exec touch $BYOBU_RUN_DIR/no-logout' \; detach
 bind-key -n M-q kill-pane
 
 unbind-key -n F8
-bind-key -n M-t command-prompt -p "(rename-window) " "rename-window '%%'"
+bind-key -n M-w command-prompt -p "(rename-window) " "rename-window '%%'"
 bind-key -n M-r command-prompt -p "(rename-session) " "rename-session '%%'"
 
 # try zooms
