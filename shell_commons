@@ -10,6 +10,7 @@ alias py="ipython --autoindent --automagic --banner --pprint --no-confirm-exit"
 alias zrc='vim ~/projects/dotfiles/zshrc;source ~/.zshrc'
 alias vrc='vim ~/projects/dotfiles/vimrc'
 
+alias batt='watch -g cat /sys/class/power_supply/AC0/online > /dev/null && notify-send -u CRITICAL "NO BATTERY. SLEEP."'
 
 alias noproxy='export {http,https,ftp,socks}_proxy="";export no_proxy="localhost, 127.0.0.1"'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";export no_proxy="localhost, 127.0.0.1, iiit.ac.in, .iiit.ac.in,iiit.net, .iiit.net, 172.16.0.0/12, 192.168.0.0/16, 10.0.0.0/8"'
