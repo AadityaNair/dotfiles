@@ -92,7 +92,7 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 
 source /home/Aaditya/Public/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
 
 source /home/Aaditya/Public/zsh-history-substring-search/zsh-history-substring-search.zsh
 # bind UP and DOWN arrow keys
