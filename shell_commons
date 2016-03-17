@@ -19,7 +19,7 @@ setproxy
 
 alias tmux="tmux -2"
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
-
+alias open="xdg-open"
 # FUNCTIONS
 
 
