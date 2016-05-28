@@ -30,7 +30,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
-    Plugin 'lyxell/pride.vim'
+    Plugin 'haoyu953/pride.vim'
     Plugin 'scrooloose/syntastic'
     
     Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim

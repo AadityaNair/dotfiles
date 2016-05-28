@@ -6,7 +6,7 @@ alias sl='ls'
 alias tst='ping www.google.com'
 alias la='ll -a'
 
-alias py="ipython --autoindent --automagic --banner --pprint --no-confirm-exit"
+alias py='ptipython'
 alias zrc='vim ~/projects/dotfiles/zshrc;source ~/.zshrc'
 alias vrc='vim ~/projects/dotfiles/vimrc'
 
@@ -21,7 +21,7 @@ alias tmux="tmux -2"
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias open="xdg-open"
 # FUNCTIONS
-
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
 mk () {
     mkdir -p "$*"
