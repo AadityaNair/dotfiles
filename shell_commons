@@ -17,7 +17,7 @@ alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:808
 alias err='echo $?'
 setproxy
 
-alias tmux="tmux -2"
+alias tmux="tmux -2 attach || tmux -2 new"
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias open="xdg-open"
 # FUNCTIONS
