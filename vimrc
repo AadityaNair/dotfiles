@@ -27,17 +27,17 @@ call vundle#begin()     " List of All Plugins
     
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
-    Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
+    "Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
 
     Plugin 'haoyu953/pride.vim'
     Plugin 'scrooloose/syntastic'
     
-    Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
+    "Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
-    Plugin 'SirVer/ultisnips'
-    Plugin 'tpope/vim-fugitive'
+    "Plugin 'SirVer/ultisnips'
+    "Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -59,22 +59,22 @@ filetype plugin indent on   " Enable filetype specific plugins
     set laststatus=2        " Show two-line status bar
     set t_Co=256            " Make terminal to 256 colour mode
 
-    nnoremap + <C-w>+|       " Increase split size
-    nnoremap - <C-w>-|       " Decrease split size 
-    nnoremap = <C-w>=|       " Equalise all splits
+    "nnoremap + <C-w>+|       " Increase split size
+    "nnoremap - <C-w>-|       " Decrease split size 
+    "nnoremap = <C-w>=|       " Equalise all splits
 
-    set background=dark     " Colorscheme mode
+    "set background=dark     " Colorscheme mode
     colorscheme pride       " Set colourscheme
   
-    function! SwitchScheme()    " Function to switch color schemes
-        if g:colors_name == "pride"
-            colorscheme deepsea
-            set background=dark
-        else
-            colorscheme pride
-        endif
-    endfunction
-    map <F3> :call SwitchScheme()<CR>|
+    "function! SwitchScheme()    " Function to switch color schemes
+        "if g:colors_name == "pride"
+            "colorscheme deepsea
+            "set background=dark
+        "else
+            "colorscheme pride
+        "endif
+    "endfunction
+    "map <F3> :call SwitchScheme()<CR>|
     let g:rainbow_active = 1 
        
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -130,9 +130,9 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:UltiSnipsJumpBackwardTrigger="<c-z>"
     let g:UltiSnipsEditSplit="context"
 
-    let g:syntastic_quiet_messages = { "type": "style", "level": "warnings" }
-    let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_aggregate_errors = 1
+    "let g:syntastic_quiet_messages = { "type": "style", "level": "warnings" }
+    "let g:syntastic_python_checkers = ['flake8']
+    "let g:syntastic_aggregate_errors = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
@@ -145,12 +145,12 @@ filetype plugin indent on   " Enable filetype specific plugins
     noremap <silent> <C-l> :tabnext<CR>
     noremap <silent> <C-h> :tabprevious<CR>
 
-    let NERDTreeDirArrows=1
-    let g:tagbar_autoclose=1
-    let g:tagbar_autofocus=1
-    let g:tagbar_sort=0
+    "let NERDTreeDirArrows=1
+    "let g:tagbar_autoclose=1
+    "let g:tagbar_autofocus=1
+    "let g:tagbar_sort=0
 
-    map <Leader>w H<Leader><Leader>w|                   " Macro for Easy Motion
+    "map <Leader>w H<Leader><Leader>w|                   " Macro for Easy Motion
     nnoremap <silent> <leader><space> :nohlsearch<CR>|  " Clear all searches
 
     nnoremap <silent> <F8> :TagbarToggle<CR>|           " Tagbar Mapping
@@ -164,7 +164,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     set pastetoggle=<F2>                                " HotKey for Paste Mode
     set showmode                                        " Display Present Mode
 
-    nnoremap :hs :sp|                         " To create similar mapping for horiz or verti split (thoroughly useless)
+    "nnoremap :hs :sp|                         " To create similar mapping for horiz or verti split (thoroughly useless)
     inoremap kj <Esc>|                        " Go to escape mode faster ( who uses `kj` in a word anyway ?) 
     nnoremap ; :|                             " Map `:` to `;` for command mode (Best Macro Ever !!!)
     nnoremap <silent> u :GundoToggle<CR>|     " Replace default undo with GUndo
@@ -180,7 +180,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     let NERDCommentWholeLinesInVMode=1     " NERDCommenter Configuration
     let g:gundo_close_on_revert=1          " GUndo auto-close
 
-    let delimitMate_expand_space = 1
-    let delimitMate_expand_cr = 1
+    "let delimitMate_expand_space = 1
+    "let delimitMate_expand_cr = 1
     
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
