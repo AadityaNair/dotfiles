@@ -29,7 +29,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
     "Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
-
+    Plugin 'altercation/vim-colors-solarized'
     Plugin 'haoyu953/pride.vim'
     Plugin 'scrooloose/syntastic'
     
@@ -57,7 +57,8 @@ filetype plugin indent on   " Enable filetype specific plugins
     python del powerline_setup                                  
 
     set laststatus=2        " Show two-line status bar
-    set t_Co=256            " Make terminal to 256 colour mode
+    set term=screen         " Make terminal to 256 colour mode
+    set t_Co=256
 
     "set background=dark     " Colorscheme mode
     colorscheme pride       " Set colourscheme
