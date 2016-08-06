@@ -13,8 +13,8 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "zsh-users/zsh-history-substring-search"
 zplug "jreese/zsh-titles", use:titles.plugin.zsh
 zplug "zsh-users/zsh-completions", use:zsh-completions.plugin.zsh
-zplug "b4b4r07/enhancd", use:init.zsh
-
+zplug "b4b4r07/enhancd", use:init.sh
+zplug "peterhurford/git-aliases.zsh" use:git-aliases.plugin.zsh
 
 # ----------------------------  Tab Title Settings  --------------------------
 
@@ -22,7 +22,7 @@ zplug "b4b4r07/enhancd", use:init.zsh
 
 # ----------------------------  History Settings  ----------------------------
 
-HISTFILE=$HOME/.zsh-history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
