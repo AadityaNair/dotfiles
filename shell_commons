@@ -6,7 +6,7 @@ alias sl='ls'
 alias tst='ping www.google.com'
 alias la='ll -a'
 
-alias py='ptipython'
+alias py='ptipython3.5'
 alias zrc='vim ~/projects/dotfiles/zshrc;source ~/.zshrc'
 alias vrc='vim ~/projects/dotfiles/vimrc'
 
