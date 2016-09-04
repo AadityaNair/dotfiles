@@ -10,21 +10,61 @@ eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
 
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
-zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
 zplug "jreese/zsh-titles", use:titles.plugin.zsh
 zplug "zsh-users/zsh-completions", use:zsh-completions.plugin.zsh
 zplug "b4b4r07/enhancd", use:init.sh
-zplug "peterhurford/git-aliases.zsh" use:git-aliases.plugin.zsh
+#zplug "peterhurford/git-aliases.zsh" use:git-aliases.plugin.zsh
 
 # ----------------------------  Tab Title Settings  --------------------------
 
+# Uncategorized
+export ENHANCD_DISABLE_DOT=1
+export ENHANCD_DISABLE_HYPHEN=0
+export ENHANCD_COMMAND=z
+
+setopt chase_dots
+
+setopt extended_glob
+
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
+unsetopt clobber
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
+sudo-command-line() {
+        [[ -z $BUFFER ]] && zle up-history
+            [[ $BUFFER != sudo\ * ]] && LBUFFER="sudo $LBUFFER"
+}
+zle -N sudo-command-line
+bindkey "\e\e" sudo-command-line
+
+source /home/Aaditya/projects/dotfiles/shell_commons
+# TODO: correct this
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
 # ----------------------------  Theme Settings  ------------------------------
+
+POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+# TODO: fix this
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="$ "
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_SHORTEN_DELIMITER="..."
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv background_jobs dir vcs status root_indicator)
 
 # ----------------------------  History Settings  ----------------------------
 
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 
 setopt append_history
 setopt extended_history
@@ -95,6 +135,6 @@ if ! zplug check --verbose; then
     fi
 fi
 zplug load
-
+#autoload -U compinit -u && compinit -u
 
 # vi: syntax=zsh
