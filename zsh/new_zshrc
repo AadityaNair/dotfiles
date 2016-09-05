@@ -3,42 +3,34 @@ export TERM="screen-256color"
 
 export ZPLUG_HOME=/home/Aaditya/.zsh/
 export ZPLUG_CLONE_DEPTH=1
-export ENHANCD_FILTER=percol
-
 source $ZPLUG_HOME/init.zsh
-eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
 
-
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
-zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
-zplug "jreese/zsh-titles", use:titles.plugin.zsh
-zplug "zsh-users/zsh-completions", use:zsh-completions.plugin.zsh
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "supercrabtree/k"
-zplug "marzocchi/zsh-notify", use:notify.plugin.zsh
-# TODO: Configure each plugin
-# TODO: Get git aliases
-
-# ----------------------------  Tab Title Settings  --------------------------
-
-# Uncategorized
+export ENHANCD_FILTER=percol
 export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HYPHEN=0
 export ENHANCD_COMMAND=z
 
+eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
+source /home/Aaditya/projects/dotfiles/shell_commons
+
+
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+zplug "jreese/zsh-titles", use:titles.plugin.zsh
+zplug "zsh-users/zsh-completions", use:zsh-completions.plugin.zsh
+zplug "b4b4r07/enhancd", use:init.sh
+zplug "supercrabtree/k"
+#zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
+#zplug "srijanshetty/zsh-pip-completion"
+# TODO: Configure each plugin
+
+# ----------------------------  Uncategorized Settings  --------------------------
+
 setopt chase_dots
-
 setopt extended_glob
-
-setopt hist_find_no_dups
-setopt hist_reduce_blanks
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
-
 unsetopt clobber
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
+
 sudo-command-line() {
         [[ -z $BUFFER ]] && zle up-history
             [[ $BUFFER != sudo\ * ]] && LBUFFER="sudo $LBUFFER"
@@ -46,18 +38,21 @@ sudo-command-line() {
 zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 
-source /home/Aaditya/projects/dotfiles/shell_commons
-# TODO: correct this
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
-# TODO: import omz files
-# ----------------------------  Theme Settings  ------------------------------
+
+
+
+# ----------------------------  Visual Settings  ------------------------------
 
 POWERLEVEL9K_DISABLE_RPROMPT=true
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-# TODO: fix this
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="$ "
+
+if [[ $EUID -ne 0 ]]; then
+    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="$ "
+else
+    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="# "
+fi
+
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_SHORTEN_DELIMITER="..."
@@ -65,12 +60,21 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv background_jobs dir vcs status root_indicator)
 # TODO: optimize theme
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
+# TODO: Correct This
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+
+
 # ----------------------------  History Settings  ----------------------------
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
@@ -89,7 +93,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # ----------------------------  Auto Completion Settings ----------------------
 
-#zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
@@ -143,4 +147,4 @@ fi
 zplug load
 #autoload -U compinit -u && compinit -u
 
-# vi: syntax=zsh
+# vi: syntax=zsh ft=zsh
