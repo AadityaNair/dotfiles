@@ -1,3 +1,4 @@
+export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/Aaditya/.local/bin:/home/Aaditya/bin"
 export TERM="screen-256color"
 
 export ZPLUG_HOME=/home/Aaditya/.zsh/
@@ -14,7 +15,10 @@ zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search
 zplug "jreese/zsh-titles", use:titles.plugin.zsh
 zplug "zsh-users/zsh-completions", use:zsh-completions.plugin.zsh
 zplug "b4b4r07/enhancd", use:init.sh
-#zplug "peterhurford/git-aliases.zsh" use:git-aliases.plugin.zsh
+zplug "supercrabtree/k"
+zplug "marzocchi/zsh-notify", use:notify.plugin.zsh
+# TODO: Configure each plugin
+# TODO: Get git aliases
 
 # ----------------------------  Tab Title Settings  --------------------------
 
@@ -46,6 +50,7 @@ source /home/Aaditya/projects/dotfiles/shell_commons
 # TODO: correct this
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+# TODO: import omz files
 # ----------------------------  Theme Settings  ------------------------------
 
 POWERLEVEL9K_DISABLE_RPROMPT=true
@@ -59,7 +64,7 @@ POWERLEVEL9K_SHORTEN_DELIMITER="..."
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv background_jobs dir vcs status root_indicator)
-
+# TODO: optimize theme
 # ----------------------------  History Settings  ----------------------------
 
 HISTFILE=$HOME/.zsh_history
@@ -84,6 +89,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # ----------------------------  Auto Completion Settings ----------------------
 
+#zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
