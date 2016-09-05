@@ -1,14 +1,11 @@
-# Contains aliases common to all shells.
+# vim: ft=zsh
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
-numlockx on
-alias ls='ls --color -h --group-directories-first'
-alias sl='ls'
 alias tst='ping www.google.com'
-alias la='ll -a'
+alias py='ipython3'
 
-alias py='ptipython3.5'
-alias zrc='vim ~/projects/dotfiles/zshrc;source ~/.zshrc'
-alias vrc='vim ~/projects/dotfiles/vimrc'
+alias zrc='vim ~/.zshrc;source ~/.zshrc'
+alias vrc='vim ~/.vimrc'
 
 alias batt='watch -g cat /sys/class/power_supply/AC0/online > /dev/null && notify-send -u CRITICAL "NO BATTERY. SLEEP."'
 
@@ -20,13 +17,104 @@ setproxy
 alias tmux="tmux -2 attach || tmux -2 new"
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias open="xdg-open"
-# FUNCTIONS
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
 mk () {
     mkdir -p "$*"
     cd "$*"
 }
 
-. /etc/profile.d/vte.sh
-. /home/Aaditya/Public/z/z.sh
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+alias -- -='cd -'
+
+# List directory contents
+alias ls='ls --color -h --group-directories-first'
+alias lsa='ls -lah'
+alias l='ls -lah'
+alias ll='ls -lh'
+alias la='ls -lAh'
+alias sl='ls'
+
+# clipcopy - Copy data to clipboard
+#
+# Usage:
+#
+#  <command> | clipcopy    - copies stdin to clipboard
+#
+#  clipcopy <file>         - copies a file's contents to clipboard
+#
+# TODO: Minimize this
+function clipcopy() {
+  emulate -L zsh
+  local file=$1
+  if [[ $OSTYPE == darwin* ]]; then
+    if [[ -z $file ]]; then
+      pbcopy
+    else
+      cat $file | pbcopy
+    fi
+  elif [[ $OSTYPE == cygwin* ]]; then
+    if [[ -z $file ]]; then
+      cat > /dev/clipboard
+    else
+      cat $file > /dev/clipboard
+    fi
+  else
+    if which xclip &>/dev/null; then
+      if [[ -z $file ]]; then
+        xclip -in -selection clipboard
+      else
+        xclip -in -selection clipboard $file
+      fi
+    elif which xsel &>/dev/null; then
+      if [[ -z $file ]]; then
+        xsel --clipboard --input 
+      else
+        cat "$file" | xsel --clipboard --input
+      fi
+    else
+      print "clipcopy: Platform $OSTYPE not supported or xclip/xsel not installed" >&2
+      return 1
+    fi
+  fi
+}
+
+# clippaste - "Paste" data from clipboard to stdout
+#
+# Usage:
+#
+#   clippaste   - writes clipboard's contents to stdout
+#
+#   clippaste | <command>    - pastes contents and pipes it to another process
+#
+#   clippaste > <file>      - paste contents to a file
+#
+# Examples:
+#
+#   # Pipe to another process
+#   clippaste | grep foo
+#
+#   # Paste to a file
+#   clippaste > file.txt
+function clippaste() {
+  emulate -L zsh
+  if [[ $OSTYPE == darwin* ]]; then
+    pbpaste
+  elif [[ $OSTYPE == cygwin* ]]; then
+    cat /dev/clipboard
+  else
+    if which xclip &>/dev/null; then
+      xclip -out -selection clipboard
+    elif which xsel &>/dev/null; then
+      xsel --clipboard --output
+    else
+      print "clipcopy: Platform $OSTYPE not supported or xclip/xsel not installed" >&2
+      return 1
+    fi
+  fi
+}
