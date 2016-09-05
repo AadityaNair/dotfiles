@@ -11,7 +11,7 @@ export ENHANCD_DISABLE_HYPHEN=0
 export ENHANCD_COMMAND=z
 
 eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
-source /home/Aaditya/projects/dotfiles/shell_commons
+source /home/Aaditya/projects/dotfiles/zsh/shell_commons 
 
 
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
