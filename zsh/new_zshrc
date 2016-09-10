@@ -1,29 +1,30 @@
 export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/Aaditya/.local/bin:/home/Aaditya/bin"
-export TERM="screen-256color"
+export TERM="xterm-256color"
 
-export ZPLUG_HOME=/home/Aaditya/.zsh/
+export ZPLUG_HOME=/home/Aaditya/.zsh
 export ZPLUG_CLONE_DEPTH=1
 source $ZPLUG_HOME/init.zsh
 
-export ENHANCD_FILTER=percol
+export ENHANCD_FILTER=fzf-tmux
 export ENHANCD_DISABLE_DOT=1
 export ENHANCD_DISABLE_HYPHEN=0
-export ENHANCD_COMMAND=z
+export ENHANCD_COMMAND=cd
+
+
 
 eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
 source /home/Aaditya/projects/dotfiles/zsh/shell_commons 
 
-
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-zplug "jreese/zsh-titles", use:titles.plugin.zsh
-zplug "zsh-users/zsh-completions", use:zsh-completions.plugin.zsh
+zplug "jreese/zsh-titles"
+zplug "zsh-users/zsh-completions"
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "supercrabtree/k"
-#zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
-zplug "zsh-users/zsh-history-substring-search", use:zsh-history-substring-search.zsh
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-syntax-highlighting", nice:18
 #zplug "srijanshetty/zsh-pip-completion"
-# TODO: Configure each plugin
+# TODO: hist-subs colours
+# TODO: systax colours
 
 # ----------------------------  Uncategorized Settings  --------------------------
 
@@ -58,13 +59,9 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_SHORTEN_DELIMITER="..."
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv background_jobs dir vcs status root_indicator)
-# TODO: optimize theme
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv background_jobs dir vcs status)
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
-# TODO: Correct This
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line root)
 
 
 # ----------------------------  History Settings  ----------------------------
@@ -145,6 +142,5 @@ if ! zplug check --verbose; then
     fi
 fi
 zplug load
-#autoload -U compinit -u && compinit -u
 
 # vi: syntax=zsh ft=zsh
