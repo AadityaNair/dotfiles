@@ -25,11 +25,11 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:18
 #zplug "srijanshetty/zsh-pip-completion"
 # TODO: hist-subs colours
 # TODO: systax colours
-
 # ----------------------------  Uncategorized Settings  --------------------------
 
 setopt chase_dots
 setopt extended_glob
+setopt autocd
 unsetopt clobber
 
 sudo-command-line() {
@@ -81,12 +81,12 @@ setopt hist_verify
 setopt inc_append_history
 setopt share_history # share command history data
 
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
 
-
-
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey "^[[3~" delete-char
 
 # ----------------------------  Auto Completion Settings ----------------------
 
