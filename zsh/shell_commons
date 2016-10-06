@@ -2,8 +2,10 @@
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
 alias tst='ping www.google.com'
-alias py='ipython3'
 
+alias py='ipython3 --no-banner --autoindent --pprint --matplotlib --term-title'
+alias pip='pip3.4'
+alias ff='fzf'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
 alias vrc='vim ~/.vimrc'
 
