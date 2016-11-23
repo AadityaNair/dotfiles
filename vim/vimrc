@@ -31,7 +31,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'haoyu953/pride.vim'
-    "Plugin 'scrooloose/syntastic'
+    Plugin 'scrooloose/syntastic'
     
     "Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
@@ -112,7 +112,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:ycm_autoclose_preview_window_after_insertion =0
     autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
     autocmd BufEnter  *.cpp,*.h    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
-
+    let g:syntastic_quiet_messages = { "type": "style" , "level": "warnings"}
     "let g:UltiSnipsExpandTrigger="<c-b>"
     "let g:UltiSnipsJumpForwardTrigger="<c-b>"
     "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
