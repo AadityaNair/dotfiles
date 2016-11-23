@@ -1,5 +1,5 @@
 export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/Aaditya/.local/bin:/home/Aaditya/bin"
-export TERM="xterm-256color"
+export TERM="screen-256color"
 
 export ZPLUG_HOME=/home/Aaditya/.zsh
 export ZPLUG_CLONE_DEPTH=1
@@ -30,7 +30,6 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:18
 setopt chase_dots
 setopt extended_glob
 setopt autocd
-unsetopt clobber
 
 sudo-command-line() {
         [[ -z $BUFFER ]] && zle up-history
@@ -87,6 +86,7 @@ bindkey "^[[B" history-substring-search-down
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
+bindkey "^[." insert-last-word
 
 # ----------------------------  Auto Completion Settings ----------------------
 
