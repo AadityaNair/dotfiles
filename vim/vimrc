@@ -51,10 +51,6 @@ filetype plugin indent on   " Enable filetype specific plugins
     set textwidth=0         " Turn off physical line wrapping
     set wrapmargin=0        " same as above
     "set wildmode=longest
-" Configuration for powerline
-    python from powerline.vim import setup as powerline_setup   
-    python powerline_setup()                              
-    python del powerline_setup                                  
 
     set laststatus=2        " Show two-line status bar
     set term=screen         " Make terminal to 256 colour mode
@@ -113,10 +109,6 @@ filetype plugin indent on   " Enable filetype specific plugins
     autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
     autocmd BufEnter  *.cpp,*.h    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
     let g:syntastic_quiet_messages = { "type": "style" , "level": "warnings"}
-    "let g:UltiSnipsExpandTrigger="<c-b>"
-    "let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-    "let g:UltiSnipsEditSplit="context"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
@@ -126,8 +118,6 @@ filetype plugin indent on   " Enable filetype specific plugins
     set hlsearch        " Highlight searches
     set smartcase       " Parse cases smartly while searching
 
-    noremap <silent> <C-l> :tabnext<CR>
-    noremap <silent> <C-h> :tabprevious<CR>
     nnoremap <silent> <leader><space> :nohlsearch<CR>|  " Clear all searches
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -150,7 +140,4 @@ filetype plugin indent on   " Enable filetype specific plugins
     vnoremap <silent> <C-j> :m '>+1<CR>gv=gv
     vnoremap <silent> <C-k> :m '<-2<CR>gv=gv
 
-    let NERDCommentWholeLinesInVMode=1     " NERDCommenter Configuration
-    let g:gundo_close_on_revert=1          " GUndo auto-close
-    
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
