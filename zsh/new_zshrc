@@ -2,29 +2,19 @@ export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/
 export TERM="screen-256color"
 
 export ZPLUG_HOME=/home/Aaditya/.zsh
-export ZPLUG_CLONE_DEPTH=1
+zstyle :zplug:tag depth 1
 source $ZPLUG_HOME/init.zsh
 
-export ENHANCD_FILTER=fzf-tmux
-export ENHANCD_DISABLE_DOT=1
-export ENHANCD_DISABLE_HYPHEN=0
-export ENHANCD_COMMAND=cd
 
-
-
-eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
-source /home/Aaditya/projects/dotfiles/zsh/shell_commons 
-
+zplug "zplug/zplug"
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 zplug "jreese/zsh-titles"
 zplug "zsh-users/zsh-completions"
-zplug "b4b4r07/enhancd", use:init.sh
 zplug "supercrabtree/k"
 zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-syntax-highlighting", nice:18
-#zplug "srijanshetty/zsh-pip-completion"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # TODO: hist-subs colours
-# TODO: systax colours
+
 # ----------------------------  Uncategorized Settings  --------------------------
 
 setopt chase_dots
@@ -43,6 +33,9 @@ bindkey "\e\e" sudo-command-line
 
 # ----------------------------  Visual Settings  ------------------------------
 
+eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
+source /home/Aaditya/projects/dotfiles/zsh/shell_commons 
+
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 
@@ -59,8 +52,6 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv background_jobs dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history virtualenv)
-
-# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line root)
 
 
 # ----------------------------  History Settings  ----------------------------
