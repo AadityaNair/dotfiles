@@ -27,17 +27,16 @@ call vundle#begin()     " List of All Plugins
     
     Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
-    "Plugin 'majutsushi/tagbar'              " View Code Structure as Tags
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'haoyu953/pride.vim'
     Plugin 'scrooloose/syntastic'
     
-    "Plugin 'scrooloose/nerdtree'            " View Directory Structre in Vim
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
-    "Plugin 'SirVer/ultisnips'
-    "Plugin 'tpope/vim-fugitive'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'romainl/flattened'
+
+
 call vundle#end()
 filetype plugin indent on   " Enable filetype specific plugins
 
@@ -56,10 +55,10 @@ filetype plugin indent on   " Enable filetype specific plugins
     set term=screen         " Make terminal to 256 colour mode
     set t_Co=256
 
-    "set background=dark     " Colorscheme mode
-    colorscheme pride       " Set colourscheme
-  
-    let g:rainbow_active = 1 
+    set background=dark     " Colorscheme mode
+    colorscheme flattened_dark       " Set colourscheme
+    let g:airline_powerline_fonts = 1
+    let g:rainbow_active = 1
        
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     
