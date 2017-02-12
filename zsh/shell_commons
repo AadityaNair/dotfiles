@@ -4,6 +4,7 @@ export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 alias tst='ping www.google.com'
 
 alias py='ipython3 --no-banner --autoindent --pprint'
+alias vim='nvim'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
 alias vrc='vim ~/.vimrc'
 
