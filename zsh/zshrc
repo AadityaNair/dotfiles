@@ -34,7 +34,9 @@ source /home/Aaditya/projects/dotfiles/zsh/titles.zsh # Personalized zsh-titles
 antigen bundle zsh-users/zsh-completions
 #antigen bundle zsh-users/zsh-autosuggestions
 
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle psprint/history-search-multi-word
+#antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 
 antigen apply
