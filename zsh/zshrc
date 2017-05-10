@@ -27,8 +27,9 @@ POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 source /home/Aaditya/.antigen/antigen.zsh
 
 antigen bundle rupa/z
-
 antigen theme bhilburn/powerlevel9k powerlevel9k
+
+source /home/Aaditya/projects/dotfiles/zsh/titles.zsh # Personalized zsh-titles
 
 antigen bundle zsh-users/zsh-completions
 #antigen bundle zsh-users/zsh-autosuggestions
@@ -87,7 +88,7 @@ bindkey "\ei" insert-last-word
 # ----------------------------  Auto Completion Settings ----------------------
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*:*:*:*:*' menu select # Arrow key based selections
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
