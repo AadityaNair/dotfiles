@@ -1,6 +1,3 @@
-"TODO: spacevim mappings
-"TODO: unite.vim mapping
-
 set runtimepath+=/home/Aaditya/.config/nvim/autoload
 
 call plug#begin('/home/Aaditya/.config/nvim/plugins')
@@ -13,9 +10,8 @@ call plug#begin('/home/Aaditya/.config/nvim/plugins')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'simnalamburt/vim-mundo'
     Plug 'luochen1990/rainbow'
-    Plug 'Shougo/denite.nvim'
     Plug 'haya14busa/incsearch.vim'
-    Plug 'beloglazov/vim-online-thesaurus'
+    Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 filetype plugin indent on
@@ -35,6 +31,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
+let mapleader =','
 
 set ruler
 set expandtab
@@ -47,7 +44,8 @@ set smartindent
 
 set incsearch
 set hlsearch
-set smartcase
+set ignorecase
+map /  <Plug>(incsearch-forward)
 
 nnoremap <silent> <leader><space> :nohlsearch<CR>
 vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
@@ -58,7 +56,6 @@ set showmode
 
 inoremap kj <Esc>
 nnoremap ; :
-let mapleader =','
 nnoremap <silent> u :MundoToggle<CR>
 
 nnoremap <silent> <C-j> :m .+1<CR>==
