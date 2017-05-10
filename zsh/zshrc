@@ -1,0 +1,128 @@
+# ----------------------------  Visual Settings  ------------------------------
+
+eval `dircolors /home/Aaditya/Public/dircolors-solarized/dircolors.ansi-dark`
+
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+
+if [[ $EUID -ne 0 ]]; then
+    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{black}%F{white}$ %f%k%F{black}%f"
+else
+    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{black}%F{white}# %f%k%F{black}%f"
+fi
+
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_SHORTEN_DELIMITER="..."
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv background_jobs dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history virtualenv)
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+
+
+# ------------------------------ Plugins --------------------------------------
+
+source /home/Aaditya/.antigen/antigen.zsh
+
+antigen bundle rupa/z
+
+antigen theme bhilburn/powerlevel9k powerlevel9k
+
+antigen bundle zsh-users/zsh-completions
+#antigen bundle zsh-users/zsh-autosuggestions
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
+
+antigen apply
+
+# ----------------------------  Uncategorized Settings  --------------------------
+
+source /home/Aaditya/projects/dotfiles/zsh/shell_commons
+setopt chase_dots
+setopt extended_glob
+setopt autocd
+
+sudo-command-line() {
+        [[ -z $BUFFER ]] && zle up-history
+            [[ $BUFFER != sudo\ * ]] && LBUFFER="sudo $LBUFFER"
+}
+zle -N sudo-command-line
+bindkey "\e\e" sudo-command-line
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
+#ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,bold'
+
+# ----------------------------  History Settings  ----------------------------
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
+setopt hist_find_no_dups
+setopt hist_reduce_blanks
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+
+
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey "^[[3~" delete-char
+bindkey "\ei" insert-last-word
+
+# ----------------------------  Auto Completion Settings ----------------------
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# Increase the number of errors based on the length of the typed word.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+
+# Don't complete unavailable commands.
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+
+# Array completion element sorting.
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+# Directories
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+zstyle ':completion:*' squeeze-slashes true
+
+# History
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+
