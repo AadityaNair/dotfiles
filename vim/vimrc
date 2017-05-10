@@ -1,8 +1,8 @@
 "   My Ultimate .vimrc
 "   Created and maintained by Aaditya M Nair
-" 
+"
 "   Use or modify freely at your own risk.
-"   
+"
 "   The vimrc consists of following parts:
 "       -> Plugin Management
 "       -> UI Config and Colours
@@ -18,18 +18,18 @@
 "                                                        Plugin Manager
 
 set nocompatible                                    " Make VIM incompatible with VI
-set rtp+=/home/Aaditya/.vim/bundle/Vundle.vim    " Append Plugin Manager's location to run time path (rtp)
+set rtp+=~Aaditya/.vim/bundle/Vundle.vim    " Append Plugin Manager's location to run time path (rtp)
 filetype off
 
 call vundle#begin()     " List of All Plugins
 
     Plugin 'gmarik/Vundle.vim'              " Plugin Manager manages itself !!
-    
-    Plugin 'scrooloose/nerdcommenter'       " Faster Commenting  
+
+    Plugin 'scrooloose/nerdcommenter'       " Faster Commenting
     Plugin 'terryma/vim-multiple-cursors'   " Simutaneous Multi-line Editing
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
     Plugin 'scrooloose/syntastic'
-    
+
     Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'vim-airline/vim-airline'
@@ -59,11 +59,11 @@ filetype plugin indent on   " Enable filetype specific plugins
     colorscheme flattened_dark       " Set colourscheme
     let g:airline_powerline_fonts = 1
     let g:rainbow_active = 1
-       
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    
+
 "                                                            Behaviour
-    
+
     set timeoutlen=200                      " Timeout for escape mode macros
     set autoread                            " Update files changed outside vim
     set lazyredraw                          " No redraw while executing macros
@@ -77,10 +77,10 @@ filetype plugin indent on   " Enable filetype specific plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "                                                          Space and Tabs
-    
+
     set ruler               " Show line and column number on status bar
     set expandtab           " Expand TABs to spaces
-    set smarttab            " Use TABs intelligently 
+    set smarttab            " Use TABs intelligently
     set shiftwidth=4        " Spaces per level of indentation
     set tabstop=4           " Translate tab to 4 spaces
 
@@ -90,7 +90,7 @@ filetype plugin indent on   " Enable filetype specific plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "                                                        AutoComplete Behaviour
-    
+
     let g:ycm_use_ultisnips_completer=1
     let g:ycm_min_num_of_chars_for_completion=2
     let g:ycm_min_num_identifier_candidate_chars=4
@@ -105,15 +105,15 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:ycm_add_preview_to_completeopt=0
     let g:ycm_autoclose_preview_window_after_completion=1
     let g:ycm_autoclose_preview_window_after_insertion =0
-    autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
-    autocmd BufEnter  *.cpp,*.h    let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
+    autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~Aaditya/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
+    autocmd BufEnter  *.cpp,*.h    let g:ycm_global_ycm_extra_conf='~Aaditya/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
     let g:syntastic_quiet_messages = { "type": "style" , "level": "warnings"}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "                                                       Searching and Navigation
-    
-    set incsearch       " Search Patterns in real-time (as it is being typed) 
+
+    set incsearch       " Search Patterns in real-time (as it is being typed)
     set hlsearch        " Highlight searches
     set smartcase       " Parse cases smartly while searching
 
@@ -122,12 +122,12 @@ filetype plugin indent on   " Enable filetype specific plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "                                                             Editing
-    
+
     nnoremap <silent> <F2> :set invpaste paste?<CR>|    " Open Paste Mode
     set pastetoggle=<F2>                                " HotKey for Paste Mode
     set showmode                                        " Display Present Mode
 
-    inoremap kj <Esc>|                        " Go to escape mode faster ( who uses `kj` in a word anyway ?) 
+    inoremap kj <Esc>|                        " Go to escape mode faster ( who uses `kj` in a word anyway ?)
     nnoremap ; :|                             " Map `:` to `;` for command mode (Best Macro Ever !!!)
     nnoremap <silent> u :GundoToggle<CR>|     " Replace default undo with GUndo
 
