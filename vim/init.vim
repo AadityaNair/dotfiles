@@ -1,6 +1,6 @@
-set runtimepath+=~Aaditya/.config/nvim/autoload
+set runtimepath+=$HOME/.config/nvim/autoload
 
-call plug#begin('~Aaditya/.config/nvim/plugins')
+call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'romainl/flattened'
     Plug 'Shougo/deoplete.nvim'
     Plug 'zchee/deoplete-jedi'

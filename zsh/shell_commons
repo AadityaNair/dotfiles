@@ -8,17 +8,13 @@ alias vim='nvim'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
 alias vrc='vim ~/.config/nvim/init.vim'
 
-alias batt='watch -g cat /sys/class/power_supply/AC0/online > /dev/null && notify-send -u CRITICAL "NO BATTERY. SLEEP."'
-
 alias noproxy='unset {http,https,ftp,socks,no}_proxy'
-alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";export no_proxy="localhost, 127.0.0.1, iiit.ac.in, .iiit.ac.in,iiit.net, .iiit.net, 172.16.0.0/12, 192.168.0.0/16, 10.0.0.0/8"'
+alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";'
 
 alias tmux="tmux -2 attach || tmux -2 new"
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias open="xdg-open"
 
-alias k="k -h"
-alias kk="k -ah"
 mk () {
     mkdir -p "$*"
     cd "$*"
