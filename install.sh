@@ -7,13 +7,13 @@ set -exo pipefail
 cd $HOME
 
 #Exit if repo already exists.
-if [ ! -d .dotfiles ]; then
+if [ -d .dotfiles ]; then
     echo "The repo seems already setup. Exiting"
     exit 1
 fi
 
 #Download the repository
-#git clone --depth 1 https://github.com/AadityaNair/dotfiles.git .dotfiles
+git clone --depth 1 https://github.com/AadityaNair/dotfiles.git .dotfiles
 
 # 1. Install ZSH setup
 # --------------------
