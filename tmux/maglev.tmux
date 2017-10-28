@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
-# Battery icons
-#tmux set -g @batt_charged_icon "︎♡"
-#tmux set -g @batt_charging_icon "︎♡"
-#tmux set -g @batt_discharging_icon "︎♡"
-#tmux set -g @batt_attached_icon "︎♡"
-#tmux set-option -g status-position top
+PLUGINS=$(tmux show-options -g | grep @tpm_plugins)
 
+# Determine whether the tmux-cpu plugin should be installed
+SHOW_CPU=false
+if [[ $PLUGINS == *"tmux-cpu"* ]]; then
+    SHOW_CPU=true
+fi
+SHOW_BATTERY=false
+if [[ $PLUGINS == *"tmux-battery"* ]]; then
+    SHOW_BATTERY=true
+fi
+
+
+# Optional prefix highlight plugin
+tmux set -g @prefix_highlight_show_copy_mode 'on'
+tmux set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=yellow,bold' # default is 'fg=default,bg=yellow'
 
 # BEGIN Fix CPU segment --------------------------------------------------------
 
@@ -15,39 +24,38 @@ set -e
 # window name. This script adds the blank space back to the `status-left`.
 # Issue #2: https://github.com/caiogondim/maglev/issues/2
 
-get_tmux_option() {
-    local option
-    local default_value
-    local option_value
+#get_tmux_option() {
+    #local option
+    #local default_value
+    #local option_value
 
-    option="$1"
-    default_value="$2"
-    option_value="$(tmux show-option -gqv "$option")"
+    #option="$1"
+    #default_value="$2"
+    #option_value="$(tmux show-option -gqv "$option")"
 
-    if [ -z "$option_value" ]; then
-        echo "$default_value"
-    else
-        echo "$option_value"
-    fi
-}
+    #if [ -z "$option_value" ]; then
+        #echo "$default_value"
+    #else
+        #echo "$option_value"
+    #fi
+#}
 
-set_tmux_option() {
-    local option=$1
-    local value=$2
+#set_tmux_option() {
+    #local option=$1
+    #local value=$2
 
-    tmux set-option -gq "$option" "$value"
-}
+    #tmux set-option -gq "$option" "$value"
+#}
 
-main() {
-    local status_left
+#main() {
+    #local status_left
 
-    status_left=$(get_tmux_option "status-left")
-    set_tmux_option "status-left" "$status_left "
-}
-main
+    #status_left=$(get_tmux_option "status-left")
+    #set_tmux_option "status-left" "$status_left "
+#}
+#main
 
 # END Fix CPU segment ----------------------------------------------------------
-
 
 apply_theme() {
     left_separator=''
@@ -56,17 +64,19 @@ apply_theme() {
     right_separator_black=''
     session_symbol=''
 
+    # --------------
     # panes
-    #pane_border_fg=colour8 # gray
-    #pane_active_border_fg=colour4 # blue
+    pane_border_fg=colour8 # gray
+    pane_active_border_fg=colour4 # blue
 
-    #tmux set -g pane-border-style fg=$pane_border_fg \; set -g pane-active-border-style fg=$pane_active_border_fg
+    # ---------------
+    tmux set -g pane-border-style fg=$pane_border_fg \; set -g pane-active-border-style fg=$pane_active_border_fg
     #uncomment for fat borders
     #tmux set -ga pane-border-style bg=$pane_border_fg \; set -ga pane-active-border-style bg=$pane_active_border_fg
 
-    #display_panes_active_colour=colour4 # blue
-    #display_panes_colour=colour4 # blue
-    #tmux set -g display-panes-active-colour $display_panes_active_colour \; set -g display-panes-colour $display_panes_colour
+    display_panes_active_colour=colour4 # blue
+    display_panes_colour=colour4 # blue
+    tmux set -g display-panes-active-colour $display_panes_active_colour \; set -g display-panes-colour $display_panes_colour
 
     # messages
     message_fg=colour16           # black
@@ -85,31 +95,24 @@ apply_theme() {
     tmux setw -g mode-style fg=$mode_fg,bg=$mode_bg,$mode_attr
 
     # status line
-    status_fg=colour253 # white
-    status_bg="#2d2d2d" # dark gray
+    status_fg=colour255 # white
+    status_bg=colour0 # dark gray
     tmux set -g status-style fg=$status_fg,bg=$status_bg
 
     session_fg=colour16  # black
     session_bg=colour11 # yellow
-    
-    
-    
     status_left="#[fg=$session_fg,bg=$session_bg] ❐ #S #[fg=$session_bg,bg=$status_bg]$left_separator_black"
     if [ x"`tmux -q -L tmux_theme_status_left_test -f /dev/null new-session -d \; show -g -v status-left \; kill-session`" = x"[#S] " ] ; then
         status_left="$status_left "
     fi
-    
-    
-    
-    
     tmux set -g status-left-length 32 \; set -g status-left "$status_left"
 
-    window_status_fg=colour254 # blue 
-    window_status_bg="#2d2d2d" # dark gray
-    window_status_format=" #I $left_separator #W  " # change width here
+    window_status_fg=colour255 # white
+    window_status_bg=colour0 # dark gray
+    window_status_format="#I $left_separator #W  "
     tmux setw -g window-status-style fg=$window_status_fg,bg=$window_status_bg \; setw -g window-status-format "$window_status_format"
 
-    window_status_current_fg="#2d2d2d" # black
+    window_status_current_fg=colour16 # black
     window_status_current_bg=colour4 # blue
     window_status_current_format="#[fg=$window_status_bg,bg=$window_status_current_bg]$left_separator_black#[fg=$window_status_current_fg,bg=$window_status_current_bg] #I $left_separator #W #[fg=$window_status_current_bg,bg=$status_bg,nobold]$left_separator_black"
     tmux setw -g window-status-current-format "$window_status_current_format"
@@ -129,36 +132,15 @@ apply_theme() {
     window_status_last_attr=default
     tmux setw -g window-status-last-style $window_status_last_attr,fg=$window_status_last_fg
 
-    battery_full_fg=colour160   # red
-    battery_empty_fg=colour254  # white
-    battery_bg=colour160        # black
-    time_date_fg=colour253      # gray
-    time_date_bg=colour253 # dark gray
-    whoami_fg=colour254         # white
-    whoami_bg=colour160         # red
-    host_fg=colour16            # black
-    host_bg=colour254           # white
-    
-    
-    
-    status_right="︎#[fg=$time_date_fg,nobold]$right_separator %R $right_separator %a %d %b #[fg=$host_bg]$right_separator_black#[fg=$host_fg,bg=$host_bg] #(uptime | sed -e "s/.*://" | cut -d "," -f 1) $right_separator #(ifconfig $interface | grep inet | head -1 | cut -d\" \" -f10) "
-    
-
+    time_date_fg=colour105      # gray
+    time_date_bg=colour0 # dark gray
+    status_right="︎#[fg=$time_date_fg,nobold]#{prefix_highlight} $right_separator %R $right_separator %a %d %b #[fg=$host_bg]$right_separator#[fg=colour123,bg=$host_bg]#(uptime | sed -e "s/.*://" | cut -d "," -f 1) $right_separator #(ifconfig $interface | grep inet | head -1 | cut -d\" \" -f10)"
 
     tmux set -g status-right-length 64 \; set -g status-right "$status_right"
 
     # clock
     clock_mode_colour=colour4 # blue
     tmux setw -g clock-mode-colour $clock_mode_colour
-}
-
-circled_digit() {
-    circled_digits='⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳'
-    if [ $1 -lt 20 ] 2>/dev/null ; then
-        echo ${circled_digits:$1:1}
-    else
-        echo $1
-    fi
 }
 
 maximize_pane() {
@@ -185,5 +167,4 @@ maximize_pane() {
         ${__restore} || tmux kill-pane
     fi
 }
-
 apply_theme
