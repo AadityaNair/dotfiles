@@ -66,16 +66,16 @@ apply_theme() {
 
     # --------------
     # panes
-    pane_border_fg=colour8 # gray
-    pane_active_border_fg=colour4 # blue
+    pane_border_fg=red
+    pane_active_border_fg=green
 
     # ---------------
     tmux set -g pane-border-style fg=$pane_border_fg \; set -g pane-active-border-style fg=$pane_active_border_fg
     #uncomment for fat borders
     #tmux set -ga pane-border-style bg=$pane_border_fg \; set -ga pane-active-border-style bg=$pane_active_border_fg
 
-    display_panes_active_colour=colour4 # blue
-    display_panes_colour=colour4 # blue
+    display_panes_active_colour=colour154
+    display_panes_colour=colour247
     tmux set -g display-panes-active-colour $display_panes_active_colour \; set -g display-panes-colour $display_panes_colour
 
     # messages
