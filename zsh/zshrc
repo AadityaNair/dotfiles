@@ -19,19 +19,17 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv background_jobs dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history virtualenv)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-
+export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 
 # ------------------------------ Plugins --------------------------------------
 
 source $HOME/.zplug/init.zsh
 
-zplug "rupa/z"
 zplug "bhilburn/powerlevel9k", as:theme
 
 source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 zplug "zsh-users/zsh-completions"
-zplug "psprint/history-search-multi-word"
 zplug "zdharma/fast-syntax-highlighting", defer:2 
 zplug "zsh-users/zsh-history-substring-search"
 

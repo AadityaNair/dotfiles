@@ -12,6 +12,7 @@ call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'luochen1990/rainbow'
     Plug 'haya14busa/incsearch.vim'
     Plug 'terryma/vim-multiple-cursors'
+    Plug 'racer-rust/vim-racer'
 call plug#end()
 
 filetype plugin indent on
@@ -75,6 +76,14 @@ cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
+
+set hidden
+let g:racer_cmd = "~Aaditya/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+"au FileType rust nmap gd <Plug>(rust-def)
+"au FileType rust nmap gs <Plug>(rust-def-split)
+"au FileType rust nmap gx <Plug>(rust-def-vertical)
+"au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 let g:indentLine_enabled = 1
 let g:indentLine_concealcursor = 0
