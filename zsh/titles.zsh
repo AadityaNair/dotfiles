@@ -1,44 +1,21 @@
-# Copyright 2015 John Reese
-# Licensed under the MIT license
-#
-# Update terminal/tmux window titles based on location/command
-# Used as-is till I can modify it to my needs
+# Nair's tmux titles.
+# Use on your own risk
 
-function update_title() {
-  local a
-  # escape '%' in $1, make nonprintables visible
-  a=${(V)1//\%/\%\%}
-  a=$(print -n "%20>...>$a")
-  # remove newlines
-  a=${a//$'\n'/}
-  if [[ -n "$TMUX" ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
-  elif [[ "$TERM" =~ "screen*" ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
-  elif [[ "$TERM" =~ "xterm*" ]]; then
-    print -n "\e]0;${(%)a}:${(%)2}\a"
-  elif [[ "$TERM" =~ "^rxvt-unicode.*" ]]; then
-    printf '\33]2;%s:%s\007' ${(%)a} ${(%)2}
-  fi
+# Print truncated current path
+
+trunc_path() {
+    DIR_LENGTH=2
+    DELIMITER='..'
+    echo $(print -P "%$((DIR_LENGTH+1))(c:$DELIMITER/:)%${DIR_LENGTH}c")
 }
 
-# called just before the prompt is printed
-function _zsh_title__precmd() {
-  update_title "zsh" "%20<...<%~"
-}
+# Set the title once when a new shell is created.
+\tmux rename-window $(trunc_path)
 
-# called just before a command is executed
-function _zsh_title__preexec() {
-  local -a cmd; cmd=(${(z)1})             # Re-parse the command line
 
-  # Construct a command that will output the desired job number.
-  case $cmd[1] in
-    fg)	cmd="${(z)jobtexts[${(Q)cmd[2]:-%+}]}" ;;
-    %*)	cmd="${(z)jobtexts[${(Q)cmd[1]:-%+}]}" ;;
-  esac
-  update_title "$cmd" "%20<...<%~"
+function zsh_change_title() {
+    \tmux rename-window $(trunc_path)
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd _zsh_title__precmd
-add-zsh-hook preexec _zsh_title__preexec
+add-zsh-hook chpwd zsh_change_title
