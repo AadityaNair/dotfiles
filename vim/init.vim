@@ -13,6 +13,7 @@ call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'haya14busa/incsearch.vim'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'racer-rust/vim-racer'
+    Plug 'ambv/black'
 call plug#end()
 
 filetype plugin indent on
