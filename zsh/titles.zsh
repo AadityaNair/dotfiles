@@ -10,11 +10,17 @@ trunc_path() {
 }
 
 # Set the title once when a new shell is created.
-\tmux rename-window $(trunc_path)
+
+tmux_rename() {
+    # TODO: Remove the hardcode
+    \tmux -S /tmp/tmux-1000/default rename-window $1
+}
+
+tmux_rename $(trunc_path)
 
 
 function zsh_change_title() {
-    \tmux rename-window $(trunc_path)
+    tmux_rename $(trunc_path)
 }
 
 autoload -Uz add-zsh-hook
