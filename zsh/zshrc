@@ -26,7 +26,7 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 source $HOME/.zplug/init.zsh
 
-zplug "bhilburn/powerlevel9k", as:theme
+zplug "agnoster/agnoster-zsh-theme", as:theme
 
 source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 zplug "zsh-users/zsh-completions"
