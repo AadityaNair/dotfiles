@@ -2,23 +2,6 @@
 export TERM=xterm-256color
 eval `dircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-
-if [[ $EUID -ne 0 ]]; then
-    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{black}%F{white}$ %f%k%F{black}%f"
-else
-    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{black}%F{white}# %f%k%F{black}%f"
-fi
-
-
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_SHORTEN_DELIMITER="..."
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_left"
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv background_jobs dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history virtualenv)
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 
@@ -26,7 +9,7 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 source $HOME/.zplug/init.zsh
 
-zplug "agnoster/agnoster-zsh-theme", as:theme
+zplug "AadityaNair/agnoster-zsh-theme", as:theme
 
 source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 zplug "zsh-users/zsh-completions"
