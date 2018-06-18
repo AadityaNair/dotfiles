@@ -12,8 +12,7 @@ trunc_path() {
 # Set the title once when a new shell is created.
 
 tmux_rename() {
-    # TODO: Remove the hardcode
-    \tmux -S /tmp/tmux-1000/default rename-window $1
+    printf "\033k$1\033\\"
 }
 
 tmux_rename $(trunc_path)
