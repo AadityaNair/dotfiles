@@ -9,7 +9,12 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 source $HOME/.zplug/init.zsh
 
-zplug "AadityaNair/agnoster-zsh-theme", as:theme
+# Have a separate theme for machines that aren't mine
+if [ "$(cat /etc/hostname)" = "DarkStar" ];then
+    zplug "AadityaNair/agnoster-zsh-theme", as:theme
+else
+    zplug "dracula/zsh", as:theme
+fi
 
 source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 zplug "zsh-users/zsh-completions"
