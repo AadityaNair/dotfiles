@@ -4,9 +4,8 @@ export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 alias tst='ping www.google.com'
 
 alias py='ipython3 --no-banner --autoindent --pprint'
-alias vim='nvim'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
-alias vrc='vim ~/.config/nvim/init.vim'
+alias vrc='vim ~/.vimrc'
 
 alias noproxy='unset {http,https,ftp,socks,no}_proxy'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";'

@@ -30,7 +30,6 @@ call vundle#begin()     " List of All Plugins
     Plugin 'sjl/gundo.vim'                  " Fully utilise vim's undo (graphically)
     Plugin 'scrooloose/syntastic'
 
-    Plugin 'Valloric/YouCompleteMe'         " Most awesome auto-complete there is
     Plugin 'luochen1990/rainbow'            " Colour Code Braces
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
