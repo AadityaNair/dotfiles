@@ -14,6 +14,7 @@ alias tmux="tmux -2 attach || tmux -2 new"
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias open="xdg-open"
 alias irssi='TERM=screen-256color irssi'
+alias vim='nvim'
 
 mk () {
     mkdir -p "$*"
