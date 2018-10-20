@@ -34,6 +34,7 @@ call vundle#begin()     " List of All Plugins
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'romainl/flattened'
+    Plugin 'Valloric/YouCompleteMe'
 
 
 call vundle#end()
@@ -104,7 +105,7 @@ filetype plugin indent on   " Enable filetype specific plugins
     let g:ycm_add_preview_to_completeopt=0
     let g:ycm_autoclose_preview_window_after_completion=1
     let g:ycm_autoclose_preview_window_after_insertion =0
-    autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~Aaditya/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
+    "autocmd BufEnter  *.c  let g:ycm_global_ycm_extra_conf='~Aaditya/.vim/bundle/YouCompleteMe/c/.ycm_extra_conf.py'
     autocmd BufEnter  *.cpp,*.h    let g:ycm_global_ycm_extra_conf='~Aaditya/.vim/bundle/YouCompleteMe/cpp/.ycm_extra_conf.py'
     let g:syntastic_quiet_messages = { "type": "style" , "level": "warnings"}
 
