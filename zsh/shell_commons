@@ -15,6 +15,7 @@ alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias open="xdg-open"
 alias irssi='TERM=screen-256color irssi'
 alias vim='nvim'
+alias ip='ip -color'
 
 mk () {
     mkdir -p "$*"
