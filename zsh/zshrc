@@ -20,6 +20,7 @@ source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2 
 zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
 
 if ! zplug check; then
     printf "Install? [y/N]: "
@@ -45,6 +46,8 @@ bindkey "\e\e" sudo-command-line
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
 #ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,bold'
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=241'
 
 # ----------------------------  History Settings  ----------------------------
 
