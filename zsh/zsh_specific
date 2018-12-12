@@ -1,0 +1,17 @@
+################# FUNCTIONS ####################
+
+sudo-command-line() {
+        [[ -z $BUFFER ]] && zle up-history
+            [[ $BUFFER != sudo\ * ]] && LBUFFER="sudo $LBUFFER"
+}
+zle -N sudo-command-line
+bindkey "\e\e" sudo-command-line
+
+
+################# KEYBINDINGS ##################
+
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey "^[[3~" delete-char
+bindkey "\ei" insert-last-word
+
