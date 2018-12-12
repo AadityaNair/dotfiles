@@ -49,6 +49,7 @@ function spectrum() {
 
 function myip(){
     curl http://ipecho.net/plain
+    printf '\n'
 }
 
 function extract () {

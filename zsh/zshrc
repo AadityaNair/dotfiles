@@ -16,10 +16,6 @@ fi
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 
-setopt chase_dots
-setopt extended_glob
-setopt autocd
-
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
 #ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,bold'
@@ -31,6 +27,12 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+
+# ----------------------------  ZSH Features  ------------------------------
+
+setopt extended_glob
+setopt complete_aliases
+
 
 # ----------------------------  History Settings  ----------------------------
 
@@ -91,7 +93,7 @@ zstyle ':completion:*:history-words' remove-all-dups yes
 zstyle ':completion:*:history-words' list false
 zstyle ':completion:*:history-words' menu yes
 
-# ----------------------------  Boilerplate Bottom  ------------------------------
+# ----------------------------  Boilerplate  ------------------------------
 export TERM=xterm-256color
 eval `dircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
