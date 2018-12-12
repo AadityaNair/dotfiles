@@ -1,37 +1,32 @@
 # vim: ft=zsh
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+#export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
-alias tst='ping www.google.com'
+################ ALIASES #############################
 
-alias py='ipython3 --no-banner --autoindent --pprint'
-alias zrc='vim ~/.zshrc;source ~/.zshrc'
-alias vrc='vim ~/.vimrc'
-
-alias noproxy='unset {http,https,ftp,socks,no}_proxy'
-alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";'
-
-alias tmux="tmux -2 attach || tmux -2 new"
-alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
-alias open="xdg-open"
-alias irssi='TERM=screen-256color irssi'
-alias vim='nvim'
+# Random useful aliases
 alias ip='ip -color'
+alias irssi='TERM=screen-256color irssi'
+alias noproxy='unset {http,https,ftp,socks,no}_proxy'
+alias open="xdg-open"
+alias py='ipython3 --no-banner --autoindent --pprint'
+alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";'
+alias tmux="tmux -2 attach || tmux -2 new"
+alias tst='ping www.google.com'
+alias vim='nvim'
+alias vrc='vim ~/.vimrc'
+alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
+alias zrc='vim ~/.zshrc;source ~/.zshrc'
 
-mk () {
-    mkdir -p "$*"
-    cd "$*"
-}
 
-
+# CD aliases
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-
 alias -- -='cd -'
 
-# List directory contents
+# LS aliases
 alias ls='ls --color -h --group-directories-first'
 alias lsa='ls -lah'
 alias l='ls -lah'
@@ -39,11 +34,23 @@ alias ll='ls -lh'
 alias la='ls -lAh'
 alias sl='ls'
 
+################ FUNCTIONS #####################
+
+function mk () {
+    mkdir -p "$*"
+    cd "$*"
+}
+
+function spectrum() {
+    for i in {0..255}; do
+        printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+    done
+}
+
 # clipcopy - Copy data to clipboard
 # Usage:
 #  <command> | clipcopy    - copies stdin to clipboard
 #  clipcopy <file>         - copies a file's contents to clipboard
-
 function clipcopy() {
   emulate -L zsh
   local file=$1
@@ -62,12 +69,12 @@ function clipcopy() {
   fi
 }
 
+
 # clippaste - "Paste" data from clipboard to stdout
 # Usage:
 #   clippaste   - writes clipboard's contents to stdout
 #   clippaste | <command>    - pastes contents and pipes it to another process
 #   clippaste > <file>      - paste contents to a file
-
 function clippaste() {
   emulate -L zsh
     if which xclip &>/dev/null; then
@@ -77,8 +84,3 @@ function clippaste() {
     fi
 }
 
-function spectrum() {
-    for i in {0..255}; do
-        printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
-    done
-}
