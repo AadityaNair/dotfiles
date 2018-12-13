@@ -5,6 +5,7 @@ source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2 
 zplug "zsh-users/zsh-history-substring-search"
+zplug "eendroroy/zed-zsh"
 #zplug "zsh-users/zsh-autosuggestions"
 
 # Have a separate theme for machines that aren't mine
