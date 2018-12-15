@@ -1,8 +1,8 @@
 # Nair's tmux titles.
 # Use on your own risk
 #
-# NOTE: We could have used chpwd to print pwd but we still needed to change title after 
-# any command was executed. That required using precmd and that seemed to fulfill the 
+# NOTE: We could have used chpwd to print pwd but we still needed to change title after
+# any command was executed. That required using precmd and that seemed to fulfill the
 # chpwd task as well.
 
 
@@ -27,7 +27,7 @@ function set_from_command(){
 
     case $cmd[1] in
         vim) tmux_rename "◉ $cmd[2]" ;;
-        man|run-help) tmux_rename "$cmd[2] ❓" ;;
+        man|run-help) tmux_rename "$cmd[-1] ❓" ;;
         ssh) tmux_rename "$cmd[2]" ;;
         *) tmux_rename "$cmd[1]" ;;
     esac
