@@ -13,7 +13,7 @@ alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:808
 alias tmux="tmux -2 attach || tmux -2 new"
 alias tst='ping www.google.com'
 alias vim='nvim'
-alias vrc='vim ~/.vimrc'
+alias vrc='vim ~/.config/nvim/init.vim'
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
 
