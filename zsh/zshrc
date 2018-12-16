@@ -1,6 +1,8 @@
 # ----------------------------  Plugins  --------------------------
 source $HOME/.zplug/init.zsh  # Plugin config import
-source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
+if [ "$(cat /etc/hostname)" = "DarkStar" ];then
+    source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
+fi
 
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2 
