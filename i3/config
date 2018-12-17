@@ -150,5 +150,5 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec feh --bg-scale $HOME/Pictures/WallPaper/wallpaper.jpg
-exec --no-startup-id compton
+exec_always feh --bg-scale $HOME/Pictures/WallPaper/wallpaper.jpg
+exec_always --no-startup-id compton
