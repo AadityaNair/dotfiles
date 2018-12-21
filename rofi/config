@@ -1,4 +1,5 @@
 !!!!! GENERAL
+rofi.modi:      window,run,ssh,combi
 rofi.show:      combi
 !!!!! MATCHING
 
@@ -15,12 +16,12 @@ rofi.show:      combi
 !!!!! DMENU
 
 !!!!! THEMING
-
+rofi.blur-background:   true
+rofi.fullscreen:    true
 !!!!! KEYBINDING
 
 
 ! "Enabled modi" Set from: Default
-rofi.modi:                           window,run,ssh,combi
 
 rofi.width:                          50
 
@@ -132,9 +133,6 @@ rofi.combi-modi:                     window,run
 
 ! "Hide scroll-bar *DEPRECATED*" Set from: Default
 ! rofi.hide-scrollbar:                 false
-
-! "Fullscreen" Set from: Default
-! rofi.fullscreen:                     false
 
 ! "DPI" Set from: Default
 ! rofi.dpi:                            -1
