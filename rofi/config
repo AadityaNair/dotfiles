@@ -18,6 +18,8 @@ rofi.show:      combi
 !!!!! THEMING
 rofi.blur-background:   true
 rofi.fullscreen:    true
+rofi.theme:    ~/.dotfiles/rofi/personal.rasi
+
 !!!!! KEYBINDING
 
 
