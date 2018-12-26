@@ -29,6 +29,7 @@ function set_from_command(){
         vim) tmux_rename "◉ $cmd[2]" ;;
         man|run-help) tmux_rename "$cmd[-1] ❓" ;;
         ssh) tmux_rename "$cmd[2]" ;;
+        sudo) tmux_rename "⚡$cmd[2]" ;;
         *) tmux_rename "$cmd[1]" ;;
     esac
 }
