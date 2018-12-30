@@ -35,7 +35,7 @@ bindkey "^[[B" history-substring-search-down
 
 setopt extended_glob
 setopt complete_aliases
-
+setopt autocd
 
 # ----------------------------  History Settings  ----------------------------
 
