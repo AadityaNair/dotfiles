@@ -150,7 +150,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 for_window [class="^.*"] border pixel 0
-
+gaps inner 3
 exec_always --no-startup-id $HOME/.dotfiles/polybar/launch.sh
 exec_always --no-startup-id $HOME/.dotfiles/compton/launch.sh
 exec_always --no-startup-id $HOME/.dotfiles/dunst/launch.sh
@@ -169,7 +169,7 @@ exec_always --no-startup-id xrandr -s 1920x1080
 
 # Setup dropdown
 bindsym F12 scratchpad show
-bindsym $mod+Shift+Minus move scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
 # DO NOT ACTIVATE UNTIL YOU KNOW WHAT THIS IS
 #set $color  #FF9988
