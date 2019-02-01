@@ -28,7 +28,10 @@ setup_zsh()
 
     ln -s .dotfiles/zsh/zshrc .zshrc
 
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    git clone https://github.com/zplug/zplug.git .zplug
+    cd .zplug
+    git apply ~/.dotfiles/zsh/secret_sauce.diff
+
     chsh -s /bin/zsh
 }
 
