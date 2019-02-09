@@ -1,2 +1,39 @@
 git config --global user.name "AadityaNair"
 git config --global user.email "aadityanair6494@gmail.com"
+
+install:
+    base-devel
+    chrome-beta
+    firefox
+    git
+    grub
+    htop
+    ipython
+    mlocate
+    neovim
+    openssh
+    pulseaudio
+    python-neovim
+    tmux
+    tree
+    wget
+    xdelta3
+    xf96-video* (different for nvidia)
+    xorg-server
+    xorg-xinit
+    zsh
+
+    compton-git
+    dunst-git
+    i3-git
+    polybar-git
+    rofi-git
+
+services:
+    sshd.service
+    dhcpcd.service
+
+./install.sh
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+cd nerd-fonts/
+./install.sh
