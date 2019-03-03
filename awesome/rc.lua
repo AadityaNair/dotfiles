@@ -48,8 +48,8 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
-editor = os.getenv("EDITOR") or "nano"
+terminal = "x-terminal-emulator"
+editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -61,9 +61,9 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
+    awful.layout.suit.floating,
+    --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
     awful.layout.suit.fair,
@@ -229,29 +229,25 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    awful.key({ modkey}, "s",      hotkeys_popup.show_help,   {description="show help", group="awesome"}),
+    awful.key({ modkey}, "Left",   awful.tag.viewprev,        {description = "view previous", group = "tag"}),
+    awful.key({ modkey}, "Right",  awful.tag.viewnext,        {description = "view next", group = "tag"}),
+    awful.key({ modkey}, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
 
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    awful.key({ modkey}, "j", function ()
+                                awful.client.focus.byidx( 1)
+                              end,
+        {description = "focus next by index", group = "client"}),
+
+    awful.key({ modkey}, "k", function ()
+                                awful.client.focus.byidx(-1)
+                              end,
+        {description = "focus previous by index", group = "client"}),
+
+    awful.key({ modkey}, "w", function () 
+                                mymainmenu:show() 
+                              end,
+        {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
