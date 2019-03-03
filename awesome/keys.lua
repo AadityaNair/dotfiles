@@ -2,6 +2,7 @@ local awful = require("awful")
 local naughty = require("naughty")
 local gears = require("gears")
 local beautiful = require("beautiful")
+local hotkeys_popup = require("awful.hotkeys_popup")
 
 local keys = {}
 
@@ -10,6 +11,18 @@ local modkey = 'Mod4'
 local altkey = 'Mod1'
 local ctrlkey = 'Control'
 local shiftkey = 'Shift'
+
+-- Mouse Keys
+mouse_lmb = 1
+mouse_middle = 2
+mouse_rmb = 3
+mouse_scrollup = 4
+mouse_scrolldown = 5
+
+-- keys in testing
+mouse_sidefwd = 9
+mouse_sidebwd = 8
+
 
 -- Mouse bindings
 keys.desktopbuttons = gears.table.join(
@@ -35,8 +48,8 @@ keys.globalkeys = gears.table.join(
                               end,
         {description = "focus previous by index", group = "client"}),
 
-    awful.key({ modkey}, "w", function () 
-                                mymainmenu:show() 
+    awful.key({ modkey}, "w", function ()
+                                mymainmenu:show()
                               end,
         {description = "show main menu", group = "awesome"}),
 
