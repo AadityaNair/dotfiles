@@ -35,7 +35,6 @@ keys.desktopbuttons = gears.table.join(
 ----------------------  KEY BINDINGS
 
 keys.globalkeys = gears.table.join(
-
 ---- Workspaces
     awful.key({ctrlkey, altkey}, "Up",   awful.tag.viewprev,        {description = "view previous", group = "tag"}),
     awful.key({ctrlkey, altkey}, "Down", awful.tag.viewnext,        {description = "view next", group = "tag"}),
@@ -54,12 +53,13 @@ keys.globalkeys = gears.table.join(
 ---- Applications
     awful.key({modkey}, "Return", function () awful.spawn(terminal) end, {description = "open a terminal", group = "launcher"}),
     awful.key({modkey}, "r", function () awful.screen.focused().mypromptbox:run() end, {description = "run prompt", group = "launcher"}),
-    awful.key({modkey}, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"})
+    awful.key({modkey}, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
 
 ---- Awesome
     awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
     awful.key({modkey, ctrlkey}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
-    awful.key({modkey, shiftkey}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
+    awful.key({modkey, shiftkey}, "q", awesome.quit, {description = "quit awesome", group = "awesome"})
+)
 --------------------------------------------
 
 
@@ -101,7 +101,7 @@ keys.globalkeys = gears.table.join(
     --awful.key({ modkey, "Control" }, "n",
               --function ()
                   --local c = awful.client.restore()
-                   Focus restored client
+                   --Focus restored client
                   --if c then
                     --c:emit_signal(
                         --"request::activate", "key.unminimize", {raise = true}
@@ -122,9 +122,7 @@ keys.globalkeys = gears.table.join(
                   --}
               --end,
               --{description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
 
-)
 
 keys.clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
@@ -141,8 +139,8 @@ keys.clientkeys = gears.table.join(
         c.maximized = not c.maximized
         c:raise()
     end,
-    {description = "(un)maximize", group = "client"}),
-
+    {description = "(un)maximize", group = "client"})
+)
 
     --awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               --{description = "move to master", group = "client"}),
@@ -167,7 +165,6 @@ keys.clientkeys = gears.table.join(
             --c:raise()
         --end ,
         --{description = "(un)maximize horizontally", group = "client"})
-)
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
