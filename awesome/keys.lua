@@ -37,18 +37,18 @@ keys.desktopbuttons = gears.table.join(
 keys.globalkeys = gears.table.join(
 
 ---- Workspaces
-    awful.key({ modkey}, "Left",   awful.tag.viewprev,        {description = "view previous", group = "tag"}),
-    awful.key({ modkey}, "Right",  awful.tag.viewnext,        {description = "view next", group = "tag"}),
+    awful.key({ctrlkey, altkey}, "Up",   awful.tag.viewprev,        {description = "view previous", group = "tag"}),
+    awful.key({ctrlkey, altkey}, "Down", awful.tag.viewnext,        {description = "view next", group = "tag"}),
 
 ---- Clients
-    awful.key({modkey}, "j", function () awful.client.focus.byidx( 1) end, {description = "focus next by index", group = "client"}),
-    awful.key({modkey}, "k", function () awful.client.focus.byidx(-1) end, {description = "focus previous by index", group = "client"}),
+    awful.key({modkey}, "Right", function () awful.client.focus.byidx( 1) end, {description = "focus next by index", group = "client"}),
+    awful.key({modkey}, "Left", function () awful.client.focus.byidx(-1) end, {description = "focus previous by index", group = "client"}),
 
 ---- Layouts
-    awful.key({ modkey,"Shift"}, "j", function() awful.client.swap.byidx(  1) end, {description = "swap with next client by index", group = "client"}),
-    awful.key({modkey, "Shift"}, "k", function() awful.client.swap.byidx( -1) end, {description = "swap with previous client by index", group = "client"}),
-    awful.key({modkey}, "l", function() awful.tag.incmwfact( 0.05) end, {description = "increase master width factor", group = "layout"}),
-    awful.key({modkey}, "h", function() awful.tag.incmwfact(-0.05) end, {description = "decrease master width factor", group = "layout"}),
+    awful.key({modkey, shiftkey}, "Right", function() awful.client.swap.byidx(  1) end, {description = "swap with next client by index", group = "client"}),
+    awful.key({modkey, shiftkey}, "Left", function() awful.client.swap.byidx( -1) end, {description = "swap with previous client by index", group = "client"}),
+    awful.key({modkey, ctrlkey}, "Right", function() awful.tag.incmwfact( 0.05) end, {description = "increase master width factor", group = "layout"}),
+    awful.key({modkey, ctrlkey}, "Left", function() awful.tag.incmwfact(-0.05) end, {description = "decrease master width factor", group = "layout"}),
     awful.key({modkey}, "space", function () awful.layout.inc( 1)  end, {description = "select next", group = "layout"}),
 
 ---- Applications
@@ -57,9 +57,9 @@ keys.globalkeys = gears.table.join(
     awful.key({modkey}, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"})
 
 ---- Awesome
-    awful.key({ modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
-    awful.key({ modkey, "Control"}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
+    awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
+    awful.key({modkey, ctrlkey}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
+    awful.key({modkey, shiftkey}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
 --------------------------------------------
 
 
@@ -123,7 +123,7 @@ keys.globalkeys = gears.table.join(
               --end,
               --{description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    
+
 )
 
 keys.clientkeys = gears.table.join(
