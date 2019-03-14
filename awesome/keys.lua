@@ -35,6 +35,16 @@ keys.desktopbuttons = gears.table.join(
 
 ----------------------  KEY BINDINGS
 
+function test()
+    if awful.tag.selected().name == "scratch" then
+        awful.tag.history.restore()
+    else
+        local tag = awful.tag.find_by_name(awful.screen.focused(), 'scratch')
+        tag:view_only()
+    end
+end
+
+
 keys.globalkeys = gears.table.join(
 ---- Workspaces
     awful.key({ctrlkey, altkey}, "Up",   awful.tag.viewprev,        {description = "view previous", group = "tag"}),
@@ -55,6 +65,7 @@ keys.globalkeys = gears.table.join(
     awful.key({modkey}, "Return", function () awful.spawn(terminal) end, {description = "open a terminal", group = "launcher"}),
     awful.key({modkey}, "r", function() awful.spawn(rofi_normal) end, {description = "run prompt", group = "launcher"}),
     awful.key({modkey}, "p", function() awful.spawn(rofi_drun) end, {description = "show the menubar", group = "launcher"}),
+    awful.key({}, "F12", test, {description = "open dropdown", group = "launcher"}),
 
 ---- Awesome
     awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
@@ -170,7 +181,7 @@ keys.clientkeys = gears.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 5 do
     keys.globalkeys = gears.table.join(keys.globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
