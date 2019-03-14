@@ -20,11 +20,8 @@ mouse_middle = 2
 mouse_rmb = 3
 mouse_scrollup = 4
 mouse_scrolldown = 5
-
--- keys in testing
-mouse_sidefwd = 9
 mouse_sidebwd = 8
-
+mouse_sidefwd = 9
 
 -- Mouse bindings
 keys.desktopbuttons = gears.table.join(
