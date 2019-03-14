@@ -1,7 +1,8 @@
+local rofi_normal = "rofi -show combi"
+local rofi_drun = "rofi -show drun"
+
 local awful = require("awful")
-local naughty = require("naughty")
 local gears = require("gears")
-local beautiful = require("beautiful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
 
@@ -52,8 +53,8 @@ keys.globalkeys = gears.table.join(
 
 ---- Applications
     awful.key({modkey}, "Return", function () awful.spawn(terminal) end, {description = "open a terminal", group = "launcher"}),
-    awful.key({modkey}, "r", function () awful.screen.focused().mypromptbox:run() end, {description = "run prompt", group = "launcher"}),
-    awful.key({modkey}, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
+    awful.key({modkey}, "r", function() awful.spawn(rofi_normal) end, {description = "run prompt", group = "launcher"}),
+    awful.key({modkey}, "p", function() awful.spawn(rofi_drun) end, {description = "show the menubar", group = "launcher"}),
 
 ---- Awesome
     awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
