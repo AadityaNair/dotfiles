@@ -4,7 +4,7 @@ call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'romainl/flattened'
     Plug 'Shougo/deoplete.nvim'
     Plug 'zchee/deoplete-jedi'
-    Plug 'Yggdroot/indentLine'
+    "Plug 'Yggdroot/indentLine'
     Plug 'scrooloose/nerdcommenter'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
