@@ -4,7 +4,6 @@ call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'romainl/flattened'
     Plug 'Shougo/deoplete.nvim'
     Plug 'zchee/deoplete-jedi'
-    "Plug 'Yggdroot/indentLine'
     Plug 'scrooloose/nerdcommenter'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -12,8 +11,7 @@ call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'luochen1990/rainbow'
     Plug 'haya14busa/incsearch.vim'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'racer-rust/vim-racer'
-    Plug 'ambv/black'
+    Plug 'w0rp/ale'
 call plug#end()
 
 filetype plugin indent on
