@@ -1,6 +1,6 @@
 # vim: ft=zsh
 #export PKG_CONFIG_PATH=/usr/lib/pkgconfig
-
+export MANPAGER="most"
 ################ ALIASES #############################
 
 # Random useful aliases
