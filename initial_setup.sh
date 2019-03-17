@@ -22,6 +22,16 @@ install:
     xorg-server
     xorg-xinit
     zsh
+    the_silver_searcher
+    
+    nmap
+    feh
+    xorg-{xprop, xwininfo, xrandr, xbacklight, xinit}
+    x11-utils
+    ttf-dejavu ttf-liberation noto-fonts
+    xterm
+    corkscrew
+    xdelta3
 
     compton-git
     dunst-git
