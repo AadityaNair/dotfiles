@@ -1,5 +1,6 @@
 local rofi_normal = "rofi -show combi"
 local rofi_drun = "rofi -show drun"
+local screen_locker = "i3lock-fancy -p && sleep 5 && xset dpms force off"
 
 local awful = require("awful")
 local gears = require("gears")
@@ -66,6 +67,7 @@ keys.globalkeys = gears.table.join(
 
 ---- Awesome
     awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
+    awful.key({modkey}, "l", function() awful.spawn(screen_locker) end, {description = "Lock Screen", group = "awesome"}),
     awful.key({modkey, ctrlkey}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
     awful.key({modkey, shiftkey}, "q", awesome.quit, {description = "quit awesome", group = "awesome"})
 )
@@ -134,21 +136,13 @@ keys.globalkeys = gears.table.join(
 
 
 keys.clientkeys = gears.table.join(
-    awful.key({ modkey,           }, "f",
-        function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end,
-        {description = "toggle fullscreen", group = "client"}),
+    awful.key({modkey}, "f", function (c) c.fullscreen = not c.fullscreen
+                                          c:raise() end, {description = "toggle fullscreen", group = "client"}),
     awful.key({modkey, "Shift"}, "c", function(c) c:kill() end, {description = "close", group = "client"}),
     awful.key({modkey, "Control"}, "space", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
     awful.key({modkey}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"}),
-    awful.key({modkey}, "m",
-    function (c)
-        c.maximized = not c.maximized
-        c:raise()
-    end,
-    {description = "(un)maximize", group = "client"})
+    awful.key({modkey}, "m", function (c) c.maximized = not c.maximized
+                                          c:raise() end, {description = "(un)maximize", group = "client"})
 )
 
     --awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
