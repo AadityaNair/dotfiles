@@ -32,6 +32,7 @@ install:
     xterm
     corkscrew
     xdelta3
+    xscreensaver/xautolock+i3lock-fancy
 
     compton-git
     dunst-git

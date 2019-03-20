@@ -73,7 +73,7 @@ font pango:cantarell 11
 #font pango:DejaVu Sans Mono 8
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -115,22 +115,22 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 for_window [class="^.*"] border pixel 0
-gaps inner 3
+gaps inner 0
 exec_always --no-startup-id $HOME/.dotfiles/polybar/launch.sh
 exec_always --no-startup-id $HOME/.dotfiles/compton/launch.sh
 exec_always --no-startup-id $HOME/.dotfiles/dunst/launch.sh
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/WallPaper/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/wallpaper.jpg
 
 # Volume Control
-bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume 0 +5% && pactl set-sink-volume 2 +5%
-bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume 0 -5% && pactl set-sink-volume 2 -5%
-bindsym XF86AudioMute		exec --no-startup-id pactl set-sink-mute 0 toggle && pactl set-sink-mute 2 toggle
+#bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume 0 +5% && pactl set-sink-volume 2 +5%
+#bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume 0 -5% && pactl set-sink-volume 2 -5%
+#bindsym XF86AudioMute		exec --no-startup-id pactl set-sink-mute 0 toggle && pactl set-sink-mute 2 toggle
 
 # Brightness control
-bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
+#bindsym XF86MonBrightnessUp     exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown   exec xbacklight -dec 10
 
-exec_always --no-startup-id xrandr -s 1920x1080
+#exec_always --no-startup-id xrandr -s 1920x1080
 
 # Setup dropdown
 bindsym F12 scratchpad show
