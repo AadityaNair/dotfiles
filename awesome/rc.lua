@@ -145,12 +145,23 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- Possible bug in the below statement. Restarting awesome disables the fullscreen
+awful.spawn.single_instance("urxvt", {
+        fullscreen=true,
+        titlebars_enabled=false,
+        focus=false,
+        floating=true,
+        minimized=true,
+        maximized=true,  --yeah, both refer to different stuff
+        skip_taskbar=true
+   })
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "scratch"}, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()

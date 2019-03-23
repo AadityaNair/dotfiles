@@ -6,6 +6,7 @@ local awful = require("awful")
 local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
+local naughty = require("naughty")
 
 local keys = {}
 
@@ -33,15 +34,39 @@ keys.desktopbuttons = gears.table.join(
 
 ----------------------  KEY BINDINGS
 
-function test()
-    if awful.tag.selected().name == "scratch" then
-        awful.tag.history.restore()
-    else
-        local tag = awful.tag.find_by_name(awful.screen.focused(), 'scratch')
-        tag:view_only()
+--function test()
+    --if awful.tag.selected().name == "scratch" then
+        --awful.tag.history.restore()
+    --else
+        --local tag = awful.tag.find_by_name(awful.screen.focused(), 'scratch')
+        --tag:view_only()
+    --end
+--end
+
+--function maximise()
+    --local c = awful.client.restore()
+    --if c then
+        --c:emit_signal("request::activate", "key.unminimize", {raise = true})
+    --end
+--end
+
+function toggle_dropdown()
+    for _, c in ipairs(client.get()) do
+        if c.name == 'urxvt' then
+            if c.minimized == true then
+                c.minimized = false
+                c.maximized = true
+                c.focus = true
+                c.fullscreen = true -- This doesn't work for some reason
+
+                c:tags({awful.screen.focused().selected_tag})
+                c:emit_signal("request::activate", "key.unminimize", {raise = true})
+            else
+                c.minimized = true
+            end
+        end
     end
 end
-
 
 keys.globalkeys = gears.table.join(
 ---- Workspaces
@@ -51,6 +76,9 @@ keys.globalkeys = gears.table.join(
 ---- Clients
     awful.key({modkey}, "Right", function () awful.client.focus.byidx( 1) end, {description = "focus next by index", group = "client"}),
     awful.key({modkey}, "Left", function () awful.client.focus.byidx(-1) end, {description = "focus previous by index", group = "client"}),
+    --awful.key({modkey}, "n",  function (c) c.minimized=true end, {description = "Minimise Client", group = "client"}),
+    --awful.key({modkey, shiftkey}, "n", maximise, {description = "Maximise Client", group = "client"}),
+
 
 ---- Layouts
     awful.key({modkey, shiftkey}, "Right", function() awful.client.swap.byidx(  1) end, {description = "swap with next client by index", group = "client"}),
@@ -63,7 +91,8 @@ keys.globalkeys = gears.table.join(
     awful.key({modkey}, "Return", function () awful.spawn(terminal) end, {description = "open a terminal", group = "launcher"}),
     awful.key({modkey}, "r", function() awful.spawn(rofi_normal) end, {description = "run prompt", group = "launcher"}),
     awful.key({modkey}, "p", function() awful.spawn(rofi_drun) end, {description = "show the menubar", group = "launcher"}),
-    awful.key({}, "F12", test, {description = "open dropdown", group = "launcher"}),
+    awful.key({}, "F12", toggle_dropdown, {description = "open dropdown", group = "launcher"}),
+    --awful.key({modkey, ctrlkey}, "Return", spawn_dropdown, {description="Test terminal", group="launcher"}),
 
 ---- Awesome
     awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
@@ -134,15 +163,19 @@ keys.globalkeys = gears.table.join(
               --end,
               --{description = "lua execute prompt", group = "awesome"}),
 
+--function minimise(c)
+    --c.minimized = true
+--end
 
 keys.clientkeys = gears.table.join(
     awful.key({modkey}, "f", function (c) c.fullscreen = not c.fullscreen
                                           c:raise() end, {description = "toggle fullscreen", group = "client"}),
     awful.key({modkey, "Shift"}, "c", function(c) c:kill() end, {description = "close", group = "client"}),
     awful.key({modkey, "Control"}, "space", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
-    awful.key({modkey}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"}),
-    awful.key({modkey}, "m", function (c) c.maximized = not c.maximized
-                                          c:raise() end, {description = "(un)maximize", group = "client"})
+    awful.key({modkey}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"})
+    --awful.key({modkey}, "n",  minimise, {description = "Minimise Client", group = "client"})
+    --awful.key({modkey}, "m", function (c) c.maximized = not c.maximized
+                                          --c:raise() end, {description = "(un)maximize", group = "client"})
 )
 
     --awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
