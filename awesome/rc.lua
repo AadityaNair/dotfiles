@@ -15,6 +15,15 @@ require("awful.hotkeys_popup.keys")
 
 local keys = require("keys")
 
+-- Mouse Keys
+mouse_lmb = 1
+mouse_middle = 2
+mouse_rmb = 3
+mouse_scrollup = 4
+mouse_scrolldown = 5
+mouse_sidebwd = 8
+mouse_sidefwd = 9
+
 -- Error handling
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
@@ -57,8 +66,10 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.floating,
-    awful.layout.suit.fair,
+    --awful.layout.suit.fair,
+    awful.layout.suit.max
 }
 
 -- Menu
@@ -71,17 +82,13 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
+mymainmenu = awful.menu({items = {{"awesome", myawesomemenu, beautiful.awesome_icon}, {"open terminal", terminal}}
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({image = beautiful.awesome_icon, menu = mymainmenu})
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -92,24 +99,24 @@ mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
-                    awful.button({ }, 1, function(t) t:view_only() end),
-                    awful.button({ modkey }, 1, function(t)
+                    awful.button({ }, mouse_lmb, function(t) t:view_only() end),
+                    awful.button({ modkey }, mouse_lmb, function(t)
                                               if client.focus then
                                                   client.focus:move_to_tag(t)
                                               end
                                           end),
-                    awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, function(t)
+                    awful.button({ }, mouse_rmb, awful.tag.viewtoggle),
+                    awful.button({ modkey }, mouse_rmb, function(t)
                                               if client.focus then
                                                   client.focus:toggle_tag(t)
                                               end
                                           end),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+                    awful.button({ }, mouse_scrolldown, function(t) awful.tag.viewnext(t.screen) end),
+                    awful.button({ }, mouse_scrollup, function(t) awful.tag.viewprev(t.screen) end)
                 )
 
 local tasklist_buttons = gears.table.join(
-                     awful.button({ }, 1, function (c)
+                     awful.button({ }, mouse_lmb, function (c)
                                               if c == client.focus then
                                                   c.minimized = true
                                               else
@@ -120,13 +127,13 @@ local tasklist_buttons = gears.table.join(
                                                   )
                                               end
                                           end),
-                     awful.button({ }, 3, function()
+                     awful.button({ }, mouse_rmb, function()
                                               awful.menu.client_list({ theme = { width = 250 } })
                                           end),
-                     awful.button({ }, 4, function ()
+                     awful.button({ }, mouse_scrollup, function ()
                                               awful.client.focus.byidx(1)
                                           end),
-                     awful.button({ }, 5, function ()
+                     awful.button({ }, mouse_scrolldown, function ()
                                               awful.client.focus.byidx(-1)
                                           end))
 
@@ -146,7 +153,7 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 -- Possible bug in the below statement. Restarting awesome disables the fullscreen
-awful.spawn.single_instance("urxvt", {
+awful.spawn.single_instance(terminal, {
         fullscreen=true,
         titlebars_enabled=false,
         focus=false,
@@ -169,10 +176,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+                           awful.button({ }, mouse_lmb, function () awful.layout.inc( 1) end),
+                           awful.button({ }, mouse_rmb, function () awful.layout.inc(-1) end),
+                           awful.button({ }, mouse_scrolldown, function () awful.layout.inc( 1) end),
+                           awful.button({ }, mouse_scrollup, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -195,7 +202,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
