@@ -99,43 +99,33 @@ mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
-                    awful.button({ }, mouse_lmb, function(t) t:view_only() end),
-                    awful.button({ modkey }, mouse_lmb, function(t)
+                    awful.button({}, mouse_lmb, function(t) t:view_only() end),
+                    awful.button({}, mouse_rmb, awful.tag.viewtoggle),
+                    awful.button({}, mouse_scrolldown, function(t) awful.tag.viewnext(t.screen) end),
+                    awful.button({}, mouse_scrollup, function(t) awful.tag.viewprev(t.screen) end),
+                    awful.button({modkey}, mouse_lmb, function(t)
                                               if client.focus then
                                                   client.focus:move_to_tag(t)
                                               end
                                           end),
-                    awful.button({ }, mouse_rmb, awful.tag.viewtoggle),
-                    awful.button({ modkey }, mouse_rmb, function(t)
+                    awful.button({modkey}, mouse_rmb, function(t)
                                               if client.focus then
                                                   client.focus:toggle_tag(t)
                                               end
-                                          end),
-                    awful.button({ }, mouse_scrolldown, function(t) awful.tag.viewnext(t.screen) end),
-                    awful.button({ }, mouse_scrollup, function(t) awful.tag.viewprev(t.screen) end)
+                                          end)
                 )
 
 local tasklist_buttons = gears.table.join(
-                     awful.button({ }, mouse_lmb, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  c:emit_signal(
-                                                      "request::activate",
-                                                      "tasklist",
-                                                      {raise = true}
-                                                  )
-                                              end
-                                          end),
-                     awful.button({ }, mouse_rmb, function()
-                                              awful.menu.client_list({ theme = { width = 250 } })
-                                          end),
-                     awful.button({ }, mouse_scrollup, function ()
-                                              awful.client.focus.byidx(1)
-                                          end),
-                     awful.button({ }, mouse_scrolldown, function ()
-                                              awful.client.focus.byidx(-1)
-                                          end))
+                    awful.button({}, mouse_rmb, function() awful.menu.client_list({ theme = { width = 250 } }) end),
+                    awful.button({}, mouse_scrolldown, function() awful.client.focus.byidx(1) end),
+                    awful.button({}, mouse_scrollup, function() awful.client.focus.byidx(-1) end))
+
+                    --awful.button({}, mouse_lmb, function (c)
+                                            --if c == client.focus then
+                                                --c.minimized = true
+                                            --else
+                                                --c:emit_signal( "request::activate", "tasklist", {raise = true})
+                                            --end end
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -176,10 +166,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
-                           awful.button({ }, mouse_lmb, function () awful.layout.inc( 1) end),
-                           awful.button({ }, mouse_rmb, function () awful.layout.inc(-1) end),
-                           awful.button({ }, mouse_scrolldown, function () awful.layout.inc( 1) end),
-                           awful.button({ }, mouse_scrollup, function () awful.layout.inc(-1) end)))
+                           awful.button({}, mouse_lmb, function () awful.layout.inc( 1) end),
+                           awful.button({}, mouse_rmb, function () awful.layout.inc(-1) end),
+                           awful.button({}, mouse_scrolldown, function () awful.layout.inc( 1) end),
+                           awful.button({}, mouse_scrollup, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -296,11 +286,11 @@ end)
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
     local buttons = gears.table.join(
-        awful.button({ }, 1, function()
+        awful.button({ }, mouse_lmb, function()
             c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.move(c)
         end),
-        awful.button({ }, 3, function()
+        awful.button({ }, mouse_rmb, function()
             c:emit_signal("request::activate", "titlebar", {raise = true})
             awful.mouse.client.resize(c)
         end)
