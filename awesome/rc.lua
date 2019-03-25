@@ -143,7 +143,7 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 -- Possible bug in the below statement. Restarting awesome disables the fullscreen
-awful.spawn.single_instance(terminal, {
+awful.spawn.single_instance("urxvt", {
         fullscreen=true,
         titlebars_enabled=false,
         focus=false,
