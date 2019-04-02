@@ -90,25 +90,39 @@ keys.globalkeys = gears.table.join(
 )
 --------------------------------------------
 
-    --awful.key({ modkey }, "x",
-              --function ()
-                  --awful.prompt.run {
-                    --prompt       = "Run Lua code: ",
-                    --textbox      = awful.screen.focused().mypromptbox.widget,
-                    --exe_callback = awful.util.eval,
-                    --history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  --}
-              --end,
-              --{description = "lua execute prompt", group = "awesome"}),
+-- TODO: Make this non reliant on tags being numbers. Also, fails with dynamic tags
+-- UNTESTED!!
+function move_client_down(c)
+    screen = awful.screen.focused()
+    local t = client.focus and client.focus.first_tag or nil
+    if t == nil or t.name == 5 then
+        return
+    end
 
+    local tag = screen.tags[t.name+1]
+    c:move_to_tag(tag)
+    awful.tag.viewnext()
+end
+function move_client_up(c)
+    screen = awful.screen.focused()
+    local t = client.focus and client.focus.first_tag or nil
+    if t == nil or t.name == 1 then
+        return
+    end
+
+    local tag = screen.tags[t.name-1]
+    c:move_to_tag(tag)
+    awful.tag.viewnext()
+end
 keys.clientkeys = gears.table.join(
     awful.key({modkey}, "f", function (c) c.fullscreen = not c.fullscreen
                                           c:raise() end, {description = "toggle fullscreen", group = "client"}),
     awful.key({modkey, "Shift"}, "c", function(c) c:kill() end, {description = "close", group = "client"}),
     awful.key({modkey, "Control"}, "space", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
-    awful.key({modkey}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"})
+    awful.key({modkey}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"}),
+    awful.key({modkey, ctrlkey, shiftkey}, "Down", move_client_down, {description = 'move client to next screen', group='client'}),
+    awful.key({modkey, ctrlkey, shiftkey}, "Up", move_client_up, {description = 'move client to prev screen', group='client'})
 )
-
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
