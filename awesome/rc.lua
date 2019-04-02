@@ -82,8 +82,7 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({items = {{"awesome", myawesomemenu, beautiful.awesome_icon}, {"open terminal", terminal}}
-                        })
+mymainmenu = awful.menu({items = {{"awesome", myawesomemenu, beautiful.awesome_icon}, {"terminal", terminal}}})
 
 mylauncher = awful.widget.launcher({image = beautiful.awesome_icon, menu = mymainmenu})
 
@@ -115,10 +114,10 @@ local taglist_buttons = gears.table.join(
                                           end)
                 )
 
-local tasklist_buttons = gears.table.join(
-                    awful.button({}, mouse_rmb, function() awful.menu.client_list({ theme = { width = 250 } }) end),
-                    awful.button({}, mouse_scrolldown, function() awful.client.focus.byidx(1) end),
-                    awful.button({}, mouse_scrollup, function() awful.client.focus.byidx(-1) end))
+--local tasklist_buttons = gears.table.join(
+                    --awful.button({}, mouse_rmb, function() awful.menu.client_list({ theme = { width = 250 } }) end),
+                    --awful.button({}, mouse_scrolldown, function() awful.client.focus.byidx(1) end),
+                    --awful.button({}, mouse_scrollup, function() awful.client.focus.byidx(-1) end))
 
                     --awful.button({}, mouse_lmb, function (c)
                                             --if c == client.focus then
