@@ -3,33 +3,64 @@ set runtimepath+=$HOME/.config/nvim/autoload
 call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'romainl/flattened'
     Plug 'Shougo/deoplete.nvim'
-    Plug 'zchee/deoplete-jedi'
+    Plug 'deoplete-plugins/deoplete-jedi'
     Plug 'scrooloose/nerdcommenter'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'simnalamburt/vim-mundo'
+    Plug 'mbbill/undotree'
     Plug 'luochen1990/rainbow'
-    Plug 'haya14busa/incsearch.vim'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'w0rp/ale'  " TODO: Lot of config possible. Integrate ambv/black
-    " TODO: Evaluate below.
+    Plug 'w0rp/ale'
     Plug 'easymotion/vim-easymotion'
-    Plug 'mhinz/vim-startify'
 call plug#end()
 filetype plugin indent on
 syntax enable
 
 """""""""""""""""""""""""""""""""""""" PLUGIN OPTIONS
+
+" Airline
 let g:airline_powerline_fonts = 1
 
+" Ale
+let g:ale_use_global_executables = 1
+let g:ale_python_black_use_global = 1
+let g:ale_python_black_change_directory = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_fix_on_save = 1
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black'],
+\}
+
+" Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 
+" EasyMotion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0
+
+" Indentline
 let g:indentLine_enabled = 1
 let g:indentLine_concealcursor = 0
 let g:indentLine_char = '┆'
 let g:indentLine_faster = 1
 
+" NerdCommenter
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+
+" Rainbow
+let g:rainbow_active = 1
+
+" UndoTree
+let g:undotree_WindowLayout = 4
+let g:undotree_ShortIndicators = 1
+let g:undotree_RelativeTimestamp = 1
+let g:undotree_SplitWidth = 20
+let g:undotree_DiffpanelHeight = 9
+let g:undotree_SetFocusWhenToggle = 1
 
 set number
 set textwidth=0
@@ -41,6 +72,9 @@ colorscheme flattened_dark
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
 let mapleader =','
+" Move to last known position
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+nmap <Leader>, <Plug>(easymotion-w)
 
 set ruler
 set expandtab
@@ -54,7 +88,6 @@ set smartindent
 set incsearch
 set hlsearch
 set ignorecase
-map /  <Plug>(incsearch-forward)
 
 nnoremap <silent> <leader><space> :nohlsearch<CR>
 vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
@@ -65,7 +98,7 @@ set showmode
 
 inoremap kj <Esc>
 nnoremap ; :
-nnoremap <silent> u :MundoToggle<CR>
+nnoremap <silent> u :UndotreeToggle<CR>
 
 nnoremap <silent> <C-j> :m .+1<CR>==
 nnoremap <silent> <C-k> :m .-2<CR>==
@@ -86,5 +119,3 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 
 set hidden
-
-"let g:indentLine_setColors = 0
