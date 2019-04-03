@@ -141,8 +141,12 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-----------------------------  APPLICATIONS
+awful.spawn("tmux new -d -s 1")
+
 -- Possible bug in the below statement. Restarting awesome disables the fullscreen
-awful.spawn.single_instance("urxvt", {
+-- Probably not a bug exactly. The terminal just lowers down to allow for the bar
+awful.spawn.single_instance("urxvt -e tmux attach", {
         fullscreen=true,
         titlebars_enabled=false,
         focus=false,
@@ -266,7 +270,7 @@ awful.rules.rules = {
 }
 -- }}}
 
--- {{{ Signals
+---------------------- SIGNALS
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
