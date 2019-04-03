@@ -10,7 +10,7 @@ alias noproxy='unset {http,https,ftp,socks,no}_proxy'
 alias open="xdg-open"
 alias py='ipython3 --no-banner --autoindent --pprint'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";'
-alias tmux="tmux -2 attach || tmux -2 new"
+#alias tmux="tmux -2 attach || tmux -2 new"
 alias tst='ping www.google.com'
 alias vim='nvim'
 alias vrc='vim ~/.config/nvim/init.vim'
