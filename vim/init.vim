@@ -11,24 +11,33 @@ call plug#begin('$HOME/.config/nvim/plugins')
     Plug 'luochen1990/rainbow'
     Plug 'haya14busa/incsearch.vim'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'w0rp/ale'
+    Plug 'w0rp/ale'  " TODO: Lot of config possible. Integrate ambv/black
+    " TODO: Evaluate below.
+    Plug 'easymotion/vim-easymotion'
+    Plug 'mhinz/vim-startify'
 call plug#end()
-
 filetype plugin indent on
 syntax enable
+
+"""""""""""""""""""""""""""""""""""""" PLUGIN OPTIONS
+let g:airline_powerline_fonts = 1
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 0
+let g:indentLine_char = '┆'
+let g:indentLine_faster = 1
+
 
 set number
 set textwidth=0
 set wrapmargin=0
 
 set laststatus=2
-"set term=screen
 set t_Co=256
 colorscheme flattened_dark
-let g:airline_powerline_fonts = 1
-
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
 let mapleader =','
@@ -77,15 +86,5 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 
 set hidden
-let g:racer_cmd = "~Aaditya/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
-"au FileType rust nmap gd <Plug>(rust-def)
-"au FileType rust nmap gs <Plug>(rust-def-split)
-"au FileType rust nmap gx <Plug>(rust-def-vertical)
-"au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
-let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 0
-let g:indentLine_char = '┆'
-let g:indentLine_faster = 1
 "let g:indentLine_setColors = 0
