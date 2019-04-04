@@ -54,6 +54,7 @@ end
 
 keys.globalkeys = gears.table.join(
 ---- Workspaces
+-- TODO: Focus when there is only a single client
     awful.key({ctrlkey, altkey}, "Up",   awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({ctrlkey, altkey}, "Down", awful.tag.viewnext, {description = "view next", group = "tag"}),
 
@@ -91,28 +92,31 @@ keys.globalkeys = gears.table.join(
 --------------------------------------------
 
 -- TODO: Make this non reliant on tags being numbers. Also, fails with dynamic tags
--- UNTESTED!!
 function move_client_down(c)
     screen = awful.screen.focused()
     local t = client.focus and client.focus.first_tag or nil
-    if t == nil or t.name == 5 then
+    if t == nil or t.name == '5' then
         return
     end
 
     local tag = screen.tags[t.name+1]
-    c:move_to_tag(tag)
     awful.tag.viewnext()
+    c:move_to_tag(tag)
+    client.focus = c
+    c:raise()
 end
 function move_client_up(c)
     screen = awful.screen.focused()
     local t = client.focus and client.focus.first_tag or nil
-    if t == nil or t.name == 1 then
+    if t == nil or t.name =='1' then
         return
     end
 
     local tag = screen.tags[t.name-1]
+    awful.tag.viewprev()
     c:move_to_tag(tag)
-    awful.tag.viewnext()
+    client.focus = c
+    c:raise()
 end
 keys.clientkeys = gears.table.join(
     awful.key({modkey}, "f", function (c) c.fullscreen = not c.fullscreen
@@ -120,8 +124,8 @@ keys.clientkeys = gears.table.join(
     awful.key({modkey, "Shift"}, "c", function(c) c:kill() end, {description = "close", group = "client"}),
     awful.key({modkey, "Control"}, "space", awful.client.floating.toggle, {description = "toggle floating", group = "client"}),
     awful.key({modkey}, "t", function (c) c.ontop = not c.ontop end, {description = "toggle keep on top", group = "client"}),
-    awful.key({modkey, ctrlkey, shiftkey}, "Down", move_client_down, {description = 'move client to next screen', group='client'}),
-    awful.key({modkey, ctrlkey, shiftkey}, "Up", move_client_up, {description = 'move client to prev screen', group='client'})
+    awful.key({altkey, ctrlkey, shiftkey}, "Down", move_client_down, {description = 'move client to next screen', group='client'}),
+    awful.key({altkey, ctrlkey, shiftkey}, "Up", move_client_up, {description = 'move client to prev screen', group='client'})
 )
 
 -- Bind all key numbers to tags.
