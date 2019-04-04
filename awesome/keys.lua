@@ -78,8 +78,16 @@ keys.globalkeys = gears.table.join(
     awful.key({modkey}, "space", function () awful.layout.inc( 1)  end, {description = "select next", group = "layout"}),
 
 ---- Applications
-    awful.key({modkey}, "Return", function () awful.spawn(terminal) end, {description = "open a terminal", group = "launcher"}),
-    awful.key({modkey}, "r", function() awful.spawn(rofi_normal) end, {description = "run prompt", group = "launcher"}),
+    awful.key({modkey}, "Return", function () awful.spawn(rofi_normal) end, {description = "open a terminal", group = "launcher"}),
+    awful.key({modkey}, "r", function() awful.spawn("tmux new -d -s 1")
+        awful.spawn("urxvt -e tmux attach", {
+            fullscreen=true,
+            titlebars_enabled=false,
+            focus=false,
+            floating=true,
+            minimized=true,
+            maximized=true,
+            skip_taskbar=true }) end, {description = "run prompt", group = "launcher"}),
     awful.key({modkey}, "p", function() awful.spawn(rofi_drun) end, {description = "show the menubar", group = "launcher"}),
     awful.key({}, "F12", toggle_dropdown, {description = "open dropdown", group = "launcher"}),
 
