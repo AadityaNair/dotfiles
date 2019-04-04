@@ -36,7 +36,7 @@ keys.desktopbuttons = gears.table.join(
 
 function toggle_dropdown()
     for _, c in ipairs(client.get()) do
-        if c.name == 'urxvt' then
+        if c.name == 'tmux' then
             if c.minimized == true then
                 c.minimized = false
                 c.maximized = true
