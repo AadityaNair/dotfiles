@@ -52,6 +52,22 @@ function toggle_dropdown()
     end
 end
 
+function lock_screen()
+    awful.spawn.easy_async("i3lock-fancy -p",
+        function(...)
+            gears.timer.start_new(5,
+                function()
+                    awful.spawn("xset dpms force off")
+                    return false
+                    -- false assures that timer is not called again
+                    -- TODO: This will only allow screen to turn off only once.
+                    --       Make it so that it always happens when locked or somehow use xautolock
+                end
+            )
+        end
+    )
+end
+
 keys.globalkeys = gears.table.join(
 ---- Workspaces
 -- TODO: Focus when there is only a single client
@@ -93,7 +109,8 @@ keys.globalkeys = gears.table.join(
 
 ---- Awesome
     awful.key({modkey}, "s",hotkeys_popup.show_help, {description="show help", group="awesome"}),
-    awful.key({modkey}, "l", function() awful.spawn(screen_locker) end, {description = "Lock Screen", group = "awesome"}),
+    -- awful.key({modkey}, "l", function() awful.spawn('i3lock-fancy -p') end, {description = "Lock Screen", group = "awesome"}),
+    awful.key({modkey}, "l", lock_screen, {description = "Lock Screen", group = "awesome"}),
     awful.key({modkey, ctrlkey}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
     awful.key({modkey, shiftkey}, "q", awesome.quit, {description = "quit awesome", group = "awesome"})
 )
