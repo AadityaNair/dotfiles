@@ -1,0 +1,22 @@
+urxvt.scrollBar: false
+urxvt.jumpScroll: false
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+
+urxvt.perl-ext-common: default,matcher,font-size,clipboard
+
+!! Change font size on Control-Plus/Minus
+URxvt.keysym.Control-0x2b: perl:font-size:increase
+URxvt.keysym.Control-0x2d: perl:font-size:decrease
+
+
+urxvt.font: xft:Source Code Pro:pixelsize=18
+urxvt.boldFont: xft:Source Code Pro:pixelsize=18:weight=bold
+
+! urxvt.font: xft:Iosevka:style=Regular:size=18
+! urxvt.boldFont: xft:Iosevka:style=Bold:size=18
+! urxvt.italicFont: xft:Iosevka:style=Italic:size=18
+! urxvt.boldItalicFont: xft:Iosevka:style=Bold Italic:size=18
+
+URxvt.keysym.C-S-c: perl:clipboard:copy
+URxvt.keysym.C-S-v: perl:clipboard:paste
