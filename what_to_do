@@ -1,0 +1,76 @@
+applications:
+    - awesome-client for ad-hoc commands
+    - rofi (f) (done)
+    - screen locking (f) (done)
+        - xautolock  & i3lock-fancy (test on atlas)
+        - xscreensaver (dropped)
+    - application switcher (f) (done)
+    - application overview (f)
+    - dropdown (f) (done)
+        - all new terminals connect to this session
+                     --OR--
+        - create a new terminal on boot/key-press (done)
+        - Hide the terminal via minimisation (done)
+        - show on key-press (done)
+        - spawn only one terminal (done)
+        - move terminal to current tag (done)
+        - some keybind to fix things on unusual exit
+                     --OR--
+        - create toggle-able scratchpad (done) (dropped)
+        - hide scratchpad in list (dropped)
+        - autocreate a terminal on scratchpad
+        - make sure terminal is not deleted.
+    - ncmpcpp
+
+keybindings:
+    - hide bars
+    - copy i3 KBs for workspaces. (f) (done)
+    - KBs for media (f)
+    - move/resize clients without the titlebar (done)
+    - dynamic tags (f)
+        - create new when moving to new tag
+        - don't create after the last one
+        - remove tags with no client from the end
+        - remove tags with no client from the beginning
+    - move clients like gnome (f) (done)
+        - move clients for constant number of tags and numeric tags
+        - relax numeric constraint
+        - relax count constraint
+        - don't move when the only client in the last tag
+    - Have KB to restart dropdown (done)
+
+Others:
+    - start a tmux session on boot (done)
+    - auto-connect to tmux session (done)
+    - sidebar kind of thing
+    - menu for logouts and stuff
+    - application bar gnome-ish or like apple
+    - hardware monitoring
+    - quick settings
+    - change workspaces keybindings (f) (done)
+    - modal system
+    - send input to multiple clients
+    - fix/remove titlebars (f) (done)
+    - fix display on topbar
+    - Secure mode: Inactivity lock mode on keypress
+    - Copy Paste
+    - Alt-Tab mode
+
+Optional:
+    - optimise dropdown using signals
+    - rofi powered menus: https://gist.github.com/RobSis/7251f8eec0c63b32a1b0a7e37abd32d2
+    - System status window. Key press to show a window with lot of info. Maybe integrate with rofi
+
+Theming:
+    - window gaps
+    - blurwal
+        - implement awesomewm backend
+    - compton
+    - notifications
+    - correct fonts
+    - fix rofi theme
+    - more flat look
+    - minimalistic
+    - floating top bar
+    - put icons on workspaces depending on application
+    - configure urxvt
