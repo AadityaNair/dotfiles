@@ -10,8 +10,8 @@ URxvt.keysym.Control-0x2b: perl:font-size:increase
 URxvt.keysym.Control-0x2d: perl:font-size:decrease
 
 
-urxvt.font: xft:Source Code Pro:pixelsize=18
-urxvt.boldFont: xft:Source Code Pro:pixelsize=18:weight=bold
+urxvt.font: xft:Source Code Pro:pixelsize=18,xft:PowerlineSymbols:style=medium
+urxvt.boldFont: xft:Source Code Pro:pixelsize=18:weight=bold,xft:PowerlineSymbols:style=medium
 
 ! urxvt.font: xft:Iosevka:style=Regular:size=18
 ! urxvt.boldFont: xft:Iosevka:style=Bold:size=18
@@ -21,4 +21,4 @@ urxvt.boldFont: xft:Source Code Pro:pixelsize=18:weight=bold
 URxvt.keysym.C-S-c: perl:clipboard:copy
 URxvt.keysym.C-S-v: perl:clipboard:paste
 
-# vi: ft=xdefaults
+! vi: ft=xdefaults
