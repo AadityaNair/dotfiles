@@ -15,3 +15,7 @@ bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "\ei" insert-last-word
 
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
