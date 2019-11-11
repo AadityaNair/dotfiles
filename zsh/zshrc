@@ -1,17 +1,17 @@
 # ----------------------------  Plugins  --------------------------
 source $HOME/.zplug/init.zsh  # Plugin config import
-if [ "$(cat /etc/hostname)" = "DarkStar" ];then
+if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
     source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 fi
 
 zplug "zsh-users/zsh-completions"
-zplug "zdharma/fast-syntax-highlighting", defer:2 
+zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 zplug "eendroroy/zed-zsh"
 #zplug "zsh-users/zsh-autosuggestions"
 
 # Have a separate theme for machines that aren't mine
-if [ "$(cat /etc/hostname)" = "DarkStar" ];then
+if [[ ! -n "$SSH_CLIENT" ]] || [[ ! -n "$SSH_TTY" ]];then
     zplug "AadityaNair/agnoster-zsh-theme", as:theme
 else
     zplug "dracula/zsh", as:theme
@@ -97,6 +97,8 @@ zstyle ':completion:*:history-words' remove-all-dups yes
 zstyle ':completion:*:history-words' list false
 zstyle ':completion:*:history-words' menu yes
 
+zstyle ':completion:*:ssh:*' hosts off
+
 # ----------------------------  Boilerplate  ------------------------------
 export TERM=xterm-256color
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
@@ -111,4 +113,4 @@ zplug load
 
 source $HOME/.dotfiles/zsh/zsh_specific
 source $HOME/.dotfiles/zsh/shell_commons
-
+compdef kb=kubectl

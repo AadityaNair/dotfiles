@@ -4,13 +4,14 @@ export MANPAGER="most"
 ################ ALIASES #############################
 
 # Random useful aliases
+alias cat='bat'
 alias ip='ip -color'
 alias irssi='TERM=screen-256color irssi'
+alias kb='kubectl'
 alias noproxy='unset {http,https,ftp,socks,no}_proxy'
 alias open="xdg-open"
 alias py='ipython3 --no-banner --autoindent --pprint'
 alias setproxy='export {http,https,ftp,socks}_proxy="http://proxy.iiit.ac.in:8080";'
-#alias tmux="tmux -2 attach || tmux -2 new"
 alias tst='ping www.google.com'
 alias vim='nvim'
 alias vrc='vim ~/.config/nvim/init.vim'
@@ -89,7 +90,7 @@ function clipcopy() {
       fi
     elif which xsel &>/dev/null; then
       if [[ -z $file ]]; then
-        xsel --clipboard --input 
+        xsel --clipboard --input
       else
         cat "$file" | xsel --clipboard --input
       fi
@@ -110,4 +111,3 @@ function clippaste() {
       xsel --clipboard --output
     fi
 }
-
