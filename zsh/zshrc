@@ -113,4 +113,5 @@ zplug load
 
 source $HOME/.dotfiles/zsh/zsh_specific
 source $HOME/.dotfiles/zsh/shell_commons
+source $HOME/.dotfiles/zsh/tower.sh
 compdef kb=kubectl
