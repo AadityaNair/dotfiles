@@ -1,7 +1,10 @@
+# Setup default install location
+export INSTALL=$HOME
+
 # ----------------------------  Plugins  --------------------------
-source $HOME/.zplug/init.zsh  # Plugin config import
+source $INSTALL/.zplug/init.zsh  # Plugin config import
 if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
-    source $HOME/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
+    source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 fi
 
 zplug "zsh-users/zsh-completions"
@@ -39,7 +42,7 @@ setopt autocd
 
 # ----------------------------  History Settings  ----------------------------
 
-HISTFILE=$HOME/.zsh_history
+HISTFILE=$INSTALL/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
@@ -84,7 +87,7 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # Directories
-eval `dircolors $HOME/.dotfiles/zsh/dircolors.ansi-dark`
+eval `dircolors $INSTALL/.dotfiles/zsh/dircolors.ansi-dark`
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
@@ -111,7 +114,7 @@ if ! zplug check; then
 fi
 zplug load
 
-source $HOME/.dotfiles/zsh/zsh_specific
-source $HOME/.dotfiles/zsh/shell_commons
-source $HOME/.dotfiles/zsh/tower.sh
+source $INSTALL/.dotfiles/zsh/zsh_specific
+source $INSTALL/.dotfiles/zsh/shell_commons
+source $INSTALL/.dotfiles/zsh/tower.sh
 compdef kb=kubectl
