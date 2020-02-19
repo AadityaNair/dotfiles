@@ -3,7 +3,13 @@ export INSTALL=$HOME
 
 # ----------------------------  Plugins  --------------------------
 export ZPLUG_HOME=$INSTALL/.zplug
+export ZPLUG_LOADFILE=$ZPLUG_HOME/packages.zsh
+export ZPLUG_ERROR_LOG=$ZPLUG_HOME/error.log
+export ZPLUG_BIN=$ZPLUG_HOME/bin
+export ZPLUG_CACHE_DIR=$ZPLUG_HOME/cache
+export ZPLUG_REPOS=$ZPLUG_HOME/repos
 source $INSTALL/.zplug/init.zsh  # Plugin config import
+
 if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
     source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
 fi
