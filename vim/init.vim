@@ -1,7 +1,7 @@
-set runtimepath+=$HOME/.config/nvim/autoload
+set runtimepath+=$INSTALL/.config/nvim/autoload
 
 set guicursor=
-call plug#begin('$HOME/.config/nvim/plugins')
+call plug#begin('$INSTALL/.config/nvim/plugins')
     Plug 'romainl/flattened'
     Plug 'Shougo/deoplete.nvim'
     Plug 'deoplete-plugins/deoplete-jedi'
