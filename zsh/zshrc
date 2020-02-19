@@ -2,6 +2,7 @@
 export INSTALL=$HOME
 
 # ----------------------------  Plugins  --------------------------
+export ZPLUG_HOME=$INSTALL/.zplug
 source $INSTALL/.zplug/init.zsh  # Plugin config import
 if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
     source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
