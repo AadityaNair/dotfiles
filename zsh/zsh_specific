@@ -14,3 +14,10 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "\ei" insert-last-word
+
+# Adding below because for some fucking reason zsh replaced a lot of these with self-insert
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^U" kill-whole-line
+bindkey "^Y" yank
+bindkey "^B" backward-word # This is a new keybinding
