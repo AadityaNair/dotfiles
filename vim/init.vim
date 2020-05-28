@@ -56,7 +56,7 @@ endfunction
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('smart_case', v:true)
 
 " EasyMotion
 let g:EasyMotion_smartcase = 1
