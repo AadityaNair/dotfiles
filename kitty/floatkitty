@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+# Configuration to make kitty a dropdown terminal
+
+tdrop -w 100% -h 100% kitty
