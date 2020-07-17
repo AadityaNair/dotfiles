@@ -34,8 +34,9 @@ function set_from_command(){
     esac
 }
 
-
-autoload -Uz add-zsh-hook
-
-add-zsh-hook precmd set_pwd
-add-zsh-hook preexec set_from_command
+if [[ ! -z "$TMUX" ]]
+then
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd set_pwd
+    add-zsh-hook preexec set_from_command
+fi
