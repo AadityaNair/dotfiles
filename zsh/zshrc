@@ -125,6 +125,11 @@ source $INSTALL/.dotfiles/zsh/zsh_specific
 source $INSTALL/.dotfiles/zsh/shell_commons
 source $INSTALL/.dotfiles/zsh/tower.sh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Added nvm function because nvm loading takes a ton of time.
+# With this, nvm will load once I type nvm once and will override this function
+# So for every terminal type nvm twice
+function nvm(){
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
