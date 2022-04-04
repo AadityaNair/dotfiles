@@ -26,7 +26,7 @@ function set_from_command(){
     cmd=(${(z)1}) # Convert command string to a list of words.
 
     case $cmd[1] in
-        vim) tmux_rename "◉ $cmd[2]" ;;
+        vim|nvim) tmux_rename "◉ $cmd[2]" ;;
         man|run-help) tmux_rename "$cmd[-1] ❓" ;;
         ssh) tmux_rename "$cmd[2]" ;;
         sudo) tmux_rename "⚡$cmd[2]" ;;
