@@ -13,9 +13,9 @@ call plug#begin('$INSTALL/.config/nvim/plugins')
     Plug 'terryma/vim-multiple-cursors'
     Plug 'dense-analysis/ale'
     Plug 'easymotion/vim-easymotion'
-    Plug 'chrisbra/csv.vim'
-    Plug 'Shougo/denite.nvim'
-    Plug 'robbles/logstash.vim'
+    " Plug 'chrisbra/csv.vim'
+    " Plug 'Shougo/denite.nvim'
+    " Plug 'robbles/logstash.vim'
 call plug#end()
 filetype plugin indent on
 syntax enable
