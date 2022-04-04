@@ -1,7 +1,7 @@
 # Setup default install location
 export INSTALL=$HOME
 
-# ----------------------------  Plugins  --------------------------
+# ----------------------------  Plugin Configuration  --------------------------
 export ZPLUG_HOME=$INSTALL/.zplug
 export ZPLUG_LOADFILE=$ZPLUG_HOME/packages.zsh
 export ZPLUG_ERROR_LOG=$ZPLUG_HOME/error.log
@@ -10,9 +10,6 @@ export ZPLUG_CACHE_DIR=$ZPLUG_HOME/cache
 export ZPLUG_REPOS=$ZPLUG_HOME/repos
 source $INSTALL/.zplug/init.zsh  # Plugin config import
 
-if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
-    source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
-fi
 
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2
@@ -27,13 +24,22 @@ else
     zplug "dracula/zsh", as:theme
 fi
 
+if ! zplug check; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+
+
 # ----------------------------  Plugin Specific Settings  --------------------------
 
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
-#ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,bold'
-ZSH_AUTOSUGGEST_USE_ASYNC=1
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=239'
+# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,bold'
+# ZSH_AUTOSUGGEST_USE_ASYNC=1
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=239'
 
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -113,14 +119,10 @@ zstyle ':completion:*:ssh:*' hosts off
 export TERM=xterm-256color
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
-if ! zplug check; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-zplug load
 
 source $INSTALL/.dotfiles/zsh/zsh_specific
 source $INSTALL/.dotfiles/zsh/shell_commons
 source $INSTALL/.dotfiles/zsh/tower.sh
+if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
+    source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
+fi
