@@ -10,9 +10,9 @@ bindkey "\e\e" sudo-command-line
 
 ################# KEYBINDINGS ##################
 
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[4~" end-of-line
-bindkey "^[[3~" delete-char
+#bindkey "^[[1~" beginning-of-line
+#bindkey "^[[4~" end-of-line
+#bindkey "^[[3~" delete-char
 bindkey "\ei" insert-last-word
 
 # Adding below because for some fucking reason zsh replaced a lot of these with self-insert
@@ -21,3 +21,13 @@ bindkey "^E" end-of-line
 bindkey "^U" kill-whole-line
 bindkey "^Y" yank
 bindkey "^B" backward-word # This is a new keybinding
+
+bindkey "^H" backward-kill-word # This also maps to Ctrl+Bcksp
+bindkey "^[[1;5D" backward-word # Ctrl+Left
+bindkey "^[[1;5C" forward-word  # Ctrl+Right
+
+bindkey "^K" kill-line
+
+# bindkey <something> quote-region
+# bindkey <something> transpose-words
+# Something to directly edit a file
