@@ -16,10 +16,11 @@ alias open="xdg-open"
 alias py='ipython3 --no-banner --autoindent --pprint'
 alias tst='ping www.google.com'
 alias vim='nvim'
-alias vrc='vim ~/.config/nvim/init.vim'
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
+alias vrc='vim ~/.config/nvim/init.vim'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
 alias trc="vim ~/.tmux.conf"
+alias crc="vim ~/.dotfiles/zsh/company.sh"
 
 
 # CD aliases
