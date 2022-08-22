@@ -14,6 +14,7 @@ alias kb='kubectl'
 alias noproxy='unset {http,https,ftp,socks,no}_proxy'
 alias open="xdg-open"
 alias py='ipython3 --no-banner --autoindent --pprint'
+alias tmux='tmux attach || tmux new'
 alias tst='ping www.google.com'
 alias vim='nvim'
 alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
