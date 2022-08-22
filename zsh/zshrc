@@ -123,6 +123,6 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 source $INSTALL/.dotfiles/zsh/zsh_specific
 source $INSTALL/.dotfiles/zsh/shell_commons
 source $INSTALL/.dotfiles/zsh/company.sh
-if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
-    source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
-fi
+source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
+# if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
+# fi
