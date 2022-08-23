@@ -12,7 +12,7 @@ source $INSTALL/.zplug/init.zsh  # Plugin config import
 
 
 zplug "zsh-users/zsh-completions"
-zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 zplug "eendroroy/zed-zsh"
 #zplug "zsh-users/zsh-autosuggestions"
