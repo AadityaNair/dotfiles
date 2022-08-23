@@ -2,7 +2,7 @@
 #export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 #TODO: What if `most` or `nvim`  doesn't exist
 #export MANPAGER="most"
-#export EDITOR="nvim"
+export EDITOR="nvim"
 ################ ALIASES #############################
 
 # Random useful aliases
