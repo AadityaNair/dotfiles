@@ -2,17 +2,17 @@ set runtimepath+=$INSTALL/.config/nvim/autoload
 
 set guicursor=
 call plug#begin('$INSTALL/.config/nvim/plugins')
-    Plug 'romainl/flattened'
     Plug 'Shougo/deoplete.nvim'
     Plug 'deoplete-plugins/deoplete-jedi'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'luochen1990/rainbow'
+    Plug 'mbbill/undotree'
+    Plug 'romainl/flattened'
     Plug 'scrooloose/nerdcommenter'
+    Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'mbbill/undotree'
-    Plug 'luochen1990/rainbow'
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'dense-analysis/ale'
-    Plug 'easymotion/vim-easymotion'
+    " Plug 'dense-analysis/ale'
     " Plug 'chrisbra/csv.vim'
     " Plug 'Shougo/denite.nvim'
     " Plug 'robbles/logstash.vim'
