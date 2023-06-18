@@ -36,11 +36,11 @@ alias ......='cd ../../../../..'
 alias -- -='cd -'
 
 # LS aliases
-alias ls='ls --color -h --group-directories-first'
-alias lsa='ls -lah'
-alias l='ls -lah'
-alias ll='ls -lh'
-alias la='ls -lAh'
+alias ls='exa --group-directories-first'
+#alias lsa='ls -lah'
+#alias l='ls -lah'
+#alias ll='ls -lh'
+#alias la='ls -lAh'
 alias sl='ls'
 
 ################ FUNCTIONS #####################
