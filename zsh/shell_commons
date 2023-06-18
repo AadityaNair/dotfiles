@@ -6,7 +6,7 @@ export EDITOR="nvim"
 ################ ALIASES #############################
 
 # Random useful aliases
-#alias cat='bat'
+alias cat='bat'
 alias htop='TERM=screen htop'
 alias ip='ip -color'
 alias irssi='TERM=screen-256color irssi'
