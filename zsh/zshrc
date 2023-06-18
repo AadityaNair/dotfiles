@@ -1,4 +1,5 @@
 # Setup default install location
+# zmodload zsh/zprof
 export INSTALL=$HOME/.config/
 
 # ----------------------------  Plugin Configuration  --------------------------
