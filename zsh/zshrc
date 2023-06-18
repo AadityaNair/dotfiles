@@ -2,13 +2,13 @@
 export INSTALL=$HOME
 
 # ----------------------------  Plugin Configuration  --------------------------
-export ZPLUG_HOME=$INSTALL/.zplug
+export ZPLUG_HOME=$INSTALL/.local/share/zplug
 export ZPLUG_LOADFILE=$ZPLUG_HOME/packages.zsh
 export ZPLUG_ERROR_LOG=$ZPLUG_HOME/error.log
 export ZPLUG_BIN=$ZPLUG_HOME/bin
 export ZPLUG_CACHE_DIR=$ZPLUG_HOME/cache
 export ZPLUG_REPOS=$ZPLUG_HOME/repos
-source $INSTALL/.zplug/init.zsh  # Plugin config import
+source $ZPLUG_HOME/init.zsh  # Plugin config import
 
 
 zplug "zsh-users/zsh-completions"
@@ -55,7 +55,7 @@ setopt autocd
 
 # ----------------------------  History Settings  ----------------------------
 
-HISTFILE=$INSTALL/.zsh_history
+HISTFILE=$INSTALL/.local/share/zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
@@ -120,9 +120,9 @@ export TERM=xterm-256color
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 
-source $INSTALL/.dotfiles/zsh/zsh_specific
-source $INSTALL/.dotfiles/zsh/shell_commons
-source $INSTALL/.dotfiles/zsh/company.sh
-source $INSTALL/.dotfiles/zsh/titles.zsh # Personalized zsh-titles
+source $INSTALL/.config/dotfiles/zsh/zsh_specific
+source $INSTALL/.config/dotfiles/zsh/shell_commons
+source $INSTALL/.config/dotfiles/zsh/company.sh
+source $INSTALL/.config/dotfiles/zsh/titles.zsh # Personalized zsh-titles
 # if [[ ! -n "$SSH_CLIENT" ]] && [[ ! -n "$SSH_TTY" ]];then
 # fi
