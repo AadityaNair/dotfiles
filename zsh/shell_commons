@@ -25,6 +25,7 @@ alias src="vim $INSTALL/dotfiles/zsh/shell_commons"
 alias trc="vim ~/.tmux.conf"
 alias vrc='vim ~/.config/nvim/init.vim'
 alias zrc='vim ~/.zshrc;source ~/.zshrc'
+alias dots="cd $INSTALL/dotfiles/"
 
 
 # CD aliases
