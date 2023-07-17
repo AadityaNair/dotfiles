@@ -4,16 +4,13 @@
 #export MANPAGER="most"
 export EDITOR="nvim"
 export IPYTHONDIR="~/.config/ipython"
+export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 ################ ALIASES #############################
 
 # Random useful aliases
 alias cat='bat'
-alias htop='TERM=screen htop'
 alias ip='ip -color'
-alias irssi='TERM=screen-256color irssi'
 alias kb='kubectl'
-alias noproxy='unset {http,https,ftp,socks,no}_proxy'
-alias open="xdg-open"
 alias py='ipython3 --no-banner --autoindent --pprint'
 alias tmux='tmux attach || tmux new'
 alias tst='ping www.google.com'
@@ -86,44 +83,6 @@ function extract () {
     fi
 }
 
-
-# clipcopy - Copy data to clipboard
-# Usage:
-#  <command> | clipcopy    - copies stdin to clipboard
-#  clipcopy <file>         - copies a file's contents to clipboard
-function clipcopy() {
-  emulate -L zsh
-  local file=$1
-    if which xclip &>/dev/null; then
-      if [[ -z $file ]]; then
-        xclip -in -selection clipboard
-      else
-        xclip -in -selection clipboard $file
-      fi
-    elif which xsel &>/dev/null; then
-      if [[ -z $file ]]; then
-        xsel --clipboard --input
-      else
-        cat "$file" | xsel --clipboard --input
-      fi
-  fi
-}
-
-
-# clippaste - "Paste" data from clipboard to stdout
-# Usage:
-#   clippaste   - writes clipboard's contents to stdout
-#   clippaste | <command>    - pastes contents and pipes it to another process
-#   clippaste > <file>      - paste contents to a file
-function clippaste() {
-  emulate -L zsh
-    if which xclip &>/dev/null; then
-      xclip -out -selection clipboard
-    elif which xsel &>/dev/null; then
-      xsel --clipboard --output
-    fi
-}
-
 # Lazy load kubectl completions
 function kubectl() {
     if ! type __start_kubectl >/dev/null 2>&1; then
@@ -143,5 +102,4 @@ function nvm(){
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
 
-#eval `dircolors $INSTALL/dotfiles/zsh/dircolors.ansi-dark`
 

@@ -115,8 +115,6 @@ setopt share_history # share command history data
 # zstyle ':completion:*:ssh:*' hosts off
 
 # ----------------------------  Boilerplate  ------------------------------
-export TERM=xterm-256color
-export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 
 
 source $INSTALL/dotfiles/zsh/zsh_specific.zsh
