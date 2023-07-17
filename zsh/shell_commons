@@ -3,6 +3,7 @@
 #TODO: What if `most` or `nvim`  doesn't exist
 #export MANPAGER="most"
 export EDITOR="nvim"
+export IPYTHONDIR="~/.config/ipython"
 ################ ALIASES #############################
 
 # Random useful aliases
