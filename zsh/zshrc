@@ -126,4 +126,6 @@ source $INSTALL/dotfiles/zsh/titles.zsh # Personalized zsh-titles
 
 if [[ $OSTYPE == "darwin"* ]]; then
     source $INSTALL/dotfiles/zsh/macOS.sh
+else
+    source $INSTALL/dotfiles/zsh/linux.sh
 fi
