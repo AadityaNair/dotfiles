@@ -22,7 +22,7 @@ alias dots="cd $INSTALL/dotfiles/"
 
 alias crc="vim $INSTALL/dotfiles/zsh/company.sh"
 alias frc="vim $INSTALL/dotfiles/zsh/config.fish"
-alias src="vim $INSTALL/dotfiles/zsh/shell_commons"
+alias src="vim $INSTALL/dotfiles/zsh/shell_commons.sh"
 alias trc="vim $INSTALL/dotfiles/tmux/tmux.conf"
 alias vrc="vim $INSTALL/dotfiles/vim/init.vim"
 alias zrc="vim $INSTALL/dotfiles/zsh/zshrc;source ~/.zshrc"
@@ -97,9 +97,11 @@ function kubectl() {
 # With this, nvm will load once I type nvm once and will override this function
 # So for every terminal type nvm twice
 function nvm(){
+    unset -f nvm
+
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    nvm "$@"
 }
-
 
