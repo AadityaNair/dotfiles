@@ -28,7 +28,7 @@ setup_zsh()
 
     ln -s .dotfiles/zsh/zshrc .zshrc
 
-    git clone https://github.com/zplug/zplug.git .zplug
+    git clone https://github.com/AadityaNair/zplug.git .zplug
     cd .zplug
     git apply ~/.dotfiles/zsh/secret_sauce.diff
 
