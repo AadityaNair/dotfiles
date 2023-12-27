@@ -1,7 +1,8 @@
 # Setup default install location
 # zmodload zsh/zprof
 export INSTALL=$HOME/.config/
-
+# Testing version of LS_COLORS.
+# export LS_COLORS="di=1;34:ln=0;36:pi=0;33:bd=1;33:cd=1;33:so=1;31:ex=1;32:*README=1;4;33:*README.txt=1;4;33:*README.md=1;4;33:*readme.txt=1;4;33:*readme.md=1;4;33:*.ninja=1;4;33:*Makefile=1;4;33:*Cargo.toml=1;4;33:*SConstruct=1;4;33:*CMakeLists.txt=1;4;33:*build.gradle=1;4;33:*pom.xml=1;4;33:*Rakefile=1;4;33:*package.json=1;4;33:*Gruntfile.js=1;4;33:*Gruntfile.coffee=1;4;33:*BUILD=1;4;33:*BUILD.bazel=1;4;33:*WORKSPACE=1;4;33:*build.xml=1;4;33:*Podfile=1;4;33:*webpack.config.js=1;4;33:*meson.build=1;4;33:*composer.json=1;4;33:*RoboFile.php=1;4;33:*PKGBUILD=1;4;33:*Justfile=1;4;33:*Procfile=1;4;33:*Dockerfile=1;4;33:*Containerfile=1;4;33:*Vagrantfile=1;4;33:*Brewfile=1;4;33:*Gemfile=1;4;33:*Pipfile=1;4;33:*build.sbt=1;4;33:*mix.exs=1;4;33:*bsconfig.json=1;4;33:*tsconfig.json=1;4;33:*.zip=0;31:*.tar=0;31:*.Z=0;31:*.z=0;31:*.gz=0;31:*.bz2=0;31:*.a=0;31:*.ar=0;31:*.7z=0;31:*.iso=0;31:*.dmg=0;31:*.tc=0;31:*.rar=0;31:*.par=0;31:*.tgz=0;31:*.xz=0;31:*.txz=0;31:*.lz=0;31:*.tlz=0;31:*.lzma=0;31:*.deb=0;31:*.rpm=0;31:*.zst=0;31:*.lz4=0;31"
 # ----------------------------  Plugin Configuration  --------------------------
 export ZPLUG_HOME=$HOME/.local/share/zplug
 export ZPLUG_LOADFILE=$ZPLUG_HOME/packages.zsh
@@ -33,6 +34,7 @@ if ! zplug check; then
 fi
 zplug load
 
+export FAST_WORK_DIR=$HOME/.local/fsh
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 
@@ -73,46 +75,47 @@ setopt share_history # share command history data
 
 # ----------------------------  Auto Completion Settings ----------------------
 
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-# zstyle ':completion:*:*:*:*:*' menu select # Arrow key based selections
-# zstyle ':completion:*:matches' group 'yes'
-# zstyle ':completion:*:options' description 'yes'
-# zstyle ':completion:*:options' auto-description '%d'
-# zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-# zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-# zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-# zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-# zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-# zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-# zstyle ':completion:*' group-name ''
-# zstyle ':completion:*' verbose yes
+zstyle ':completion:*:*:*:*:*' menu select # Allow moving across selections using arrow keys
 
-# zstyle ':completion:*' completer _complete _match _approximate
-# zstyle ':completion:*:match:*' original only
-# zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
+
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 # Increase the number of errors based on the length of the typed word.
-# zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Don't complete unavailable commands.
-# zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 
 # Array completion element sorting.
-# zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # Directories
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-# zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
-# zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
-# zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+zstyle ':completion:*' squeeze-slashes true
 
 # History
-# zstyle ':completion:*:history-words' stop yes
-# zstyle ':completion:*:history-words' remove-all-dups yes
-# zstyle ':completion:*:history-words' list false
-# zstyle ':completion:*:history-words' menu yes
-# zstyle ':completion:*:ssh:*' hosts off
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+zstyle ':completion:*:ssh:*' hosts off
 
 # ----------------------------  Boilerplate  ------------------------------
 
@@ -120,7 +123,7 @@ setopt share_history # share command history data
 source $INSTALL/dotfiles/zsh/zsh_specific.zsh
 source $INSTALL/dotfiles/zsh/shell_commons.sh
 source $INSTALL/dotfiles/zsh/company.sh
-source $INSTALL/dotfiles/zsh/titles.zsh # Personalized zsh-titles
+source $INSTALL/dotfiles/zsh/titles.zsh
 
 if [[ $OSTYPE == "darwin"* ]]; then
     source $INSTALL/dotfiles/zsh/macOS.sh
