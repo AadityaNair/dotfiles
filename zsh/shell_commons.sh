@@ -37,7 +37,7 @@ alias ......='cd ../../../../..'
 alias -- -='cd -'
 
 # LS aliases
-alias ls='exa --group-directories-first'
+alias ls='eza --group-directories-first'
 #alias lsa='ls -lah'
 #alias l='ls -lah'
 alias ll='ls -lh'
