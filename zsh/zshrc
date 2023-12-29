@@ -12,12 +12,14 @@ export ZPLUG_CACHE_DIR=$ZPLUG_HOME/cache
 export ZPLUG_REPOS=$ZPLUG_HOME/repos
 source $ZPLUG_HOME/init.zsh  # Plugin config import
 
-
 zplug "zsh-users/zsh-completions"
-zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
+zplug "AadityaNair/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 zplug "eendroroy/zed-zsh"
-#zplug "zsh-users/zsh-autosuggestions"
+# Ideas for new features:
+# marlonrichert/zsh-autocomplete
+# marlonrichert/zsh-snap (very useful with Ansible)
+
 
 # Have a separate theme for machines that aren't mine
 if [[ ! -n "$SSH_CLIENT" ]] || [[ ! -n "$SSH_TTY" ]];then
@@ -34,7 +36,6 @@ if ! zplug check; then
 fi
 zplug load
 
-export FAST_WORK_DIR=$HOME/.local/fsh
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 
