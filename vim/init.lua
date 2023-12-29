@@ -1,0 +1,12 @@
+-- Rewrite init.vim to init.lua. 
+-- Plugin manager: lazy.vim
+-- Plugins:
+--  shougo/deoplete.nvim            -> hrsh7th/nvim-cmp (?X)
+--  easymotion/vim-easymotion       -> ggandor/leap.nvim 
+--  luochen1990/rainbow             -> https://gitlab.com/HiPhish/rainbow-delimiters.nvim
+--  mbbill/undotree                 -> debugloop/telescope-undo.nvim
+--  romainl/flattened               -> svrana/neosolarized.nvim (??)
+--  scrooloose/nerdcommenter        -> numToStr/Comment.nvim
+--  terryma/vim-multiple-cursors    -> mg979/vim-visual-multi (?X)
+--  vim-airline/vim-airline         -> nvim-lualine/lualine.nvim
+--  vim-airline/vim-airline-themes  -> XX
