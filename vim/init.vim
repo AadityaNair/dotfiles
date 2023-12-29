@@ -1,5 +1,5 @@
 set runtimepath+=$INSTALL/nvim/autoload
-
+"TODO: Check out folke/lazy.nvim
 set guicursor=
 call plug#begin('$INSTALL/nvim/plugins')
     Plug 'Shougo/deoplete.nvim'
