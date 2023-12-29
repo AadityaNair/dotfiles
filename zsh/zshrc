@@ -1,5 +1,5 @@
 # Setup default install location
-# zmodload zsh/zprof
+zmodload zsh/zprof
 export INSTALL=$HOME/.config/
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
@@ -12,9 +12,7 @@ source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
 
 znap install "zsh-users/zsh-completions"
 znap source "AadityaNair/fast-syntax-highlighting"
-
-# Ideas for new features:
-# marlonrichert/zsh-autocomplete
+# znap source marlonrichert/zsh-autocomplete
 
 
 # Have a separate theme for machines that aren't mine
@@ -23,11 +21,11 @@ if [[ ! -n "$SSH_CLIENT" ]] || [[ ! -n "$SSH_TTY" ]];then
 else
     znap prompt "dracula/zsh"
 fi
-znap eval atuin  "$(atuin init zsh)"
-znap eval zoxide "$(zoxide init zsh)"
+znap eval atuin  'atuin init zsh'
+znap eval zoxide 'zoxide init zsh'
 
 # ----------------------------  Plugin Specific Settings  --------------------------
-
+zstyle '*:compinit' arguments -u -C
 
 # ----------------------------  ZSH Features  ------------------------------
 
