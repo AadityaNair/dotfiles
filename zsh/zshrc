@@ -1,49 +1,33 @@
 # Setup default install location
-# zmodload zsh/zprof
+zmodload zsh/zprof
 export INSTALL=$HOME/.config/
 # ----------------------------  Plugin Configuration  --------------------------
-export ZPLUG_HOME=$HOME/.local/share/zplug
-export ZPLUG_LOADFILE=$ZPLUG_HOME/packages.zsh
-export ZPLUG_ERROR_LOG=$ZPLUG_HOME/error.log
-export ZPLUG_BIN=$ZPLUG_HOME/bin
-export ZPLUG_CACHE_DIR=$ZPLUG_HOME/cache
-export ZPLUG_REPOS=$ZPLUG_HOME/repos
-source $ZPLUG_HOME/init.zsh  # Plugin config import
+export XDG_CACHE_HOME=$HOME/.local/cache
+export PLUGIN_DIR=$HOME/.local/share/zsh-plugins
+[[ -r $PLUGIN_DIR/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git $PLUGIN_DIR/znap
+source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
 
-zplug "zsh-users/zsh-completions"
-zplug "AadityaNair/fast-syntax-highlighting", defer:2
-# zplug "zsh-users/zsh-history-substring-search"
 
-# Ideas for new features:
-# marlonrichert/zsh-autocomplete
-# marlonrichert/zsh-snap (very useful with Ansible)
+znap install "zsh-users/zsh-completions"
+znap source "AadityaNair/fast-syntax-highlighting"
+
+# TODO: With a bit more configuration, this would be much more useful
+# znap source marlonrichert/zsh-autocomplete
 
 
 # Have a separate theme for machines that aren't mine
 if [[ ! -n "$SSH_CLIENT" ]] || [[ ! -n "$SSH_TTY" ]];then
-    zplug "AadityaNair/agnoster-zsh-theme", as:theme
+    znap prompt "AadityaNair/agnoster-zsh-theme"
 else
-    zplug "dracula/zsh", as:theme
+    znap prompt "dracula/zsh"
 fi
-
-if ! zplug check; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-zplug load
-
+znap eval atuin  'atuin init zsh'
+znap eval zoxide 'zoxide init zsh'
 
 # ----------------------------  Plugin Specific Settings  --------------------------
-
-# HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
-
-# zmodload zsh/terminfo
-# bindkey "$terminfo[kcuu1]" history-substring-search-up
-# bindkey "$terminfo[kcud1]" history-substring-search-down
-# bindkey "^[[A" history-substring-search-up
-# bindkey "^[[B" history-substring-search-down
+zstyle '*:compinit' arguments -u -C
 
 # ----------------------------  ZSH Features  ------------------------------
 
@@ -126,5 +110,3 @@ else
     source $INSTALL/dotfiles/zsh/linux.sh
 fi
 
-eval "$(atuin init zsh)"
-eval "$(zoxide init zsh)"
