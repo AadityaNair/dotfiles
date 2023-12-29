@@ -1,5 +1,5 @@
 # Setup default install location
-# zmodload zsh/zprof
+zmodload zsh/zprof
 export INSTALL=$HOME/.config/
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
@@ -12,6 +12,8 @@ source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
 
 znap install "zsh-users/zsh-completions"
 znap source "AadityaNair/fast-syntax-highlighting"
+
+# TODO: With a bit more configuration, this would be much more useful
 # znap source marlonrichert/zsh-autocomplete
 
 
