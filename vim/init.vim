@@ -9,7 +9,7 @@ call plug#begin('$INSTALL/nvim/plugins')
     Plug 'mbbill/undotree'
     Plug 'romainl/flattened'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'terryma/vim-multiple-cursors'
+    " Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
