@@ -15,7 +15,7 @@ source $ZPLUG_HOME/init.zsh  # Plugin config import
 zplug "zsh-users/zsh-completions"
 zplug "AadityaNair/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
-zplug "eendroroy/zed-zsh"
+
 # Ideas for new features:
 # marlonrichert/zsh-autocomplete
 # marlonrichert/zsh-snap (very useful with Ansible)
@@ -131,3 +131,4 @@ if [[ $OSTYPE == "darwin"* ]]; then
 else
     source $INSTALL/dotfiles/zsh/linux.sh
 fi
+eval "$(zoxide init zsh)"
