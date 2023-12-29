@@ -14,7 +14,7 @@ source $ZPLUG_HOME/init.zsh  # Plugin config import
 
 zplug "zsh-users/zsh-completions"
 zplug "AadityaNair/fast-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search"
+# zplug "zsh-users/zsh-history-substring-search"
 
 # Ideas for new features:
 # marlonrichert/zsh-autocomplete
@@ -39,17 +39,13 @@ zplug load
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
-# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,bold'
-# ZSH_AUTOSUGGEST_USE_ASYNC=1
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=239'
+# HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
 
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
+# zmodload zsh/terminfo
+# bindkey "$terminfo[kcuu1]" history-substring-search-up
+# bindkey "$terminfo[kcud1]" history-substring-search-down
+# bindkey "^[[A" history-substring-search-up
+# bindkey "^[[B" history-substring-search-down
 
 # ----------------------------  ZSH Features  ------------------------------
 
