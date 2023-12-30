@@ -27,16 +27,16 @@ syntax enable
 let g:airline_powerline_fonts = 1
 
 " Ale
-let g:ale_use_global_executables = 1
-let g:ale_python_black_use_global = 1
-let g:ale_python_black_change_directory = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_fix_on_save = 1
+" let g:ale_use_global_executables = 1
+" let g:ale_python_black_use_global = 1
+" let g:ale_python_black_change_directory = 1
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_fix_on_save = 1
 
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['black'],
-\}
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'python': ['black'],
+" \}
 
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -64,10 +64,10 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 
 " Indentline
-let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 0
-let g:indentLine_char = '┆'
-let g:indentLine_faster = 1
+" let g:indentLine_enabled = 1
+" let g:indentLine_concealcursor = 0
+" let g:indentLine_char = '┆'
+" let g:indentLine_faster = 1
 
 " NerdCommenter
 let g:NERDSpaceDelims = 1
