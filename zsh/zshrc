@@ -23,6 +23,9 @@ else
 fi
 znap eval atuin  'atuin init zsh'
 znap eval zoxide 'zoxide init zsh'
+# TODO: Atuin needs different configuration for up-arrow and ctrl-r search
+# TODO: Maybe hack around zsh_history_substring search to have a proper up arrow experience: 
+# https://gist.github.com/tyalie/7e13cfe2ec62d99fa341a07ed12ef7c0
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 zstyle '*:compinit' arguments -u -C
