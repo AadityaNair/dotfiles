@@ -32,6 +32,3 @@ source $INSTALL/dotfiles/zsh/02_atuin-history-arrow.zsh
 # bindkey <something> quote-region
 # bindkey <something> transpose-words
 # Something to directly edit a file
-# TODO: Use zcompile to automatically create a parsed version for faster load times.
-# ref: https://github.com/antonio/zsh-config/blob/master/help/zcompile
-# ref: https://github.com/jandamm/zgenom
