@@ -16,16 +16,15 @@ znap source "AadityaNair/fast-syntax-highlighting"
 
 
 # Have a separate theme for machines that aren't mine
+# TODO: Move to powerlevel10k
 if [[ ! -n "$SSH_CLIENT" ]] || [[ ! -n "$SSH_TTY" ]];then
     znap prompt "AadityaNair/agnoster-zsh-theme"
 else
     znap prompt "dracula/zsh"
 fi
-znap eval atuin  'atuin init zsh'
+
+znap eval atuin  'atuin init zsh --disable-up-arrow'
 znap eval zoxide 'zoxide init zsh'
-# TODO: Atuin needs different configuration for up-arrow and ctrl-r search
-# TODO: Maybe hack around zsh_history_substring search to have a proper up arrow experience: 
-# https://gist.github.com/tyalie/7e13cfe2ec62d99fa341a07ed12ef7c0
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 zstyle '*:compinit' arguments -u -C
