@@ -15,10 +15,12 @@ znap source "AadityaNair/fast-syntax-highlighting"
 # znap source marlonrichert/zsh-autocomplete
 
 
-# Have a separate theme for machines that aren't mine
-# TODO: Move to powerlevel10k
 znap prompt "AadityaNair/agnoster-zsh-theme"
+# TODO: Have a separate theme for machines that aren't mine
+# Options include powerlevel10k or starship
+# znap prompt "romkatv/powerlevel10k"
 # source $INSTALL/dotfiles/zsh/p10k.zsh
+# znap eval starship 'starship init zsh'
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 zstyle '*:compinit' arguments -u -C
