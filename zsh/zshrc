@@ -20,10 +20,6 @@ znap source "AadityaNair/fast-syntax-highlighting"
 znap prompt "AadityaNair/agnoster-zsh-theme"
 # source $INSTALL/dotfiles/zsh/p10k.zsh
 
-# Instead of eval, just copy the output of init command to file
-# znap eval atuin  'atuin init zsh --disable-up-arrow'
-# znap eval zoxide 'zoxide init zsh'
-
 # ----------------------------  Plugin Specific Settings  --------------------------
 zstyle '*:compinit' arguments -u -C
 
