@@ -1,3 +1,5 @@
+# Regenerate this file after every upgrade of zoxide
+# $ zoxide init zsh
 # =============================================================================
 #
 # Utility functions for zoxide.
