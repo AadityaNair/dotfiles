@@ -17,11 +17,8 @@ znap source "AadityaNair/fast-syntax-highlighting"
 
 # Have a separate theme for machines that aren't mine
 # TODO: Move to powerlevel10k
-if [[ ! -n "$SSH_CLIENT" ]] || [[ ! -n "$SSH_TTY" ]];then
-    znap prompt "AadityaNair/agnoster-zsh-theme"
-else
-    znap prompt "dracula/zsh"
-fi
+znap prompt "AadityaNair/agnoster-zsh-theme"
+# source $INSTALL/dotfiles/zsh/p10k.zsh
 
 # Instead of eval, just copy the output of init command to file
 # znap eval atuin  'atuin init zsh --disable-up-arrow'
