@@ -23,8 +23,9 @@ else
     znap prompt "dracula/zsh"
 fi
 
-znap eval atuin  'atuin init zsh --disable-up-arrow'
-znap eval zoxide 'zoxide init zsh'
+# Instead of eval, just copy the output of init command to file
+# znap eval atuin  'atuin init zsh --disable-up-arrow'
+# znap eval zoxide 'zoxide init zsh'
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 zstyle '*:compinit' arguments -u -C
