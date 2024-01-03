@@ -102,8 +102,11 @@ zstyle ':completion:*:ssh:*' hosts off
 
 source $INSTALL/dotfiles/zsh/zsh_specific.zsh
 source $INSTALL/dotfiles/zsh/shell_commons.sh
-source $INSTALL/dotfiles/zsh/company.sh
 source $INSTALL/dotfiles/zsh/titles.zsh
+
+if [[ -f ~/.config/company_specific_commands.sh ]]; then
+    source ~/.config/company_specific_commands.sh
+fi
 
 if [[ $OSTYPE == "darwin"* ]]; then
     source $INSTALL/dotfiles/zsh/macOS.sh

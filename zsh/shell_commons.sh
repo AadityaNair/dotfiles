@@ -21,7 +21,7 @@ alias youtube-dl='youtube-dl -o"%(title)s.%(ext)s"'
 alias dots="cd $INSTALL/dotfiles/"
 
 # TODO: Ivestigate why adding "source ~/.zshrc" breaks fast syntax highlighting.
-alias crc="vim $INSTALL/dotfiles/zsh/company.sh"
+alias crc="vim ~/.config/company_specific_commands.sh"
 alias frc="vim $INSTALL/dotfiles/zsh/config.fish"
 alias src="vim $INSTALL/dotfiles/zsh/shell_commons.sh"
 alias trc="vim $INSTALL/dotfiles/tmux/tmux.conf"
