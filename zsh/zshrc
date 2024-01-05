@@ -45,9 +45,9 @@ setopt share_history # share command history data
 # ----------------------------  Auto Completion Settings ----------------------
 
 # Setup zoxide for recent directories completion
-# +autocomplete:recent-directories() {
-#  typeset -ga reply=( [code that generates an array of absolute paths] )
-#}
++autocomplete:recent-directories() {
+    typeset -ga reply=( ${(f)"$( zoxide query --list $1 2> /dev/null )"} )
+}
 
 # ----------------------------  Boilerplate  ------------------------------
 
