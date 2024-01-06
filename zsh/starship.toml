@@ -1,7 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](color_orange)\
 $hostname\
 $username\
 [](bg:color_yellow fg:color_orange)\
@@ -14,7 +13,9 @@ $git_status\
 $status\
 [](fg:color_bg3 bg:color_bg1)\
 $cmd_duration\
-[ ](fg:color_bg1)\
+[ ](fg:color_bg1)\
+
+$cmd_duration\
 """
 
 add_newline = false
@@ -42,7 +43,7 @@ format = '[$ssh_symbol$hostname]($style)'
 style = 'bold dimmed green'
 
 [username]
-show_always = false
+show_always = true
 style_user = "bg:color_orange fg:color_fg0"
 style_root = "bg:color_orange fg:color_fg0"
 format = '[ $user ]($style)'
