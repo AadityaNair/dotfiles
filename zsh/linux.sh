@@ -4,6 +4,7 @@ alias htop='TERM=screen htop'
 alias noproxy='unset {http,https,ftp,socks,no}_proxy'
 alias open="xdg-open"
 alias irssi='TERM=screen-256color irssi'
+export MANPAGER='bat -l man -p'
 
 eval `dircolors $INSTALL/dotfiles/zsh/dircolors.ansi-dark`
 

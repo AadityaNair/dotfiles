@@ -1,7 +1,5 @@
 # vim: ft=zsh
-#export PKG_CONFIG_PATH=/usr/lib/pkgconfig
-#TODO: What if `most` or `nvim`  doesn't exist
-#export MANPAGER="most"
+# export MANPAGER="bat -l man"
 export EDITOR="nvim"
 export IPYTHONDIR="~/.config/ipython"
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
