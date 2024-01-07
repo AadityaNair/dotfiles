@@ -14,13 +14,8 @@ znap source "AadityaNair/fast-syntax-highlighting"
 # TODO: With a bit more configuration, this would be much more useful
 # znap source marlonrichert/zsh-autocomplete
 
-
-znap prompt "AadityaNair/agnoster-zsh-theme"
-# TODO: Have a separate theme for machines that aren't mine
-# Options include powerlevel10k or starship
-# znap prompt "romkatv/powerlevel10k"
-# source $INSTALL/dotfiles/zsh/p10k.zsh
-# znap eval starship 'starship init zsh'
+znap eval starship 'starship init zsh'
+export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
 
 # ----------------------------  Plugin Specific Settings  --------------------------
 zstyle '*:compinit' arguments -u -C

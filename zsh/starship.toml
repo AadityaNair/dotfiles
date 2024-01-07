@@ -1,0 +1,91 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$hostname\
+$username\
+$directory\
+$git_branch\
+$git_status\
+$status\
+$cmd_duration\
+[ ]()\
+"""
+
+add_newline = false
+palette = 'solarized_dark'
+
+[palettes.solarized_dark]
+color_fg0 = '#fbf1c7'
+# color_fg0 = "#839496"
+color_bg3 = '#665c54'
+
+color_base0 = "#839496"   # body text / default code
+color_base1 = "#93a1a1"   # optional emphasised content
+color_base2 = "#eee8d5"
+color_base3 = "#fdf6e3"
+color_base00 = "#657b83"
+color_base01 = "#586e75"  # comments / secondary content
+color_base02 = "#073642"  # backgroud highlights
+color_base03 = "#002b36"  # background 
+
+color_violet = "#6c71c4"
+color_magenta = "#d33682"
+color_aqua = '#2aa198'    # Also called cyan, officially
+color_blue = '#268bd2'
+color_green = '#859900'
+color_orange = '#cb4b16'
+color_red = '#d30102'
+color_yellow = '#b58900'
+
+[hostname]
+ssh_only = true
+ssh_symbol = '🌐 '
+trim_at = '.'
+detect_env_vars = []
+format = '[$ssh_symbol$hostname ❯]($style)'
+style = 'fg:color_green'
+
+[username]
+show_always = false
+style_user = "fg:color_orange"
+style_root = "fg:color_red"
+format = '[ $user ❯]($style)'
+
+[directory]
+style = "fg:color_yellow"
+format = "[ $path ❯]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "fg:color_aqua"
+format = '[[ $symbol $branch ](fg:color_aqua)]($style)'
+
+[git_status]
+style = "fg:color_aqua"
+format = '[[($all_status$ahead_behind ) ❯](fg:color_aqua)]($style)'
+
+[cmd_duration]
+min_time = 2_000
+show_milliseconds = false
+format = '[ $duration ❯]($style)'
+style = 'bold yellow'
+show_notifications = false
+min_time_to_notify = 45_000
+
+[status]
+format = '[ $symbol$status ❯]($style) '
+symbol = '❌'
+success_symbol = ''
+not_executable_symbol = ''
+not_found_symbol = '🔍'
+sigint_symbol = '🧱'
+signal_symbol = '⚡'
+style = 'fg:color_red'
+recognize_signal_code = true
+map_symbol = false
+pipestatus = false
+pipestatus_separator = '|'
+pipestatus_format = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style)'
+disabled = false
