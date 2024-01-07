@@ -13,7 +13,7 @@ znap source "AadityaNair/fast-syntax-highlighting"
 
 znap source marlonrichert/zsh-autocomplete
 
-source $INSTALL/dotfiles/zsh/starship.zsh
+znap eval starship 'starship init zsh'
 export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
 
 # ----------------------------  Plugin Specific Settings  --------------------------
