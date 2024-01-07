@@ -2,6 +2,7 @@
 
 format = """
 $hostname\
+[]( fg:color_base03)\
 $username\
 [](bg:color_yellow fg:color_orange)\
 $directory\
@@ -11,26 +12,36 @@ $git_status\
 [](fg:color_aqua bg:color_blue)\
 [](fg:color_blue bg:color_bg3)\
 $status\
-[](fg:color_bg3 bg:color_bg1)\
+[](fg:color_bg3 bg:color_base03)\
 $cmd_duration\
-[ ](fg:color_bg1)\
+[ ](fg:color_red)\
 """
 
 add_newline = false
-palette = 'gruvbox_dark'
+palette = 'solarized_dark'
 
-[palettes.gruvbox_dark]
+[palettes.solarized_dark]
 color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
+# color_fg0 = "#839496"
 color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#689d6a'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
 
+color_base0 = "#839496"   # body text / default code
+color_base1 = "#93a1a1"   # optional emphasised content
+color_base2 = "#eee8d5"
+color_base3 = "#fdf6e3"
+color_base00 = "#657b83"
+color_base01 = "#586e75"  # comments / secondary content
+color_base02 = "#073642"  # backgroud highlights
+color_base03 = "#002b36"  # background 
+
+color_violet = "#6c71c4"
+color_magenta = "#d33682"
+color_aqua = '#2aa198'    # Also called cyan, officially
+color_blue = '#268bd2'
+color_green = '#859900'
+color_orange = '#cb4b16'
+color_red = '#d30102'
+color_yellow = '#b58900'
 
 [hostname]
 ssh_only = false
@@ -64,7 +75,7 @@ format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
 [cmd_duration]
 min_time = 2_000
 show_milliseconds = false
-format = '[$duration]($style)'
+format = '[ $duration ]($style)'
 style = 'bold yellow'
 show_notifications = false
 min_time_to_notify = 45_000
