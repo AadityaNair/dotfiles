@@ -38,7 +38,7 @@ color_red = '#d30102'
 color_yellow = '#b58900'
 
 [hostname]
-ssh_only = false
+ssh_only = true
 ssh_symbol = '🌐 '
 trim_at = '.'
 detect_env_vars = []
@@ -46,7 +46,7 @@ format = '[$ssh_symbol$hostname ❯]($style)'
 style = 'fg:color_green'
 
 [username]
-show_always = true
+show_always = false
 style_user = "fg:color_orange"
 style_root = "fg:color_red"
 format = '[ $user ❯]($style)'
