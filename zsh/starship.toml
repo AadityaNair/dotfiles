@@ -2,19 +2,13 @@
 
 format = """
 $hostname\
-[]( fg:color_base03)\
 $username\
-[](bg:color_yellow fg:color_orange)\
 $directory\
-[](fg:color_yellow bg:color_aqua)\
 $git_branch\
 $git_status\
-[](fg:color_aqua bg:color_blue)\
-[](fg:color_blue bg:color_bg3)\
 $status\
-[](fg:color_bg3 bg:color_base03)\
 $cmd_duration\
-[ ](fg:color_red)\
+[ ]()\
 """
 
 add_newline = false
@@ -48,47 +42,47 @@ ssh_only = false
 ssh_symbol = '🌐 '
 trim_at = '.'
 detect_env_vars = []
-format = '[$ssh_symbol$hostname]($style)'
-style = 'bold dimmed green'
+format = '[$ssh_symbol$hostname ❯]($style)'
+style = 'fg:color_green'
 
 [username]
 show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
-format = '[ $user ]($style)'
+style_user = "fg:color_orange"
+style_root = "fg:color_red"
+format = '[ $user ❯]($style)'
 
 [directory]
-style = "fg:color_fg0 bg:color_yellow"
-format = "[ $path ]($style)"
+style = "fg:color_yellow"
+format = "[ $path ❯]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
+style = "fg:color_aqua"
+format = '[[ $symbol $branch ](fg:color_aqua)]($style)'
 
 [git_status]
-style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+style = "fg:color_aqua"
+format = '[[($all_status$ahead_behind ) ❯](fg:color_aqua)]($style)'
 
 [cmd_duration]
 min_time = 2_000
 show_milliseconds = false
-format = '[ $duration ]($style)'
+format = '[ $duration ❯]($style)'
 style = 'bold yellow'
 show_notifications = false
 min_time_to_notify = 45_000
 
 [status]
-format = '[$symbol$status]($style) '
+format = '[ $symbol$status ❯]($style) '
 symbol = '❌'
 success_symbol = ''
 not_executable_symbol = ''
 not_found_symbol = '🔍'
 sigint_symbol = '🧱'
 signal_symbol = '⚡'
-style = 'bold red'
+style = 'fg:color_red'
 recognize_signal_code = true
 map_symbol = false
 pipestatus = false
