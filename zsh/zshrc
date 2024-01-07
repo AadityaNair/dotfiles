@@ -11,14 +11,12 @@ source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
 znap install "zsh-users/zsh-completions"
 znap source "AadityaNair/fast-syntax-highlighting"
 
-# TODO: With directories, it automatically picks up the first suggestion. Can't TAB to move forward.
 znap source marlonrichert/zsh-autocomplete
 
 source $INSTALL/dotfiles/zsh/starship.zsh
 export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
 
 # ----------------------------  Plugin Specific Settings  --------------------------
-zstyle '*:compinit' arguments -u -C
 
 # ----------------------------  ZSH Features  ------------------------------
 
@@ -45,10 +43,15 @@ setopt share_history # share command history data
 
 # ----------------------------  Auto Completion Settings ----------------------
 
+# Don't check permissions for completions. Makes shell startup faster.
+zstyle '*:compinit' arguments -u -C
+
 # Setup zoxide for recent directories completion
 +autocomplete:recent-directories() {
     typeset -ga reply=( ${(f)"$( zoxide query --list $1 2> /dev/null )"} )
 }
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
 # ----------------------------  Boilerplate  ------------------------------
 
