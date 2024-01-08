@@ -1,5 +1,5 @@
 # Setup default install location
-zmodload zsh/zprof
+# zmodload zsh/zprof
 export INSTALL=$HOME/.config
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
