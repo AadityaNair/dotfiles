@@ -58,11 +58,11 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "fg:color_cyan"
-format = '[[ $symbol $branch ](fg:color_cyan)]($style)'
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "fg:color_cyan"
-format = '[[($all_status$ahead_behind ) ❯](fg:cyan)]($style)'
+format = '[($all_status$ahead_behind ) ❯]($style)'
 
 [cmd_duration]
 min_time = 2_000
