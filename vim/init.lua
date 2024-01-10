@@ -24,7 +24,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
--- require("lazy").setup(plugins, opts)
 
 vim.g.mapleader = ","
 
@@ -37,8 +36,65 @@ require("lazy").setup({
   "numToStr/Comment.nvim",
 })
 
-vim.cmd[[colorscheme NeoSolarized]]
+vim.cmd.colorscheme("NeoSolarized")
 require('lualine').setup {
   options = { theme  = "solarized_dark" },
 }
 require('leap').create_default_mappings()
+
+--------------------- Other configuration
+
+vim.opt.number = true
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 0
+vim.opt.ruler = true
+vim.opt.expandtab = true
+vim.opt.smarttab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+
+
+-- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+-- autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
+-- let mapleader =','
+-- " Move to last known position
+-- autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+-- nmap <Leader>, <Plug>(easymotion-w)
+-- autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+-- nnoremap <silent> <leader><space> :nohlsearch<CR>
+-- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+
+-- nnoremap <silent> <F2> :set invpaste paste?<CR>
+-- set pastetoggle=<F2>
+-- set showmode
+
+-- inoremap kj <Esc>
+-- nnoremap ; :
+-- nnoremap <silent> u :UndotreeToggle<CR>
+
+-- nnoremap <silent> <C-j> :m .+1<CR>==
+-- nnoremap <silent> <C-k> :m .-2<CR>==
+-- inoremap <silent> <C-j> <Esc>:m .+1<CR>==gi
+-- inoremap <silent> <C-k> <Esc>:m .-2<CR>==gi
+-- vnoremap <silent> <C-j> :m '>+1<CR>gv=gv
+-- vnoremap <silent> <C-k> :m '<-2<CR>gv=gv
+
+-- cnoreabbrev W! w!
+-- cnoreabbrev Q! q!
+-- cnoreabbrev Qall! qall!
+-- cnoreabbrev Wq wq
+-- cnoreabbrev Wa wa
+-- cnoreabbrev wQ wq
+-- cnoreabbrev WQ wq
+-- cnoreabbrev W w
+-- cnoreabbrev Q q
+-- cnoreabbrev Qall qall
+
+-- set hidden
