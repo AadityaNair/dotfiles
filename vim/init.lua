@@ -12,7 +12,7 @@
 --  vim-airline/vim-airline-themes  -> XX
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- TODO: We shouldn't be bootstrapping plugins.
+-- TODO: We shouldn't be bootstrapping plugins here.
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -58,25 +58,29 @@ vim.opt.smartindent = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
+-- vim.opt.showmode = true
+-- vim.opt.hidden = true
 
+vim.keymap.set('i', 'kj', '<Esc>')
+vim.keymap.set('n', ';', ':')
+vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true}) -- TODO: Can this be replaced with a proper function
+
+-- vim.api.nvim_create_autocmd({'BufReadPost'}, {pattern = {'*'}, command="echo 'asdf'"},)
+-- TODO: Fix below command to move cursor to last position
+-- vim.api.nvim_create_autocmd('BufReadPost',{ command = '<C-o>' })
 
 -- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 -- autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
--- let mapleader =','
 -- " Move to last known position
 -- autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 -- nmap <Leader>, <Plug>(easymotion-w)
 -- autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
--- nnoremap <silent> <leader><space> :nohlsearch<CR>
 -- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 
 -- nnoremap <silent> <F2> :set invpaste paste?<CR>
 -- set pastetoggle=<F2>
--- set showmode
 
--- inoremap kj <Esc>
--- nnoremap ; :
 -- nnoremap <silent> u :UndotreeToggle<CR>
 
 -- nnoremap <silent> <C-j> :m .+1<CR>==
@@ -96,5 +100,3 @@ vim.opt.ignorecase = true
 -- cnoreabbrev W w
 -- cnoreabbrev Q q
 -- cnoreabbrev Qall qall
-
--- set hidden
