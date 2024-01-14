@@ -12,17 +12,6 @@
 --  vim-airline/vim-airline-themes  -> XX
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- TODO: We shouldn't be bootstrapping plugins here.
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ","
