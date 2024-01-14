@@ -41,6 +41,20 @@ require('lualine').setup {
   options = { theme  = "solarized_dark" },
 }
 require('leap').create_default_mappings()
+require('Comment').setup({
+    padding = true,
+    sticky = true,
+    toggler = {
+        line = '<leader>ci'
+    },
+    opleader = {
+        line = '<leader>ci'
+    },
+    mappings = {
+        basic = true,
+        extra = false,
+    },
+})
 
 --------------------- Other configuration
 
@@ -65,6 +79,14 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('n', ';', ':')
 vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true}) -- TODO: Can this be replaced with a proper function
 
+
+vim.keymap.set('n','<C-j>',':m .+1<CR>==',{silent = true})
+vim.keymap.set('n','<C-k>',':m .-2<CR>==',{silent = true})
+vim.keymap.set('i','<C-j>','<Esc>:m .+1<CR>==gi',{silent = true})
+vim.keymap.set('i','<C-k>','<Esc>:m .-2<CR>==gi',{silent = true})
+vim.keymap.set('v','<C-j>',":m '>+1<CR>gv=gv",{silent = true})
+vim.keymap.set('v','<C-k>',":m '<-2<CR>gv=gv",{silent = true})
+
 -- vim.api.nvim_create_autocmd({'BufReadPost'}, {pattern = {'*'}, command="echo 'asdf'"},)
 -- TODO: Fix below command to move cursor to last position
 -- vim.api.nvim_create_autocmd('BufReadPost',{ command = '<C-o>' })
@@ -82,13 +104,6 @@ vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true}) -- TO
 -- set pastetoggle=<F2>
 
 -- nnoremap <silent> u :UndotreeToggle<CR>
-
--- nnoremap <silent> <C-j> :m .+1<CR>==
--- nnoremap <silent> <C-k> :m .-2<CR>==
--- inoremap <silent> <C-j> <Esc>:m .+1<CR>==gi
--- inoremap <silent> <C-k> <Esc>:m .-2<CR>==gi
--- vnoremap <silent> <C-j> :m '>+1<CR>gv=gv
--- vnoremap <silent> <C-k> :m '<-2<CR>gv=gv
 
 -- cnoreabbrev W! w!
 -- cnoreabbrev Q! q!
