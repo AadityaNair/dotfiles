@@ -87,6 +87,19 @@ vim.keymap.set('i','<C-k>','<Esc>:m .-2<CR>==gi',{silent = true})
 vim.keymap.set('v','<C-j>',":m '>+1<CR>gv=gv",{silent = true})
 vim.keymap.set('v','<C-k>',":m '<-2<CR>gv=gv",{silent = true})
 
+-- TODO: Replace this with a proper function
+vim.cmd('cnoreabbrev W! w!')
+vim.cmd('cnoreabbrev Q! q!')
+vim.cmd('cnoreabbrev Qall! qall!')
+vim.cmd('cnoreabbrev Wq wq')
+vim.cmd('cnoreabbrev Wa wa')
+vim.cmd('cnoreabbrev wQ wq')
+vim.cmd('cnoreabbrev WQ wq')
+vim.cmd('cnoreabbrev W w')
+vim.cmd('cnoreabbrev Q q')
+vim.cmd('cnoreabbrev Qall qall')
+
+
 -- vim.api.nvim_create_autocmd({'BufReadPost'}, {pattern = {'*'}, command="echo 'asdf'"},)
 -- TODO: Fix below command to move cursor to last position
 -- vim.api.nvim_create_autocmd('BufReadPost',{ command = '<C-o>' })
@@ -105,13 +118,3 @@ vim.keymap.set('v','<C-k>',":m '<-2<CR>gv=gv",{silent = true})
 
 -- nnoremap <silent> u :UndotreeToggle<CR>
 
--- cnoreabbrev W! w!
--- cnoreabbrev Q! q!
--- cnoreabbrev Qall! qall!
--- cnoreabbrev Wq wq
--- cnoreabbrev Wa wa
--- cnoreabbrev wQ wq
--- cnoreabbrev WQ wq
--- cnoreabbrev W w
--- cnoreabbrev Q q
--- cnoreabbrev Qall qall
