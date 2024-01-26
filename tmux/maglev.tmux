@@ -1,61 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-PLUGINS=$(tmux show-options -g | grep @tpm_plugins)
-
-# Determine whether the tmux-cpu plugin should be installed
-SHOW_CPU=false
-if [[ $PLUGINS == *"tmux-cpu"* ]]; then
-    SHOW_CPU=true
-fi
-SHOW_BATTERY=false
-if [[ $PLUGINS == *"tmux-battery"* ]]; then
-    SHOW_BATTERY=true
-fi
-
-
 # Optional prefix highlight plugin
 tmux set -g @prefix_highlight_show_copy_mode 'on'
 tmux set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=yellow,bold' # default is 'fg=default,bg=yellow'
-
-# BEGIN Fix CPU segment --------------------------------------------------------
-
-# The plugin “cpu” is removing a blank space between the session name and first
-# window name. This script adds the blank space back to the `status-left`.
-# Issue #2: https://github.com/caiogondim/maglev/issues/2
-
-#get_tmux_option() {
-    #local option
-    #local default_value
-    #local option_value
-
-    #option="$1"
-    #default_value="$2"
-    #option_value="$(tmux show-option -gqv "$option")"
-
-    #if [ -z "$option_value" ]; then
-        #echo "$default_value"
-    #else
-        #echo "$option_value"
-    #fi
-#}
-
-#set_tmux_option() {
-    #local option=$1
-    #local value=$2
-
-    #tmux set-option -gq "$option" "$value"
-#}
-
-#main() {
-    #local status_left
-
-    #status_left=$(get_tmux_option "status-left")
-    #set_tmux_option "status-left" "$status_left "
-#}
-#main
-
-# END Fix CPU segment ----------------------------------------------------------
 
 apply_theme() {
     left_separator=''
