@@ -9,7 +9,8 @@ source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
 
 
 znap install "zsh-users/zsh-completions"
-znap source "AadityaNair/fast-syntax-highlighting"
+# TODO: Something is broken with using source. Atleast at work.
+znap install "AadityaNair/fast-syntax-highlighting"
 
 znap source marlonrichert/zsh-autocomplete
 
