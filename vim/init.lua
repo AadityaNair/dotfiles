@@ -39,7 +39,7 @@ require("lazy").setup({
         },
     },
 
-    -- {'akinsho/bufferline.nvim', version = "*",}
+    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
     'nvim-treesitter/nvim-treesitter',
     -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -76,7 +76,9 @@ require('Comment').setup({
     },
 })
 vim.opt.termguicolors = true
--- require("bufferline").setup{}
+require("bufferline").setup({
+    options = {always_show_bufferline = false,},
+})
 
 -- TODO: Configure noice and notify
 
