@@ -37,7 +37,7 @@ require("lazy").setup({
   "saadparwaiz1/cmp_luasnip",
   -- TODO: {'akinsho/bufferline.nvim', version = "*",}
   'nvim-treesitter/nvim-treesitter',
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+  -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
 })
 
 -- TODO: Configure IBL
