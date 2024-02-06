@@ -20,6 +20,7 @@ require("lazy").setup({
     {"Tsuzat/NeoSolarized.nvim", lazy=true,},
     "numToStr/Comment.nvim",
 
+    'nvim-treesitter/nvim-treesitter',
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
@@ -38,25 +39,25 @@ require("lazy").setup({
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
         },
     },
-
+    
+    {'folke/twilight.nvim'},
     {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
-    'nvim-treesitter/nvim-treesitter',
-    -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
         "folke/noice.nvim",
-		event = "VeryLazy",
-  		opts = {
-    		-- add any options here
-  		},
-  		dependencies = {
+        event = "VeryLazy",
+        opts = {},
+        dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
     },
 })
 
--- TODO: Configure IBL
--- require('ibl').setup()
+-- TODO: Only generate indentlines when there are more than two lines indented.
+require('ibl').setup({
+    indent = {char='│'},
+})
 vim.cmd.colorscheme("NeoSolarized")
 require('lualine').setup {
   options = { theme  = "solarized_dark" },
