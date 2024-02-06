@@ -41,7 +41,7 @@ require("lazy").setup({
 })
 
 -- TODO: Configure IBL
-require('ibl').setup()
+-- require('ibl').setup()
 vim.cmd.colorscheme("NeoSolarized")
 require('lualine').setup {
   options = { theme  = "solarized_dark" },
@@ -66,6 +66,7 @@ vim.opt.termguicolors = true
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 -- TODO: nvim-treesitter/nvim-treesitter-context
+require("nvim-treesitter.install").prefer_git = true
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         'bash',
