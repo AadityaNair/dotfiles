@@ -16,31 +16,31 @@ vim.g.mapleader = ","
 -- TODO: vista.vim, trouble.nvim
 -- TODO: Full Refactor: Looks, autocomplete, Work file, 
 require("lazy").setup({
-  "ggandor/leap.nvim",  -- TODO: Replace with flash.nvim
-  "nvim-lualine/lualine.nvim",
-  "Tsuzat/NeoSolarized.nvim",
-  "numToStr/Comment.nvim",
+    "ggandor/leap.nvim",  -- TODO: Replace with flash.nvim
+    "nvim-lualine/lualine.nvim",
+    {"Tsuzat/NeoSolarized.nvim", lazy=true,},
+    "numToStr/Comment.nvim",
 
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-path",
-  "neovim/nvim-lspconfig",
-  "hrsh7th/cmp-cmdline",
-  "hrsh7th/nvim-cmp",
-  "L3MON4D3/LuaSnip",
-  "saadparwaiz1/cmp_luasnip",
-  -- TODO: {'akinsho/bufferline.nvim', version = "*",}
-  'nvim-treesitter/nvim-treesitter',
-  -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-  {
-		"folke/noice.nvim",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    -- TODO: {'akinsho/bufferline.nvim', version = "*",}
+    'nvim-treesitter/nvim-treesitter',
+    -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    {
+        "folke/noice.nvim",
 		event = "VeryLazy",
   		opts = {
     		-- add any options here
   		},
   		dependencies = {
-    			"MunifTanjim/nui.nvim",
-                "rcarriga/nvim-notify",
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
         },
     },
 })
@@ -70,6 +70,32 @@ vim.opt.termguicolors = true
 -- require("bufferline").setup{}
 
 -- TODO: Configure noice and notify
+
+require("notify").setup({
+    background_colour = "#000000",
+    top_down = true,
+    render = 'minimal',
+    stages = 'fade',
+})
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+})
+
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 -- TODO: nvim-treesitter/nvim-treesitter-context
