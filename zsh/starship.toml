@@ -42,12 +42,14 @@ trim_at = '.'
 detect_env_vars = []
 format = '[$ssh_symbol$hostname ❯]($style)'
 style = 'fg:color_green'
+disabled = true
 
 [username]
 show_always = false
 style_user = "fg:color_orange"
 style_root = "fg:color_red"
 format = '[ $user ❯]($style)'
+disabled = true
 
 [directory]
 style = "fg:color_yellow"
