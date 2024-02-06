@@ -8,8 +8,6 @@ tmux set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=yellow,bold' # default
 apply_theme() {
     left_separator=''
     left_separator_black=''
-    right_separator=''
-    right_separator_black=''
     session_symbol=''
 
     # --------------
@@ -80,11 +78,8 @@ apply_theme() {
     window_status_last_attr=default
     tmux setw -g window-status-last-style $window_status_last_attr,fg=$window_status_last_fg
 
-    time_date_fg=colour105      # gray
-    time_date_bg=colour0 # dark gray
-    status_right="︎#[fg=$time_date_fg,nobold]#{prefix_highlight} $right_separator %R $right_separator %a %d %b #[fg=$host_bg]$right_separator#[fg=colour123,bg=$host_bg]#(uptime | sed -e "s/.*://" | cut -d "," -f 1) $right_separator #(ifconfig $interface | grep inet | head -1 | cut -d\" \" -f10)"
 
-    tmux set -g status-right-length 64 \; set -g status-right "$status_right"
+    tmux set -g status-right-length 64 \; set -g status-right ""
 
     # clock
     clock_mode_colour=colour4 # blue
