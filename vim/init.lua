@@ -18,6 +18,9 @@ vim.g.mapleader = ","
 
 -- TODO: Some plugins require additional configuration
 -- TODO: Try to load a plugin along with its configuration. Maybe not possible.
+-- TODO: noice.vim, vista.vim, trouble.nvim flash.nvim
+-- TODO: Work plugins
+-- TODO: Full Refactor
 require("lazy").setup({
   "ggandor/leap.nvim",
   "nvim-lualine/lualine.nvim",
@@ -32,8 +35,13 @@ require("lazy").setup({
   "hrsh7th/nvim-cmp",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
+  -- TODO: {'akinsho/bufferline.nvim', version = "*",}
+  'nvim-treesitter/nvim-treesitter',
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
 })
 
+-- TODO: Configure IBL
+require('ibl').setup()
 vim.cmd.colorscheme("NeoSolarized")
 require('lualine').setup {
   options = { theme  = "solarized_dark" },
@@ -53,6 +61,45 @@ require('Comment').setup({
         extra = false,
     },
 })
+vim.opt.termguicolors = true
+-- require("bufferline").setup{}
+
+-- TODO: nvim-treesitter/nvim-treesitter-textobjects
+-- TODO: nvim-treesitter/nvim-treesitter-context
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {
+        'bash',
+        'c',
+        'cpp',
+        'diff',
+        'graphql',
+        'hack',
+        'json',
+        'lua',
+        'markdown',
+        'markdown_inline',
+        'php',
+        'python',
+        'regex',
+        'ruby',
+        'rust',
+        'starlark',
+        'thrift',
+        'toml',
+        'vim',
+        'vimdoc',
+        'yaml',
+    },
+    highlight = {
+        enable = true,
+        -- disable = {'latex'},
+    },
+    indent = {
+        enable = true,
+        -- disable = {'latex'},
+    },
+})
+
 
 local cmp = require'cmp'
 
