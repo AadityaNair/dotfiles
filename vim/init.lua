@@ -18,26 +18,36 @@ vim.g.mapleader = ","
 
 -- TODO: Some plugins require additional configuration
 -- TODO: Try to load a plugin along with its configuration. Maybe not possible.
--- TODO: noice.vim, vista.vim, trouble.nvim flash.nvim
--- TODO: Work plugins
--- TODO: Full Refactor
+-- TODO: vista.vim, trouble.nvim
+-- TODO: Full Refactor: Looks, autocomplete, Work file, 
 require("lazy").setup({
-  "ggandor/leap.nvim",
+  "ggandor/leap.nvim",  -- TODO: Replace with flash.nvim
   "nvim-lualine/lualine.nvim",
   "Tsuzat/NeoSolarized.nvim",
   "numToStr/Comment.nvim",
 
-  "neovim/nvim-lspconfig",
-  "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-path",
+  "neovim/nvim-lspconfig",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/nvim-cmp",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
   -- TODO: {'akinsho/bufferline.nvim', version = "*",}
   'nvim-treesitter/nvim-treesitter',
-  -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+  {
+		"folke/noice.nvim",
+		event = "VeryLazy",
+  		opts = {
+    		-- add any options here
+  		},
+  		dependencies = {
+    			"MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+        }
+    },
 })
 
 -- TODO: Configure IBL
@@ -63,6 +73,8 @@ require('Comment').setup({
 })
 vim.opt.termguicolors = true
 -- require("bufferline").setup{}
+
+-- TODO: Configure noice and notify
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 -- TODO: nvim-treesitter/nvim-treesitter-context
