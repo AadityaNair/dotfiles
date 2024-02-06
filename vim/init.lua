@@ -1,8 +1,3 @@
--- Rewrite init.vim to init.lua. 
--- Plugin manager: lazy.vim
--- Plugins:
---  shougo/deoplete.nvim            -> hrsh7th/nvim-cmp (?X)
---  easymotion/vim-easymotion       -> ggandor/leap.nvim 
 --  luochen1990/rainbow             -> https://gitlab.com/HiPhish/rainbow-delimiters.nvim
 --  mbbill/undotree                 -> debugloop/telescope-undo.nvim
 --  romainl/flattened               -> svrana/neosolarized.nvim (??)
@@ -36,7 +31,7 @@ require("lazy").setup({
   "saadparwaiz1/cmp_luasnip",
   -- TODO: {'akinsho/bufferline.nvim', version = "*",}
   'nvim-treesitter/nvim-treesitter',
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+  -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -46,7 +41,7 @@ require("lazy").setup({
   		dependencies = {
     			"MunifTanjim/nui.nvim",
                 "rcarriga/nvim-notify",
-        }
+        },
     },
 })
 
@@ -214,15 +209,12 @@ vim.cmd('cnoreabbrev W w')
 vim.cmd('cnoreabbrev Q q')
 vim.cmd('cnoreabbrev Qall qall')
 
-
--- vim.api.nvim_create_autocmd({'BufReadPost'}, {pattern = {'*'}, command="echo 'asdf'"},)
--- TODO: Fix below command to move cursor to last position
--- vim.api.nvim_create_autocmd('BufReadPost',{ command = '<C-o>' })
+-- TODO: Wrap this in a vim.cmd()
+-- autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 -- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 -- autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
 -- " Move to last known position
--- autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 -- nmap <Leader>, <Plug>(easymotion-w)
 -- autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
