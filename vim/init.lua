@@ -256,8 +256,6 @@ vim.cmd('cnoreabbrev Qall qall')
 
 -- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 -- autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
--- " Move to last known position
--- nmap <Leader>, <Plug>(easymotion-w)
 -- autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 -- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
