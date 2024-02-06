@@ -1,10 +1,6 @@
 --  luochen1990/rainbow             -> https://gitlab.com/HiPhish/rainbow-delimiters.nvim
 --  mbbill/undotree                 -> debugloop/telescope-undo.nvim
---  romainl/flattened               -> svrana/neosolarized.nvim (??)
---  scrooloose/nerdcommenter        -> numToStr/Comment.nvim
 --  terryma/vim-multiple-cursors    -> mg979/vim-visual-multi (?X)
---  vim-airline/vim-airline         -> nvim-lualine/lualine.nvim
---  vim-airline/vim-airline-themes  -> XX
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
@@ -40,7 +36,7 @@ require("lazy").setup({
         },
     },
     
-    {'folke/twilight.nvim'},
+    {'folke/twilight.nvim'}, -- TODO: Fix this theme or get a whole new theme.
     {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -55,6 +51,7 @@ require("lazy").setup({
 })
 
 -- TODO: Only generate indentlines when there are more than two lines indented.
+-- TODO: Rainbow indentlines
 require('ibl').setup({
     indent = {char='│'},
 })
