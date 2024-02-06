@@ -17,6 +17,7 @@ require("lazy").setup({
     "numToStr/Comment.nvim",
 
     'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter-context',
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
@@ -107,8 +108,14 @@ require("noice").setup({
 
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
--- TODO: nvim-treesitter/nvim-treesitter-context
 require("nvim-treesitter.install").prefer_git = true
+-- TODO: Finetune the values below.
+require("treesitter-context").setup({
+    enable=true,
+    max_lines = 0,
+    min_window_height = 0,
+    line_numbers = true,
+})
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         'bash',
@@ -145,7 +152,7 @@ require("nvim-treesitter.configs").setup({
 
 
 local cmp = require'cmp'
-
+-- TODO: Use TAB to iterate through options.
 cmp.setup({
     snippet = {
         expand = function(args)
