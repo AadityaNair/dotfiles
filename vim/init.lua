@@ -16,7 +16,6 @@ vim.g.mapleader = ","
 -- TODO: vista.vim, trouble.nvim
 -- TODO: Full Refactor: Looks, autocomplete, Work file, 
 require("lazy").setup({
-    "ggandor/leap.nvim",  -- TODO: Replace with flash.nvim
     "nvim-lualine/lualine.nvim",
     {"Tsuzat/NeoSolarized.nvim", lazy=true,},
     "numToStr/Comment.nvim",
@@ -29,7 +28,18 @@ require("lazy").setup({
     "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
-    -- TODO: {'akinsho/bufferline.nvim', version = "*",}
+
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        -- TODO: Maybe there is some interesting options here. But for now only this is fine.
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+        },
+    },
+
+    -- {'akinsho/bufferline.nvim', version = "*",}
     'nvim-treesitter/nvim-treesitter',
     -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -51,7 +61,6 @@ vim.cmd.colorscheme("NeoSolarized")
 require('lualine').setup {
   options = { theme  = "solarized_dark" },
 }
-require('leap').create_default_mappings()
 require('Comment').setup({
     padding = true,
     sticky = true,
