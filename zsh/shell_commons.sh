@@ -22,7 +22,7 @@ alias dots="cd $INSTALL/dotfiles/"
 alias crc="vim ~/.config/company_specific_commands.sh"
 alias frc="vim $INSTALL/dotfiles/zsh/config.fish"
 alias src="vim $INSTALL/dotfiles/zsh/shell_commons.sh"
-alias trc="vim $INSTALL/dotfiles/tmux/tmux.conf"
+alias trc="vim $INSTALL/dotfiles/tmux/config.tmux"
 alias vrc="vim $INSTALL/dotfiles/vim/init.vim"
 alias zrc="vim $INSTALL/dotfiles/zsh/zshrc"
 

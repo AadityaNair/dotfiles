@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-/opt/homebrew/bin/tmux set -g default-terminal "xterm-256color"
+tmux set -g default-terminal "xterm-256color"
 tmux set-option -ga terminal-overrides ",*256col*:Tc"
 tmux set -g default-command /bin/zsh
 
