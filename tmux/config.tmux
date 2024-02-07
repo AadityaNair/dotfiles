@@ -61,5 +61,7 @@ tmux bind r source-file ~/.tmux.conf
 tmux bind -n M-. resize-pane -Z
 
 tmux run '$INSTALL/dotfiles/tmux/maglev.tmux'
+#TODO: Configure Tokyonight Storm.
+# tmux run '$INSTALL/dotfiles/tmux/tokyonight_storm.tmux'
 
 #vi: syntax=sh ft=sh
