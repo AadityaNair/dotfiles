@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-tmux set -g default-terminal "xterm-256color"
+tmux set -g default-terminal "tmux-256color"
 tmux set-option -ga terminal-overrides ",*256col*:Tc"
-tmux set -g default-command /bin/zsh
+
+# Asked by nvim
+tmux set-option -sg escape-time 10 
+tmux set-option -g focus-events on
+
 
 tmux set -g base-index 1
 tmux set -g pane-base-index 1
