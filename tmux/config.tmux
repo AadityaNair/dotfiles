@@ -60,7 +60,7 @@ tmux bind r source-file ~/.tmux.conf
 
 tmux bind -n M-. resize-pane -Z
 
-tmux run '$INSTALL/dotfiles/tmux/maglev.tmux'
+tmux run '$INSTALL/dotfiles/tmux/theme.tmux'
 #TODO: Configure Tokyonight Night.
 # tmux run '$INSTALL/dotfiles/tmux/tokyonight_night.tmux'
 
