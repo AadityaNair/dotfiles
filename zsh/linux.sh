@@ -1,4 +1,4 @@
-export TERM=xterm-256color
+export TERM=tmux-256color
 alias htop='TERM=screen htop'
 
 alias noproxy='unset {http,https,ftp,socks,no}_proxy'
