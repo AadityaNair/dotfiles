@@ -13,7 +13,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     "nvim-lualine/lualine.nvim",
-    {"Tsuzat/NeoSolarized.nvim", lazy=true,},
+    {"folke/tokyonight.nvim", lazy=false, priority=1000,},
     "numToStr/Comment.nvim",
 
     'nvim-treesitter/nvim-treesitter',
@@ -55,9 +55,9 @@ require("lazy").setup({
 
 
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("NeoSolarized")
+vim.cmd.colorscheme("tokyonight-night")
 require('lualine').setup {
-  options = { theme  = "solarized_dark" },
+  options = { theme  = "tokyonight" },
 }
 require("bufferline").setup({
     options = {always_show_bufferline = false,},
