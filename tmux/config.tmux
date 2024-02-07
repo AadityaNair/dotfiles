@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 tmux set -g default-terminal "tmux-256color"
-tmux set-option -ga terminal-overrides ",*256col*:Tc"
+tmux set-option -sa terminal-features ",*:RGB"
 
 # Asked by nvim
 tmux set-option -sg escape-time 10 
@@ -61,7 +61,7 @@ tmux bind r source-file ~/.tmux.conf
 tmux bind -n M-. resize-pane -Z
 
 tmux run '$INSTALL/dotfiles/tmux/maglev.tmux'
-#TODO: Configure Tokyonight Storm.
-# tmux run '$INSTALL/dotfiles/tmux/tokyonight_storm.tmux'
+#TODO: Configure Tokyonight Night.
+# tmux run '$INSTALL/dotfiles/tmux/tokyonight_night.tmux'
 
 #vi: syntax=sh ft=sh
