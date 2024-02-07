@@ -2,15 +2,15 @@
 --  mbbill/undotree                 -> debugloop/telescope-undo.nvim
 --  terryma/vim-multiple-cursors    -> mg979/vim-visual-multi (?X)
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-vim.opt.rtp:prepend(lazypath)
-
+vim.g.python3_host_prog="/usr/bin/python3"
 vim.g.mapleader = ","
 
--- TODO: Some plugins require additional configuration
--- TODO: Try to load a plugin along with its configuration. Maybe not possible.
+------------------------------------------------- Plugins Setup --------------------------------------------------
+
 -- TODO: vista.vim, trouble.nvim
 -- TODO: Full Refactor: Looks, autocomplete, Work file, 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     {"Tsuzat/NeoSolarized.nvim", lazy=true,},
@@ -51,35 +51,17 @@ require("lazy").setup({
     },
 })
 
--- TODO: Only generate indentlines when there are more than two lines indented.
--- TODO: Rainbow indentlines
-require('ibl').setup({
-    indent = {char='│'},
-})
+----------------------------------------------------- UI Improvements ----------------------------------------------
+
+
+vim.opt.termguicolors = true
 vim.cmd.colorscheme("NeoSolarized")
 require('lualine').setup {
   options = { theme  = "solarized_dark" },
 }
-require('Comment').setup({
-    padding = true,
-    sticky = true,
-    toggler = {
-        line = '<leader>ci'
-    },
-    opleader = {
-        line = '<leader>ci'
-    },
-    mappings = {
-        basic = true,
-        extra = false,
-    },
-})
-vim.opt.termguicolors = true
 require("bufferline").setup({
     options = {always_show_bufferline = false,},
 })
-
--- TODO: Configure noice and notify
 
 require("notify").setup({
     background_colour = "#000000",
@@ -106,6 +88,28 @@ require("noice").setup({
   },
 })
 
+
+------------------------------------------------ Coding Quality of Life ------------------------------------------
+
+-- TODO: Only generate indentlines when there are more than two lines indented.
+-- TODO: Rainbow indentlines
+require('ibl').setup({
+    indent = {char='│'},
+})
+require('Comment').setup({
+    padding = true,
+    sticky = true,
+    toggler = {
+        line = '<leader>ci'
+    },
+    opleader = {
+        line = '<leader>ci'
+    },
+    mappings = {
+        basic = true,
+        extra = false,
+    },
+})
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 require("nvim-treesitter.install").prefer_git = true
@@ -149,7 +153,6 @@ require("nvim-treesitter.configs").setup({
         -- disable = {'latex'},
     },
 })
-
 
 local cmp = require'cmp'
 -- TODO: Use TAB to iterate through options.
@@ -214,7 +217,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
   }
 
 
---------------------- Other configuration
+----------------------------------------------------  Other configuration   ------------------------------------------
 
 vim.opt.number = true
 vim.opt.textwidth = 0
