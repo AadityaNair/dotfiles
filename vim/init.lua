@@ -211,10 +211,9 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-    capabilities = capabilities
-  }
+-- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+--     capabilities = capabilities
+--   }
 
 
 ----------------------------------------------------  Other configuration   ------------------------------------------
@@ -260,8 +259,18 @@ vim.cmd('cnoreabbrev W w')
 vim.cmd('cnoreabbrev Q q')
 vim.cmd('cnoreabbrev Qall qall')
 
--- TODO: Wrap this in a vim.cmd()
--- autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+-- Copied from https://github.com/creativenull/dotfiles/blob/9ae60de4f926436d5682406a5b801a3768bbc765/config/nvim/init.lua#L70-L86
+-- Return to the previous cursor position.
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function(args)
+    local valid_line = vim.fn.line([['"]]) >= 1 and vim.fn.line([['"]]) < vim.fn.line('$')
+    local not_commit = vim.b[args.buf].filetype ~= 'commit'
+
+    if valid_line and not_commit then
+      vim.cmd([[normal! g`"]])
+    end
+  end,
+})
 
 -- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 -- autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
