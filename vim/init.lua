@@ -142,7 +142,7 @@ require("nvim-treesitter.configs").setup({
     },
     highlight = {
         enable = true,
-        -- disable = {'latex'},
+        disable = {'bash'},
     },
     indent = {
         enable = true,
