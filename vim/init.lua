@@ -255,6 +255,7 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('n', ';', ':')
 vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true}) -- TODO: Can this be replaced with a proper function
 
+vim.keymap.set('n', '<Leader>r', '<Cmd>edit!<CR>')
 
 vim.keymap.set('n','<C-j>',':m .+1<CR>==',{silent = true})
 vim.keymap.set('n','<C-k>',':m .-2<CR>==',{silent = true})
@@ -286,6 +287,13 @@ vim.api.nvim_create_autocmd('BufReadPost', {
       vim.cmd([[normal! g`"]])
     end
   end,
+})
+
+-- Set the right filetypes.
+vim.filetype.add({
+ filename = {
+   ['TARGETS'] = 'starlark',
+ },
 })
 
 -- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
