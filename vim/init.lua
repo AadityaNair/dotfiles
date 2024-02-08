@@ -54,6 +54,19 @@ require("lazy").setup({
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
 
+require("tokyonight").setup({
+    terminal_colors = true,
+    styles = {
+    -- Value is any valid attr-list value for `:help nvim_set_hl`
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = {},
+        variables = {bold = true},
+        strings = {italic = true},
+  },
+})
+
+
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("tokyonight-night")
 require('lualine').setup {
