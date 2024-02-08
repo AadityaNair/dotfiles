@@ -34,21 +34,19 @@ window_status_fg=colour255 # white
 window_status_last_fg=colour4 # blue
 
 #----------------------------------------- TokyoNight Night Theme ------------------------
-display_panes_active_colour=colour154
-display_panes_colour=colour247
-message_attr=bold
-message_bg=colour11 # yellow
-message_command_bg=colour160  # light yellow
-message_command_fg=colour16   # black
-message_fg=colour16           # black
-mode_bg=colour11 # yellow
-mode_fg=colour16   # black
-pane_active_border_fg='#7aa2f7' #
-pane_border_fg='#3b4261' #
-session_bg=colour11
-session_fg=colour16
-status_bg=colour0
-status_fg=colour255
+pane_active_border_fg='#7aa2f7'
+pane_border_fg='#3b4261'
+message_fg=$pane_active_border_fg
+message_bg=$pane_border_fg
+message_command_bg=$message_bg
+message_command_fg=$message_fg
+mode_bg=$pane_border_fg
+mode_fg=$pane_active_border_fg
+session_bg=$pane_active_border_fg
+session_fg='#15161e'
+status_bg='#16161e'
+status_fg=$pane_active_border_fg
+
 window_status_activity_bg=default
 window_status_activity_fg=default
 window_status_bell_attr=blink,bold
@@ -59,9 +57,13 @@ window_status_current_bg=colour4 # blue
 window_status_current_fg=colour16 # black
 window_status_fg=colour255 # white
 window_status_last_fg=colour4 # blue
+display_panes_active_colour=colour154
+display_panes_colour=colour247
 
 #----------------------------------------- Actual Theme --------------------------------
 
+message_attr=bold
+mode_attr=bold
 
 left_separator=''
 left_separator_black=''
@@ -80,16 +82,15 @@ tmux set -g message-style fg=$message_fg,bg=$message_bg,$message_attr
 tmux set -g message-command-style fg=$message_command_fg,bg=$message_command_bg,$message_attr
 
 # windows mode
-mode_attr=bold
 tmux setw -g mode-style fg=$mode_fg,bg=$mode_bg,$mode_attr
 
 # status line
 tmux set -g status-style fg=$status_fg,bg=$status_bg
 
-status_left="#[fg=$session_fg,bg=$session_bg] ❐ #S #[fg=$session_bg,bg=$status_bg]$left_separator_black"
-if [ x"`tmux -q -L tmux_theme_status_left_test -f /dev/null new-session -d \; show -g -v status-left \; kill-session`" = x"[#S] " ] ; then
-    status_left="$status_left "
-fi
+status_left="#[fg=$session_fg,bg=$session_bg] #S #[fg=$session_bg,bg=$status_bg]$left_separator_black"
+# if [ x"`tmux -q -L tmux_theme_status_left_test -f /dev/null new-session -d \; show -g -v status-left \; kill-session`" = x"[#S] " ] ; then
+#     status_left="$status_left "
+# fi
 tmux set -g status-left-length 32 \; set -g status-left "$status_left"
 
 window_status_last_attr=default
