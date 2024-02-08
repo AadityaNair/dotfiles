@@ -3,6 +3,9 @@
 --  terryma/vim-multiple-cursors    -> mg979/vim-visual-multi (?X)
 
 vim.g.python3_host_prog="/usr/bin/python3"
+vim.g.loaded_node_provider=0 
+vim.g.loaded_perl_provider=0
+vim.g.loaded_python_provider=0
 vim.g.mapleader = ","
 
 ------------------------------------------------- Plugins Setup --------------------------------------------------
