@@ -224,7 +224,7 @@ _atuin-history-do-search() {
   if [[ $1 -ge 0 ]]; then
     atuin search --filter-mode "$ATUIN_HISTORY_SEARCH_FILTER_MODE" --search-mode "$ATUIN_HISTORY_SEARCH_MODE" \
       --limit 1 --offset $1 --format "{command}" \
-      "$2"
+      -- "$2"
   fi
 }
 
