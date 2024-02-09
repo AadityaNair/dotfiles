@@ -64,8 +64,7 @@ require("tokyonight").setup({
         comments = { italic = true },
         keywords = { italic = true },
         functions = {},
-        variables = {bold = true},
-        Strings = {italic = true},
+        variables = {},
   },
 })
 
@@ -170,6 +169,12 @@ require("nvim-treesitter.configs").setup({
         -- disable = {'latex'},
     },
 })
+
+-- Set strings to be italics
+hl_settings = vim.api.nvim_get_hl(0, {name="String"})
+hl_settings['italic']=true
+vim.api.nvim_set_hl(0, "String", hl_settings)
+
 
 local cmp = require'cmp'
 -- TODO: Use TAB to iterate through options.
