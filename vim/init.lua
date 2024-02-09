@@ -112,6 +112,7 @@ require("noice").setup({
 require('ibl').setup({
     indent = {char='│'},
 })
+-- TODO: This can use a good looking at.
 require('Comment').setup({
     padding = true,
     sticky = true,
@@ -259,7 +260,7 @@ vim.opt.ignorecase = true
 
 vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('n', ';', ':')
-vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true}) -- TODO: Can this be replaced with a proper function
+vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true})
 
 vim.keymap.set('n', '<Leader>r', '<Cmd>edit!<CR>')
 
@@ -270,7 +271,6 @@ vim.keymap.set('i','<C-k>','<Esc>:m .-2<CR>==gi',{silent = true})
 vim.keymap.set('v','<C-j>',":m '>+1<CR>gv=gv",{silent = true})
 vim.keymap.set('v','<C-k>',":m '<-2<CR>gv=gv",{silent = true})
 
--- TODO: Replace this with a proper function
 vim.cmd('cnoreabbrev W! w!')
 vim.cmd('cnoreabbrev Q! q!')
 vim.cmd('cnoreabbrev Qall! qall!')
