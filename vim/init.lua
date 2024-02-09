@@ -175,7 +175,7 @@ hl_settings = vim.api.nvim_get_hl(0, {name="String"})
 hl_settings['italic']=true
 vim.api.nvim_set_hl(0, "String", hl_settings)
 
-
+------------------------------------------------------ Auto Complete -------------------------------
 local cmp = require'cmp'
 -- TODO: Use TAB to iterate through options.
 cmp.setup({
