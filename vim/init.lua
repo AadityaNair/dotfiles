@@ -65,7 +65,7 @@ require("tokyonight").setup({
         keywords = { italic = true },
         functions = {},
         variables = {bold = true},
-        strings = {italic = true},
+        Strings = {italic = true},
   },
 })
 
@@ -78,7 +78,8 @@ require('lualine').setup {
 require("bufferline").setup({
     options = {always_show_bufferline = false,},
 })
-
+-- TODO: Maybe it is better if the notifications are on the bottom right
+--       And without a box like in fidget.nvim. Investigate
 require("notify").setup({
     background_colour = "#000000",
     top_down = true,
@@ -162,7 +163,7 @@ require("nvim-treesitter.configs").setup({
     },
     highlight = {
         enable = true,
-        disable = {'bash'},
+        -- disable = {'bash'},
     },
     indent = {
         enable = true,
