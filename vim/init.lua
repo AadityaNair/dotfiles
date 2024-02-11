@@ -204,12 +204,13 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<Esc>'] = cmp.mapping.close(),
     }),
-    
+    -- TODO: These group indices are weird. We probably don't need it. 
+    --       I think the order defines the index.
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-    }, {
-        { name = 'buffer' },
+        { name = 'nvim_lsp', group_index = 1 },
+        { name = 'buffer',   group_index = 2 },
+        { name = 'path',     group_index = 3 },
+        { name = 'luasnip',  group_index = 4,},
     })
 })
 
