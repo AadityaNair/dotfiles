@@ -241,7 +241,7 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig')['bash-language-server'].setup {
+require('lspconfig')['bashls'].setup {
     capabilities = capabilities
   }
 
@@ -306,6 +306,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 vim.filetype.add({
  filename = {
     ['TARGETS'] = 'starlark',
+    --TODO: Make *.zsh look like bash. Below doesn't do it.
     ['*.zsh'] = 'bash',
  },
 })
