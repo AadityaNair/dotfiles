@@ -305,7 +305,8 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- Set the right filetypes.
 vim.filetype.add({
  filename = {
-   ['TARGETS'] = 'starlark',
+    ['TARGETS'] = 'starlark',
+    ['*.zsh'] = 'bash',
  },
 })
 
