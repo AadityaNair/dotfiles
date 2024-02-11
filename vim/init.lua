@@ -311,14 +311,6 @@ vim.filetype.add({
  },
 })
 
--- inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
--- autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " remove completion window
--- autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
 -- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-
--- nnoremap <silent> <F2> :set invpaste paste?<CR>
--- set pastetoggle=<F2>
-
 -- nnoremap <silent> u :UndotreeToggle<CR>
 
