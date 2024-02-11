@@ -241,9 +241,9 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
---     capabilities = capabilities
---   }
+require('lspconfig')['bash-language-server'].setup {
+    capabilities = capabilities
+  }
 
 
 ----------------------------------------------------  Other configuration   ------------------------------------------
