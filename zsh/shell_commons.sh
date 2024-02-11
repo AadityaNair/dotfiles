@@ -6,6 +6,7 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 ################ ALIASES #############################
 
 # Random useful aliases
+# TODO: Make bat the default pager for a lot of things. Also replace `less` with `bat`
 alias cat='bat'
 alias ip='ip -color'
 alias kb='kubectl'
