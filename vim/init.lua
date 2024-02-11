@@ -12,6 +12,8 @@ vim.g.mapleader = ","
 
 -- TODO: vista.vim, trouble.nvim
 -- TODO: Full Refactor: Looks, autocomplete, Work file, 
+-- TODO: Bring the default keymapings to the top so that those work even if some plugins break things.
+-- TODO: When there is an error, the error window goes away too fast to actually read the thing.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
@@ -79,6 +81,7 @@ require("bufferline").setup({
 })
 -- TODO: Maybe it is better if the notifications are on the bottom right
 --       And without a box like in fidget.nvim. Investigate
+-- TODO: Have a way to hold the notification for some time.
 require("notify").setup({
     background_colour = "#000000",
     top_down = true,
@@ -196,7 +199,10 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<Tab>'] = cmp.mapping.select_next_item({ behaviour = "select"}),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item({ behaviour = "select" }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<Esc>'] = cmp.mapping.close(),
     }),
     
     sources = cmp.config.sources({
