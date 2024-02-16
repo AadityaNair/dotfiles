@@ -113,7 +113,7 @@ plugins = {
             "rcarriga/nvim-notify",
         },
     },
-    "jose-elias-alvarez/null-ls.nvim",
+    "jose-elias-alvarez/null-ls.nvim", -- TODO: Move this to company-specific
     {
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
