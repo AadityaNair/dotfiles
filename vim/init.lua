@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- TODO: When there is an error, the error window goes away too fast to actually read the thing.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup({
+plugins = {
     "nvim-lualine/lualine.nvim",
     {"folke/tokyonight.nvim", lazy=false, priority=1000,},
     "numToStr/Comment.nvim",
@@ -110,8 +110,9 @@ require("lazy").setup({
             "rcarriga/nvim-notify",
         },
     },
-})
+}
 
+require('lazy').setup(plugins)
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
 
@@ -304,14 +305,19 @@ require('lspconfig')['bashls'].setup {
 
 -- Set the right filetypes.
 vim.filetype.add({
- filename = {
-    --TODO: Comment-nvim doesn't work with starlark.
-    ['TARGETS'] = 'starlark',
+ extension = {
     --TODO: Make *.zsh look like bash. Below doesn't do it.
-    ['*.zsh'] = 'bash',
+    ['zsh'] = 'bash',
  },
 })
 
 -- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 -- nnoremap <silent> u :UndotreeToggle<CR>
 
+----------------------------------------------------- Meta Specific Settings -------------------------------
+vim.filetype.add({
+ filename = {
+    --TODO: Comment-nvim doesn't work with starlark.
+    ['TARGETS'] = 'starlark',
+ },
+})
