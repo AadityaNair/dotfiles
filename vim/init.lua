@@ -113,8 +113,13 @@ plugins = {
             "rcarriga/nvim-notify",
         },
     },
+    "jose-elias-alvarez/null-ls.nvim",
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    }
 }
-plugins[19]=company.plugin
+plugins[21]=company.plugin
 require('lazy').setup(plugins)
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
