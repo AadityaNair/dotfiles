@@ -119,7 +119,18 @@ plugins = {
         dependencies = { 'nvim-lua/plenary.nvim' }
     }
 }
-plugins[21]=company.plugin
+
+-- List all the plugins from the company specific code and add it to default list.
+-- Only when company.plugin is set.
+if company.plugin then
+    len = require("table").getn(plugins)
+
+    for index, entry in pairs(company.plugin) do
+        plugins[len+index] = entry
+    end
+        
+end
+
 require('lazy').setup(plugins)
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
