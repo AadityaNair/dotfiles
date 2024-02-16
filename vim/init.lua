@@ -274,11 +274,12 @@ cmp.setup({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
         ['<Tab>'] = cmp.mapping.select_next_item({ behaviour = "select"}),
         ['<S-Tab>'] = cmp.mapping.select_prev_item({ behaviour = "select" }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<Esc>'] = cmp.mapping.close(),
+        ['<Esc>'] = function(fallback)
+                        cmp.mapping.close()
+                        vim.cmd('stopinsert') 
+                    end,
     }),
     -- TODO: These group indices are weird. We probably don't need it. 
     --       I think the order defines the index.
