@@ -72,6 +72,9 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- TODO: When there is an error, the error window goes away too fast to actually read the thing.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
+
+company = require("company_specific_config")
+
 plugins = {
     "nvim-lualine/lualine.nvim",
     {"folke/tokyonight.nvim", lazy=false, priority=1000,},
@@ -111,7 +114,7 @@ plugins = {
         },
     },
 }
-
+plugins[19]=company.plugin
 require('lazy').setup(plugins)
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
@@ -314,10 +317,4 @@ vim.filetype.add({
 -- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 -- nnoremap <silent> u :UndotreeToggle<CR>
 
------------------------------------------------------ Meta Specific Settings -------------------------------
-vim.filetype.add({
- filename = {
-    --TODO: Comment-nvim doesn't work with starlark.
-    ['TARGETS'] = 'starlark',
- },
-})
+company.setup()
