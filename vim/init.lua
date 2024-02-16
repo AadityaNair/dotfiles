@@ -237,7 +237,8 @@ vim.api.nvim_set_hl(0, "String", hl_settings)
 
 ------------------------------------------------------ Auto Complete -------------------------------
 local cmp = require'cmp'
--- TODO: Use TAB to iterate through options.
+-- TODO: Using <Esc> to close completions has a small problem when the completion window
+--       shows up everywhere. Esc, in that case, doesn't go to Normal mode. Fix that.
 cmp.setup({
     snippet = {
         expand = function(args)
