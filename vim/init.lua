@@ -67,8 +67,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 
 ------------------------------------------------- Plugins Setup --------------------------------------------------
 
--- TODO: vista.vim, trouble.nvim
--- TODO: Full Refactor: Looks, autocomplete, Work file, 
+-- TODO: vista.vim
 -- TODO: When there is an error, the error window goes away too fast to actually read the thing.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
@@ -100,9 +99,10 @@ plugins = {
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
         },
     },
-    
-    {'folke/twilight.nvim'}, -- TODO: Fix this theme or get a whole new theme.
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+    -- TODO: Configure todo-comments and trouble.nvim 
+    {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
+    {"folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+    {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
         "folke/noice.nvim",
@@ -115,8 +115,8 @@ plugins = {
     },
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    }
+        dependencies = { 'nvim-lua/plenary.nvim' },
+    },
 }
 
 -- List all the plugins from the company specific code and add it to default list.
@@ -206,6 +206,12 @@ require('Comment').setup({
     },
 })
 
+-- TODO: Few more possibilities here. We don't need to to look too much different than comments.
+require("todo-comments").setup({
+    signs = false,
+})
+
+
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 require("nvim-treesitter.install").prefer_git = true
 -- TODO: Finetune the values below.
@@ -255,9 +261,10 @@ hl_settings['italic']=true
 vim.api.nvim_set_hl(0, "String", hl_settings)
 
 ------------------------------------------------------ Auto Complete -------------------------------
+
+require('trouble').setup({})
+
 local cmp = require'cmp'
--- TODO: Using <Esc> to close completions has a small problem when the completion window
---       shows up everywhere. Esc, in that case, doesn't go to Normal mode. Fix that.
 cmp.setup({
     snippet = {
         expand = function(args)
