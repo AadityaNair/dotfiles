@@ -118,6 +118,7 @@ plugins = {
         dependencies = { 
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
+            'debugloop/telescope-undo.nvim',
             -- NOTE: Adding anything in depedencies except plenary.nvim is wrong. 
             --       Technically, file-browser.nvim depends on plenary.nvim and telescope.nvim
             --       But, because all `depedencies` really mean is that it downloads the dependency
@@ -252,10 +253,12 @@ telescope.setup({
     },
 })
 telescope.load_extension "file_browser"
+telescope.load_extension "undo"
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', telescope.extensions.file_browser.file_browser)
 vim.keymap.set('n', '<leader>tt', ":Telescope")
+vim.keymap.set('n', 'u', telescope.extensions.undo.undo)
 -- TODO: Just `T/t` is also some function. Change it.
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
@@ -386,8 +389,5 @@ vim.filetype.add({
         ['zshrc'] = 'sh',
     },
 })
-
--- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
--- nnoremap <silent> u :UndotreeToggle<CR>
 
 company.setup()
