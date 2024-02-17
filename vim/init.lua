@@ -325,16 +325,20 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- TODO: Consider if `bashls` is useful for zsh since syntax may be slightly different.
 require('lspconfig')['bashls'].setup {
-    capabilities = capabilities
+    capabilities = capabilities,
+    filetypes= {'sh', 'zsh'},
   }
 
--- Set the right filetypes.
+-- Set the right filetypes for zsh
 vim.filetype.add({
- extension = {
-    --TODO: Make *.zsh look like bash. Below doesn't do it.
-    ['zsh'] = 'bash',
- },
+    extension = {
+        ['zsh'] = 'sh',
+    },
+    filename = {
+        ['zshrc'] = 'sh',
+    },
 })
 
 -- vmap <silent> <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
