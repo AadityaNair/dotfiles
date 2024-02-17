@@ -1,6 +1,6 @@
+#!/usr/bin/env zsh
 # Pulled from https://gist.github.com/tyalie/7e13cfe2ec62d99fa341a07ed12ef7c0
 # Stopgap till the problem is fixed in atuin itself.
-#!/usr/bin/env zsh
 ##############################################################################
 #
 # Copyright (c) 2023 Sophie Tyalie

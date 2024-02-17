@@ -6,7 +6,7 @@ alias open="xdg-open"
 alias irssi='TERM=screen-256color irssi'
 export MANPAGER='bat -l man -p'
 
-eval `dircolors $INSTALL/dotfiles/zsh/dircolors.ansi-dark`
+eval "$(dircolors "$INSTALL/dotfiles/zsh/dircolors.ansi-dark")"
 
 #TODO: Have two aliases to copy/paste from/to terminal
 # Check out clipcopy and clippaste from OMZ

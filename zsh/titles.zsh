@@ -7,34 +7,34 @@
 
 
 tmux_rename() {
-    printf "\033k$1\033\\"
+    printf "\033k%s\033\\" "$1"
 }
 
 # Print truncated current path
 trunc_path() {
     DIR_LENGTH=2
     DELIMITER='..'
-    echo $(print -P "%$((DIR_LENGTH+1))(c:$DELIMITER/:)%${DIR_LENGTH}c")
+    print -P "%$((DIR_LENGTH+1))(c:$DELIMITER/:)%${DIR_LENGTH}c"
 }
 
 function set_pwd() {
-    tmux_rename $(trunc_path)
+    tmux_rename "$(trunc_path)"
 }
 
 function set_from_command(){
     local -a cmd
     cmd=(${(z)1}) # Convert command string to a list of words.
 
-    case $cmd[1] in
-        vim|nvim) tmux_rename "◉ $cmd[2]" ;;
-        man|run-help) tmux_rename "$cmd[-1] ❓" ;;
-        ssh) tmux_rename "$cmd[2]" ;;
-        sudo) tmux_rename "⚡$cmd[2]" ;;
-        *) tmux_rename "$cmd[1]" ;;
+    case ${cmd[1]} in
+        vim|nvim) tmux_rename "◉ ${cmd[2]}" ;;
+        man|run-help) tmux_rename "${cmd[-1]} ❓" ;;
+        ssh) tmux_rename "${cmd[2]}" ;;
+        sudo) tmux_rename "⚡${cmd[2]}" ;;
+        *) tmux_rename "${cmd[1]}" ;;
     esac
 }
 
-if [[ ! -z "$TMUX" ]]
+if [[ -n "$TMUX" ]]
 then
     autoload -Uz add-zsh-hook
     add-zsh-hook precmd set_pwd
