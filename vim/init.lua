@@ -117,6 +117,18 @@ plugins = {
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
     },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+                vim.o.timeout = true
+                vim.o.timeoutlen = 300
+               end,
+        opts = {
+            -- TODO: your configuration comes here
+        }
+    }
+
 }
 
 -- List all the plugins from the company specific code and add it to default list.
