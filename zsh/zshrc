@@ -46,10 +46,11 @@ setopt share_history # share command history data
 # Don't check permissions for completions. Makes shell startup faster.
 zstyle '*:compinit' arguments -u -C
 
-# Setup zoxide for recent directories completion
-+autocomplete:recent-directories() {
-    typeset -ga reply=( ${(f)"$( zoxide query --list $1 2> /dev/null )"} )
-}
+# Setup zoxide for recent directories completion while using `cd` 
+# I always use `z` directly for completion so don't particularly need this feature.
+# +autocomplete:recent-directories() {
+#     typeset -ga reply=( ${(f)"$( zoxide query --list "$1" 2> /dev/null )"} )
+# }
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
