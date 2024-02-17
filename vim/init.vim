@@ -1,3 +1,5 @@
+" IMPORTANT NOTE: This file is now deperecated and is only kept for reference
+" purposes. Take a look at init.lua for the current config.
 set runtimepath+=$INSTALL/nvim/autoload
 "TODO: Check out folke/lazy.nvim
 set guicursor=
