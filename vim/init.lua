@@ -115,7 +115,15 @@ plugins = {
     },
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = { 
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-file-browser.nvim',
+            -- NOTE: Adding anything in depedencies except plenary.nvim is wrong. 
+            --       Technically, file-browser.nvim depends on plenary.nvim and telescope.nvim
+            --       But, because all `depedencies` really mean is that it downloads the dependency
+            --       before the main one, we can put anything in here. Only thing is, if we decide to
+            --       remove telescope.nvim, the depedencies are deleted too. Which is OK for this case.
+        },
     },
     {
         "folke/which-key.nvim",
@@ -223,6 +231,32 @@ require("todo-comments").setup({
     signs = false,
 })
 
+local telescope = require('telescope')
+
+telescope.setup({
+    pickers = {
+        find_files = {
+            hidden = false,
+        },
+    },
+    extensions = {
+        file_browser = {
+            hijack_netrw = true,
+            grouped = false,
+            collapsed_dir = true,
+            -- WARNING: We might need to turn previewer off for at work stuff
+            -- previewer = true,
+
+            -- display_stat = true,
+        },
+    },
+})
+telescope.load_extension "file_browser"
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>f', telescope.extensions.file_browser.file_browser)
+vim.keymap.set('n', '<leader>tt', ":Telescope")
+-- TODO: Just `T/t` is also some function. Change it.
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 require("nvim-treesitter.install").prefer_git = true
