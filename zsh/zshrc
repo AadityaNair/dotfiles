@@ -1,5 +1,5 @@
 # Setup default install location
-# zmodload zsh/zprof
+zmodload zsh/zprof
 export INSTALL=$HOME/.config
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
@@ -14,6 +14,9 @@ znap source "AadityaNair/fast-syntax-highlighting"
 znap source marlonrichert/zsh-autocomplete
 
 znap eval starship 'starship init zsh'
+znap eval atuin 'atuin init zsh'
+znap eval zoxide 'zoxide init zsh'
+
 export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
 
 # ----------------------------  Plugin Specific Settings  --------------------------

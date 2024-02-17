@@ -28,8 +28,6 @@ bindkey "^[[1;5C" forward-word  # Ctrl+Right
 
 bindkey "^K" kill-line
 
-source "$INSTALL/dotfiles/zsh/atuin.zsh"
-source "$INSTALL/dotfiles/zsh/zoxide.zsh"
 source "$INSTALL/dotfiles/zsh/02_atuin-history-arrow.zsh"
 # bindkey <something> quote-region
 # bindkey <something> transpose-words
