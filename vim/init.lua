@@ -245,8 +245,7 @@ telescope.setup({
             hijack_netrw = true,
             grouped = false,
             collapsed_dir = true,
-            -- WARNING: We might need to turn previewer off for at work stuff
-            -- previewer = true,
+            previewer = company.use_previewer_for_files,
 
             -- display_stat = true,
         },
