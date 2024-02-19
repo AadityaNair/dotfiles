@@ -260,8 +260,9 @@ telescope.load_extension "undo"
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', telescope.extensions.file_browser.file_browser)
-vim.keymap.set('n', '<leader>tt', ":Telescope")
 vim.keymap.set('n', 'u', telescope.extensions.undo.undo, {silent=true})
+vim.keymap.set('n', '<leader>b', function () builtin.buffers({ignore_current_buffer=true, sort_lastused=true}) end, {silent=true, noremap=true})
+vim.keymap.set('n', '<leader>tt', ":Telescope")
 -- TODO: Just `T/t` is also some function. Change it.
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
