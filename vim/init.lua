@@ -173,7 +173,7 @@ vim.cmd.colorscheme("flexoki-dark")
 lualine_flexoki = require('lualine-flexoki')
 require('lualine').setup {
     options = { 
-        theme  = lualine_flexoki,
+        theme  = lualine_flexoki.theme,
         icons_enabled = true,
         globalstatus = true,
     },

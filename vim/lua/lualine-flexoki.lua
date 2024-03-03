@@ -1,3 +1,5 @@
+local struct = {}
+
 local colors = {
   black        = '#282828',
   white        = '#ebdbb2',
@@ -10,7 +12,8 @@ local colors = {
   lightgray    = '#504945',
   inactivegray = '#7c6f64',
 }
-return {
+
+struct.theme = {
   normal = {
     a = {bg = colors.gray, fg = colors.black, gui = 'bold'},
     b = {bg = colors.lightgray, fg = colors.white},
@@ -42,3 +45,6 @@ return {
     c = {bg = colors.darkgray, fg = colors.gray}
   }
 }
+
+struct.colors = colors
+return struct
