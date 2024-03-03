@@ -170,7 +170,19 @@ require("tokyonight").setup({
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("tokyonight-night")
 require('lualine').setup {
-  options = { theme  = "tokyonight" },
+    options = { 
+        theme  = "tokyonight",
+        icons_enabled = true,
+        globalstatus = true,
+        sections = {
+            lualine_a = {'mode'},
+            lualine_b = {'diagnostics'},
+            lualine_c = {'filename'},
+            lualine_x = {'fileformat', 'filetype'},
+            lualine_y = {'progress'},
+            lualine_z = {'location'}
+        },
+    },
 }
 require("bufferline").setup({
     options = {always_show_bufferline = false,},
