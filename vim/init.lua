@@ -76,7 +76,7 @@ company = require("company_specific_config")
 
 plugins = {
     "nvim-lualine/lualine.nvim",
-    {"folke/tokyonight.nvim", lazy=false, priority=1000,},
+    { "kepano/flexoki-neovim", name='flexoki'},
     "numToStr/Comment.nvim",
 
     'nvim-treesitter/nvim-treesitter',
@@ -155,23 +155,25 @@ require('lazy').setup(plugins)
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
 
-require("tokyonight").setup({
-    terminal_colors = true,
-    styles = {
-    -- Value is any valid attr-list value for `:help nvim_set_hl`
-        comments = { italic = true },
-        keywords = { italic = true },
-        functions = {},
-        variables = {},
-  },
-})
+-- require("tokyonight").setup({
+--     terminal_colors = true,
+--     styles = {
+--     -- Value is any valid attr-list value for `:help nvim_set_hl`
+--         comments = { italic = true },
+--         keywords = { italic = true },
+--         functions = {},
+--         variables = {},
+--   },
+-- })
 
 
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.colorscheme("flexoki-dark")
+
+lualine_flexoki = require('lualine-flexoki')
 require('lualine').setup {
     options = { 
-        theme  = "tokyonight",
+        theme  = lualine_flexoki,
         icons_enabled = true,
         globalstatus = true,
     },
