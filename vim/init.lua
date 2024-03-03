@@ -174,15 +174,16 @@ require('lualine').setup {
         theme  = "tokyonight",
         icons_enabled = true,
         globalstatus = true,
-        sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'diagnostics'},
-            lualine_c = {'filename'},
-            lualine_x = {'fileformat', 'filetype'},
-            lualine_y = {'progress'},
-            lualine_z = {'location'}
-        },
     },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {'filename'},
+        lualine_x = {'searchcount', 'selectioncount', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    extensions = {'lazy', 'trouble'},
 }
 require("bufferline").setup({
     options = {always_show_bufferline = false,},
