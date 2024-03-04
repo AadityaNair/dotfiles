@@ -154,20 +154,8 @@ end
 require('lazy').setup(plugins)
 ----------------------------------------------------- UI Improvements ----------------------------------------------
 
-
--- require("tokyonight").setup({
---     terminal_colors = true,
---     styles = {
---     -- Value is any valid attr-list value for `:help nvim_set_hl`
---         comments = { italic = true },
---         keywords = { italic = true },
---         functions = {},
---         variables = {},
---   },
--- })
-
-
 vim.opt.termguicolors = true
+-- TODO: Some keywords don't show up as a different colour or in italics.
 vim.cmd.colorscheme("flexoki-dark")
 
 lualine_flexoki = require('lualine-flexoki')
