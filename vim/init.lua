@@ -293,6 +293,7 @@ require("nvim-treesitter.configs").setup({
         'c',
         'cpp',
         'diff',
+        'erlang',
         'go',
         'graphql',
         'hack',
