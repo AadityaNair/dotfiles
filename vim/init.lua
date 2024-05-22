@@ -119,7 +119,7 @@ plugins = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
             'debugloop/telescope-undo.nvim',
-            -- NOTE: Adding anything in depedencies except plenary.nvim is wrong. 
+            -- NOTE: Adding anything in dependencies except plenary.nvim is wrong. 
             --       Technically, file-browser.nvim depends on plenary.nvim and telescope.nvim
             --       But, because all `depedencies` really mean is that it downloads the dependency
             --       before the main one, we can put anything in here. Only thing is, if we decide to
@@ -136,7 +136,11 @@ plugins = {
         opts = {
             -- TODO: your configuration comes here
         }
-    }
+    },
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = {"kevinhwang91/promise-async"},
+    },
 
 }
 
@@ -218,6 +222,22 @@ require("noice").setup({
 
 
 ------------------------------------------------ Coding Quality of Life ------------------------------------------
+
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+-- TODO: UFO also supports directly talking to LSP. Maybe that is more useful than treesitter.
+-- TODO: This also needs to be configured properly. Especially to remove the numbers on the left.
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})
 
 -- TODO: Only generate indentlines when there are more than two lines indented.
 -- TODO: Rainbow indentlines
