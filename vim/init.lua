@@ -318,6 +318,7 @@ require("nvim-treesitter.configs").setup({
         'graphql',
         'hack',
         'json',
+        'kdl',
         'lua',
         'markdown',
         'markdown_inline',
