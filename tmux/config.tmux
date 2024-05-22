@@ -2,7 +2,7 @@
 
 tmux set -g default-terminal "tmux-256color"
 tmux set-option -sa terminal-features ",*:RGB"
-
+tmux set -g set-clipboard external
 # Asked by nvim
 tmux set-option -sg escape-time 10 
 tmux set-option -g focus-events on

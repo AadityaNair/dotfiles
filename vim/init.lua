@@ -28,6 +28,8 @@ vim.opt.ignorecase = true
 -- vim.opt.showmode = true
 -- vim.opt.hidden = true
 
+vim.opt.clipboard = 'unnamedplus'  -- Integrate vim with system clipboard.
+
 vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('n', ';', ':')
 vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', {silent = true})
