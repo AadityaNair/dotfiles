@@ -260,6 +260,11 @@ require('Comment').setup({
     },
 })
 
+-- Custom commentstrings
+local ft = require('Comment.ft')
+ft.set('kdl', '//%s')
+
+
 -- TODO: Few more possibilities here. We don't need to to look too much different than comments.
 require("todo-comments").setup({
     signs = false,
