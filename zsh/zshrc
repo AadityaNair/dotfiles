@@ -8,27 +8,24 @@ export PLUGIN_DIR=$HOME/.local/share/zsh-plugins
 source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
 
 
-znap install "zsh-users/zsh-completions"
 znap source "AadityaNair/fast-syntax-highlighting"
 
-znap source marlonrichert/zsh-autocomplete
 
-znap eval starship 'starship init zsh'
-znap eval atuin 'atuin init zsh'
 znap eval zoxide 'zoxide init zsh'
 
+
+# ----------------------------  Prompt Settings  --------------------------
+znap eval starship 'starship init zsh'
 export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
 
-# ----------------------------  Plugin Specific Settings  --------------------------
 
 # ----------------------------  ZSH Features  ------------------------------
-
 setopt extended_glob
 setopt complete_aliases
 setopt autocd
 
-# ----------------------------  History Settings  ----------------------------
 
+# ----------------------------  History Settings  ----------------------------
 # TODO: We can remove a lot of these if we can rely solely on atuin. Will probably improve perf.
 HISTFILE=$HOME/.local/share/zsh_history
 HISTSIZE=1000000000
@@ -45,7 +42,12 @@ setopt hist_verify
 # setopt inc_append_history
 setopt share_history # share command history data
 
+znap eval atuin 'atuin init zsh'
+
+
 # ----------------------------  Auto Completion Settings ----------------------
+znap install "zsh-users/zsh-completions"
+znap source marlonrichert/zsh-autocomplete
 
 # Don't check permissions for completions. Makes shell startup faster.
 zstyle '*:compinit' arguments -u -C
