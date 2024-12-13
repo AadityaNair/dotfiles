@@ -60,6 +60,13 @@ zstyle '*:compinit' arguments -u -C
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
+# Insert the longest matching prefix before starting completions
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
+zstyle ':completion:*:*' matcher-list 'm:{[:lower:]-}={[:upper:]_}' '+r:|[.]=**'
+
+
 # ----------------------------  Boilerplate  ------------------------------
 
 
