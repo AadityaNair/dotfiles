@@ -1,5 +1,5 @@
 # Setup default install location
-zmodload zsh/zprof
+# zmodload zsh/zprof
 export INSTALL=$HOME/.config
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
@@ -29,6 +29,7 @@ setopt autocd
 
 # ----------------------------  History Settings  ----------------------------
 
+# TODO: We can remove a lot of these if we can rely solely on atuin. Will probably improve perf.
 HISTFILE=$HOME/.local/share/zsh_history
 HISTSIZE=1000000000
 SAVEHIST=1000000000
