@@ -4,19 +4,16 @@ export INSTALL=$HOME/.config
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
 export PLUGIN_DIR=$HOME/.local/share/zsh-plugins
-
 source $PLUGIN_DIR/znap/znap.zsh  # Start Znap
-
-
-znap source "AadityaNair/fast-syntax-highlighting"
-
 
 znap eval zoxide 'zoxide init zsh'
 
 
 # ----------------------------  Prompt Settings  --------------------------
-znap eval starship 'starship init zsh'
 export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
+
+znap eval starship 'starship init zsh'
+znap source "AadityaNair/fast-syntax-highlighting"
 
 
 # ----------------------------  ZSH Features  ------------------------------
@@ -50,7 +47,7 @@ znap install "zsh-users/zsh-completions"
 znap source marlonrichert/zsh-autocomplete
 
 # Don't check permissions for completions. Makes shell startup faster.
-zstyle '*:compinit' arguments -u -C
+zstyle '*:compinit' arguments -u -C -w
 
 # Setup zoxide for recent directories completion while using `cd` 
 # I always use `z` directly for completion so don't particularly need this feature.
