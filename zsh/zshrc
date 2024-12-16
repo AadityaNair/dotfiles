@@ -47,6 +47,7 @@ znap eval atuin 'atuin init zsh --disable-up-arrow'
 
 # ----------------------------  Auto Completion Settings ----------------------
 znap install "zsh-users/zsh-completions"
+# TODO: We should just figure out how completion works in zsh and not rely on plugins.
 znap source marlonrichert/zsh-autocomplete
 
 # Don't check permissions for completions. Makes shell startup faster.
