@@ -25,12 +25,12 @@ keybinds clear-defaults=true {
         // bind "Shift F9" {Move Tab Right};
 
         // PANE Management
-        // bind "Alt |" {Split Vertically}
-        // bind "Alt -" {Split Horizontally}
-        // bind "Shift Left" { MoveFocus "Left";}
-        // bind "Shift Right" { MoveFocus "Right";}
-        // bind "Shift Up"  { MoveFocus "Up";}
-        // bind "Shift Down" { MoveFocus "Down";}
+        bind "Alt \\" {NewPane "Right";}
+        bind "Alt -" {NewPane "Down";}
+        bind "Shift Left" { MoveFocus "Left";}
+        bind "Shift Right" { MoveFocus "Right";}
+        bind "Shift Up"  { MoveFocus "Up";}
+        bind "Shift Down" { MoveFocus "Down";}
         bind "Alt ]" { ToggleActiveSyncTab; }
 
         // SESSION Management
