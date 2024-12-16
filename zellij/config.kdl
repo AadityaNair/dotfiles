@@ -6,6 +6,7 @@
 // TODO: Manually change session names.
 // TODO: Easily create new sessions.
 // TODO: Disable name change if manually changed names.
+// TODO: Common bindings across all modes as an escape hatch
 
 
 //Feature: Pipe contents of buffer to a file or a command
@@ -15,7 +16,7 @@ keybinds clear-defaults=true {
         bind "Alt c" { Copy; }
 
         // Move to Contexts
-        bind "Alt s" { SwitchToMode "Session"; }
+        bind "Ctrl a" { SwitchToMode "Session"; }
 
         // TAB Management
         bind "Alt a" { NewTab; }
@@ -91,20 +92,23 @@ keybinds clear-defaults=true {
         bind "PageUp" { PageScrollUp; }
         // bind "d" { HalfPageScrollDown; }
         // bind "u" { HalfPageScrollUp; }
-        // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
+        
+        // comment this out if using copy_on_select=true
+        bind "Alt c" { Copy; }
+    }
+
+    entersearch {
+        bind "Ctrl c" "Esc" { SwitchToMode "scroll"; }
+        bind "enter" { SwitchToMode "search"; }
     }
     search {
         bind "Ctrl s" { SwitchToMode "Normal"; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
-        // bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
-        // bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
-        // bind "d" { HalfPageScrollDown; }
-        // bind "u" { HalfPageScrollUp; }
+
         bind "n" { Search "down"; }
-        bind "p" { Search "up"; }
+        bind "N" { Search "up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
         bind "w" { SearchToggleOption "Wrap"; }
         bind "o" { SearchToggleOption "WholeWord"; }
@@ -128,7 +132,7 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        bind "w" {
+        bind "s" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
                 move_to_focused_tab true
