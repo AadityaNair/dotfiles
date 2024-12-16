@@ -39,7 +39,10 @@ setopt hist_verify
 # setopt inc_append_history
 setopt share_history # share command history data
 
-znap eval atuin 'atuin init zsh'
+# TODO: I believe we can modify the output of `atuin init zsh` to also
+#       have the up arrow behaviour we like. This will allow us to probably not
+#       source the other script we have.
+znap eval atuin 'atuin init zsh --disable-up-arrow'
 
 
 # ----------------------------  Auto Completion Settings ----------------------
