@@ -2,8 +2,6 @@
 // TODO: Iterate through sessions.
 // TODO: Auto rename tabs.
 // TODO: Customize status bar.
-// TODO: Be able to use Shift key.
-// TODO: Be able to use Fn Keys.
 // TODO: Be able to 2-way synchronise panes.
 // TODO: Manually change session names.
 // TODO: Easily create new sessions.
@@ -13,8 +11,11 @@
 //Feature: Pipe contents of buffer to a file or a command
 keybinds clear-defaults=true {
     normal {
-        // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
+        // comment this out if using copy_on_select=true
+        bind "Alt c" { Copy; }
+
+        // Move to Contexts
+        bind "Alt s" { SwitchToMode "Session"; }
 
         // TAB Management
         bind "Alt a" { NewTab; }
@@ -34,7 +35,6 @@ keybinds clear-defaults=true {
         bind "Alt ]" { ToggleActiveSyncTab; }
 
         // SESSION Management
-        bind "Alt s" { SwitchToMode "Session"; }
         // bind "Alt s" { New Session};
         // bind "Alt Up" { Next Session};
         // bind "Alt Down" { Previous Session};
@@ -43,22 +43,7 @@ keybinds clear-defaults=true {
         // SCROLL Management
         bind "F11" { SwitchToMode "Scroll"; }
     }
-    entersearch {
-        bind "Ctrl c" "Esc" { SwitchToMode "Scroll"; }
-        bind "Enter" { SwitchToMode "Search"; }
-    }
-    locked {
-        bind "Ctrl g" { SwitchToMode "Normal"; }
-    }
-    // move {
-    //     bind "Ctrl h" { SwitchToMode "Normal"; }
-    //     bind "n" "Tab" { MovePane; }
-    //     bind "p" { MovePaneBackwards; }
-    //     bind "h" "Left" { MovePane "Left"; }
-    //     bind "j" "Down" { MovePane "Down"; }
-    //     bind "k" "Up" { MovePane "Up"; }
-    //     bind "l" "Right" { MovePane "Right"; }
-    // }
+    
     pane {
         // bind "Ctrl p" { SwitchToMode "Normal"; }
         // bind "h" "Left" { MoveFocus "Left"; }
@@ -77,10 +62,6 @@ keybinds clear-defaults=true {
         // bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
 
-    renamepane {
-        bind "Ctrl c" { SwitchToMode "Normal"; }
-        bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
-    }
     renametab {
         bind "Ctrl c" { SwitchToMode "Normal"; }
         bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
