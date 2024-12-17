@@ -6,9 +6,23 @@
 # chpwd task as well.
 
 
-tmux_rename() {
-    printf "\033k%s\033\\" "$1"
-}
+
+
+
+if [[ -n "$TMUX" ]]; then
+    function rename() {
+        printf "\033k%s\033\\" "$1"
+    }
+
+elif [[ -n "$ZELLIJ" ]]; then
+    function rename() {
+        zellij action rename-tab "$1"
+    }
+
+else
+    function rename() {}
+
+fi
 
 # Print truncated current path
 trunc_path() {
@@ -18,7 +32,7 @@ trunc_path() {
 }
 
 function set_pwd() {
-    tmux_rename "$(trunc_path)"
+    rename "$(trunc_path)"
 }
 
 function set_from_command(){
@@ -26,17 +40,14 @@ function set_from_command(){
     cmd=(${(z)1}) # Convert command string to a list of words.
 
     case ${cmd[1]} in
-        vim|nvim) tmux_rename "◉ ${cmd[2]}" ;;
-        man|run-help) tmux_rename "${cmd[-1]} ❓" ;;
-        ssh) tmux_rename "${cmd[2]}" ;;
-        sudo) tmux_rename "⚡${cmd[2]}" ;;
-        *) tmux_rename "${cmd[1]}" ;;
+        vim|nvim) rename "◉ ${cmd[2]}" ;;
+        man|run-help) rename "${cmd[-1]} ❓" ;;
+        ssh) rename "${cmd[2]}" ;;
+        sudo) rename "⚡${cmd[2]}" ;;
+        *) rename "${cmd[1]}" ;;
     esac
 }
 
-if [[ -n "$TMUX" ]]
-then
-    autoload -Uz add-zsh-hook
-    add-zsh-hook precmd set_pwd
-    add-zsh-hook preexec set_from_command
-fi
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set_pwd
+add-zsh-hook preexec set_from_command
