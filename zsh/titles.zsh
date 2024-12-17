@@ -5,10 +5,6 @@
 # any command was executed. That required using precmd and that seemed to fulfill the
 # chpwd task as well.
 
-
-
-
-
 if [[ -n "$TMUX" ]]; then
     function rename() {
         printf "\033k%s\033\\" "$1"
