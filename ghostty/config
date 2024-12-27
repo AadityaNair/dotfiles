@@ -1,0 +1,40 @@
+command = /bin/zsh
+auto-update-channel = stable
+
+# Fonts
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 18
+
+# Theme
+theme = tokyonight-storm
+
+# Mouse Usage
+mouse-hide-while-typing = true
+focus-follows-mouse = true
+click-repeat-interval = 500
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+
+# Window Presentation
+fullscreen = true
+window-decoration = false
+window-save-state = never
+#### Validate if needed
+macos-non-native-fullscreen = false
+macos-titlebar-style = hidden
+
+# Quick Terminal Stuff
+quick-terminal-screen = mouse
+quick-terminal-animation-duration = 0.2
+keybind = global:f12=toggle_quick_terminal
+
+# Others 
+link-url = true
+quit-after-last-window-closed = false
+shell-integration = zsh
+macos-option-as-alt = left
+bold-is-bright = true
+
+# Custom Keybindings
