@@ -6,7 +6,7 @@ font-family = JetBrainsMono Nerd Font Mono
 font-size = 18
 
 # Theme
-theme = tokyonight-storm
+theme = tokyonight
 
 # Mouse Usage
 mouse-hide-while-typing = true
@@ -36,5 +36,11 @@ quit-after-last-window-closed = false
 shell-integration = zsh
 macos-option-as-alt = left
 bold-is-bright = true
+
+# Alt+<left/right> has a weird default with Ghostty. We need to unbind
+# it to make my tmux/zellij keybindings work. 
+# Refer here for more: https://github.com/ghostty-org/ghostty/discussions/3681
+keybind = alt+left=unbind
+keybind = alt+right=unbind
 
 # Custom Keybindings
