@@ -19,11 +19,7 @@ clipboard-write = allow
 
 # Window Presentation
 fullscreen = true
-window-decoration = false
 window-save-state = never
-#### Validate if needed
-macos-non-native-fullscreen = false
-macos-titlebar-style = hidden
 
 # Quick Terminal Stuff
 quick-terminal-screen = mouse
