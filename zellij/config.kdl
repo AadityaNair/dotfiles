@@ -2,7 +2,6 @@
 // TODO: Iterate through sessions.
 // TODO: Auto rename tabs.
 // TODO: Customize status bar.
-// TODO: Be able to 2-way synchronise panes.
 // TODO: Manually change session names.
 // TODO: Easily create new sessions.
 // TODO: Disable name change if manually changed names.
@@ -233,28 +232,8 @@ serialize_pane_viewport false
 // 
 // serialization_interval 10000
 
-// Define color themes for Zellij
-// For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
-// Once these themes are defined, one of them should to be selected in the "theme" section of this file
-//
-themes {
-    tokyo-night-storm {
-        fg 169 177 214
-        bg 36 40 59
-        black 56 62 90
-        red 249 51 87
-        green 158 206 106
-        yellow 224 175 104
-        blue 122 162 247
-        magenta 187 154 247
-        cyan 42 195 222
-        white 192 202 245
-        orange 255 158 100
-    } 
-}
-
-// Choose the theme that is specified in the themes section.
-theme "tokyo-night-storm"
+// Choose the theme that is specified in the themes section or builtin.
+theme "tokyo-night"
 
 // The name of the default layout to load on startup
 default_layout "compact"
