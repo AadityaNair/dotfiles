@@ -6,7 +6,7 @@
 ----------------------------------------------------  Other configuration   ------------------------------------------
 
 vim.g.python3_host_prog="/usr/bin/python3"
-vim.g.loaded_node_provider=0 
+vim.g.loaded_node_provider=0
 vim.g.loaded_perl_provider=0
 vim.g.loaded_python_provider=0
 
@@ -27,7 +27,7 @@ vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 -- vim.opt.showmode = true
 -- vim.opt.hidden = true
-
+-- add function to get length of line
 vim.opt.clipboard = 'unnamedplus'  -- Integrate vim with system clipboard.
 
 vim.keymap.set('i', 'kj', '<Esc>')
@@ -101,7 +101,7 @@ plugins = {
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
         },
     },
-    -- TODO: Configure todo-comments and trouble.nvim 
+    -- TODO: Configure todo-comments and trouble.nvim
     {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
     {"folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
@@ -117,11 +117,11 @@ plugins = {
     },
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 
+        dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
             'debugloop/telescope-undo.nvim',
-            -- NOTE: Adding anything in dependencies except plenary.nvim is wrong. 
+            -- NOTE: Adding anything in dependencies except plenary.nvim is wrong.
             --       Technically, file-browser.nvim depends on plenary.nvim and telescope.nvim
             --       But, because all `depedencies` really mean is that it downloads the dependency
             --       before the main one, we can put anything in here. Only thing is, if we decide to
@@ -154,7 +154,6 @@ if company.plugin then
     for index, entry in pairs(company.plugin) do
         plugins[len+index] = entry
     end
-        
 end
 
 require('lazy').setup(plugins)
@@ -176,7 +175,7 @@ require("tokyonight").setup({
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("tokyonight-night")
 require('lualine').setup {
-    options = { 
+    options = {
         theme  = "tokyonight",
         icons_enabled = true,
         globalstatus = true,
@@ -367,12 +366,12 @@ cmp.setup({
             require('luasnip').lsp_expand(args.body)
         end,
     },
-    
+
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
-    
+
     mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -381,10 +380,10 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping.select_prev_item({ behaviour = "select" }),
         ['<Esc>'] = function(fallback)
                         cmp.mapping.close()
-                        vim.cmd('stopinsert') 
+                        vim.cmd('stopinsert')
                     end,
     }),
-    -- TODO: These group indices are weird. We probably don't need it. 
+    -- TODO: These group indices are weird. We probably don't need it.
     --       I think the order defines the index.
     sources = cmp.config.sources({
         { name = 'nvim_lsp', group_index = 1 },
