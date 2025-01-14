@@ -89,8 +89,6 @@ plugins = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
 
     {
         "folke/flash.nvim",
@@ -127,17 +125,6 @@ plugins = {
             --       before the main one, we can put anything in here. Only thing is, if we decide to
             --       remove telescope.nvim, the depedencies are deleted too. Which is OK for this case.
         },
-    },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        init = function()
-                vim.o.timeout = true
-                vim.o.timeoutlen = 300
-               end,
-        opts = {
-            -- TODO: your configuration comes here
-        }
     },
     {
         "kevinhwang91/nvim-ufo",
@@ -363,7 +350,7 @@ local cmp = require'cmp'
 cmp.setup({
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            vim.snippet.expand(args.body)
         end,
     },
 
@@ -389,7 +376,6 @@ cmp.setup({
         { name = 'nvim_lsp', group_index = 1 },
         { name = 'buffer',   group_index = 2 },
         { name = 'path',     group_index = 3 },
-        { name = 'luasnip',  group_index = 4,},
     })
 })
 
