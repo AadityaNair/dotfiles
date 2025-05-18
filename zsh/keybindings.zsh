@@ -1,4 +1,4 @@
-################# FUNCTIONS ####################
+################# MODIFY COMMANDS ####################
 
 sudo-command-line() {
         [[ -z $BUFFER ]] && zle up-history
@@ -8,7 +8,12 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 
 
-################# KEYBINDINGS ##################
+################# MOVEMENTS ##################
+# TODO: Reorganise commands.
+# Research the docs:
+#   - http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
+#   - http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Zle-Builtins
+#   - http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
 
 #bindkey "^[[1~" beginning-of-line
 #bindkey "^[[4~" end-of-line

@@ -51,10 +51,13 @@ source "$INSTALL/dotfiles/zsh/atuin-history-up-arrow.zsh"
 
 source $INSTALL/dotfiles/zsh/autocomplete.zsh
 
+# ----------------------------  KeyBindings  -----------------------------
+
+source $INSTALL/dotfiles/zsh/keybindings.zsh
+
 # ----------------------------  Boilerplate  ------------------------------
 
 
-source $INSTALL/dotfiles/zsh/zsh_specific.zsh
 source $INSTALL/dotfiles/zsh/shell_commons.sh
 source $INSTALL/dotfiles/zsh/titles.zsh
 
