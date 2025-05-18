@@ -1,5 +1,5 @@
 # Setup default install location
-# zmodload zsh/zprof
+zmodload zsh/zprof
 export INSTALL=$HOME/.config
 # ----------------------------  Plugin Configuration  --------------------------
 export XDG_CACHE_HOME=$HOME/.local/cache
@@ -16,10 +16,11 @@ znap eval starship 'starship init zsh'
 znap source "AadityaNair/fast-syntax-highlighting"
 
 
-# ----------------------------  ZSH Features  ------------------------------
+# ----------------------------  ZSH Options  ------------------------------
 setopt extended_glob
-setopt complete_aliases
 setopt autocd
+
+unsetopt flow_control # Disable the Ctrl-S/Q flow control sequences
 
 
 # ----------------------------  History Settings  ----------------------------
