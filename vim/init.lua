@@ -99,9 +99,21 @@ plugins = {
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
         },
     },
-    -- TODO: Configure todo-comments and trouble.nvim
+    -- TODO: Configure todo-comments
     {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
-    {"folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+    {   
+        -- TODO: Move configurations to the bottom.
+        "folke/trouble.nvim", 
+        dependencies = "nvim-tree/nvim-web-devicons",
+        opts = {},
+        keys = {
+            {
+                "<leader>tr",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+        },
+    },
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -343,7 +355,7 @@ hl_settings['italic']=true
 vim.api.nvim_set_hl(0, "String", hl_settings)
 
 ------------------------------------------------------ Auto Complete -------------------------------
-
+-- TODO: Add `trouble` commands to view code symbols.
 require('trouble').setup({})
 
 local cmp = require'cmp'
