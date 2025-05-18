@@ -24,7 +24,8 @@ unsetopt flow_control # Disable the ctrl-s/q flow control sequences
 
 
 # ----------------------------  History Settings  ----------------------------
-# TODO: We can remove a lot of these if we can rely solely on atuin. Will probably improve perf.
+# TODO: Make `!!` work without history somehow. Then we won't need default history at all.
+# TODO: Also validate if functions show up in atuin history.
 HISTFILE=$HOME/.local/share/zsh_history
 HISTSIZE=1000000000
 SAVEHIST=1000000000
@@ -33,17 +34,17 @@ setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_find_no_dups
-setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_save_no_dups
+setopt hist_ignore_all_dups # ignore duplication command history list
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt hist_verify
-# setopt inc_append_history
 setopt share_history # share command history data
+setopt hist_no_store  # When calling `history` remove the `history` command itself.
 
-# TODO: I believe we can modify the output of `atuin init zsh` to also
-#       have the up arrow behaviour we like. This will allow us to probably not
-#       source the other script we have.
 znap eval atuin 'atuin init zsh --disable-up-arrow'
+# Make up arrow work like history substring search
+source "$INSTALL/dotfiles/zsh/atuin-history-up-arrow.zsh"
 
 
 # ----------------------------  Auto Completion Settings ----------------------
