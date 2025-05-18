@@ -42,7 +42,7 @@
 
 # global configuration
 : ${ATUIN_HISTORY_SEARCH_FILTER_MODE='host'}
-: ${ATUIN_HISTORY_SEARCH_MODE='fulltext'}
+: ${ATUIN_HISTORY_SEARCH_MODE='prefix'}
 # internal variables
 typeset -g -i _atuin_history_match_index
 typeset -g _atuin_history_search_result
