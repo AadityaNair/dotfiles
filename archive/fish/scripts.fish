@@ -31,7 +31,6 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 
 
 # LS Aliases
-# TODO: Upgrade eza and add the right theme.
 abbr -a ls "eza --group-directories-first"
 abbr -a sl "eza --group-directories-first"
 
