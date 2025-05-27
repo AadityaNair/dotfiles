@@ -10,7 +10,10 @@ if status is-interactive
     ### COSMETIC SETTINGS
     set -x STARSHIP_CONFIG "$INSTALL/dotfiles/zsh/starship.toml"
     starship init fish | source
+    # TODO: Small optimisation where we just directly save the fish_prompt function.
+    #       And regenrate it whenever we update the starship theme.
     # TODO: Configure titles
+    # TODO: Configure theme
 
     ### HISTORY SETTINGS
     # TODO: Export atuin config file location here.
