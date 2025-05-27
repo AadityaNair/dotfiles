@@ -15,7 +15,7 @@ abbr -a ytdl 'youtube-dl -o"%(title)s.%(ext)s"'
 # Manage dotfiles
 # TODO: Investigate trying to reload config automatically
 abbr -a dots "cd $INSTALL/dotfiles"
-abbr -a crc "nvim ~/.config/company_specific_commands.sh"
+abbr -a crc "nvim ~/.config/company_specific_commands.fish"
 abbr -a frc "nvim $INSTALL/dotfiles/archive/fish/config.fish"
 abbr -a src "nvim $INSTALL/dotfiles/archive/fish/scripts.fish"
 abbr -a trc "nvim $INSTALL/dotfiles/tmux/config.tmux"
@@ -53,6 +53,9 @@ if test "$(uname)" = "Darwin"
     # TODO: Copy pnpm configuration
 end
 
+if test -f "~/.config/company_specific_commands.fish"
+    source "~/.config/company_specific_commands.fish"
+end
 
 # TODO: copy functions from the shell_commons.sh file
 # Function mk
