@@ -25,7 +25,9 @@ if status is-interactive
     ### SHELL ALIASES
     source "$INSTALL/dotfiles/archive/fish/scripts.fish"
 
-    ### OTHERS
+    ### NAVIGATION
     zoxide init fish | source # TODO: Configure zoxide
+    # TODO: Esc-Esc for sudo command
+    # TODO: All navigation keybindings
 end
  # vim: ft=fish
