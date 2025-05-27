@@ -10,7 +10,7 @@ znap eval zoxide 'zoxide init zsh'
 
 
 # ----------------------------  Prompt Settings  --------------------------
-export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml 
+export STARSHIP_CONFIG=$INSTALL/dotfiles/zsh/starship.toml
 
 znap eval starship 'starship init zsh'
 znap source "AadityaNair/fast-syntax-highlighting"
@@ -27,8 +27,8 @@ unsetopt flow_control # Disable the ctrl-s/q flow control sequences
 # TODO: Make `!!` work without history somehow. Then we won't need default history at all.
 # TODO: Also validate if functions show up in atuin history.
 HISTFILE=$HOME/.local/share/zsh_history
-HISTSIZE=1000000000
-SAVEHIST=1000000000
+HISTSIZE=100
+SAVEHIST=100
 
 setopt append_history
 setopt extended_history
