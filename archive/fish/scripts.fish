@@ -53,14 +53,57 @@ if test "$(uname)" = "Darwin"
     # TODO: Copy pnpm configuration
 end
 
+function mk
+    mkdir -p "$argv[1]"
+    cd "$argv[1]"
+end
+
+
+function myip
+    curl https://ipecho.net/plain
+    printf "\n"
+end
+
+function extract
+    if test (count $argv) -ne 1
+        echo "You must only provide one file"
+        return 1
+    end
+
+    if test -f $argv[1]
+        echo "The argument must be a file"
+        return 1
+    end
+
+    switch $argv[1]
+        case *.tar.bz2 *.tbz2
+            tar xjf "$argv[1]"
+        case *.tar.gz *.tgz
+            tar xzf "$argv[1]"
+        case *.bz2
+            bunzip2 $argv[1]
+        case *.rar
+            unrar x $argv[1]
+        case *.gz
+            gunzip $argv[1]
+        case *.tar
+            tar xf $argv[1]
+        case *.zip
+            unzip $argv[1]
+        case *.Z
+            uncompress $argv[1]
+        case *.7z
+            7zr e $argv[1]
+        case *.rpm
+            rpm2cpio $argv[1] | cpio -idmv
+        case *
+            echo "Can't `extract` this file. Please check."
+    end
+end
+
 if test -f "$INSTALL/company_specific_commands.fish"
-    # TODO: Build company_specific_commands 
+    # TODO: Build company_specific_commands
     source "$INSTALL/company_specific_commands.fish"
 end
 
-# TODO: copy functions from the shell_commons.sh file
-# Function mk
-# Function myip
-# Function spectrum
-# Function extract
-# Lazyload Kubectl and nvm
+# TODO: Lazyload Kubectl and nvm
