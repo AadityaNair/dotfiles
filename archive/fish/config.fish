@@ -13,12 +13,11 @@ if status is-interactive
     # TODO: Small optimisation where we just directly save the fish_prompt function.
     #       And regenrate it whenever we update the starship theme.
     # TODO: Configure titles
-    # TODO: Configure theme
 
     ### HISTORY SETTINGS
     # TODO: Export atuin config file location here.
     # TODO: Add function for the up arrow function.
-    atuin init fish | source
+    atuin init fish --disable-up-arrow | source
 
     ### AUTOCOMPLETE SETTINGS
 
@@ -26,7 +25,6 @@ if status is-interactive
     source "$INSTALL/dotfiles/archive/fish/scripts.fish"
 
     ### OTHERS
-    zoxide init fish | source
-    # TODO: Configure zoxide
+    zoxide init fish | source # TODO: Configure zoxide
 end
  # vim: ft=fish
