@@ -19,7 +19,8 @@ if status is-interactive
 
     ### AUTOCOMPLETE SETTINGS
 
-    ### COMMON SHELL ALIASES
+    ### SHELL ALIASES
+    source "$INSTALL/dotfiles/archive/fish/scripts.fish"
 
     ### OTHERS
     zoxide init fish | source
