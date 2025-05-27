@@ -12,7 +12,8 @@ if status is-interactive
     starship init fish | source
     # TODO: Small optimisation where we just directly save the fish_prompt function.
     #       And regenrate it whenever we update the starship theme.
-    # TODO: Configure titles
+
+    source "$INSTALL/dotfiles/archive/fish/titles.fish"
 
     ### HISTORY SETTINGS
     # TODO: Export atuin config file location here.
