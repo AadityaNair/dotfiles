@@ -8,7 +8,7 @@ if status is-interactive
 
 
     ### COSMETIC SETTINGS
-    set -x STARSHIP_CONFIG "$INSTALL/dotfiles/zsh/starship.toml"
+    set -x STARSHIP_CONFIG "$INSTALL/dotfiles/shell_applications/starship.toml"
     starship init fish | source
     # TODO: Small optimisation where we just directly save the fish_prompt function.
     #       And regenrate it whenever we update the starship theme.
