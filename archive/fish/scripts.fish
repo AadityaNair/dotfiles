@@ -31,8 +31,8 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 
 
 # LS Aliases
-abbr -a ls "eza --group-directories-first"
-abbr -a sl "eza --group-directories-first"
+abbr -a ls "eza --group-directories-first --icons --classify --color=always"
+abbr -a sl "eza --group-directories-first --icons --classify --color=always"
 
 if test "$(uname)" = "Darwin"
     abbr -a caps "screencapture -c" # Capture entire screen
@@ -102,7 +102,6 @@ function extract
 end
 
 if test -f "$INSTALL/company_specific_commands.fish"
-    # TODO: Build company_specific_commands
     source "$INSTALL/company_specific_commands.fish"
 end
 
