@@ -13,7 +13,6 @@ abbr -a ytdl 'youtube-dl -o"%(title)s.%(ext)s"'
 
 
 # Manage dotfiles
-# TODO: Investigate trying to reload config automatically
 abbr -a dots "cd $INSTALL/dotfiles"
 abbr -a crc "nvim $INSTALL/company_specific_commands.fish"
 abbr -a frc "nvim $INSTALL/dotfiles/archive/fish/config.fish"
@@ -34,6 +33,10 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 abbr -a ls "eza --group-directories-first --icons --classify --color=always"
 abbr -a sl "eza --group-directories-first --icons --classify --color=always"
 
+function tree --wraps ls
+    eza --group-directories-first --icons --classify --color=always --tree $argv
+end
+
 if test "$(uname)" = "Darwin"
     abbr -a caps "screencapture -c" # Capture entire screen
     abbr -a capa "screencapture -i -c" # Capture a specified area
@@ -49,8 +52,6 @@ if test "$(uname)" = "Darwin"
     set -x PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" $PATH
     set -x MANPATH "/opt/homebrew/share/man" $MANPATH
     set -x INFOPATH "/opt/homebrew/share/info" $INFOPATH
-
-    # TODO: Copy pnpm configuration
 end
 
 function mk
@@ -105,4 +106,4 @@ if test -f "$INSTALL/company_specific_commands.fish"
     source "$INSTALL/company_specific_commands.fish"
 end
 
-# TODO: Lazyload Kubectl and nvm
+# TODO: Lazyload Kubectl nvm and pnpm settings
