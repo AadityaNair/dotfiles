@@ -1,24 +1,22 @@
 # The shell aliases/abbrs that are common across OS
 
-# TODO: Consider using functions for some of these.
-#       For a bunch of these, you don't want the abbreviation expanded.
+alias cat="bat"
+alias ip="ip -color"
+alias kb="kubectl"
+alias py="ipython3 --no-banner --autoindent --pprint"
+alias tst="ping www.google.com"
+alias ytdl='youtube-dl -o"%(title)s.%(ext)s"'
 
-abbr -a cat "bat"
-abbr -a ip "ip -color"
-abbr -a kb "kubectl"
-abbr -a py "ipython3 --no-banner --autoindent --pprint"
-abbr -a tst "ping www.google.com"
 abbr -a vim "nvim"
-abbr -a ytdl 'youtube-dl -o"%(title)s.%(ext)s"'
 
 
 # Manage dotfiles
-abbr -a dots "cd $INSTALL/dotfiles"
-abbr -a crc "nvim $INSTALL/company_specific_commands.fish"
-abbr -a frc "nvim $INSTALL/dotfiles/archive/fish/config.fish"
-abbr -a src "nvim $INSTALL/dotfiles/archive/fish/scripts.fish"
-abbr -a trc "nvim $INSTALL/dotfiles/tmux/config.tmux"
-abbr -a vrc "nvim $INSTALL/dotfiles/vim/init.lua"
+alias dots="cd $INSTALL/dotfiles"
+alias crc="nvim $INSTALL/company_specific_commands.fish"
+alias frc="nvim $INSTALL/dotfiles/archive/fish/config.fish"
+alias src="nvim $INSTALL/dotfiles/archive/fish/scripts.fish"
+alias trc="nvim $INSTALL/dotfiles/tmux/config.tmux"
+alias vrc="nvim $INSTALL/dotfiles/vim/init.lua"
 
 
 # CD Aliases
@@ -30,8 +28,11 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 
 
 # LS Aliases
-abbr -a ls "eza --group-directories-first --icons --classify --color=always"
-abbr -a sl "eza --group-directories-first --icons --classify --color=always"
+# abbr -a ls "eza --group-directories-first --icons --classify --color=always"
+function ls --wraps ls
+    eza --group-directories-first --icons --classify --color=always $argv
+end
+abbr -a sl "ls"
 
 function tree --wraps ls
     eza --group-directories-first --icons --classify --color=always --tree $argv
