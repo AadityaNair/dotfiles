@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+# TODO: Reorder this file to be more logical.
+# TODO: Add if-else statements for my personal mac.
+# TODO: Configure tokyonight theme
 tmux set -g default-terminal "tmux-256color"
 tmux set-option -sa terminal-features ",*:RGB"
 tmux set -g set-clipboard external
 # Asked by nvim
-tmux set-option -sg escape-time 10 
+tmux set-option -sg escape-time 10
 tmux set-option -g focus-events on
 
 
@@ -61,7 +64,6 @@ tmux bind r source-file ~/.tmux.conf
 tmux bind -n M-. resize-pane -Z
 
 tmux run '$INSTALL/dotfiles/tmux/theme.tmux'
-#TODO: Configure Tokyonight Night.
 # tmux run '$INSTALL/dotfiles/tmux/tokyonight_night.tmux'
 
 #vi: syntax=sh ft=sh
