@@ -74,6 +74,8 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
+-- TODO: Avoid needing to updated the in-repo config file.
+--       I want to avoid leaving a dirty repo.
 company = require("company_specific_config")
 
 plugins = {
