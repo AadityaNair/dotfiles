@@ -9,23 +9,39 @@ set -x EDITOR nvim
 
 ### COSMETIC SETTINGS
 set -x STARSHIP_CONFIG "$INSTALL/dotfiles/shell_applications/starship.toml"
-starship init fish | source
-# TODO: Init is costly and contains useless functions. Try caching a partial output somewhere.
+starship init fish | source # TODO: Init is costly and contains useless functions. Investigate caching.
 
 source "$INSTALL/dotfiles/archive/fish/titles.fish"
 
 ### HISTORY SETTINGS
 # TODO: Export atuin config file location here.
 # TODO: Add function for the up arrow function.
-# TODO: Doing init here is costly. Investigate caching the output somewhere.
-atuin init fish --disable-up-arrow | source
+atuin init fish --disable-up-arrow | source # TODO: Doing init is costly. Investigate caching.
 
 ### SHELL ALIASES
 source "$INSTALL/dotfiles/archive/fish/scripts.fish"
 
 ### NAVIGATION
 # TODO: Set fzf options and theme for better fzf experience. Also consider using fzf for some things.
-zoxide init fish | source # TODO: init is costly. Investigate caching its output.
-# TODO: Esc-Esc for sudo command
+zoxide init fish | source # TODO: Doing init is costly. Investigate caching.
+
+function sudo_prev
+    set -l cur_buf (commandline)
+
+    if test -n $cur_buf
+        if not string match -q "sudo *" $cur_buf  # Only add sudo if it isnt already there.
+            commandline "sudo $cur_buf"
+        end
+    else
+        commandline "sudo $history[1]"
+    end
+end
+bind escape,escape sudo_prev
+
+function last_history_item
+    echo $history[1]
+end
+abbr -a !! --position anywhere --function last_history_item
+
 # TODO: All navigation keybindings
 # vim: ft=fish
