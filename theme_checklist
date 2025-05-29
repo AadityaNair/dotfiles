@@ -1,0 +1,10 @@
+When updating the theme, make sure all of the following have an equivalent theme.
+This is just to ensure consistency.
+ - Tmux
+ - Neovim
+ - Fish Shell
+ - Eza
+ - Fzf
+ - Atuin History
+ - Starship Prompt
+ - Ghostty
