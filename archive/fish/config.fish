@@ -24,6 +24,7 @@ atuin init fish --disable-up-arrow | source
 source "$INSTALL/dotfiles/archive/fish/scripts.fish"
 
 ### NAVIGATION
+# TODO: Set fzf options and theme for better fzf experience. Also consider using fzf for some things.
 zoxide init fish | source  # TODO: init is costly. Investigate caching its output.
 # TODO: Esc-Esc for sudo command
 # TODO: All navigation keybindings
