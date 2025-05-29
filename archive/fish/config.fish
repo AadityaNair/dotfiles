@@ -1,10 +1,10 @@
 ### SETUP VARIABLES
 set -x INSTALL "$HOME/.config"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
-set -x TERM "tmux-256color"
+set -x TERM tmux-256color
 set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
-set -x PAGER "bat"
-set -x EDITOR "nvim"
+set -x PAGER bat
+set -x EDITOR nvim
 
 
 ### COSMETIC SETTINGS
@@ -25,7 +25,7 @@ source "$INSTALL/dotfiles/archive/fish/scripts.fish"
 
 ### NAVIGATION
 # TODO: Set fzf options and theme for better fzf experience. Also consider using fzf for some things.
-zoxide init fish | source  # TODO: init is costly. Investigate caching its output.
+zoxide init fish | source # TODO: init is costly. Investigate caching its output.
 # TODO: Esc-Esc for sudo command
 # TODO: All navigation keybindings
- # vim: ft=fish
+# vim: ft=fish

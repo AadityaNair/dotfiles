@@ -7,7 +7,7 @@ alias py="ipython3 --no-banner --autoindent --pprint"
 alias tst="ping www.google.com"
 alias ytdl='youtube-dl -o"%(title)s.%(ext)s"'
 
-abbr -a vim "nvim"
+abbr -a vim nvim
 
 
 # Manage dotfiles
@@ -32,27 +32,27 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 function ls --wraps ls
     eza --group-directories-first --icons --classify --color=always $argv
 end
-abbr -a sl "ls"
+abbr -a sl ls
 
 function tree --wraps ls
     eza --group-directories-first --icons --classify --color=always --tree $argv
 end
 
-if test "$(uname)" = "Darwin"
+if test "$(uname)" = Darwin
     abbr -a caps "screencapture -c" # Capture entire screen
     abbr -a capa "screencapture -i -c" # Capture a specified area
     abbr -a capw "screencapture -i -w -c" # Capture a window
 
-    abbr -a cc "pbcopy"
-    abbr -a pp "pbpaste"
+    abbr -a cc pbcopy
+    abbr -a pp pbpaste
 
 
-    set -x HOMEBREW_PREFIX "/opt/homebrew"
-    set -x HOMEBREW_CELLAR "/opt/homebrew/Cellar"
-    set -x HOMEBREW_REPOSITORY "/opt/homebrew"
-    set -x PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" $PATH
-    set -x MANPATH "/opt/homebrew/share/man" $MANPATH
-    set -x INFOPATH "/opt/homebrew/share/info" $INFOPATH
+    set -x HOMEBREW_PREFIX /opt/homebrew
+    set -x HOMEBREW_CELLAR /opt/homebrew/Cellar
+    set -x HOMEBREW_REPOSITORY /opt/homebrew
+    set -x PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH
+    set -x MANPATH /opt/homebrew/share/man $MANPATH
+    set -x INFOPATH /opt/homebrew/share/info $INFOPATH
 end
 
 function mk

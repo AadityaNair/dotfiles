@@ -42,11 +42,10 @@ function fish_title
         case sudo
             terminal_rename "⚡$cmd[2]"
 
-        case ""  # After the command has run
+        case "" # After the command has run
             terminal_rename "$(prompt_pwd --full-length-dirs=1 --dir-length 2)"
             # TODO: Replace `prompt_pwd` with a nicer option, especially for work stuff
         case *
             terminal_rename "$cmd[1]"
     end
 end
-
