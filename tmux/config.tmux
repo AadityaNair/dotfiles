@@ -2,7 +2,6 @@
 
 # TODO: Reorder this file to be more logical.
 # TODO: Add if-else statements for my personal mac.
-# TODO: Configure tokyonight theme
 tmux set -g default-terminal "tmux-256color"
 tmux set-option -sa terminal-features ",*:RGB"
 tmux set -g set-clipboard external

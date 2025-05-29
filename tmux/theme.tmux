@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -e
+# TODO: Separate theme and colours
+# TODO: Configure the missing colours in tokyonight theme
+# TODO: Make the right side clock look nicer.
 
 # Optional prefix highlight plugin
 tmux set -g @prefix_highlight_show_copy_mode 'on'
