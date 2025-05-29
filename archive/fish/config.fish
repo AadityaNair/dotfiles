@@ -15,8 +15,12 @@ source "$INSTALL/dotfiles/archive/fish/titles.fish"
 
 ### HISTORY SETTINGS
 # TODO: Export atuin config file location here.
-# TODO: Add function for the up arrow function.
+# TODO: Disable fish writing history
 atuin init fish --disable-up-arrow | source # TODO: Doing init is costly. Investigate caching.
+
+# TODO: Use atuin for up arrow function. Because this will only search fish history, which isn't much.
+bind up history-prefix-search-backward
+bind down history-prefix-search-forward
 
 ### SHELL ALIASES
 source "$INSTALL/dotfiles/archive/fish/scripts.fish"
@@ -43,5 +47,9 @@ function last_history_item
 end
 abbr -a !! --position anywhere --function last_history_item
 
-# TODO: All navigation keybindings
+# TODO: backward-word
+# TODO: forward-word
+# TODO: delete-word
+# TODO: insert last argument
+
 # vim: ft=fish
