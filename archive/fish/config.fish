@@ -15,6 +15,12 @@ starship init fish | source # TODO: Init is costly and contains useless function
 
 source "$FISH_SCRIPTS/titles.fish"
 
+# No need for fish greeting inside tmux.
+if test -n "$TMUX"; or test -n "$ZELLIJ"
+    function fish_greeting
+    end
+end
+
 ### HISTORY SETTINGS
 # TODO: Export atuin config file location here.
 # TODO: Disable fish writing history
