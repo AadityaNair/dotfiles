@@ -11,12 +11,12 @@ abbr -a vim nvim
 
 
 # Manage dotfiles
-alias dots="cd $INSTALL/dotfiles"
+alias dots="cd $DOTFILES"
 alias crc="nvim $INSTALL/company_specific_commands.fish"
-alias frc="nvim $INSTALL/dotfiles/archive/fish/config.fish"
-alias src="nvim $INSTALL/dotfiles/archive/fish/scripts.fish"
-alias trc="nvim $INSTALL/dotfiles/tmux/config.tmux"
-alias vrc="nvim $INSTALL/dotfiles/vim/init.lua"
+alias frc="nvim $FISH_SCRIPTS/config.fish"
+alias src="nvim $FISH_SCRIPTS/scripts.fish"
+alias trc="nvim $DOTFILES/tmux/config.tmux"
+alias vrc="nvim $DOTFILES/vim/init.lua"
 
 
 # CD Aliases

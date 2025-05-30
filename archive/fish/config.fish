@@ -1,5 +1,7 @@
 ### SETUP VARIABLES
 set -x INSTALL "$HOME/.config"
+set -x DOTFILES "$INSTALL/dotfiles"
+set -x FISH_SCRIPTS "$DOTFILES/archive/fish"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
 set -x TERM tmux-256color
 set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
@@ -8,10 +10,10 @@ set -x EDITOR nvim
 
 
 ### COSMETIC SETTINGS
-set -x STARSHIP_CONFIG "$INSTALL/dotfiles/shell_applications/starship.toml"
+set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
 starship init fish | source # TODO: Init is costly and contains useless functions. Investigate caching.
 
-source "$INSTALL/dotfiles/archive/fish/titles.fish"
+source "$FISH_SCRIPTS/titles.fish"
 
 ### HISTORY SETTINGS
 # TODO: Export atuin config file location here.
@@ -23,7 +25,7 @@ bind up history-prefix-search-backward
 bind down history-prefix-search-forward
 
 ### SHELL ALIASES
-source "$INSTALL/dotfiles/archive/fish/scripts.fish"
+source "$FISH_SCRIPTS/scripts.fish"
 
 ### NAVIGATION
 # TODO: Set fzf options and theme for better fzf experience. Also consider using fzf for some things.
@@ -51,5 +53,6 @@ abbr -a !! --position anywhere --function last_history_item
 # TODO: forward-word
 # TODO: delete-word
 # TODO: insert last argument
+# TODO: Clipboard
 
 # vim: ft=fish
