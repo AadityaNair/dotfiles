@@ -314,6 +314,7 @@ require("treesitter-context").setup({
     min_window_height = 0,
     line_numbers = true,
 })
+-- TODO: Fish script parser
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         'bash',
