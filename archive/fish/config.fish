@@ -55,10 +55,10 @@ function last_history_item
 end
 abbr -a !! --position anywhere --function last_history_item
 
-# TODO: backward-word
-# TODO: forward-word
-# TODO: delete-word
-# TODO: insert last argument
-# TODO: Clipboard
+# TODO: Unable to bind alt-. for some reason. Pls fix.
+bind alt-/ forward-word
+bind alt-comma backward-word
+bind alt-i history-token-search-backward
+# We already do alt/ctrl+backspace to kill word
 
 # vim: ft=fish
