@@ -12,7 +12,6 @@ abbr -a vim nvim
 
 # Manage dotfiles
 alias dots="cd $DOTFILES"
-alias crc="nvim $INSTALL/company_specific_commands.fish"
 alias frc="nvim $FISH_SCRIPTS/config.fish"
 alias src="nvim $FISH_SCRIPTS/scripts.fish"
 alias trc="nvim $DOTFILES/tmux/config.tmux"
@@ -105,9 +104,4 @@ function extract
     end
 end
 
-# TODO: We can just move this file into ~/.config/fish/conf.d
-if test -f "$INSTALL/company_specific_commands.fish"
-    source "$INSTALL/company_specific_commands.fish"
-end
-
-# Lazyload Kubectl nvm and pnpm settings whenever you can.
+# Far future todo: Lazyload Kubectl nvm and pnpm settings whenever you can.
