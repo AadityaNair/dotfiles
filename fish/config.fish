@@ -37,23 +37,9 @@ source "$FISH_SCRIPTS/scripts.fish"
 # TODO: Set fzf options and theme for better fzf experience. Also consider using fzf for some things.
 zoxide init fish | source # TODO: Doing init is costly. Investigate caching.
 
-function sudo_prev
-    set -l cur_buf (commandline)
 
-    if test -n $cur_buf
-        if not string match -q "sudo *" $cur_buf  # Only add sudo if it isnt already there.
-            commandline "sudo $cur_buf"
-        end
-    else
-        commandline "sudo $history[1]"
-    end
-end
-bind escape,escape sudo_prev
-
-function last_history_item
-    echo $history[1]
-end
 abbr -a !! --position anywhere --function last_history_item
+bind escape,escape sudo_prev
 
 # TODO: Unable to bind alt-. for some reason. Pls fix.
 bind alt-/ forward-word

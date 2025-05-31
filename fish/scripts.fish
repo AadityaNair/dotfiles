@@ -20,10 +20,6 @@ alias vrc="nvim $DOTFILES/vim/init.lua"
 
 
 # CD Aliases
-# This replicates .. = cd ../ and ... = cd ../.. for any number of dots.
-function multicd
-    echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
-end
 abbr --add dotdot --regex '^\.\.+$' --function multicd
 
 
@@ -53,56 +49,6 @@ if test "$(uname)" = Darwin
     set -x PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH
     set -x MANPATH /opt/homebrew/share/man $MANPATH
     set -x INFOPATH /opt/homebrew/share/info $INFOPATH
-end
-
-function mk
-    mkdir -p "$argv[1]"
-    cd "$argv[1]"
-end
-
-
-function myip
-    curl https://ipecho.net/plain
-    printf "\n"
-end
-
-function extract
-    if test (count $argv) -ne 1
-        echo "You must only provide one file"
-        return 1
-    end
-
-    if test -f $argv[1]
-        echo "The argument must be a file"
-        return 1
-    end
-
-    switch $argv[1]
-        case "*.tar.bz2" "*.tbz2"
-            tar xjf "$argv[1]"
-        case "*.tar.gz" "*.tgz"
-            tar xzf "$argv[1]"
-        case "*.tar.xz"
-            tar xf "$argv[1]"
-        case "*.bz2"
-            bunzip2 $argv[1]
-        case "*.rar"
-            unrar x $argv[1]
-        case "*.gz"
-            gunzip $argv[1]
-        case "*.tar"
-            tar xf $argv[1]
-        case "*.zip"
-            unzip $argv[1]
-        case "*.Z"
-            uncompress $argv[1]
-        case "*.7z"
-            7zr e $argv[1]
-        case "*.rpm"
-            rpm2cpio $argv[1] | cpio -idmv
-        case "*"
-            echo "Can't `extract` this file. Please check."
-    end
 end
 
 # TODO: We can just move this file into ~/.config/fish/conf.d
