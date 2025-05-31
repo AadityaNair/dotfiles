@@ -8,18 +8,14 @@ set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
 set -x PAGER bat
 set -x EDITOR nvim
 
-# TODO: Also investigate splitting config.fish into multiple files.
-
 ### COSMETIC SETTINGS
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
 starship init fish | source # TODO: Init is costly and contains useless functions. Investigate caching.
 
 source "$FISH_SCRIPTS/titles.fish"
 
-# No need for fish greeting inside tmux.
-if test -n "$TMUX"; or test -n "$ZELLIJ"
-    function fish_greeting
-    end
+# Never have fish greet us
+function fish_greeting
 end
 
 ### HISTORY SETTINGS
