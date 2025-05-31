@@ -43,9 +43,19 @@ function fish_title
             terminal_rename "⚡$cmd[2]"
 
         case "" # After the command has run
-            terminal_rename "$(prompt_pwd --full-length-dirs=1 --dir-length 2)"
-            # TODO: Replace `prompt_pwd` with a nicer option, especially for work stuff
+            terminal_rename "$(get_cwd)"
         case "*"
-            terminal_rename "$cmd[1]"
+            terminal_rename "$(title_catchall $cmd)"
     end
 end
+
+# Make this into a custom function so that it can later be overridden.
+function get_cwd
+    prompt_pwd --full-length-dirs 1 --dir-length 2
+end
+
+# Again, so that we can override it with company specific stuff.
+function title_catchall
+    echo $argv[1]
+end
+
