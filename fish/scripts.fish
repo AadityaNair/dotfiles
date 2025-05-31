@@ -1,21 +1,44 @@
 # The shell aliases/abbrs that are common across OS
 
-alias cat="bat"
-alias ip="ip -color"
-alias kb="kubectl"
-alias py="ipython3 --no-banner --autoindent --pprint"
-alias tst="ping www.google.com"
-alias ytdl='youtube-dl -o"%(title)s.%(ext)s"'
+# Aliases are written as functions for performance reasons
+function cat --wraps cat
+    bat $argv
+end
+function ip --wraps ip
+    ip -color $argv
+end
+function kb --wraps kubectl
+    kubectl $argv
+end
+function ytdl --wraps youtube-dl
+    youtube-dl -o"%(title)s.%(ext)s" $argv
+end
+function tst
+    ping www.google.com
+end
+function py
+    ipython3 --no-banner --autoindent --pprint $argv
+end
 
 abbr -a vim nvim
 
 
 # Manage dotfiles
-alias dots="cd $DOTFILES"
-alias frc="nvim $FISH_SCRIPTS/config.fish"
-alias src="nvim $FISH_SCRIPTS/scripts.fish"
-alias trc="nvim $DOTFILES/tmux/config.tmux"
-alias vrc="nvim $DOTFILES/vim/init.lua"
+function dots
+    cd $DOTFILES
+end
+function frc
+    nvim $FISH_SCRIPTS/config.fish
+end
+function src
+    nvim $FISH_SCRIPTS/scripts.fish
+end
+function trc
+    nvim $DOTFILES/tmux/config.tmux
+end
+function vrc
+    nvim $DOTFILES/vim/init.lua
+end
 
 
 # CD Aliases
