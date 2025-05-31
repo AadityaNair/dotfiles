@@ -26,9 +26,7 @@ end
 # TODO: Disable fish writing history
 atuin init fish --disable-up-arrow | source # TODO: Doing init is costly. Investigate caching.
 
-# TODO: Use atuin for up arrow function. Because this will only search fish history, which isn't much.
-bind up history-prefix-search-backward
-bind down history-prefix-search-forward
+source "$FISH_SCRIPTS/history-search.fish"
 
 ### SHELL ALIASES
 source "$FISH_SCRIPTS/scripts.fish"
