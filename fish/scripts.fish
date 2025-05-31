@@ -62,24 +62,6 @@ bind alt-comma backward-word
 bind alt-i history-token-search-backward
 # We already do alt/ctrl+backspace to kill word
 
-
-if test "$(uname)" = Darwin
-    abbr -a caps "screencapture -c" # Capture entire screen
-    abbr -a capa "screencapture -i -c" # Capture a specified area
-    abbr -a capw "screencapture -i -w -c" # Capture a window
-
-    abbr -a cc pbcopy
-    abbr -a pp pbpaste
-
-
-    set -x HOMEBREW_PREFIX /opt/homebrew
-    set -x HOMEBREW_CELLAR /opt/homebrew/Cellar
-    set -x HOMEBREW_REPOSITORY /opt/homebrew
-    set -x PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH
-    set -x MANPATH /opt/homebrew/share/man $MANPATH
-    set -x INFOPATH /opt/homebrew/share/info $INFOPATH
-end
-
 function mk
     mkdir -p "$argv[1]"
     cd "$argv[1]"
