@@ -10,12 +10,11 @@ set -x EDITOR nvim
 
 ### COSMETIC SETTINGS
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
-starship init fish | source # TODO: Init is costly and contains useless functions. Investigate caching.
+# starship init fish | source
 
 source "$FISH_SCRIPTS/titles.fish"
 
-# Never have fish greet us
-function fish_greeting
+function fish_greeting --description "We do not need fish greeting us on every shell"
 end
 
 ### HISTORY SETTINGS
