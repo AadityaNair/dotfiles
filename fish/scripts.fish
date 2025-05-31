@@ -1,44 +1,24 @@
 # The shell aliases/abbrs that are common across OS
 
 # Aliases are written as functions for performance reasons
-function cat --wraps cat
-    bat $argv
-end
-function ip --wraps ip
-    ip -color $argv
-end
-function kb --wraps kubectl
-    kubectl $argv
-end
-function ytdl --wraps youtube-dl
-    youtube-dl -o"%(title)s.%(ext)s" $argv
-end
-function tst
-    ping www.google.com
-end
-function py
-    ipython3 --no-banner --autoindent --pprint $argv
-end
+# I don't like it either but there are perf improvements.
+function cat --wraps cat; bat $argv; end
+function ip --wraps ip; ip -color $argv; end
+function kb --wraps kubectl; kubectl $argv; end
+function ytdl --wraps youtube-dl; youtube-dl -o"%(title)s.%(ext)s" $argv; end
+
+function tst; ping www.google.com; end
+function py; ipython3 --no-banner --autoindent --pprint $argv; end
 
 abbr -a vim nvim
 
 
 # Manage dotfiles
-function dots
-    cd $DOTFILES
-end
-function frc
-    nvim $FISH_SCRIPTS/config.fish
-end
-function src
-    nvim $FISH_SCRIPTS/scripts.fish
-end
-function trc
-    nvim $DOTFILES/tmux/config.tmux
-end
-function vrc
-    nvim $DOTFILES/vim/init.lua
-end
+function dots; cd $DOTFILES; end
+function frc; nvim $DOTFILES/fish/config.fish; end
+function src; nvim $DOTFILES/fish/scripts.fish; end
+function trc; nvim $DOTFILES/tmux/config.tmux; end
+function vrc; nvim $DOTFILES/vim/init.lua; end
 
 
 # CD Aliases
