@@ -79,7 +79,7 @@ function extract
         return 1
     end
 
-    if test -f $argv[1]
+    if not test -f $argv[1]
         echo "The argument must be a file"
         return 1
     end
