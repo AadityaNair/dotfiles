@@ -1,7 +1,7 @@
 ### SETUP VARIABLES
 set -x INSTALL "$HOME/.config"
 set -x DOTFILES "$INSTALL/dotfiles"
-set -x FISH_SCRIPTS "$DOTFILES/archive/fish"
+set -x FISH_SCRIPTS "$DOTFILES/fish"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
 set -x TERM tmux-256color
 set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
