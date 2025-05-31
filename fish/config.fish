@@ -8,7 +8,6 @@ set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
 set -x PAGER bat
 set -x EDITOR nvim
 
-# TODO: Investigate autoloading for functions for perf reasons.
 # TODO: Also investigate splitting config.fish into multiple files.
 
 ### COSMETIC SETTINGS
@@ -60,5 +59,9 @@ bind alt-/ forward-word
 bind alt-comma backward-word
 bind alt-i history-token-search-backward
 # We already do alt/ctrl+backspace to kill word
+
+# Far future todo: Investigate if there is any advantage to splitting parts of code into
+# autoloding functions. As of 31/05/25, there is very little. We could get much bigger gains
+# if we just optimised init for atuin/starship/zoxide.
 
 # vim: ft=fish
