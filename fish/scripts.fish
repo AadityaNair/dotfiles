@@ -37,6 +37,32 @@ function tree --wraps ls
     eza --group-directories-first --icons --classify --color=always --tree $argv
 end
 
+# Navigation functions
+function sudo_prev
+    set -l cur_buf (commandline)
+
+    if test -n $cur_buf
+        if not string match -q "sudo *" $cur_buf  # Only add sudo if it isnt already there.
+            commandline "sudo $cur_buf"
+        end
+    else
+        commandline "sudo $history[1]"
+    end
+end
+bind escape,escape sudo_prev
+
+function last_history_item
+    echo $history[1]
+end
+abbr -a !! --position anywhere --function last_history_item
+
+# TODO: Unable to bind alt-. for some reason. Pls fix.
+bind alt-/ forward-word
+bind alt-comma backward-word
+bind alt-i history-token-search-backward
+# We already do alt/ctrl+backspace to kill word
+
+
 if test "$(uname)" = Darwin
     abbr -a caps "screencapture -c" # Capture entire screen
     abbr -a capa "screencapture -i -c" # Capture a specified area
