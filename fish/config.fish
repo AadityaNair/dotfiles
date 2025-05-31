@@ -15,8 +15,6 @@ set -x EDITOR nvim
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
 starship init fish | source # TODO: Init is costly and contains useless functions. Investigate caching.
 
-source "$FISH_SCRIPTS/titles.fish"
-
 # No need for fish greeting inside tmux.
 if test -n "$TMUX"; or test -n "$ZELLIJ"
     function fish_greeting

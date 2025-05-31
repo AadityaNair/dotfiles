@@ -49,6 +49,8 @@ function fish_title
     end
 end
 
+# TODO: Once moved to autoloaded functions, these can't be overridden anymore.
+
 # Make this into a custom function so that it can later be overridden.
 function get_cwd
     prompt_pwd --full-length-dirs 1 --dir-length 2
