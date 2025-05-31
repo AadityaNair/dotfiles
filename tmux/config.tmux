@@ -38,6 +38,7 @@ tmux bind -n M-Down switch-client -n
 tmux bind -n M-r command-prompt -p "(rename-session) " "rename-session '%%'"
 
 # -- Handle Windows --
+# TODO: `pane_current_path` doesn't deal with symlinks properly. Pls fix.
 tmux bind -n M-a new-window -c "#{pane_current_path}"
 tmux bind -n M-Right next-window
 tmux bind -n M-Left previous-window

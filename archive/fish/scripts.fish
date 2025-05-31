@@ -105,8 +105,9 @@ function extract
     end
 end
 
+# TODO: We can just move this file into ~/.config/fish/conf.d
 if test -f "$INSTALL/company_specific_commands.fish"
     source "$INSTALL/company_specific_commands.fish"
 end
 
-# TODO: Lazyload Kubectl nvm and pnpm settings
+# Lazyload Kubectl nvm and pnpm settings whenever you can.

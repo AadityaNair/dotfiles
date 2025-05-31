@@ -8,6 +8,8 @@ set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
 set -x PAGER bat
 set -x EDITOR nvim
 
+# TODO: Investigate autoloading for functions for perf reasons.
+# TODO: Also investigate splitting config.fish into multiple files.
 
 ### COSMETIC SETTINGS
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
