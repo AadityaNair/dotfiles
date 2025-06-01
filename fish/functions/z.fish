@@ -8,7 +8,9 @@ function z
     # 3. Some shennanigans with __zoxide_z_prefix_regex.
     # We will come back to any of the above, if they are truly needed.
     # Also removed is the competion stuff, because I haven't seen completion being used here.
-   if test $argc -eq 1 -a -d $argv[1]
+    if test $argc -eq 0
+        zi
+    else if test $argc -eq 1 -a -d $argv[1]
         cd $argv[1]
     else
         set -l result (command zoxide query --exclude (builtin pwd -L) -- $argv)
