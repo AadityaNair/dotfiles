@@ -27,8 +27,8 @@ source "$FISH_SCRIPTS/history-search.fish"
 ### SHELL ALIASES
 source "$FISH_SCRIPTS/scripts.fish"
 
-# TODO: Set fzf options and theme for better fzf experience. Also consider using fzf for some things.
-zoxide init fish | source # TODO: Doing init is costly. Investigate caching.
+### ZOXIDE Init
+source "$FISH_SCRIPTS/functions/zoxide.fish"
 
 # Far future todo: Investigate if there is any advantage to splitting parts of code into
 # autoloding functions. As of 31/05/25, there is very little. We could get much bigger gains
