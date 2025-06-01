@@ -10,9 +10,6 @@ function ytdl --wraps youtube-dl; youtube-dl -o"%(title)s.%(ext)s" $argv; end
 function tst; ping www.google.com; end
 function py; ipython3 --no-banner --autoindent --pprint $argv; end
 
-abbr -a vim nvim
-
-
 # Manage dotfiles
 function dots; cd $DOTFILES; end
 function frc; nvim $DOTFILES/fish/config.fish; end
@@ -20,6 +17,7 @@ function src; nvim $DOTFILES/fish/scripts.fish; end
 function trc; nvim $DOTFILES/tmux/config.tmux; end
 function vrc; nvim $DOTFILES/vim/init.lua; end
 
+abbr -a vim nvim
 
 # CD Aliases
 # This replicates .. = cd ../ and ... = cd ../.. for any number of dots.
