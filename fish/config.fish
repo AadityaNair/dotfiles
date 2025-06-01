@@ -10,7 +10,7 @@ set -x EDITOR nvim
 
 ### COSMETIC SETTINGS
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
-# starship init fish | source
+# Rest of the init is available as fish_prompt autoloading function.
 
 source "$FISH_SCRIPTS/titles.fish"
 
@@ -28,7 +28,12 @@ source "$FISH_SCRIPTS/history-search.fish"
 source "$FISH_SCRIPTS/scripts.fish"
 
 ### ZOXIDE Init
-source "$FISH_SCRIPTS/functions/zoxide.fish"
+function __zoxide_hook --on-variable PWD # Store the pwd on every file change.
+    test -z "$fish_private_mode"
+    and command zoxide add -- (builtin pwd -L)
+end
+# Rest of the init is available as `z` and `zi` autoloading function
+
 
 # Far future todo: Investigate if there is any advantage to splitting parts of code into
 # autoloding functions. As of 31/05/25, there is very little. We could get much bigger gains
