@@ -13,9 +13,7 @@ set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
 # Rest of the init is available as fish_prompt autoloading function.
 
 source "$FISH_SCRIPTS/titles.fish"
-
-function fish_greeting --description "We do not need fish greeting us on every shell"
-end
+set fish_greeting  # We do not need fish greeting us on every shell
 
 ### HISTORY SETTINGS
 # TODO: Export atuin config file location here.
