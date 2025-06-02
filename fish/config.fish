@@ -12,7 +12,7 @@ set -x EDITOR nvim
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
 # Rest of the init is available as fish_prompt autoloading function.
 
-source "$FISH_SCRIPTS/titles.fish"
+# Titles are set via the fish_title.fish function file.
 set fish_greeting  # We do not need fish greeting us on every shell
 
 ### HISTORY SETTINGS
