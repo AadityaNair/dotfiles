@@ -30,11 +30,7 @@ function fish_title
             terminal_rename "◉ $filename"
 
         case man run-help
-            if test $cnt -eq 3
-                terminal_rename "$cmd[3]($cmd[2]) ❓"
-            else
-                terminal_rename "$cmd[2] ❓"
-            end
+            terminal_rename "$cmd[-1]"
 
         case ssh
             terminal_rename "$cmd[2]"
@@ -51,11 +47,19 @@ end
 
 # Make this into a custom function so that it can later be overridden.
 function get_cwd
-    prompt_pwd --full-length-dirs 1 --dir-length 2
+    if functions -q custom_get_cwd
+        custom_get_cwd
+    else
+        prompt_pwd --full-length-dirs 1 --dir-length 2
+    end
 end
 
 # Again, so that we can override it with company specific stuff.
 function title_catchall
-    echo $argv[1]
+    if functions -q custom_title_catchall
+        custom_title_catchall $argv
+    else
+        echo $argv[1]
+    end
 end
 
