@@ -22,7 +22,7 @@ function reset_index --on-event fish_prompt --on-event fish_cancel
     set index -1
 end
 
-function get_command
+function get_command_and_update_prompt
     set -l response $(atuin search \
         --filter-mode "$FILTER" \
         --search-mode "$MODE" \
@@ -30,9 +30,9 @@ function get_command
         --offset $index -- "$orig_query")
 
     if test $status -eq 0
-        echo $response
+        commandline $response
     else
-        echo $orig_query
+        commandline $orig_query
     end
 end
 
@@ -40,10 +40,9 @@ function atuin_history_up
     if test $index -eq -1
         set orig_query $(commandline)
     end
-
     set index (math $index + 1)
-    set hist_item $(get_command)
-    commandline $hist_item
+
+    get_command_and_update_prompt
 end
 
 function atuin_history_down
@@ -54,8 +53,7 @@ function atuin_history_down
         return
     end
 
-    set hist_item $(get_command)
-    commandline $hist_item
+    get_command_and_update_prompt
 end
 
 bind up atuin_history_up
