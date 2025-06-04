@@ -23,11 +23,17 @@ function reset_index --on-event fish_prompt --on-event fish_cancel
 end
 
 function get_command
-    atuin search \
+    set -l response $(atuin search \
         --filter-mode "$FILTER" \
         --search-mode "$MODE" \
         --limit 1 --format "{command}" \
-        --offset $index -- "$orig_query"
+        --offset $index -- "$orig_query")
+
+    if test $status -eq 0
+        echo $response
+    else
+        echo $orig_query
+    end
 end
 
 function atuin_history_up
