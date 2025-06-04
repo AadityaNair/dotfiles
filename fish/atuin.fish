@@ -1,14 +1,21 @@
-set -gx ATUIN_SESSION (atuin uuid)  # todo: can replace with a cheaper function or not have it at all?
+# Atuin's init script parsed out of atuin init fish
+
+# We can't replace this for multiple reasons:
+# 1. `atuin uuid` works across platforms.
+# 2. We need uuid v7 for atuin operations and AFAIK, no other platform specific application supports it
+#    UUIDv7 has some ordering advantages that atuin internally uses.
+# 3. The best platform specific application reduces the calltime by only 2ms
+# 4. We can't replace this with a static string because this is also used as the primary key for the db.
+#    If we replace it, all new history elements will just override the same row.
+set -gx ATUIN_SESSION (atuin uuid)
 set --erase ATUIN_HISTORY_ID
 
 function _atuin_preexec --on-event fish_preexec
-    if not test -n "$fish_private_mode" # todo: we will not have private mode
-        set -g ATUIN_HISTORY_ID (atuin history start -- "$argv[1]")
-    end
+    set -g ATUIN_HISTORY_ID (atuin history start -- "$argv[1]")
 end
 
 function _atuin_postexec --on-event fish_postexec
-    set -l s $status # todo: no need to `set` this thing.
+    set -l s $status # This is done so that we have the command status before next commands override it.
 
     if test -n "$ATUIN_HISTORY_ID"
         # todo: Maybe we can speed this up by supplying $CMD_DURATION to the script directly?
@@ -20,30 +27,15 @@ function _atuin_postexec --on-event fish_postexec
 end
 
 function _atuin_search
-    set -l keymap_mode
-    switch $fish_key_bindings  # todo: no need to set keymap mode.
-        case fish_vi_key_bindings
-            switch $fish_bind_mode
-                case default
-                    set keymap_mode vim-normal
-                case insert
-                    set keymap_mode vim-insert
-            end
-        case '*'
-            set keymap_mode emacs
-    end
-
-    # In fish 3.4 and above we can use `"$(some command)"` to keep multiple lines separate;
-    # but to support fish 3.3 we need to use `(some command | string collect)`.
-    # https://fishshell.com/docs/current/relnotes.html#id24 (fish 3.4 "Notable improvements and fixes")
-    set -l ATUIN_H (ATUIN_SHELL_FISH=t ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search --keymap-mode=$keymap_mode $argv -i 3>&1 1>&2 2>&3 | string collect)
+    set -l keymap_mode emacs
+    
+    set -l ATUIN_H "$(ATUIN_SHELL_FISH=t ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search --keymap-mode=$keymap_mode $argv -i 3>&1 1>&2 2>&3)"
 
     if test -n "$ATUIN_H"
         if string match --quiet '__atuin_accept__:*' "$ATUIN_H"
-          set -l ATUIN_HIST (string replace "__atuin_accept__:" "" -- "$ATUIN_H" | string collect)
+          set -l ATUIN_HIST "$(string replace "__atuin_accept__:" "" -- "$ATUIN_H")"
           commandline -r "$ATUIN_HIST"
           commandline -f repaint
-          commandline -f execute  # todo: maybe we won't need this if we don't have execute-on-accept
           return
         else
           commandline -r "$ATUIN_H"
@@ -53,25 +45,5 @@ function _atuin_search
     commandline -f repaint
 end
 
-function _atuin_bind_up  # todo: unused function
-    # Fallback to fish's builtin up-or-search if we're in search or paging mode
-    if commandline --search-mode; or commandline --paging-mode
-        up-or-search
-        return
-    end
-
-    # Only invoke atuin if we're on the top line of the command
-    set -l lineno (commandline --line)
-
-    switch $lineno
-        case 1
-            _atuin_search --shell-up-key-binding
-        case '*'
-            up-or-search
-    end
-end
-
-bind \cr _atuin_search
-if bind -M insert > /dev/null 2>&1
-bind -M insert \cr _atuin_search
-end
+bind ctrl-r _atuin_search
+bind -M insert ctrl-r _atuin_search
