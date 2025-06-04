@@ -9,9 +9,10 @@
 # NOTE: Very very prone to off-by-one errors. Please be careful updating the index.
 
 # TODO: Make the index more reasonable to read. I don't like the current code much.
+# TODO: Underline the query text
 
 # Configure atuin search
-set MODE prefix # Possible options being: prefix, fulltext, fuzzy, skim
+set MODE fulltext # Possible options being: prefix, fulltext, fuzzy, skim
 set FILTER global # Possible options being: global, host, session, directory, workspace
 
 set index -1
