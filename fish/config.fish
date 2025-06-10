@@ -27,8 +27,7 @@ source "$FISH_SCRIPTS/scripts.fish"
 
 ### ZOXIDE Init
 function __zoxide_hook --on-variable PWD # Store the pwd on every file change.
-    test -z "$fish_private_mode"
-    and command zoxide add -- (builtin pwd -L)
+     command zoxide add -- (builtin pwd -L)
 end
 # Rest of the init is available as `z` and `zi` autoloading function
 
