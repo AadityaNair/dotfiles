@@ -26,10 +26,8 @@ function _atuin_postexec --on-event fish_postexec
 end
 
 function _atuin_search
-    # TODO: Figure out what's the point of ATUIN_SHELL_FISH.
-    # TODO: What is the point of ATUIN_QUERY when $argv is passed to `atuin search`
-    # TODO: Also, why all the shennanigans with switching STDOUT and STDERR
-    set -l ATUIN_H "$(ATUIN_SHELL_FISH=t ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
+    # TODO: Why all the shennanigans with switching STDOUT and STDERR
+    set -l ATUIN_H "$(ATUIN_LOG=error atuin search $argv -i 3>&1 1>&2 2>&3)"
 
     if test -n "$ATUIN_H"
         commandline -r "$ATUIN_H"
