@@ -77,7 +77,7 @@ left_separator_black=''
 session_symbol=''
 
 right_separator=''
-right_separator_black=''
+right_separator_block=''
 
 tmux set -g pane-border-style fg=$pane_border_fg \; set -g pane-active-border-style fg=$pane_active_border_fg
 #uncomment for fat borders
@@ -104,6 +104,6 @@ tmux setw -g window-status-bell-style fg=$window_status_bell_fg,bg=$window_statu
 tmux setw -g window-status-last-style $window_status_last_attr,fg=$window_status_last_fg
 
 
-tmux set -g status-right-length 64 \; set -g status-right "$right_separator%a %b %d $right_separator%R"
+tmux set -g status-right-length 64 \; set -g status-right "#[italics]$right_separator %a, %b %d $right_separator %H:%M"
 tmux setw -g clock-mode-colour $clock_mode_colour
 
