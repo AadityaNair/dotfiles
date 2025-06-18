@@ -73,18 +73,9 @@ style = 'bold yellow'
 show_notifications = false
 min_time_to_notify = 45_000
 
+# TODO: Figure out useful pipestatus
 [status]
 format = '[ $symbol$status ❯]($style) '
 symbol = '❌'
-success_symbol = ''
-not_executable_symbol = ''
-not_found_symbol = '🔍'
-sigint_symbol = '🧱'
-signal_symbol = '⚡'
 style = 'fg:color_red'
-recognize_signal_code = true
-map_symbol = false
-pipestatus = false
-pipestatus_separator = '|'
-pipestatus_format = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style)'
 disabled = false
