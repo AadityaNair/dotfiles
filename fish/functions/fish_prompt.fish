@@ -3,6 +3,8 @@
 # The below script is parsed out of the above for performance reasons.
 # If something starts to break, we will need to redo the above command.
 
+set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
+
 function fish_prompt
     switch "$fish_key_bindings"
         case fish_hybrid_key_bindings fish_vi_key_bindings
