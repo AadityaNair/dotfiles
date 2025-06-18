@@ -17,7 +17,7 @@ function src; nvim $DOTFILES/fish/scripts.fish; end
 function trc; nvim $DOTFILES/tmux/config.tmux; end
 function vrc; nvim $DOTFILES/vim/init.lua; end
 
-abbr -a vim nvim
+function vim --wraps nvim; nvim $argv; end
 
 # CD Aliases
 # This replicates .. = cd ../ and ... = cd ../.. for any number of dots.
