@@ -4,7 +4,7 @@ set -x DOTFILES "$INSTALL/dotfiles"
 set -x FISH_SCRIPTS "$DOTFILES/fish"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
 set -x TERM tmux-256color
-set -x MANPAGER "bat -l man -p" # TODO: Find a better manpager
+set -x MANPAGER "less --use-color"
 set -x PAGER bat
 set -x EDITOR nvim
 
@@ -29,10 +29,5 @@ function __zoxide_hook --on-variable PWD # Store the pwd on every file change.
      command zoxide add -- (builtin pwd -L)
 end
 # Rest of the init is available as `z` and `zi` autoloading function
-
-
-# Far future todo: Investigate if there is any advantage to splitting parts of code into
-# autoloding functions. As of 31/05/25, there is very little. We could get much bigger gains
-# if we just optimised init for atuin/starship/zoxide.
 
 # vim: ft=fish
