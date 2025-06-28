@@ -82,8 +82,7 @@ plugins = {
     "nvim-lualine/lualine.nvim",
     {"folke/tokyonight.nvim", lazy=false, priority=1000,},
     "numToStr/Comment.nvim",
-
-    'nvim-treesitter/nvim-treesitter',
+    {'nvim-treesitter/nvim-treesitter', lazy=false, branch="main", build = ':TSUpdate'},
     'nvim-treesitter/nvim-treesitter-context',
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
@@ -306,7 +305,6 @@ vim.keymap.set('n', '<leader>tt', ":Telescope")
 -- TODO: Just `T/t` is also some function. Change it.
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
-require("nvim-treesitter.install").prefer_git = true
 -- TODO: Finetune the values below.
 require("treesitter-context").setup({
     enable=true,
@@ -314,42 +312,44 @@ require("treesitter-context").setup({
     min_window_height = 0,
     line_numbers = true,
 })
--- TODO: Fish script parser
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        'bash',
-        'c',
-        'cpp',
-        'diff',
-        'erlang',
-        'go',
-        'graphql',
-        'hack',
-        'json',
-        'kdl',
-        'lua',
-        'markdown',
-        'markdown_inline',
-        'php',
-        'python',
-        'regex',
-        'ruby',
-        'rust',
-        'starlark',
-        'thrift',
-        'toml',
-        'vim',
-        'vimdoc',
-        'yaml',
-    },
-    highlight = {
-        enable = true,
-        -- disable = {'bash'},
-    },
-    indent = {
-        enable = true,
-        -- disable = {'latex'},
-    },
+
+
+local treesitter_langs = {
+    'bash', 
+    'c', 
+    'cpp', 
+    'diff',
+    'erlang',
+    'fish',
+    'go',
+    'graphql',
+    'hack',
+    'json',
+    'kdl',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'php',
+    'python',
+    'regex',
+    'ruby',
+    'rust',
+    'starlark',
+    'thrift',
+    'toml',
+    'vim',
+    'vimdoc',
+    'yaml',
+}
+
+require("nvim-treesitter").install(treesitter_langs)
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = treesitter_langs,
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
 })
 
 -- Set strings to be italics
