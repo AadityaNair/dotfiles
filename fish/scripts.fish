@@ -26,6 +26,8 @@ function multicd
 end
 abbr --add dotdot --regex '^\.\.+$' --function multicd
 
+abbr -a awkp --position anywhere --set-cursor "awk '{print \$%}'"
+
 
 # LS Aliases
 # abbr -a ls "eza --group-directories-first --icons --classify --color=always"
