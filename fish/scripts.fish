@@ -3,7 +3,7 @@
 # Aliases are written as functions for performance reasons
 # I don't like it either but there are perf improvements.
 function cat --wraps cat; bat $argv; end
-function ip --wraps ip; ip -color $argv; end
+function ip --wraps ip; /usr/bin/ip -color $argv; end
 function kb --wraps kubectl; kubectl $argv; end
 function ytdl --wraps youtube-dl; youtube-dl -o"%(title)s.%(ext)s" $argv; end
 
