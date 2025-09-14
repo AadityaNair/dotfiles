@@ -10,6 +10,7 @@
 
 # TODO: Make the index more reasonable to read. I don't like the current code much.
 # TODO: Underline the query text
+# TODO: Reset index when we edit the code
 
 # Configure atuin search
 set MODE fulltext # Possible options being: prefix, fulltext, fuzzy, skim
@@ -37,6 +38,11 @@ function get_command_and_update_prompt
 end
 
 function atuin_history_up
+    if commandline --search-mode; or commandline --paging-mode
+        up-or-search
+        return
+    end
+
     if test $index -eq -1
         set orig_query $(commandline)
     end
@@ -46,6 +52,11 @@ function atuin_history_up
 end
 
 function atuin_history_down
+    if commandline --search-mode; or commandline --paging-mode
+        down-or-search
+        return
+    end
+
     set index (math $index - 1)
     if test $index -le -1
         commandline $orig_query
