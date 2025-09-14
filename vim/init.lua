@@ -115,10 +115,10 @@ plugins = {
         },
     },
     {
+        -- TODO: Find an alternative undotree impl and remove telescope entirely
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
             'debugloop/telescope-undo.nvim',
             -- NOTE: Adding anything in dependencies except plenary.nvim is wrong.
             --       Technically, file-browser.nvim depends on plenary.nvim and telescope.nvim
@@ -263,35 +263,19 @@ require("todo-comments").setup({
 local telescope = require('telescope')
 
 telescope.setup({
-    pickers = {
-        find_files = {
-            hidden = false,
-        },
-    },
     extensions = {
-        file_browser = {
-            hijack_netrw = true,
-            grouped = false,
-            collapsed_dir = true,
-            previewer = company.use_previewer_for_files,
-        },
         undo = {
             mappings = {
                 i = {["<CR>"] = require("telescope-undo.actions").restore},
                 n = {["<CR>"] = require("telescope-undo.actions").restore},
             },
+            -- layout_strategy = "vertical",
+            side_by_side=true,
         },
     },
 })
-telescope.load_extension "file_browser"
 telescope.load_extension "undo"
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>f', telescope.extensions.file_browser.file_browser)
 vim.keymap.set('n', 'u', telescope.extensions.undo.undo, {silent=true})
-vim.keymap.set('n', '<leader>b', function () builtin.buffers({ignore_current_buffer=true, sort_lastused=true}) end, {silent=true, noremap=true})
-vim.keymap.set('n', '<leader>tt', ":Telescope")
--- TODO: Just `T/t` is also some function. Change it.
 
 -- TODO: nvim-treesitter/nvim-treesitter-textobjects
 require("nvim-treesitter.install").prefer_git = true
