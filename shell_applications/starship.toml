@@ -75,7 +75,7 @@ min_time_to_notify = 45_000
 
 # TODO: Figure out useful pipestatus
 [status]
-format = '[ $symbol$status ❯]($style) '
+format = '[ $symbol$status ❯]($style)'
 symbol = '❌'
 style = 'fg:color_red'
 disabled = false
