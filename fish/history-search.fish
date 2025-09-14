@@ -18,6 +18,7 @@ set FILTER global # Possible options being: global, host, session, directory, wo
 
 set index -1
 set orig_query ""
+set curr_response ""
 
 function reset_index --on-event fish_prompt --on-event fish_cancel
     set index -1
@@ -32,8 +33,10 @@ function get_command_and_update_prompt
 
     if test $status -eq 0
         commandline $response
+        set curr_response $response
     else
-        commandline $orig_query
+        # If search fails, keep the last returned command
+        commandline $curr_response
     end
 end
 
@@ -43,8 +46,12 @@ function atuin_history_up
         return
     end
 
-    if test $index -eq -1
+    # If we are starting a new search or if we changed the query partway through a 
+    # previous search, we start again from the beginning.
+    if test $index -eq -1; or test $curr_response != $(commandline)
         set orig_query $(commandline)
+        set curr_response $orig_query
+        set index -1
     end
     set index (math $index + 1)
 
@@ -54,6 +61,12 @@ end
 function atuin_history_down
     if commandline --search-mode; or commandline --paging-mode
         down-or-search
+        return
+    end
+
+    if test $curr_response != $(commandline)
+        set index -1
+        set orig_query $(commandline)
         return
     end
 
