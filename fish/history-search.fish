@@ -10,18 +10,17 @@
 
 # TODO: Make the index more reasonable to read. I don't like the current code much.
 # TODO: Underline the query text
-# TODO: Reset index when we edit the code
 
 # Configure atuin search
 set MODE fulltext # Possible options being: prefix, fulltext, fuzzy, skim
 set FILTER global # Possible options being: global, host, session, directory, workspace
 
-set index -1
-set orig_query ""
-set curr_response ""
+set __hist_search_index -1
+set __hist_search_orig_query ""
+set __hist_search_curr_response ""
 
 function reset_index --on-event fish_prompt --on-event fish_cancel
-    set index -1
+    set __hist_search_index -1
 end
 
 function get_command_and_update_prompt
@@ -29,14 +28,14 @@ function get_command_and_update_prompt
         --filter-mode "$FILTER" \
         --search-mode "$MODE" \
         --limit 1 --format "{command}" \
-        --offset $index -- "$orig_query")
+        --offset $__hist_search_index -- "$__hist_search_orig_query")
 
     if test $status -eq 0
         commandline $response
-        set curr_response $response
+        set __hist_search_curr_response $response
     else
         # If search fails, keep the last returned command
-        commandline $curr_response
+        commandline $__hist_search_curr_response
     end
 end
 
@@ -48,12 +47,12 @@ function atuin_history_up
 
     # If we are starting a new search or if we changed the query partway through a 
     # previous search, we start again from the beginning.
-    if test $index -eq -1; or test $curr_response != $(commandline)
-        set orig_query $(commandline)
-        set curr_response $orig_query
-        set index -1
+    if test $__hist_search_index -eq -1; or test $__hist_search_curr_response != $(commandline)
+        set __hist_search_orig_query $(commandline)
+        set __hist_search_curr_response $__hist_search_orig_query
+        set __hist_search_index -1
     end
-    set index (math $index + 1)
+    set __hist_search_index (math $__hist_search_index + 1)
 
     get_command_and_update_prompt
 end
@@ -64,16 +63,16 @@ function atuin_history_down
         return
     end
 
-    if test $curr_response != $(commandline)
-        set index -1
-        set orig_query $(commandline)
+    if test $__hist_search_curr_response != $(commandline)
+        set __hist_search_index -1
+        set __hist_search_orig_query $(commandline)
         return
     end
 
-    set index (math $index - 1)
-    if test $index -le -1
-        commandline $orig_query
-        set index -1
+    set __hist_search_index (math $__hist_search_index - 1)
+    if test $__hist_search_index -le -1
+        commandline $__hist_search_orig_query
+        set __hist_search_index -1
         return
     end
 
