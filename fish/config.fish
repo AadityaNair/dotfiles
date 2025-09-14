@@ -30,4 +30,7 @@ function __zoxide_hook --on-variable PWD # Store the pwd on every file change.
 end
 # Rest of the init is available as `z` and `zi` autoloading function
 
+### Keybindings
+bind ctrl-c cancel-commandline  # This leaves the previous commandline in place so we can refer to it.
+
 # vim: ft=fish
