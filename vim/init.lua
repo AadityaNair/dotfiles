@@ -213,16 +213,17 @@ require("noice").setup({
 ------------------------------------------------ Coding Quality of Life ------------------------------------------
 -- TODO: Take a look at trouble.nvim again
 
-vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldcolumn = 'auto:9' -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
--- TODO: UFO also supports directly talking to LSP. Maybe that is more useful than treesitter.
--- TODO: This also needs to be configured properly. Especially to remove the numbers on the left.
+-- TODO: Look into collapsing CPP namespaces automatically. And not having indents for it as well.
+-- TODO: Add command to just fold the current fold
 require('ufo').setup({
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
@@ -230,7 +231,6 @@ require('ufo').setup({
 })
 
 -- TODO: Only generate indentlines when there are more than two lines indented.
--- TODO: Rainbow indentlines
 require('ibl').setup({
     indent = {char='│'},
 })
