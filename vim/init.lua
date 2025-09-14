@@ -103,19 +103,6 @@ plugins = {
     },
     -- TODO: Configure todo-comments
     {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
-    {   
-        -- TODO: Move configurations to the bottom.
-        "folke/trouble.nvim", 
-        dependencies = "nvim-tree/nvim-web-devicons",
-        opts = {},
-        keys = {
-            {
-                "<leader>tr",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-        },
-    },
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     {
@@ -189,7 +176,7 @@ require('lualine').setup {
         lualine_y = {'progress'},
         lualine_z = {'location'}
     },
-    extensions = {'lazy', 'trouble'},
+    extensions = {'lazy'},
 }
 require("bufferline").setup({
     options = {always_show_bufferline = false,},
@@ -224,6 +211,7 @@ require("noice").setup({
 
 
 ------------------------------------------------ Coding Quality of Life ------------------------------------------
+-- TODO: Take a look at trouble.nvim again
 
 vim.o.foldcolumn = '1' -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
@@ -360,8 +348,6 @@ hl_settings['italic']=true
 vim.api.nvim_set_hl(0, "String", hl_settings)
 
 ------------------------------------------------------ Auto Complete -------------------------------
--- TODO: Add `trouble` commands to view code symbols.
-require('trouble').setup({})
 
 local cmp = require'cmp'
 cmp.setup({
