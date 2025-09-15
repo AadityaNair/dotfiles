@@ -84,12 +84,34 @@ plugins = {
     "numToStr/Comment.nvim",
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-context',
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path",
-    "neovim/nvim-lspconfig",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = { 'saghen/blink.cmp' },
+        config = function(_, opts)
+            local lspconfig = require('lspconfig')
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            -- TODO: Not have per-server level capabilities
+            lspconfig['lua_ls'].setup({capabilities = capabilities})
+        end
+    },
+    {
+        "saghen/blink.cmp",
+        dependencies = {},
+        version = "*",
+        opts = {
+            -- TODO: Tab to iterate through options
+            keymap = {preset = "default"},
+            appearance = {
+                nerd_font_variant = "mono",
+            },
+            completion = { documentation = { auto_show = false } },
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+            fuzzy = { implementation = "prefer_rust_with_warning" }
+        },
+        opts_extend = { "sources.default" },
+    },
     {
         "folke/flash.nvim",
         event = "VeryLazy",
@@ -318,70 +340,6 @@ hl_settings['italic']=true
 vim.api.nvim_set_hl(0, "String", hl_settings)
 
 ------------------------------------------------------ Auto Complete -------------------------------
-
-local cmp = require'cmp'
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            vim.snippet.expand(args.body)
-        end,
-    },
-
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-
-    mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<Tab>'] = cmp.mapping.select_next_item({ behaviour = "select"}),
-        ['<S-Tab>'] = cmp.mapping.select_prev_item({ behaviour = "select" }),
-        ['<Esc>'] = function(fallback)
-                        cmp.mapping.close()
-                        vim.cmd('stopinsert')
-                    end,
-    }),
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp', group_index = 1 },
-        { name = 'buffer',   group_index = 2 },
-        { name = 'path',     group_index = 3 },
-    })
-})
-
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-    }, {{ name = 'buffer' },}
-    )
-})
-
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-})
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-})
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- TODO: Consider if `bashls` is useful for zsh since syntax may be slightly different.
-require('lspconfig')['bashls'].setup {
-    capabilities = capabilities,
-    filetypes= {'sh', 'zsh'},
-  }
 
 -- Set the right filetypes for zsh
 vim.filetype.add({
