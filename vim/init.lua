@@ -103,6 +103,7 @@ plugins = {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
+        opts = {}, -- Apparently this line is important
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
