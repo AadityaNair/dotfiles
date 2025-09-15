@@ -74,7 +74,6 @@ function module.setup()
     })
     telescope.load_extension "undo"
     vim.keymap.set('n', 'u', telescope.extensions.undo.undo, {silent=true})
-
 end
 
 return module
