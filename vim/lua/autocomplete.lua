@@ -34,16 +34,29 @@ module.plugins = {
         dependencies = {},
         version = "*",
         opts = {
-            -- TODO: Tab to iterate through options
-            keymap = {preset = "default"},
+            -- TODO: Tab to insert the first time always and the iterate through options
+            keymap = {
+                preset = "none",
+                ['<Up>'] = {'select_prev', 'fallback'},
+                ['<Down>'] ={'select_next', 'fallback'},
+                ['<Tab>'] ={'show_and_insert', 'select_next', 'fallback'},
+                ['<S-Tab>'] ={'select_prev', 'fallback'},
+                ['<CR>'] ={'accept', 'fallback'},
+                ['<Esc>'] ={'hide', 'fallback'},
+
+            },
             appearance = {
                 nerd_font_variant = "mono",
             },
-            completion = { documentation = { auto_show = false } },
+            completion = {
+                documentation = { auto_show = false },
+                ghost_text = { enabled = true},
+                list = {selection = {preselect = true, auto_insert = true} }
+            },
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
-            fuzzy = { implementation = "prefer_rust_with_warning" }
+            fuzzy = { implementation = "prefer_rust" }
         },
         opts_extend = { "sources.default" },
     },
@@ -114,5 +127,3 @@ function module.setup()
 end
 
 return module
-
-
