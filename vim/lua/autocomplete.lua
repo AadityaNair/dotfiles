@@ -1,13 +1,30 @@
 module = {}
+
+local default_lsp = {
+    'lua_ls'
+}
+local custom_lsps = require("company_specific_config").custom_lsps
+
+function TableConcat(t1, t2)
+    for _, v in ipairs(t2) do
+        require("table").insert(t1, v)
+    end
+    return t1
+end
+
+local enabled_lsps = TableConcat(default_lsp, custom_lsps)
+
 module.plugins = {
     {
         "neovim/nvim-lspconfig",
         dependencies = { 'saghen/blink.cmp' },
-        config = function(_, opts)
+        config = function()
             local lspconfig = require('lspconfig')
             local capabilities = require('blink.cmp').get_lsp_capabilities()
-            -- TODO: Not have per-server level capabilities
-            lspconfig['lua_ls'].setup({capabilities = capabilities})
+
+            for _, lsp in ipairs(enabled_lsps) do
+                lspconfig[lsp].setup({capabilities = capabilities})
+            end
         end
     },
     {
