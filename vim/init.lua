@@ -67,6 +67,13 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+function TableConcat(t1, t2)
+    for _, v in ipairs(t2) do
+        require("table").insert(t1, v)
+    end
+    return t1
+end
+
 ------------------------------------------------- Plugins Setup --------------------------------------------------
 
 -- TODO: vista.vim
@@ -77,10 +84,10 @@ vim.opt.rtp:prepend(lazypath)
 -- TODO: Avoid needing to updated the in-repo config file.
 --       I want to avoid leaving a dirty repo.
 company = require("company_specific_config")
+ui = require("ui")
+ux = require("ux")
 
 plugins = {
-    "nvim-lualine/lualine.nvim",
-    {"folke/tokyonight.nvim", lazy=false, priority=1000,},
     "numToStr/Comment.nvim",
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-context',
@@ -119,18 +126,7 @@ plugins = {
         -- TODO: Look into more configuration
         keys = {{"s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash"},},
     },
-    {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
-    {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {}, -- Apparently this line is important
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-    },
     {
         -- TODO: Find an alternative undotree impl and remove telescope entirely
         'nvim-telescope/telescope.nvim',
@@ -148,84 +144,13 @@ plugins = {
 
 -- List all the plugins from the company specific code and add it to default list.
 -- Only when company.plugin is set.
-if company.plugin then
-    len = require("table").getn(plugins)
-
-    for index, entry in pairs(company.plugin) do
-        plugins[len+index] = entry
-    end
-end
-
+plugins = TableConcat(plugins, ui.plugins)
+plugins = TableConcat(plugins, ux.plugins)
+plugins = TableConcat(plugins, company.plugins)
 require('lazy').setup(plugins)
------------------------------------------------------ UI Improvements ----------------------------------------------
 
-
-require("tokyonight").setup({
-    terminal_colors = true,
-    styles = {
-    -- Value is any valid attr-list value for `:help nvim_set_hl`
-        comments = { italic = true },
-        keywords = { italic = true },
-        functions = {},
-        variables = {},
-  },
-})
-
-
-vim.opt.termguicolors = true
-vim.cmd.colorscheme("tokyonight-night")
-require('lualine').setup {
-    options = {
-        theme  = "tokyonight",
-        icons_enabled = true,
-        globalstatus = true,
-    },
-    sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff', 'diagnostics'},
-        lualine_c = {'filename'},
-        lualine_x = {'searchcount', 'selectioncount', 'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'location'}
-    },
-    extensions = {'lazy'},
-}
-require("bufferline").setup({
-    options = {always_show_bufferline = false,},
-})
--- TODO: Maybe it is better if the notifications are on the bottom right
---       And without a box like in fidget.nvim. Investigate
--- TODO: Have a way to hold the notification for some time.
-require("notify").setup({
-    background_colour = "#000000",
-    top_down = true,
-    render = 'minimal',
-    stages = 'fade',
-})
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true, -- use a classic bottom cmdline for search
-    command_palette = true, -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false, -- add a border to hover docs and signature help
-  },
-})
-
--- TODO: Few more possibilities here. We don't need to to look too much different than comments.
-require("todo-comments").setup({
-    signs = false,
-})
-
+ui.setup()
+ux.setup()
 ------------------------------------------------ Quality of Life ------------------------------------------
 
 vim.o.foldcolumn = 'auto:9' -- '0' is not bad

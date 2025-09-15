@@ -1,6 +1,6 @@
 local company = {}
 
-company.plugin = nil
+company.plugins = {}
 company.use_previewer_for_files = true
 
 function company.setup()
