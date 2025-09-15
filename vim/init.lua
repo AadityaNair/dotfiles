@@ -82,7 +82,6 @@ plugins = {
     "nvim-lualine/lualine.nvim",
     {"folke/tokyonight.nvim", lazy=false, priority=1000,},
     "numToStr/Comment.nvim",
-
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-context',
     "hrsh7th/cmp-buffer",
@@ -91,24 +90,16 @@ plugins = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
-
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        opts = {},
-        -- TODO: Maybe there is some interesting options here. But for now only this is fine.
-        keys = {
-            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-        },
     },
-    -- TODO: Configure todo-comments
     {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        opts = {},
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
@@ -120,11 +111,6 @@ plugins = {
         dependencies = {
             'nvim-lua/plenary.nvim',
             'debugloop/telescope-undo.nvim',
-            -- NOTE: Adding anything in dependencies except plenary.nvim is wrong.
-            --       Technically, file-browser.nvim depends on plenary.nvim and telescope.nvim
-            --       But, because all `depedencies` really mean is that it downloads the dependency
-            --       before the main one, we can put anything in here. Only thing is, if we decide to
-            --       remove telescope.nvim, the depedencies are deleted too. Which is OK for this case.
         },
     },
     {
@@ -209,9 +195,12 @@ require("noice").setup({
   },
 })
 
+-- TODO: Few more possibilities here. We don't need to to look too much different than comments.
+require("todo-comments").setup({
+    signs = false,
+})
 
------------------------------------------------- Coding Quality of Life ------------------------------------------
--- TODO: Take a look at trouble.nvim again
+------------------------------------------------ Quality of Life ------------------------------------------
 
 vim.o.foldcolumn = 'auto:9' -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
@@ -254,11 +243,9 @@ require('Comment').setup({
 local ft = require('Comment.ft')
 ft.set('kdl', '//%s')
 
-
--- TODO: Few more possibilities here. We don't need to to look too much different than comments.
-require("todo-comments").setup({
-    signs = false,
-})
+-- Moving around
+-- TODO: Maybe there are some interesting options here. But this works for now.
+vim.keymap.set('n', '<leader>s', require("flash").jump())
 
 local telescope = require('telescope')
 
@@ -286,7 +273,6 @@ require("treesitter-context").setup({
     min_window_height = 0,
     line_numbers = true,
 })
--- TODO: Fish script parser
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         'bash',
@@ -357,8 +343,6 @@ cmp.setup({
                         vim.cmd('stopinsert')
                     end,
     }),
-    -- TODO: These group indices are weird. We probably don't need it.
-    --       I think the order defines the index.
     sources = cmp.config.sources({
         { name = 'nvim_lsp', group_index = 1 },
         { name = 'buffer',   group_index = 2 },
