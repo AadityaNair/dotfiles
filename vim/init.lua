@@ -83,68 +83,21 @@ vim.opt.rtp:prepend(lazypath)
 
 -- TODO: Avoid needing to updated the in-repo config file.
 --       I want to avoid leaving a dirty repo.
-company = require("company_specific_config")
 ui = require("ui")
 ux = require("ux")
+company = require("company_specific_config")
+autocomplete = require("autocomplete")
 
-plugins = {
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = { 'saghen/blink.cmp' },
-        config = function(_, opts)
-            local lspconfig = require('lspconfig')
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
-            -- TODO: Not have per-server level capabilities
-            lspconfig['lua_ls'].setup({capabilities = capabilities})
-        end
-    },
-    {
-        "saghen/blink.cmp",
-        dependencies = {},
-        version = "*",
-        opts = {
-            -- TODO: Tab to iterate through options
-            keymap = {preset = "default"},
-            appearance = {
-                nerd_font_variant = "mono",
-            },
-            completion = { documentation = { auto_show = false } },
-            sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer' },
-            },
-            fuzzy = { implementation = "prefer_rust_with_warning" }
-        },
-        opts_extend = { "sources.default" },
-    },
-}
+plugins = {}
 
--- List all the plugins from the company specific code and add it to default list.
--- Only when company.plugin is set.
 plugins = TableConcat(plugins, ui.plugins)
 plugins = TableConcat(plugins, ux.plugins)
+plugins = TableConcat(plugins, autocomplete.plugins)
 plugins = TableConcat(plugins, company.plugins)
+
 require('lazy').setup(plugins)
 
 ui.setup()
 ux.setup()
--- Set the right filetypes for zsh
-vim.filetype.add({
-    extension = {
-        ['zsh'] = 'sh',
-    },
-    filename = {
-        ['zshrc'] = 'sh',
-    },
-})
-
-vim.api.nvim_create_user_command("DiagnosticToggle", function()
-    local config = vim.diagnostic.config
-    local vt = config().virtual_text
-	config {
-		virtual_text = not vt,
-		underline = not vt,
-		signs = not vt,
-	}
-end, {desc = "Toggle showing LSPErrors/Hints/etc"}
-)
+autocomplete.setup()
 company.setup()
