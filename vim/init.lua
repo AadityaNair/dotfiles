@@ -93,6 +93,9 @@ plugins = {
     {
         "folke/flash.nvim",
         event = "VeryLazy",
+        -- TODO: Move this to a different keymap call elsewhere,
+        -- TODO: Look into more configuration
+        keys = {{"s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash"},},
     },
     {'folke/todo-comments.nvim', dependencies = "nvim-lua/plenary.nvim" },
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
@@ -242,10 +245,6 @@ require('Comment').setup({
 -- Custom commentstrings
 local ft = require('Comment.ft')
 ft.set('kdl', '//%s')
-
--- Moving around
--- TODO: Maybe there are some interesting options here. But this works for now.
-vim.keymap.set('n', '<leader>s', require("flash").jump())
 
 local telescope = require('telescope')
 
