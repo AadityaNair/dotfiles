@@ -45,7 +45,48 @@ module.plugins = {
         },
         opts_extend = { "sources.default" },
     },
+    -- {"folke/lazydev.nvim", ft="lua"}, -- TODO: Do this manually 
 }
+
+-- Copied directly from https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
+function lua_lsp_for_neovim()
+    vim.lsp.config('lua_ls', {
+        on_init = function(client)
+            if client.workspace_folders then
+              local path = client.workspace_folders[1].name
+              if path ~= vim.fn.stdpath('config')
+                and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+              then
+                return
+              end
+            end
+
+            client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                runtime = {
+                    version = 'LuaJIT',
+                    path = {
+                        'lua/?.lua',
+                        'lua/?/init.lua',
+                    },
+                },
+                workspace = {
+                    checkThirdParty = false,
+                    library = {
+                        vim.env.VIMRUNTIME
+                    }
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {
+                        'vim',
+                        'require'
+                    },
+                },
+            })
+      end,
+      settings = {Lua = {}}
+    })
+end
 
 function module.setup()
     vim.filetype.add({
@@ -67,6 +108,7 @@ function module.setup()
         }
         end, {desc = "Toggle showing LSPErrors/Hints/etc"}
     )
+    lua_lsp_for_neovim()
 end
 
 return module
