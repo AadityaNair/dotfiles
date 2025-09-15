@@ -6,7 +6,7 @@ font-family = JetBrainsMono Nerd Font Mono
 font-size = 20
 
 # Theme
-theme = tokyonight
+theme = Catppuccin Mocha
 
 # Mouse Usage
 mouse-hide-while-typing = true
