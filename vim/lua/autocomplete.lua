@@ -1,7 +1,9 @@
 module = {}
 
+-- TODO: support providing configs as well.
 local default_lsp = {
-    'lua_ls'
+    'lua_ls',
+    'bashls',
 }
 local custom_lsps = require("company_specific_config").custom_lsps
 
