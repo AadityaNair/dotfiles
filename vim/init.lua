@@ -83,12 +83,12 @@ vim.opt.rtp:prepend(lazypath)
 
 -- TODO: Avoid needing to updated the in-repo config file.
 --       I want to avoid leaving a dirty repo.
-ui = require("ui")
-ux = require("ux")
-company = require("company_specific_config")
-autocomplete = require("autocomplete")
+local ui = require("ui")
+local ux = require("ux")
+local company = require("company_specific_config")
+local autocomplete = require("autocomplete")
 
-plugins = {}
+local plugins = {}
 
 plugins = TableConcat(plugins, ui.plugins)
 plugins = TableConcat(plugins, ux.plugins)
