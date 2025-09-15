@@ -1,7 +1,7 @@
 module = {}
 module.plugins = {
     "nvim-lualine/lualine.nvim",
-    { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+    { "catppuccin/nvim", lazy = false, priority = 1000 },
     { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
     { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
     {
@@ -16,22 +16,41 @@ module.plugins = {
 }
 
 function module.setup()
-    require("tokyonight").setup({
-        terminal_colors = true,
+    require("catppuccin").setup({
+        term_colors = true,
         styles = {
             -- Value is any valid attr-list value for `:help nvim_set_hl`
-            comments = { italic = true },
-            keywords = { italic = true },
-            functions = {},
-            variables = {},
+            comments = { "italic" },
+            keywords = { "italic" },
+        },
+        integrations = {
+            blink_cmp = { style = "bordered" },
+            cmp = true,
+            flash = true,
+            gitsigns = true,
+            indent_blankline = {
+                enabled = true,
+                scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+                colored_indent_levels = false,
+            },
+            noice = true,
+            notify = true,
+            nvimtree = true,
+            semantic_tokens = true,
+            treesitter = true,
+            treesitter_context = true,
+            ufo = true,
+            telescope = {
+                enabled = true,
+            },
         },
     })
 
     vim.opt.termguicolors = true
-    vim.cmd.colorscheme("tokyonight-night")
+    vim.cmd.colorscheme("catppuccin-mocha")
     require("lualine").setup({
         options = {
-            theme = "tokyonight",
+            theme = "catppuccin-mocha",
             icons_enabled = true,
             globalstatus = true,
         },
@@ -45,6 +64,7 @@ function module.setup()
         },
         extensions = { "lazy" },
     })
+    -- TODO: Add catppuccin theme
     require("bufferline").setup({
         options = { always_show_bufferline = false },
     })
