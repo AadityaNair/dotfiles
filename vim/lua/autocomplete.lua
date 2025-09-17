@@ -39,9 +39,15 @@ module.plugins = {
                 preset = "none",
                 ['<Up>'] = {'select_prev', 'fallback'},
                 ['<Down>'] ={'select_next', 'fallback'},
-                ['<Tab>'] ={'show_and_insert', 'select_next', 'fallback'},
+                ['<Tab>'] ={
+                    function(cmp)
+                        if cmp.snippet_active() then return cmp.accept()
+                        else return cmp.select_and_accept() end
+                    end,
+                    'select_next',
+                    'fallback'
+                },
                 ['<S-Tab>'] ={'select_prev', 'fallback'},
-                ['<CR>'] ={'accept', 'fallback'},
                 ['<Esc>'] ={'hide', 'fallback'},
 
             },
@@ -60,11 +66,10 @@ module.plugins = {
         },
         opts_extend = { "sources.default" },
     },
-    -- {"folke/lazydev.nvim", ft="lua"}, -- TODO: Do this manually 
 }
 
 -- Copied directly from https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
-function lua_lsp_for_neovim()
+local function lua_lsp_for_neovim() -- TODO: Fix the `vim` variable not being recognized. Or make folke/lazydev work.
     vim.lsp.config('lua_ls', {
         on_init = function(client)
             if client.workspace_folders then
