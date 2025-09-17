@@ -3,13 +3,6 @@ module.plugins = {
     "numToStr/Comment.nvim",
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-context',
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        -- TODO: Move this to a different keymap call elsewhere,
-        -- TODO: Look into more configuration
-        keys = {{"s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash"},},
-    },
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
     {
@@ -48,7 +41,6 @@ function module.setup()
     require('ibl').setup({
         indent = {char='│'},
     })
-    -- TODO: This can use a good looking at.
     require('Comment').setup({
         padding = true,
         sticky = true,

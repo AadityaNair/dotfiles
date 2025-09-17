@@ -48,9 +48,7 @@ function module.setup()
     require("bufferline").setup({
         options = {always_show_bufferline = false,},
     })
-    -- TODO: Maybe it is better if the notifications are on the bottom right
-    --       And without a box like in fidget.nvim. Investigate
-    -- TODO: Have a way to hold the notification for some time.
+    -- NOTE: Use :NoiceHistory to get notification history.
     require("notify").setup({
         background_colour = "#000000",
         top_down = true,
@@ -76,7 +74,6 @@ function module.setup()
       },
     })
 
-    -- TODO: Few more possibilities here. We don't need to to look too much different than comments.
     require("todo-comments").setup({
         signs = false,
     })

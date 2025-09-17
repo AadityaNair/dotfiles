@@ -8,8 +8,6 @@ local TableConcat = common.TableConcat
 common.setup()
 ------------------------------------------------- Plugins Setup --------------------------------------------------
 
--- TODO: vista.vim
--- TODO: When there is an error, the error window goes away too fast to actually read the thing.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
@@ -17,8 +15,7 @@ local ui = require("ui")
 local ux = require("ux")
 local autocomplete = require("autocomplete")
 
--- TODO: Avoid needing to updated the in-repo config file.
---       I want to avoid leaving a dirty repo.
+-- TODO: Auto load this file if it exists. Avoids leaving a dirty repo.
 local company = require("company_specific_config")
 
 local plugins = {}
