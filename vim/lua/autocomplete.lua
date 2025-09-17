@@ -7,12 +7,7 @@ local default_lsp = {
 }
 local custom_lsps = require("company_specific_config").custom_lsps
 
-function TableConcat(t1, t2)
-    for _, v in ipairs(t2) do
-        require("table").insert(t1, v)
-    end
-    return t1
-end
+local TableConcat = require("common").TableConcat
 
 local enabled_lsps = TableConcat(default_lsp, custom_lsps)
 
