@@ -23,11 +23,11 @@ window-save-state = never
 
 # Quick Terminal Stuff
 quick-terminal-screen = mouse
-quick-terminal-animation-duration = 0.2
+quick-terminal-animation-duration = 0
 keybind = global:f12=toggle_quick_terminal
-quick-terminal-position = center
+quick-terminal-position = top
 quick-terminal-size = 100%
-quick-terminal-space-behaviour = remain
+quick-terminal-space-behavior = remain
 
 # Others
 link-url = true
