@@ -25,13 +25,17 @@ window-save-state = never
 quick-terminal-screen = mouse
 quick-terminal-animation-duration = 0.2
 keybind = global:f12=toggle_quick_terminal
+quick-terminal-position = center
+quick-terminal-size = 100%
+quick-terminal-space-behaviour = remain
 
 # Others
 link-url = true
 quit-after-last-window-closed = false
-shell-integration = zsh
+shell-integration = fish
 macos-option-as-alt = left
 bold-is-bright = true
+bell-features = no-attention
 
 # Alt+<left/right> has a weird default with Ghostty. We need to unbind
 # it to make my tmux/zellij keybindings work.
