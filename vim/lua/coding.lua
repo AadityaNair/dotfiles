@@ -159,11 +159,12 @@ function module.setup()
         end
     })
 
-    -- vim.filetype.add({
-    --     extension = {
-    --         ['zsh', 'sh'] = 'bash'
-    --     },
-    -- })
+    vim.filetype.add({
+        extension = {
+            ['zsh'] = 'bash',
+            ['sh'] = 'bash',
+        },
+    })
 
     vim.api.nvim_create_user_command("DiagnosticToggle", function()
         local config = vim.diagnostic.config
