@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local ui = require("ui")
 local ux = require("ux")
-local autocomplete = require("autocomplete")
+local coding = require("coding")
 
 -- TODO: Auto load this file if it exists. Avoids leaving a dirty repo.
 local company = require("company_specific_config")
@@ -22,12 +22,12 @@ local plugins = {}
 
 plugins = TableConcat(plugins, ui.plugins)
 plugins = TableConcat(plugins, ux.plugins)
-plugins = TableConcat(plugins, autocomplete.plugins)
+plugins = TableConcat(plugins, coding.plugins)
 plugins = TableConcat(plugins, company.plugins)
 
 require('lazy').setup(plugins)
 
 ui.setup()
 ux.setup()
-autocomplete.setup()
+coding.setup()
 company.setup()
