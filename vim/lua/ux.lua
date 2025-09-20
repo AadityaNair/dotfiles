@@ -1,7 +1,7 @@
 module = {}
 module.plugins = {
     "numToStr/Comment.nvim",
-    'nvim-treesitter/nvim-treesitter',
+    {'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate"},
     'nvim-treesitter/nvim-treesitter-context',
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
@@ -17,6 +17,37 @@ module.plugins = {
         "kevinhwang91/nvim-ufo",
         dependencies = {"kevinhwang91/promise-async"},
     },
+}
+
+local concat = require('common').TableConcat
+
+local supported_langs = {
+    'bash',
+    'c',
+    'cpp',
+    'diff',
+    'erlang',
+    'fish',
+    'go',
+    'graphql',
+    'hack',
+    'javascript',
+    'json',
+    'kdl',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'php',
+    'python',
+    'regex',
+    'ruby',
+    'rust',
+    'starlark',
+    'thrift',
+    'toml',
+    'vim',
+    'vimdoc',
+    'yaml',
 }
 
 function module.setup()
@@ -77,8 +108,6 @@ function module.setup()
     telescope.load_extension "undo"
     vim.keymap.set('n', 'u', telescope.extensions.undo.undo, {silent=true})
 
-    -- TODO: nvim-treesitter/nvim-treesitter-textobjects
-    require("nvim-treesitter.install").prefer_git = true
     -- TODO: Finetune the values below.
     require("treesitter-context").setup({
         enable=true,
@@ -86,49 +115,21 @@ function module.setup()
         min_window_height = 0,
         line_numbers = true,
     })
-    require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-            'bash',
-            'c',
-            'cpp',
-            'diff',
-            'erlang',
-            'fish',
-            'go',
-            'graphql',
-            'hack',
-            'javascript',
-            'json',
-            'kdl',
-            'lua',
-            'markdown',
-            'markdown_inline',
-            'php',
-            'python',
-            'regex',
-            'ruby',
-            'rust',
-            'starlark',
-            'thrift',
-            'toml',
-            'vim',
-            'vimdoc',
-            'yaml',
-        },
-        highlight = {
-            enable = true,
-            -- disable = {'bash'},
-        },
-        indent = {
-            enable = true,
-            -- disable = {'latex'},
-        },
-    })
 
-    -- Set strings to be italics
-    hl_settings = vim.api.nvim_get_hl(0, {name="String"})
-    hl_settings['italic']=true
-    vim.api.nvim_set_hl(0, "String", hl_settings)
+    require("nvim-treesitter").install(supported_langs)
+    vim.api.nvim_create_autocmd('FileType',{
+        pattern = supported_langs,
+        callback = function()
+            vim.treesitter.start()
+            vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+            -- Set strings to be italics
+            local hl_settings = vim.api.nvim_get_hl(0, {name="String"})
+            hl_settings['italic']=true
+            vim.api.nvim_set_hl(0, "String", hl_settings)
+        end
+    })
 end
 
 return module
