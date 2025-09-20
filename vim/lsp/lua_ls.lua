@@ -18,4 +18,25 @@ return {
         'selene.yml',
         '.git',
     },
+    settings = {
+        Lua = {
+            diagnostics = { globals = {'vim', 'require'}},
+            runtime = {
+                version = 'LuaJIT',
+                path = {
+                  'lua/?.lua',
+                  'lua/?/init.lua',
+                },
+
+            },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.RUNTIME,
+                    '${3rd}/luv/library',
+                    '${3rd}/busted/library',
+                },
+            },
+        },
+    },
 }
