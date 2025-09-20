@@ -1,5 +1,35 @@
 module = {}
 
+local supported_langs = {
+    'bash',
+    'c',
+    'cpp',
+    'diff',
+    'erlang',
+    'fish',
+    'go',
+    'graphql',
+    'hack',
+    'javascript',
+    'json',
+    'kdl',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'php',
+    'python',
+    'regex',
+    'ruby',
+    'rust',
+    'starlark',
+    'thrift',
+    'toml',
+    'vim',
+    'vimdoc',
+    'yaml',
+}
+
+
 -- TODO: support providing configs as well.
 local default_lsp = {
     'lua_ls',
@@ -12,6 +42,8 @@ local TableConcat = require("common").TableConcat
 local enabled_lsps = TableConcat(default_lsp, custom_lsps)
 
 module.plugins = {
+    {'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate"},
+    'nvim-treesitter/nvim-treesitter-context',
     {
         "neovim/nvim-lspconfig",
         dependencies = { 'saghen/blink.cmp' },
@@ -104,14 +136,34 @@ local function lua_lsp_for_neovim() -- TODO: Fix the `vim` variable not being re
 end
 
 function module.setup()
-    vim.filetype.add({
-        extension = {
-            ['zsh'] = 'sh',
-        },
-        filename = {
-            ['zshrc'] = 'sh',
-        },
+    -- TODO: Finetune the values below.
+    require("treesitter-context").setup({
+        enable=true,
+        max_lines = 0,
+        min_window_height = 0,
+        line_numbers = true,
     })
+
+    require("nvim-treesitter").install(supported_langs)
+    vim.api.nvim_create_autocmd('FileType',{
+        pattern = supported_langs,
+        callback = function()
+            vim.treesitter.start()
+            vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+            -- Set strings to be italics
+            local hl_settings = vim.api.nvim_get_hl(0, {name="String"})
+            hl_settings['italic']=true
+            vim.api.nvim_set_hl(0, "String", hl_settings)
+        end
+    })
+
+    -- vim.filetype.add({
+    --     extension = {
+    --         ['zsh', 'sh'] = 'bash'
+    --     },
+    -- })
 
     vim.api.nvim_create_user_command("DiagnosticToggle", function()
         local config = vim.diagnostic.config

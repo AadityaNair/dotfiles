@@ -1,8 +1,6 @@
 module = {}
 module.plugins = {
     "numToStr/Comment.nvim",
-    {'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate"},
-    'nvim-treesitter/nvim-treesitter-context',
     {'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons'},
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
     {
@@ -19,37 +17,6 @@ module.plugins = {
     },
 }
 
-local concat = require('common').TableConcat
-
-local supported_langs = {
-    'bash',
-    'c',
-    'cpp',
-    'diff',
-    'erlang',
-    'fish',
-    'go',
-    'graphql',
-    'hack',
-    'javascript',
-    'json',
-    'kdl',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'php',
-    'python',
-    'regex',
-    'ruby',
-    'rust',
-    'starlark',
-    'thrift',
-    'toml',
-    'vim',
-    'vimdoc',
-    'yaml',
-}
-
 function module.setup()
     vim.o.foldcolumn = 'auto:9' -- '0' is not bad
     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
@@ -63,7 +30,7 @@ function module.setup()
     -- TODO: Look into collapsing CPP namespaces automatically. And not having indents for it as well.
     -- TODO: Add command to just fold the current fold
     require('ufo').setup({
-        provider_selector = function(bufnr, filetype, buftype)
+        provider_selector = function()
             return {'treesitter', 'indent'}
         end
     })
@@ -108,28 +75,6 @@ function module.setup()
     telescope.load_extension "undo"
     vim.keymap.set('n', 'u', telescope.extensions.undo.undo, {silent=true})
 
-    -- TODO: Finetune the values below.
-    require("treesitter-context").setup({
-        enable=true,
-        max_lines = 0,
-        min_window_height = 0,
-        line_numbers = true,
-    })
-
-    require("nvim-treesitter").install(supported_langs)
-    vim.api.nvim_create_autocmd('FileType',{
-        pattern = supported_langs,
-        callback = function()
-            vim.treesitter.start()
-            vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-            -- Set strings to be italics
-            local hl_settings = vim.api.nvim_get_hl(0, {name="String"})
-            hl_settings['italic']=true
-            vim.api.nvim_set_hl(0, "String", hl_settings)
-        end
-    })
 end
 
 return module
