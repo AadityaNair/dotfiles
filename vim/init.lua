@@ -16,7 +16,7 @@ local ux = require("ux")
 local coding = require("coding")
 
 -- TODO: Auto load this file if it exists. Avoids leaving a dirty repo.
-local company = require("company_specific_config")
+local company = require("company")
 
 local plugins = {}
 

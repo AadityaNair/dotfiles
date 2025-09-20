@@ -35,7 +35,7 @@ local default_lsp = {
     'lua_ls',
     'bashls',
 }
-local custom_lsps = require("company_specific_config").custom_lsps
+local custom_lsps = require("company").custom_lsps
 
 local TableConcat = require("common").TableConcat
 
