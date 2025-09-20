@@ -1,4 +1,5 @@
 module = {}
+local TableConcat = require("common").TableConcat
 
 local supported_langs = {
     'bash',
@@ -29,33 +30,16 @@ local supported_langs = {
     'yaml',
 }
 
-
--- TODO: support providing configs as well.
-local default_lsp = {
+local default_lsps = {
     'lua_ls',
     'bashls',
 }
-local custom_lsps = require("company").custom_lsps
-
-local TableConcat = require("common").TableConcat
-
-local enabled_lsps = TableConcat(default_lsp, custom_lsps)
+local company_lsps = require("company").custom_lsps
 
 module.plugins = {
     {'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate"},
     'nvim-treesitter/nvim-treesitter-context',
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = { 'saghen/blink.cmp' },
-        config = function()
-            local lspconfig = require('lspconfig')
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-            for _, lsp in ipairs(enabled_lsps) do
-                lspconfig[lsp].setup({capabilities = capabilities})
-            end
-        end
-    },
+    { "neovim/nvim-lspconfig", dependencies = { 'saghen/blink.cmp' } },
     {
         "saghen/blink.cmp",
         dependencies = {},
@@ -176,6 +160,9 @@ function module.setup()
         }
         end, {desc = "Toggle showing LSPErrors/Hints/etc"}
     )
+    for _, lsp in ipairs(TableConcat(default_lsps, company_lsps)) do
+        vim.lsp.enable(lsp)
+    end
     lua_lsp_for_neovim()
 end
 
