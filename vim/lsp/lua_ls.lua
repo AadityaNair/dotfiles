@@ -20,7 +20,7 @@ return {
     },
     settings = {
         Lua = {
-            diagnostics = { globals = {'vim', 'require'}},
+            diagnostics = { globals = {'vim'}},
             runtime = {
                 version = 'LuaJIT',
                 path = {

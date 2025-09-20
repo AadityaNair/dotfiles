@@ -110,10 +110,7 @@ local function lua_lsp_for_neovim()
                 },
                 diagnostics = {
                     -- Get the language server to recognize the `vim` global
-                    globals = {
-                        'vim',
-                        'require'
-                    },
+                    globals = {'vim'},
                 },
             })
       end,
