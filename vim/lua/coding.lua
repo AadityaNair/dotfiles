@@ -80,7 +80,7 @@ module.plugins = {
 }
 
 -- Copied directly from https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
-local function lua_lsp_for_neovim() -- TODO: Fix the `vim` variable not being recognized. Or make folke/lazydev work.
+local function lua_lsp_for_neovim()
     vim.lsp.config('lua_ls', {
         on_init = function(client)
             if client.workspace_folders then
@@ -103,7 +103,9 @@ local function lua_lsp_for_neovim() -- TODO: Fix the `vim` variable not being re
                 workspace = {
                     checkThirdParty = false,
                     library = {
-                        vim.env.VIMRUNTIME
+                        vim.env.VIMRUNTIME,
+                        '${3rd}/luv/library',
+                        '${3rd}/busted/library',
                     }
                 },
                 diagnostics = {
