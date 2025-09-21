@@ -25,7 +25,12 @@ plugins = TableConcat(plugins, ux.plugins)
 plugins = TableConcat(plugins, coding.plugins)
 plugins = TableConcat(plugins, company.plugins)
 
-require('lazy').setup(plugins)
+require('lazy').setup({
+    spec = plugins,
+    rocks = {
+        enabled = false,
+    },
+})
 
 ui.setup()
 ux.setup()
