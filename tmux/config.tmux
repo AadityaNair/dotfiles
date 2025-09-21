@@ -63,6 +63,5 @@ tmux bind r source-file ~/.tmux.conf
 tmux bind -n M-. resize-pane -Z
 
 tmux run '$INSTALL/dotfiles/tmux/theme.tmux'
-# tmux run '$INSTALL/dotfiles/tmux/tokyonight_night.tmux'
 
 #vi: syntax=sh ft=sh
