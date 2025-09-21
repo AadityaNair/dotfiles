@@ -1,7 +1,3 @@
---  luochen1990/rainbow             -> https://gitlab.com/HiPhish/rainbow-delimiters.nvim
---  mbbill/undotree                 -> debugloop/telescope-undo.nvim
---  terryma/vim-multiple-cursors    -> mg979/vim-visual-multi (?X)
-
 local common = require('common')
 local TableConcat = common.TableConcat
 
