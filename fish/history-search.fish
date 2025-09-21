@@ -6,9 +6,7 @@
 #   2. Maintains a global `index` which says how back in history we went.
 #   3. Use `atuin_history_up` and `atuin_history_down` to increase/decrease the `index`
 #   4. Resets the index when we enter the command or cancel the command via `reset_index`
-# NOTE: Very very prone to off-by-one errors. Please be careful updating the index.
-
-# TODO: Make the index more reasonable to read. I don't like the current code much.
+# WARNING: Very very prone to off-by-one errors. Please be careful updating the index.
 # TODO: Underline the query text
 
 # Configure atuin search
