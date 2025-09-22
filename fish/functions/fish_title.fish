@@ -16,6 +16,7 @@ if test -n "$ZELLIJ"
 else if test -n "$TMUX"
     function terminal_rename
         printf "\033k%s\033\\" "$argv[1]"
+        # TODO: Use `tmux rename-window`
     end
 end
 
