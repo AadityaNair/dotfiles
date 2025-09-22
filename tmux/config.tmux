@@ -2,6 +2,25 @@
 
 # TODO: Reorder this file to be more logical.
 # TODO: Add if-else statements for my personal mac.
+
+##################### CONFIGURATION #######################
+######## Session
+######## Windows
+######## Panes
+
+
+###################### KEYBINDINGS ########################
+########## Session 
+########## Windows
+########## Panes
+
+
+######################## THEMES ###########################
+
+
+#### Hooks?
+
+
 tmux set -g set-clipboard external
 tmux set -g default-shell /opt/homebrew/bin/fish
 # Asked by nvim
