@@ -8,17 +8,11 @@ bind -n M-Down switch-client -n
 ########## Windows
 # begin-selection
 # clear-selection
-# copy-*
 # pipe-*
-# previous-prompt
 # rectangle-toggle
 # search-*-incremental
 # select-(line|word)
 
-bind -n M-n copy-mode
-bind -n M-p copy-mode
-bind -n S-F1 copy-mode
-bind -n F11   copy-mode    # Just in case pg_up/down doesn't exist. Like in a macbook.
 
 bind -n M-a new-window -c "#{pane_current_path}"  # TODO: `pane_current_path` doesn't work with symlink properly
 bind -n M-Right next-window
@@ -49,3 +43,11 @@ bind r source-file ~/.tmux.conf
 ##### Status line comm
 # display-message
 # display-popup
+
+##### Copy Mode
+bind -n M-n copy-mode
+bind -n M-p copy-mode
+bind -n S-F1 copy-mode
+bind -n F11   copy-mode    # Just in case pg_up/down doesn't exist. Like in a macbook.
+# previous-prompt
+# copy-*
