@@ -49,5 +49,3 @@ bind r source-file ~/.tmux.conf
 ##### Status line comm
 # display-message
 # display-popup
-
-#vi: syntax=sh ft=sh
