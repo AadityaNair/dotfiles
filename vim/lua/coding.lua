@@ -67,12 +67,23 @@ module.plugins = {
             completion = {
                 documentation = { auto_show = false },
                 ghost_text = { enabled = true},
-                list = {selection = {preselect = true, auto_insert = true} }
+                list = {selection = {preselect = true, auto_insert = true} },
+                menu = {
+                    draw = {
+                        columns = {
+                            {'kind_icon'},
+                            {'label', 'label_description', gap=1},
+                            {'source_name'},
+                        },
+                        treesitter = { 'lsp' },
+                    }
+                },
             },
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
-            fuzzy = { implementation = "prefer_rust" }
+            fuzzy = { implementation = "prefer_rust" },
+            signature = { enabled = true },
         },
         opts_extend = { "sources.default" },
     },
