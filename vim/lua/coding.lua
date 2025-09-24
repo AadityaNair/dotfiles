@@ -104,7 +104,8 @@ function module.setup()
         callback = function()
             vim.treesitter.start()
             vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            -- FIX: treesitter indent doesn't actually work. Figure out why.
+            -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
             -- Set strings to be italics
             local hl_settings = vim.api.nvim_get_hl(0, {name="String"})
