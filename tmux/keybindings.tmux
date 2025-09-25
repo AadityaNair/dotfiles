@@ -54,3 +54,6 @@ bind -n S-F1 copy-mode
 bind -n F11   copy-mode    # Just in case pg_up/down doesn't exist. Like in a macbook.
 # previous-prompt
 # copy-*
+
+# TODO: copy-pane, auto-layout for panes, right-click for mouse
+# TODO: Display panes
