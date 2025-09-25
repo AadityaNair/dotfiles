@@ -1,3 +1,6 @@
+unbind C-b
+set-option -g prefix C-a
+bind C-a send-prefix
 ########## Clients and Session 
 # refresh-client
 bind -n M-s new-session
