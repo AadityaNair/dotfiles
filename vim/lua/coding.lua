@@ -31,8 +31,8 @@ local supported_langs = {
 }
 
 local default_lsps = {
-    'lua_ls',
-    'bashls',
+    'lua_ls', -- Only for neovim configs
+    'bashls', -- Bash scripts
 }
 local company_lsps = require("company").custom_lsps
 
