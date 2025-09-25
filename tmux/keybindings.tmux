@@ -57,3 +57,5 @@ bind -n F11   copy-mode    # Just in case pg_up/down doesn't exist. Like in a ma
 
 # TODO: copy-pane, auto-layout for panes, right-click for mouse
 # TODO: Display panes
+
+# vim: ft=tmux
