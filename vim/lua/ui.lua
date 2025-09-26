@@ -76,6 +76,7 @@ function module.setup()
 
     require("todo-comments").setup({
         signs = false,
+        highlight = {multiline=false},
     })
 end
 
