@@ -91,10 +91,9 @@ module.plugins = {
 }
 
 function module.setup()
-    -- TODO: Finetune the values below.
     require("treesitter-context").setup({
         enable=true,
-        max_lines = 0,
+        max_lines = 2,  -- Only show context upto two levels.
         min_window_height = 0,
         line_numbers = true,
     })
