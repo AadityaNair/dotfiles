@@ -88,6 +88,7 @@ module.plugins = {
         },
         opts_extend = { "sources.default" },
     },
+    { 'stevearc/conform.nvim' },
 }
 
 function module.setup()
@@ -134,6 +135,16 @@ function module.setup()
     for _, lsp in ipairs(TableConcat(default_lsps, company_lsps)) do
         vim.lsp.enable(lsp)
     end
+
+    require('conform').setup({
+        formatters_by_ft = {
+            python = { 'ruff' },
+        },
+    })
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    require('conform').formatters.ruff = {
+        command = 'uv run ruff'
+    }
 end
 
 return module
