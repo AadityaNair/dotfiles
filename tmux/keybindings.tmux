@@ -39,24 +39,39 @@ bind -n M-. resize-pane -Z
 
 bind -n M-l next-layout  # Rotate through preset pane layouts.
 
-# pipe-pane
-# resize-pane
-# capture-pane
+# pipe-pane/capture-pane
 
 ########## Copy Mode
 bind -n M-p copy-mode
 bind -n F11 copy-mode    
 
-# begin-selection
-# clear-selection
-# pipe-*
-# rectangle-toggle
-# search-*-incremental
-# select-(line|word)
-# previous-prompt
-# copy-*
+bind -T copy-mode-vi Space send-keys -X begin-selection
+bind -T copy-mode-vi q send-keys -X cancel
+bind -T copy-mode-vi Escape send-keys -X clear-selection
+bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi p send-keys -X next-prompt
+bind -T copy-mode-vi P send-keys -X previous-prompt
+bind -T copy-mode-vi v send-keys -X rectangle-toggle
+bind -T copy-mode-vi r send-keys -X refresh-from-pane
+
+bind -T copy-mode-vi / send-keys -X search-forward
+bind -T copy-mode-vi N send-keys -X search-reverse
+
+## Possibly useful stuff
+# copy-selection
+# copy-selection-no-clear
+# copy-pipe
+# set-mark/jump-to-mark
+# (next|previous)-matching-bracket
+# (next|previous)-paragraph
+# next-word(-end)
+# next-space
+# pipe
+# search-(forward|backward)-incremental
+# history-(bottom|top) to copy entire pane
 
 ########## Mouse
+# copy-line-and-cancel
 
 
 ##### Status line comm
@@ -68,8 +83,7 @@ bind -n F11 copy-mode
 # display-panes
 
 # TODO: `pane_current_path` doesn't work with symlink properly. 
-# TODO: if-else in copy-mode
+# TODO: if-else for entering copy-mode
 # TODO: Toggle mouse mode
-# TODO: Capture pane doesn't send to copy buffer
-
+# TODO: If set window name, disable window renaming
 # vim: ft=tmux
