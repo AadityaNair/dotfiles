@@ -100,7 +100,7 @@ module.plugins = {
         },
         opts_extend = { "sources.default" },
     },
-    { 'stevearc/conform.nvim' },
+    { 'stevearc/conform.nvim', event = { "BufWritePre" } },  -- FIX: Not sure if we need these.
 }
 
 function module.setup()
@@ -144,6 +144,23 @@ function module.setup()
         }
         end, {desc = "Toggle showing LSPErrors/Hints/etc"}
     )
+
+    vim.api.nvim_create_user_command(
+        "Format",
+        function(args)
+            local range = nil
+            if args.count ~= -1 then
+                local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+                range = {
+                    start = { args.line1, 0 },
+                    ["end"] = { args.line2, end_line:len() },
+                }
+            end
+            require("conform").format({ async = true, lsp_format = "fallback", range = range })
+        end,
+        {desc = "Format the whole file or selected section", range=true}
+    )
+
     for _, lsp in ipairs(TableConcat(default_lsps, company_lsps)) do
         vim.lsp.enable(lsp)
     end
@@ -151,11 +168,40 @@ function module.setup()
     require('conform').setup({
         formatters_by_ft = {
             python = { 'ruff' },
+            lua = { 'stylua' },
         },
     })
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     require('conform').formatters.ruff = {
-        command = 'uv run ruff'
+        command = 'uv',
+        args = {
+            'run',
+            'ruff',
+            "format",
+            "--force-exclude",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+        },
+        range_args = function(_, ctx)
+            return {
+                'run',
+                'ruff',
+                "format",
+                "--force-exclude",
+                "--range",
+                string.format(
+                    "%d:%d-%d:%d",
+                    ctx.range.start[1],
+                    ctx.range.start[2] + 1,
+                    ctx.range["end"][1],
+                    ctx.range["end"][2] + 1
+                ),
+                "--stdin-filename",
+                "$FILENAME",
+                "-",
+            }
+        end,
     }
 end
 
