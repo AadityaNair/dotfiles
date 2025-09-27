@@ -9,35 +9,35 @@ return {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
     root_markers = {
-        '.luarc.json',
-        '.luarc.jsonc',
-        '.luacheckrc',
-        '.stylua.toml',
-        'stylua.toml',
-        'selene.toml',
-        'selene.yml',
-        '.git',
+        ".luarc.json",
+        ".luarc.jsonc",
+        ".luacheckrc",
+        ".stylua.toml",
+        "stylua.toml",
+        "selene.toml",
+        "selene.yml",
+        ".git",
     },
     -- Below is the only Neovim specific configuration. Above is the default config
     settings = {
         Lua = {
             runtime = {
-                version = 'LuaJIT',
+                version = "LuaJIT",
                 path = {
-                    'lua/?.lua',
-                    'lua/?/init.lua',
+                    "lua/?.lua",
+                    "lua/?/init.lua",
                 },
             },
             workspace = {
                 checkThirdParty = false,
                 library = {
                     vim.env.VIMRUNTIME,
-                    '${3rd}/luv/library',
-                    '${3rd}/busted/library',
-                }
+                    "${3rd}/luv/library",
+                    "${3rd}/busted/library",
+                },
             },
             -- Get the language server to recognize the `vim` global variable
-            diagnostics = {globals = {'vim'}},
-        }
-    }
+            diagnostics = { globals = { "vim" } },
+        },
+    },
 }

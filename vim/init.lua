@@ -1,4 +1,4 @@
-local common = require('common')
+local common = require("common")
 local TableConcat = common.TableConcat
 
 common.setup()
@@ -21,7 +21,7 @@ plugins = TableConcat(plugins, ux.plugins)
 plugins = TableConcat(plugins, coding.plugins)
 plugins = TableConcat(plugins, company.plugins)
 
-require('lazy').setup({
+require("lazy").setup({
     spec = plugins,
     rocks = {
         enabled = false,
