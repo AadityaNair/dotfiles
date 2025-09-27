@@ -38,8 +38,9 @@ local default_lsps = {
 local company_lsps = require("company").custom_lsps
 
 module.plugins = {
-    {'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate"},
-    'nvim-treesitter/nvim-treesitter-context',
+    { 'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate" },
+    { 'nvim-treesitter/nvim-treesitter-context' },
+    { "xzbdmw/colorful-menu.nvim" },
     {
         "saghen/blink.cmp",
         dependencies = {},
@@ -76,6 +77,17 @@ module.plugins = {
                             {'label', 'label_description', gap=1},
                             {'source_name'},
                         },
+                        components = {
+                        label = {
+                            text = function(ctx)
+                                return require("colorful-menu").blink_components_text(ctx)
+                            end,
+                            highlight = function(ctx)
+                                return require("colorful-menu").blink_components_highlight(ctx)
+                            end,
+                        },
+                    },
+
                         treesitter = { 'lsp' },
                     }
                 },
