@@ -86,4 +86,5 @@ bind -T copy-mode-vi N send-keys -X search-reverse
 # TODO: if-else for entering copy-mode
 # TODO: Toggle mouse mode
 # TODO: If set window name, disable window renaming
+# TODO: Starship (or its integration with fish) is eating up OSC 133 codes and breaking prompt-search.
 # vim: ft=tmux
