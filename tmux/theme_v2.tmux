@@ -73,3 +73,5 @@ status-right-*
 # Window 
 window-status-current-format
 window-status-format
+
+# TODO: Zoom indicator
