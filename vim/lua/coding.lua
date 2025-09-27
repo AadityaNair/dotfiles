@@ -40,7 +40,7 @@ local company_lsps = require("company").custom_lsps
 module.plugins = {
     { 'nvim-treesitter/nvim-treesitter', branch = "main", build = ":TSUpdate" },
     { 'nvim-treesitter/nvim-treesitter-context' },
-    { "xzbdmw/colorful-menu.nvim" },
+    { "xzbdmw/colorful-menu.nvim" },  -- NOTE: Plugin under evaluation
     {
         "saghen/blink.cmp",
         dependencies = {},
@@ -100,7 +100,7 @@ module.plugins = {
         },
         opts_extend = { "sources.default" },
     },
-    { 'stevearc/conform.nvim', event = { "BufWritePre" } },  -- FIX: Not sure if we need these.
+    { 'stevearc/conform.nvim', event = { "BufWritePre" } },  -- NOTE: Plugin under evaluation.
 }
 
 function module.setup()
