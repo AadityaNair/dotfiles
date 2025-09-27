@@ -5,6 +5,7 @@
 
 set -x STARSHIP_CONFIG "$DOTFILES/shell_applications/starship.toml"
 
+# TODO: For the usage we have, we don't need starship
 function fish_prompt
     set STARSHIP_CMD_PIPESTATUS $pipestatus
     set STARSHIP_CMD_STATUS $status
