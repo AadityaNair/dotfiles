@@ -39,7 +39,6 @@ bind -n M-. resize-pane -Z
 
 bind -n M-l next-layout  # Rotate through preset pane layouts.
 
-# pipe-pane/capture-pane
 
 ########## Copy Mode
 bind -n M-p copy-mode
@@ -49,8 +48,8 @@ bind -T copy-mode-vi Space send-keys -X begin-selection
 bind -T copy-mode-vi q send-keys -X cancel
 bind -T copy-mode-vi Escape send-keys -X clear-selection
 bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
-bind -T copy-mode-vi p send-keys -X next-prompt
-bind -T copy-mode-vi P send-keys -X previous-prompt
+bind -T copy-mode-vi p send-keys -X next-prompt -o
+bind -T copy-mode-vi P send-keys -X previous-prompt -o
 bind -T copy-mode-vi v send-keys -X rectangle-toggle
 bind -T copy-mode-vi r send-keys -X refresh-from-pane
 
@@ -70,21 +69,21 @@ bind -T copy-mode-vi N send-keys -X search-reverse
 # search-(forward|backward)-incremental
 # history-(bottom|top) to copy entire pane
 
+
 ########## Mouse
+bind -n M-m set mouse
 # copy-line-and-cancel
 
 
-##### Status line comm
-# display-message
+##### Other cool stuff
 # display-popup
-
-##### Others
+# display-message
 # customize-mode
 # display-panes
 
 # TODO: `pane_current_path` doesn't work with symlink properly. 
 # TODO: if-else for entering copy-mode
-# TODO: Toggle mouse mode
+# TODO: Keybinding to copy entire window/pane.
 # TODO: If set window name, disable window renaming
 # TODO: Starship (or its integration with fish) is eating up OSC 133 codes and breaking prompt-search.
 # vim: ft=tmux
