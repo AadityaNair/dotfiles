@@ -29,6 +29,8 @@ function module.setup()
 
     -- TODO: Look into collapsing CPP namespaces automatically. And not having indents for it as well.
     -- TODO: Add command to just fold the current fold
+    -- TODO: All fold symbols should take the same line
+    -- TODO: Maybe it would be useful to do this in the LSP config
     require("ufo").setup({
         provider_selector = function()
             return { "treesitter", "indent" }
