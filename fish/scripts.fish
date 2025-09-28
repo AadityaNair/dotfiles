@@ -14,7 +14,7 @@ function py; ipython3 --no-banner --autoindent --pprint $argv; end
 function dots; cd $DOTFILES; end
 function frc; nvim $DOTFILES/fish/config.fish; end
 function src; nvim $DOTFILES/fish/scripts.fish; end
-function trc; nvim $DOTFILES/tmux/config.tmux; end
+function trc; nvim $DOTFILES/tmux/tmux.conf; end
 function vrc; nvim $DOTFILES/vim/init.lua; end
 
 function vim --wraps nvim; nvim $argv; end
