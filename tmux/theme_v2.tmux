@@ -1,10 +1,12 @@
 
 ####### Actual Theme Colours
-set @active_window ''
-set @previous_window ''
-set @session_marker ''
-set @background ''
-#...TBD
+set @active_window '#a9b1d6'
+set @background '#1a1b26'  # In old systems, it is #16161e 
+set -F @text_active '#{@background}' # To complement active_window
+set @text_inactive '#c0caf5'  # In old systems, it #15161e
+set -F @text_previous '#{@active_window}'  # We probably don't need this at all.
+set -F @pane_border_active '#{@active_window}'  # Same as @active_window
+set @pane_border_inactive '#3b4261'  # Slightly lighter than @background
 
 
 ####### CSS
