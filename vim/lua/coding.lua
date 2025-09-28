@@ -70,8 +70,9 @@ module.plugins = {
             },
             completion = {
                 documentation = { auto_show = false },
-                ghost_text = { enabled = true },
+                ghost_text = { enabled = true, show_with_menu = false },
                 list = { selection = { preselect = true, auto_insert = true } },
+                keyword = { range = "full" },
                 menu = {
                     draw = {
                         columns = {
