@@ -13,67 +13,98 @@ set @pane_border_inactive '#3b4261'  # Slightly lighter than @background
 
 # Clock
 clock-mode-color
-clock-mode-style
+# clock-mode-style
+
+
 # Copy
-copy-mode-match-style
-copy-mode-mark-style
-copy-mode-current-match-style
+# copy-mode-match-style
+# copy-mode-mark-style
+# copy-mode-current-match-style
+
+
 # Cursor
-cursor-color
+# cursor-color
+
+
 # Menu
-menu-style
-menu-selected-style
-menu-border-style
-menu-border-lines
+# menu-style
+# menu-selected-style
+# menu-border-style
+# menu-border-lines
+
+
 # Message
-message-command-style
-message-line
 message-style
+message-command-style
+# message-line
+
+
 # Pane
-pane-colors
-display-panes-active-color
-display-panes-color
-pane-active-boder-style
+pane-active-border-style
 pane-border-style
+# pane-colors
+# display-panes-active-color
+# display-panes-color
+
+
 # Popup
-popup-style
-popup-border-style
+# popup-style
+# popup-border-style
+
+
 # Status
 status-left-style
+status-right-style
 status-style
+
+
 # Window 
-window-active-style
-window-status-activity-style
-window-status-bell-style
-window-status-current-style
 window-status-last-style
+# window-active-style
+# window-status-activity-style
+# window-status-bell-style
+# window-status-current-style
 
 
 ####### HTML
 
 # Clock
 # Copy
+
+
 # Cursor
-cursor-style
+# cursor-style
+
+
 # Menu
 # Message
+
+
 # Pane
-pane-border-format
-pane-border-indicators
-pane-border-status
-pane-border-lines
+# pane-border-format
+# pane-border-indicators
+# pane-border-status
+# pane-border-lines
+
+
 # Popup
-popup-border-lines
+# popup-border-lines
+
+
 # Status
-status-format
-status-justify
 status-left
 status-left-length
-status-position
 status-right
-status-right-*
+status-right-length
+# status-format
+# status-justify
+# status-position
+
+
 # Window 
 window-status-current-format
 window-status-format
 
 # TODO: Zoom indicator
+
+# vim: ft=tmux
