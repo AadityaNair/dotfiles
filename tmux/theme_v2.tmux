@@ -8,11 +8,13 @@ set -F @text_previous '#{@active_window}'  # We probably don't need this at all.
 set -F @pane_border_active '#{@active_window}'  # Same as @active_window
 set @pane_border_inactive '#3b4261'  # Slightly lighter than @background
 
+set -F @other_utils '#{@active_window}'
+
 
 ####### CSS
 
 # Clock
-clock-mode-color
+set clock-mode-color "#{@other_utils}"
 # clock-mode-style
 
 
@@ -34,14 +36,14 @@ clock-mode-color
 
 
 # Message
-message-style
-message-command-style
+set message-style "fg=#{@active_window},bg=#{@pane_border_inactive},bold"
+set message-command-style "fg=#{@active_window},bg=#{@pane_border_inactive},bold"
 # message-line
 
 
 # Pane
-pane-active-border-style
-pane-border-style
+set pane-border-style 'fg=#{@pane_border_active}'
+set pane-active-border-style 'fg=#{@pane_border_inactive}'
 # pane-colors
 # display-panes-active-color
 # display-panes-color
@@ -53,13 +55,13 @@ pane-border-style
 
 
 # Status
-status-left-style
-status-right-style
-status-style
+set status-style 'fg=#{@active_window},bg=#{@background}'
+# set status-left-style ''
+# set status-right-style ''
 
 
 # Window 
-window-status-last-style
+set window-status-last-style 'fg=#{@active_window},default'
 # window-active-style
 # window-status-activity-style
 # window-status-bell-style
@@ -92,18 +94,18 @@ window-status-last-style
 
 
 # Status
-status-left
-status-left-length
-status-right
-status-right-length
+set status-left "#[fg=#{@text_active},bg=#{@active_window}] #S #[fg=#{@active_window},bg=#{@active_window}]"
+set status-right "#[italics] %a, %b %d  %H:%M"
+set status-left-length 32
+set status-right-length 64
 # status-format
 # status-justify
 # status-position
 
 
 # Window 
-window-status-current-format
-window-status-format
+set window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #I  #W #[fg=#{@active_window},bg=#{@active_window},nobold]"
+set window-status-format "#I  #W  "
 
 # TODO: Zoom indicator
 
