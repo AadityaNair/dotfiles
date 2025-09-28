@@ -52,22 +52,22 @@ bind -T copy-mode-vi p send-keys -X next-prompt -o
 bind -T copy-mode-vi P send-keys -X previous-prompt -o
 bind -T copy-mode-vi v send-keys -X rectangle-toggle
 bind -T copy-mode-vi r send-keys -X refresh-from-pane
+# set-mark/jump-to-mark
 
 bind -T copy-mode-vi / send-keys -X search-forward
 bind -T copy-mode-vi N send-keys -X search-reverse
+# search-(forward|backward)-incremental
 
-## Possibly useful stuff
-# copy-selection
-# copy-selection-no-clear
-# copy-pipe
-# set-mark/jump-to-mark
+## Possibly useful search stuff
 # (next|previous)-matching-bracket
 # (next|previous)-paragraph
-# next-word(-end)
-# next-space
-# pipe
-# search-(forward|backward)-incremental
+# copy-pipe
+# copy-selection
+# copy-selection-no-clear
 # history-(bottom|top) to copy entire pane
+# next-space
+# next-word(-end)
+# pipe
 
 
 ########## Mouse
@@ -75,11 +75,13 @@ bind -n M-m set mouse
 # copy-line-and-cancel
 
 
-##### Other cool stuff
-# display-popup
-# display-message
+##### Other cool stuff to maybe test later
+# confirm-before
 # customize-mode
+# display-menu
+# display-message
 # display-panes
+# display-popup
 
 # TODO: `pane_current_path` doesn't work with symlink properly. 
 # TODO: if-else for entering copy-mode
