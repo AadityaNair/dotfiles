@@ -1,109 +1,112 @@
-#!/usr/bin/env bash
-set -e
-# TODO: Separate theme and colours
-# TODO: Configure the missing colours in tokyonight theme
-# TODO: Make the right side clock look nicer.
 
-# Optional prefix highlight plugin
-tmux set -g @prefix_highlight_show_copy_mode 'on'
-tmux set -g @prefix_highlight_copy_mode_attr 'fg=black,bg=yellow,bold' # default is 'fg=default,bg=yellow'
+####### Actual Theme Colours
+set -g @active_window '#7aa2f7'
+set -g @text_inactive '#c0caf5'  # In old systems, it #15161e
+set -g @background '#1a1b26'  # In old systems, it is #16161e 
+set -g @pane_border_inactive '#3b4261'  # Slightly lighter than @background
 
-#------------------------------------------ Maglev Theme -----------------------------
-display_panes_active_colour=colour154
-display_panes_colour=colour247
-message_bg=colour11 # yellow
-message_command_bg=colour160  # light yellow
-message_command_fg=colour16   # black
-message_fg=colour16           # black
-mode_bg=colour11 # yellow
-mode_fg=colour16   # black
-pane_active_border_fg=green
-pane_border_fg=red
-session_bg=colour11 # yellow
-session_fg=colour16  # black
-status_bg=colour0 # dark gray
-status_fg=colour255 # white
-window_status_activity_bg=default
-window_status_activity_fg=default
-window_status_bell_bg=default
-window_status_bell_fg=colour11 # yellow
-window_status_bg=colour0 # dark gray
-window_status_current_bg=colour4 # blue
-window_status_current_fg=colour16 # black
-window_status_fg=colour255 # white
-window_status_last_fg=colour4 # blue
-clock_mode_colour=colour4 # blue
-
-#----------------------------------------- TokyoNight Night Theme ------------------------
-pane_active_border_fg='#7aa2f7'
-pane_border_fg='#3b4261'
-message_fg=$pane_active_border_fg
-message_bg=$pane_border_fg
-message_command_bg=$message_bg
-message_command_fg=$message_fg
-mode_bg=$pane_border_fg
-mode_fg=$pane_active_border_fg
-session_bg=$pane_active_border_fg
-session_fg='#15161e'
-status_bg='#16161e'
-status_fg=$pane_active_border_fg
-window_status_activity_bg=$status_bg
-window_status_activity_fg='#a9b1d6'
-window_status_bg=$status_bg
-window_status_fg=$window_status_activity_fg
+set -gF @text_active '#{@background}' # To complement active_window
+set -gF @text_previous '#{@active_window}'  # We probably don't need this at all.
+set -gF @pane_border_active '#{@active_window}'  # Same as @active_window
+set -gF @other_utils '#{@active_window}'
 
 
-window_status_current_bg=colour4 # blue
-window_status_current_fg=colour16 # black
+####### CSS
 
-# These don't exist
-# display_panes_colour=colour247
-# display_panes_active_colour=colour154
-# window_status_bell_bg=default
-# window_status_bell_fg=colour11 # yellow
-# window_status_last_fg=colour4 # blue
-# clock_mode_colour=colour4 # blue
-
-#----------------------------------------- Actual Theme --------------------------------
-
-message_attr=bold
-mode_attr=bold
-window_status_bell_attr=blink,bold
-window_status_last_attr=default
-window_status_activity_attr=underscore
-
-left_separator=''
-left_separator_black=''
-session_symbol=''
-
-right_separator=''
-right_separator_block=''
-
-tmux set -g pane-border-style fg=$pane_border_fg \; set -g pane-active-border-style fg=$pane_active_border_fg
-#uncomment for fat borders
-#tmux set -ga pane-border-style bg=$pane_border_fg \; set -ga pane-active-border-style bg=$pane_active_border_fg
-
-tmux set -g display-panes-active-colour $display_panes_active_colour \; set -g display-panes-colour $display_panes_colour
-tmux set -g message-style fg=$message_fg,bg=$message_bg,$message_attr
-tmux set -g message-command-style fg=$message_command_fg,bg=$message_command_bg,$message_attr
-tmux setw -g mode-style fg=$mode_fg,bg=$mode_bg,$mode_attr
-tmux set -g status-style fg=$status_fg,bg=$status_bg
-
-status_left="#[fg=$session_fg,bg=$session_bg] #S #[fg=$session_bg,bg=$status_bg]$left_separator_black"
-tmux set -g status-left-length 32 \; set -g status-left "$status_left"
-
-window_status_format="#I $left_separator #W  "
-tmux setw -g window-status-style fg=$window_status_fg,bg=$window_status_bg \; setw -g window-status-format "$window_status_format"
-
-window_status_current_format="#[fg=$window_status_bg,bg=$window_status_current_bg]$left_separator_black#[fg=$window_status_current_fg,bg=$window_status_current_bg] #I $left_separator #W #[fg=$window_status_current_bg,bg=$status_bg,nobold]$left_separator_black"
-tmux setw -g window-status-current-format "$window_status_current_format"
-tmux set -g status-justify left
-
-tmux setw -g window-status-activity-style fg=$window_status_activity_fg,bg=$window_status_activity_bg,$window_status_activity_attr
-tmux setw -g window-status-bell-style fg=$window_status_bell_fg,bg=$window_status_bell_bg,$window_status_bell_attr
-tmux setw -g window-status-last-style $window_status_last_attr,fg=$window_status_last_fg
+# Clock
+set -gF clock-mode-color "#{@other_utils}"
+# clock-mode-style
 
 
-tmux set -g status-right-length 64 \; set -g status-right "#[italics]$right_separator %a, %b %d $right_separator %H:%M"
-tmux setw -g clock-mode-colour $clock_mode_colour
+# Copy
+# copy-mode-match-style
+# copy-mode-mark-style
+# copy-mode-current-match-style
 
+
+# Cursor
+# cursor-color
+
+
+# Menu
+# menu-style
+# menu-selected-style
+# menu-border-style
+# menu-border-lines
+
+
+# Message
+set -gF message-style "fg=#{@active_window},bg=#{@pane_border_inactive},bold"
+set -gF message-command-style "fg=#{@active_window},bg=#{@pane_border_inactive},bold"
+# message-line
+
+
+# Pane
+set -gF pane-border-style 'fg=#{@pane_border_inactive}'
+set -gF pane-active-border-style 'fg=#{@active_window}'
+# pane-colors
+# display-panes-active-color
+# display-panes-color
+
+
+# Popup
+# popup-style
+# popup-border-style
+
+
+# Status
+set -gF status-style 'fg=#{@active_window},bg=#{@background}'
+# set status-left-style ''
+# set status-right-style ''
+
+
+# Window 
+set -gF window-status-last-style 'fg=#{@active_window},default'
+# window-active-style
+# window-status-activity-style
+# window-status-bell-style
+# window-status-current-style
+
+
+####### HTML
+
+# Clock
+# Copy
+
+
+# Cursor
+# cursor-style
+
+
+# Menu
+# Message
+
+
+# Pane
+# pane-border-format
+# pane-border-indicators
+# pane-border-status
+# pane-border-lines
+
+
+# Popup
+# popup-border-lines
+
+
+# Status
+set -g status-left "#[fg=#{@background},bg=#{@active_window}] #S #[fg=#{@active_window},bg=#{@background}]"
+set -g status-right "#[italics] %a, %b %d  %H:%M"
+set -g status-left-length 32
+set -g status-right-length 64
+# status-format
+# status-justify
+# status-position
+
+
+# Window 
+set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #I  #W #[fg=#{@active_window},bg=#{@background},nobold]"
+set -g window-status-format "#I  #W  "
+
+# TODO: Zoom indicator
+
+# vim: ft=tmux
