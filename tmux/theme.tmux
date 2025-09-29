@@ -44,9 +44,9 @@ set -gF message-command-style "fg=#{@active_window},bg=#{@pane_border_inactive},
 # Pane
 set -gF pane-border-style 'fg=#{@pane_border_inactive}'
 set -gF pane-active-border-style 'fg=#{@active_window}'
+# TODO: set -gF display-panes-active-color ""
+# TODO: set -gF display-panes-color ""
 # pane-colors
-# display-panes-active-color
-# display-panes-color
 
 
 # Popup
@@ -62,9 +62,10 @@ set -gF status-style 'fg=#{@active_window},bg=#{@background}'
 
 # Window 
 set -gF window-status-last-style 'fg=#{@active_window},default'
+# TODO: window-status-activity-style
+# TODO: window-status-bell-style
+# TODO: window-status-style
 # window-active-style
-# window-status-activity-style
-# window-status-bell-style
 # window-status-current-style
 
 
@@ -98,8 +99,8 @@ set -g status-left "#[fg=#{@background},bg=#{@active_window}] #S #[fg=#{@active_
 set -g status-right "#[italics] %a, %b %d  %H:%M"
 set -g status-left-length 32
 set -g status-right-length 64
+set -g status-justify left
 # status-format
-# status-justify
 # status-position
 
 
@@ -107,6 +108,8 @@ set -g status-right-length 64
 set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #I  #W #[fg=#{@active_window},bg=#{@background},nobold]"
 set -g window-status-format "#I  #W  "
 
+# TODO: mode-style
 # TODO: Zoom indicator
+# TODO: Different UI when name has been edited.
 
 # vim: ft=tmux
