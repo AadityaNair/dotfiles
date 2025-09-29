@@ -55,12 +55,21 @@ bind -T copy-mode-vi r send-keys -X refresh-from-pane  # Refresh contents of pan
 # The below two keybindings are useful when you want to copy a command from the terminal.
 # The keybindings will take you to right after you have entered the command.
 # For this to work, your shell/prompt should emit OSC133 escape codes. fish shell does it by default.
-bind -T copy-mode-vi p send-keys -X next-prompt -o  # Navigate to next terminal prompt.
-bind -T copy-mode-vi P send-keys -X previous-prompt -o  # Navigate to previous terminal prompt.
+# The -o makes it so that your cursor ends up right after you enter your command, instead of the 
+# beginning of the prompt. This is to work around some fish+starship problems.
+bind -T copy-mode-vi p send-keys -X next-prompt -o
+bind -T copy-mode-vi P send-keys -X previous-prompt -o
 # set-mark/jump-to-mark
 
-bind -T copy-mode-vi / send-keys -X search-forward  # Search below where you currently are.
-bind -T copy-mode-vi N send-keys -X search-reverse  # Search above where you currently are.
+# This will create a search UI kind of thing. You enter what you want to search in command prompt
+# it will be selected in the terminal, if it exists.
+# The search reverse (N) expects that you have tried to search forward (/) first.
+# The search-forward (/) only works once. To get to next matches, you need to search-again (n).
+bind -T copy-mode-vi / command-prompt -T search -p "(search down)" { send-keys -X search-forward '%%'}
+bind -T copy-mode-vi n send-keys -X search-again
+bind -T copy-mode-vi N send-keys -X search-reverse
+
+
 # search-(forward|backward)-incremental
 
 ## Possibly useful search stuff
