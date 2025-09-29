@@ -32,7 +32,7 @@ set -gF window-status-last-style 'fg=#{@active_window},default'
 # window-status-current-style
 set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #I  #W #[fg=#{@active_window},bg=#{@background},nobold]"
 set -g window-status-format "#I  #W  "
-
+# TODO: Use -a to split into multiple-lines
 
 ######### Status Right
 # set status-right-style ''
