@@ -8,7 +8,7 @@ $status\
 $cmd_duration\
 [ ]()\
 """
-# TODO: Do we need the last line.
+# NOTE: The last line add a space between end of prompt and the command.
 # TODO: Add OSC133 sequences in the format above.
 
 add_newline = false
