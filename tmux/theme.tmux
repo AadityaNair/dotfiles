@@ -22,15 +22,14 @@ set -g status-left-length 32  # Maximum length of the left component of the stat
 
 ######### Window List
 set -g status-justify left  # Where to put window list. left|right|center|absolute-center
-set -g window-status-format "#I  #W  "  # Default format of the window list.
+set -g window-status-format "#I  #W "  # Default format of the window list.
 set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the window list (I think)
 
 set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #I  #W #[fg=#{@active_window},bg=#{@background},nobold]"  # Format for the the current window.
 set -gF window-status-last-style 'fg=#{@active_window},default'  # How to style the last active window.
 set -gF window-status-activity-style 'fg=#{@active_window},underscore'  # How to style a window with activity.
 
-# TODO: window-status-bell-style
-# TODO: window-status-style
+# window-status-style
 # window-active-style
 # window-status-current-style
 # TODO: Use -a to split into multiple-lines
@@ -84,7 +83,8 @@ set -gF clock-mode-color "#{@other_utils}"  # Colour when we start the clock. Pr
 # cursor-style
 
 ######### Definitely not needed
-# pane-colors
+# pane-colors  # Define colour pallete (ie colour1..255) for a pane.
+# window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
 
 # TODO: mode-style
 # TODO: Zoom indicator
