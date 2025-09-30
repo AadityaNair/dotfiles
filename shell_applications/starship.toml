@@ -10,6 +10,10 @@ $status\
 $cmd_duration\
 [ ]()\
 """
+# TODO: Do we need the last line.
+# TODO: Add OSC133 sequences in the format above.
+# TODO: Change colour scheme to tokyonight
+# TODO: Remove hostname/username from format above.
 
 add_newline = false
 palette = 'solarized_dark'
@@ -73,7 +77,6 @@ style = 'bold yellow'
 show_notifications = false
 min_time_to_notify = 45_000
 
-# TODO: Figure out useful pipestatus
 [status]
 format = '[ $symbol$status ❯]($style)'
 symbol = '❌'
