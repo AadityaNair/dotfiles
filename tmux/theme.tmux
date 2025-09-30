@@ -15,9 +15,9 @@ set -g status-left-length 32  # Maximum length of the left component of the stat
 ######### Window List
 set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the window list (I think)
 set -g status-justify left  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format "#I  #W "  # Default format of the window list.
+set -g window-status-format " #W "  # Default format of the window list.
 
-set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #I  #W #[fg=#{@active_window},bg=#{@background},nobold]"  # Format for the the current window.
+set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #W #[fg=#{@active_window},bg=#{@background},nobold]"  # Format for the the current window.
 set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
 
 # window-status-style
