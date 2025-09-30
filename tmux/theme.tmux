@@ -25,7 +25,7 @@ set -g status-left-length 32  # Maximum length of the left component of the stat
 
 ######### Window List
 set -gF window-status-last-style 'fg=#{@active_window},default'
-# TODO: window-status-activity-style
+set -gF window-status-activity-style 'fg=#{@active_window},underscore'
 # TODO: window-status-bell-style
 # TODO: window-status-style
 # window-active-style
