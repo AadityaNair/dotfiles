@@ -44,16 +44,15 @@ set -g status-right-length 64
 
 ############################### Panes
 set -gF pane-border-style 'fg=#{@pane_border_inactive}'  # Border for the inactive panes.
-set -gF pane-active-border-style 'fg=#{@active_window}'  # Border for the active pane.
-# TODO: set -gF display-panes-active-color ""
-# TODO: set -gF display-panes-color ""
-# pane-colors
+set -gF pane-active-border-style 'fg=#{@active_window}'  # Border for the active pane. # TODO: Not useful with arrows
 
 # pane-border-format
-# pane-border-indicators
+set -g pane-border-indicators arrows  # How to indicate active panes. off|colour|arrows|both
 # pane-border-status
 # pane-border-lines
 
+# set -gF display-panes-color ""   # Colour for the :display-panes command.
+# set -gF display-panes-active-color ""  # Colour for the active pane in :display-panes command.
 
 ############################### Others
 
@@ -79,10 +78,13 @@ set -gF message-command-style "fg=#{@active_window},bg=#{@pane_border_inactive},
 # popup-border-lines
 
 ######### Unordered
-set -gF clock-mode-color "#{@other_utils}"
+set -gF clock-mode-color "#{@other_utils}"  # Colour when we start the clock. Probably unnecessary.
 # clock-mode-style
 # cursor-color
 # cursor-style
+
+######### Definitely not needed
+# pane-colors
 
 # TODO: mode-style
 # TODO: Zoom indicator
