@@ -1,8 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$hostname\
-$username\
 $directory\
 $git_branch\
 $git_status\
@@ -12,48 +10,17 @@ $cmd_duration\
 """
 # TODO: Do we need the last line.
 # TODO: Add OSC133 sequences in the format above.
-# TODO: Change colour scheme to tokyonight
-# TODO: Remove hostname/username from format above.
 
 add_newline = false
-palette = 'solarized_dark'
+palette = 'tokyonight'
 
-[palettes.solarized_dark]
-# The comments describe how solarized_dark colours should be used.
-# This has been picked up from the official website.
-# It has nothing to do with how the colours are being used right now.
-color_base0 = "#839496"   # for body text / default code
-color_base1 = "#93a1a1"   # for optional emphasised content
-color_base2 = "#eee8d5"
-color_base3 = "#fdf6e3"
-color_base00 = "#657b83"
-color_base01 = "#586e75"  # for comments / secondary content
-color_base02 = "#073642"  # for backgroud highlights
-color_base03 = "#002b36"  # for background
-color_cyan = '#2aa198'
-color_blue = '#268bd2'
-color_green = '#859900'
-color_magenta = "#d33682"
-color_orange = '#cb4b16'
-color_red = '#d30102'
-color_violet = "#6c71c4"
-color_yellow = '#b58900'
-
-[hostname]
-ssh_only = true
-ssh_symbol = '🌐 '
-trim_at = '.'
-detect_env_vars = []
-format = '[$ssh_symbol$hostname ❯]($style)'
-style = 'fg:color_green'
-disabled = true
-
-[username]
-show_always = false
-style_user = "fg:color_orange"
-style_root = "fg:color_red"
-format = '[ $user ❯]($style)'
-disabled = true
+# NOTE: Get the other colours:
+#       https://github.com/tokyo-night/tokyo-night-vscode-theme?tab=readme-ov-file#tokyo-night-and-tokyo-night-storm
+[palettes.tokyonight]
+color_cyan = '#2ac3de'
+color_red = '#f7768e'
+color_orange = '#ff9e64'
+color_yellow = '#e0af68'
 
 [directory]
 style = "fg:color_yellow"
@@ -73,12 +40,11 @@ format = '[ ($all_status$ahead_behind) ❯]($style)'
 min_time = 2_000
 show_milliseconds = false
 format = '[ $duration ❯]($style)'
-style = 'bold yellow'
+style = 'fg:color_orange'
 show_notifications = false
 min_time_to_notify = 45_000
 
 [status]
-format = '[ $symbol$status ❯]($style)'
-symbol = '❌'
+format = '[ $status ❯]($style)'
 style = 'fg:color_red'
 disabled = false
