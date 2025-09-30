@@ -7,27 +7,27 @@ set -g @background '#1a1b26'
 # status-format  # Specify the format for each line of the status.
 # status-position
 
-######### Status Left
-set -g status-left "#[fg=#{@background},bg=#{@active_window}] #S #[fg=#{@active_window},bg=#{@background}]"
+######### Status Left 
+set -g status-left "#S*"
 set -g status-left-length 32  # Maximum length of the left component of the status-line
-# set status-left-style ''
+set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 
 ######### Window List
 set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the window list (I think)
-set -g status-justify left  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format " #W "  # Default format of the window list.
+set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
+set -g window-status-format " * #W "  # Default format of the window list.
 
-set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}]#[fg=#{@background},bg=#{@active_window}] #W #[fg=#{@active_window},bg=#{@background},nobold]"  # Format for the the current window.
+set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}] * #W #[fg=#{@active_window},bg=#{@background},nobold]"  # Format for the the current window.
 set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
 
 # window-status-style
-# window-active-style
+# window-active-style 
 # window-status-current-style
 
 ######### Status Right
-set -g status-right "#[italics] %a, %b %d  %H:%M"  # Format for the right side of the status bar.
+set -g status-right " %a, %b %d  %H:%M"  # Format for the right side of the status bar.
+set -g status-right-style 'italics'
 set -g status-right-length 64
-# set status-right-style ''
 
 
 
