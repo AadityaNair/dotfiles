@@ -18,7 +18,6 @@ set -g status-justify centre  # Where to put window list. left|right|centre|abso
 set -g window-status-format "#{?window_index,#{@separator},} #{window_name}"  # Default format of the window list.
 # window-status-style
 
-set -g window-status-current-style 'fg=#{@active_window},bg=#{@background}'
 set -g window-status-current-format "#{?window_index,#{@separator},} #[fg=#{@background},bg=#{@active_window},italics]#{window_name}"  # Format for the the current window.
 set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
 
@@ -74,6 +73,7 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # status-format  # Specify the format for each line of the status. We have only one line and we define it separately.
 # window-active-style  # Sets colour for the active window/pane.
 # window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
+# window-status-current-style # Unnecessary in the current setup because we have to manually define the colours in format again.
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
 # window-style  # Sets colour for the whole window/pane.
 
