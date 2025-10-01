@@ -1,31 +1,37 @@
 ####### Actual Theme Colours
-set -g @active_window '#7aa2f7'
-set -g @background '#1a1b26'
+set -g @text-active '#ff9e64'
+set -g @text-inactive '#a9b1d6'
+set -g @background-primary '#1a1b26'
+set -g @separator-color '#bb9af7'
+set -g @session '#9aa5ce'
+set -g @time "#2ac3de"
+set -g @message "#f7768e"
+
+set -gF @date '#{@session}'
+
 
 ################################ Status Bar
 
 set -g status-position bottom  # The other option is top.
-set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the entire status line.
+set -gF status-style 'bg=#{@background-primary}'  # Default theme for the entire status line.
 
 ######### Status Left 
 set -g status-left "#{session_name}"
 set -g status-left-length 32  # Maximum length of the left component of the status-line
-set -gF status-left-style 'fg=#{@active_window}, italics, bold'
+set -gF status-left-style 'fg=#{@session}, italics, bold'
 
 ######### Window List
-set -g @separator '#[fg=#{active_window},bg=#{@background}]|#[default]'
+set -gF @separator '#[fg=#{@separator-color}]|#[default]'
 
 set -g @window-activity-style '#[curly-underscore]'
 set -g @window-zoom-style '#[double-underscore]'
-set -g window-status-activity-style ''  # How to style a window with activity. Needs to be empty because we set it in the format itself.
 
 set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#{?window_activity_flag,#{@window-activity-style},}#{window_name}"
-set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@background},bg=#{@active_window},italics]#{window_name}"
+set -g window-status-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#{?window_activity_flag,#{@window-activity-style},}#[fg=#{@text-inactive}]#{window_name}"
+set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@text-active},italics,bold]#{window_name}"
 
 ######### Status Right
-set -g status-right " %a, %b %d  %H:%M"  # Format for the right side of the status bar.
-set -g status-right-style 'italics'
+set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"  # Format for the right side of the status bar.
 set -g status-right-length 64
 
 
@@ -50,7 +56,7 @@ set -g pane-border-status off  # Adds a status line to each pane. Needs work bef
 # menu-border-lines
 
 ######### Message
-set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
+set -gF message-style "fg=#{@message},italics"
 
 ######### Popups
 # popup-style
@@ -66,13 +72,15 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # clock-mode-color  # Colour when we start the clock. We already have clock in the status-bar
 # message-command-style  # I found no case where we call message-command-style. Something command mode + vi mode. 
 # message-line  # I dunno what this changes when there is only one line status. 
-# pane-active-border-style  # With arrows, only this style is used. Unnecessary when fg=@active_window.
+# pane-active-border-style  # With arrows, only this style is used.
 # pane-border-format ''  # Format of the pane border. Useful only when enabled.
 # pane-border-lines  # How does the border look when not covered by above format. Useful only when enabled.
 # pane-border-style  # Useless when using arrows; only pane-active-border-style is applied.
 # pane-colors  # Define colour pallete (ie colour1..255) for a pane.
 # status-format  # Specify the format for each line of the status. We have only one line and we define it separately.
+# status-right-style  # We set the style directly in the format.
 # window-active-style  # Sets colour for the active window/pane.
+# window-status-activity-style ''  # How to style a window with activity. Specified in the format itself.
 # window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
 # window-status-current-style # Unnecessary in the current setup because we have to manually define the colours in format again.
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
@@ -81,4 +89,5 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 
 # TODO: mode-style
 # TODO: Different UI when name has been edited.
+# TODO: Split the long format strings
 # vim: ft=tmux
