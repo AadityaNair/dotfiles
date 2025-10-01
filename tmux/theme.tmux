@@ -4,31 +4,27 @@ set -g @background '#1a1b26'
 
 ################################ Status Bar
 
-# status-format  # Specify the format for each line of the status.
-# status-position
+set -g status-position bottom  # The other option is top.
+set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the entire status line.
 
 ######### Status Left 
-set -g status-left "#S*"
+set -g status-left "˂#S˃"
 set -g status-left-length 32  # Maximum length of the left component of the status-line
 set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 
 ######### Window List
-set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the window list (I think)
 set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
 set -g window-status-format " * #W "  # Default format of the window list.
-
-set -g window-status-current-format "#[fg=#{@background},bg=#{@active_window}] * #W #[fg=#{@active_window},bg=#{@background},nobold]"  # Format for the the current window.
-set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
-
 # window-status-style
-# window-active-style 
-# window-status-current-style
+
+set -gF window-status-current-style 'fg=#{@background},bg=#{@active_window}'
+set -g window-status-current-format " * #W "  # Format for the the current window.
+set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
 
 ######### Status Right
 set -g status-right " %a, %b %d  %H:%M"  # Format for the right side of the status bar.
 set -g status-right-style 'italics'
 set -g status-right-length 64
-
 
 
 ############################### Panes
@@ -74,8 +70,11 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # pane-active-border-style  # With arrows, only this style is used. Unnecessary when fg=@active_window.
 # pane-border-style  # Useless when using arrows; only pane-active-border-style is applied.
 # pane-colors  # Define colour pallete (ie colour1..255) for a pane.
+# status-format  # Specify the format for each line of the status. We have only one line and we define it separately.
+# window-active-style  # Sets colour for the active window/pane.
 # window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
+# window-style  # Sets colour for the whole window/pane.
 
 # TODO: mode-style
 # TODO: Zoom indicator
