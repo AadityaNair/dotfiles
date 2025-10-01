@@ -17,8 +17,8 @@ set -g status-justify centre  # Where to put window list. left|right|centre|abso
 set -g window-status-format "#{?window_index,|,} #{window_name}"  # Default format of the window list.
 # window-status-style
 
-set -gF window-status-current-style 'fg=#{@background},bg=#{@active_window}'
-set -g window-status-current-format " * #{window_name} "  # Format for the the current window.
+set -gF window-status-current-style 'fg=#{@active_window},bg=#{@background}'
+set -g window-status-current-format "#{?window_index,|,} #[fg=#{@background}, bg=#{@active_window},italics]#{window_name}"  # Format for the the current window.
 set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
 
 ######### Status Right
