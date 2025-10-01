@@ -14,7 +14,7 @@ set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 
 ######### Window List
 set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format " #{window_index} #{window_name} "  # Default format of the window list.
+set -g window-status-format "#{?window_index,|,} #{window_name}"  # Default format of the window list.
 # window-status-style
 
 set -gF window-status-current-style 'fg=#{@background},bg=#{@active_window}'
@@ -79,6 +79,5 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # TODO: mode-style
 # TODO: Zoom indicator
 # TODO: Different UI when name has been edited.
-# TODO: Vertical line between windows
 
 # vim: ft=tmux
