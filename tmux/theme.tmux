@@ -8,17 +8,17 @@ set -g status-position bottom  # The other option is top.
 set -gF status-style 'fg=#{@active_window},bg=#{@background}'  # Default theme for the entire status line.
 
 ######### Status Left 
-set -g status-left "˂#S˃"
+set -g status-left "#{session_name}"
 set -g status-left-length 32  # Maximum length of the left component of the status-line
 set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 
 ######### Window List
 set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format " * #W "  # Default format of the window list.
+set -g window-status-format " #{window_index} #{window_name} "  # Default format of the window list.
 # window-status-style
 
 set -gF window-status-current-style 'fg=#{@background},bg=#{@active_window}'
-set -g window-status-current-format " * #W "  # Format for the the current window.
+set -g window-status-current-format " * #{window_name} "  # Format for the the current window.
 set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
 
 ######### Status Right
@@ -79,5 +79,6 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # TODO: mode-style
 # TODO: Zoom indicator
 # TODO: Different UI when name has been edited.
+# TODO: Vertical line between windows
 
 # vim: ft=tmux
