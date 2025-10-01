@@ -15,11 +15,11 @@ set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 ######### Window List
 set -g @separator '#[fg=#{active_window},bg=#{@background}]|#[default]'
 
-set -g @window-activity-style 'curly-underscore'
+set -g @window-activity-style '#[curly-underscore]'
 set -g window-status-activity-style ''  # How to style a window with activity. Needs to be empty because we set it in the format itself.
 
 set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format "#{?window_index,#{@separator},} #[#{?window_activity_flag,#{@window-activity-style},}]#{window_name}"
+set -g window-status-format "#{?window_index,#{@separator},} #{?window_activity_flag,#{@window-activity-style},}#{window_name}"
 set -g window-status-current-format "#{?window_index,#{@separator},} #[fg=#{@background},bg=#{@active_window},italics]#{window_name}"
 
 ######### Status Right
