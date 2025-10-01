@@ -15,9 +15,9 @@ set -gF @date '#{@session}'
 set -g status-position bottom  # The other option is top.
 set -gF status-style 'bg=#{@background-primary}'  # Default theme for the entire status line.
 
-######### Status Left 
+######### Status Left
 set -g status-left "#{session_name}"
-set -g status-left-length 32  # Maximum length of the left component of the status-line
+set -g status-left-length 32
 set -gF status-left-style 'fg=#{@session}, italics, bold'
 
 ######### Window List
@@ -26,12 +26,12 @@ set -gF @separator '#[fg=#{@separator-color}]|#[default]'
 set -g @window-activity-style '#[curly-underscore]'
 set -g @window-zoom-style '#[double-underscore]'
 
-set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
+set -g status-justify centre
 set -g window-status-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#{?window_activity_flag,#{@window-activity-style},}#[fg=#{@text-inactive}]#{window_name}"
 set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@text-active},italics,bold]#{window_name}"
 
 ######### Status Right
-set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"  # Format for the right side of the status bar.
+set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"
 set -g status-right-length 64
 
 
@@ -39,10 +39,11 @@ set -g status-right-length 64
 set -g pane-border-indicators arrows  # How to indicate active panes. off|colour|arrows|both
 set -g pane-border-status off  # Adds a status line to each pane. Needs work before deploying.
 
-# set -gF display-panes-color ""   # Colour for the :display-panes command.
-# set -gF display-panes-active-color ""  # Colour for the active pane in :display-panes command.
 
 ############################### Others
+
+######### Message
+set -gF message-style "fg=#{@message},italics"
 
 ######### Copy Mode
 # copy-mode-match-style
@@ -55,9 +56,6 @@ set -g pane-border-status off  # Adds a status line to each pane. Needs work bef
 # menu-border-style
 # menu-border-lines
 
-######### Message
-set -gF message-style "fg=#{@message},italics"
-
 ######### Popups
 # popup-style
 # popup-border-style
@@ -67,6 +65,8 @@ set -gF message-style "fg=#{@message},italics"
 # clock-mode-style
 # cursor-color
 # cursor-style
+# display-panes-active-color  # Colour for the active pane in :display-panes command.
+# display-panes-color  # Colour for the :display-panes command.
 
 ######### Definitely not needed
 # clock-mode-color  # Colour when we start the clock. We already have clock in the status-bar
