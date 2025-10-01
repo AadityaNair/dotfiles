@@ -16,11 +16,12 @@ set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 set -g @separator '#[fg=#{active_window},bg=#{@background}]|#[default]'
 
 set -g @window-activity-style '#[curly-underscore]'
+set -g @window-zoom-style '#[double-underscore]'
 set -g window-status-activity-style ''  # How to style a window with activity. Needs to be empty because we set it in the format itself.
 
 set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format "#{?window_index,#{@separator},} #{?window_activity_flag,#{@window-activity-style},}#{window_name}"
-set -g window-status-current-format "#{?window_index,#{@separator},} #[fg=#{@background},bg=#{@active_window},italics]#{window_name}"
+set -g window-status-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#{?window_activity_flag,#{@window-activity-style},}#{window_name}"
+set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@background},bg=#{@active_window},italics]#{window_name}"
 
 ######### Status Right
 set -g status-right " %a, %b %d  %H:%M"  # Format for the right side of the status bar.
@@ -80,6 +81,5 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # window-status-style  # This is set directly in the format and hence un-needed.
 
 # TODO: mode-style
-# TODO: Zoom indicator
 # TODO: Different UI when name has been edited.
 # vim: ft=tmux
