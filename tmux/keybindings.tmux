@@ -102,4 +102,5 @@ bind -n M-m set mouse  # Toggle enabling/disabling mouse.
 # TODO: Keybinding to copy entire window/pane.
 # TODO: If set window name, disable window renaming
 # TODO: Starship (or its integration with fish) is eating up OSC 133 codes and breaking prompt-search.
+# TODO: Add colour formatting for rename window/session.
 # vim: ft=tmux
