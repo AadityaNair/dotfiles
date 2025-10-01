@@ -31,10 +31,7 @@ set -g status-right-length 64
 
 ############################### Panes
 set -g pane-border-indicators arrows  # How to indicate active panes. off|colour|arrows|both
-
-# pane-border-format
-# pane-border-status
-# pane-border-lines
+set -g pane-border-status off  # Adds a status line to each pane. Needs work before deploying.
 
 # set -gF display-panes-color ""   # Colour for the :display-panes command.
 # set -gF display-panes-active-color ""  # Colour for the active pane in :display-panes command.
@@ -54,7 +51,6 @@ set -g pane-border-indicators arrows  # How to indicate active panes. off|colour
 
 ######### Message
 set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
-# message-line
 
 ######### Popups
 # popup-style
@@ -69,7 +65,10 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 ######### Definitely not needed
 # clock-mode-color  # Colour when we start the clock. We already have clock in the status-bar
 # message-command-style  # I found no case where we call message-command-style. Something command mode + vi mode. 
+# message-line  # I dunno what this changes when there is only one line status. 
 # pane-active-border-style  # With arrows, only this style is used. Unnecessary when fg=@active_window.
+# pane-border-format ''  # Format of the pane border. Useful only when enabled.
+# pane-border-lines  # How does the border look when not covered by above format. Useful only when enabled.
 # pane-border-style  # Useless when using arrows; only pane-active-border-style is applied.
 # pane-colors  # Define colour pallete (ie colour1..255) for a pane.
 # status-format  # Specify the format for each line of the status. We have only one line and we define it separately.
@@ -77,8 +76,8 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
 # window-status-current-style # Unnecessary in the current setup because we have to manually define the colours in format again.
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
-# window-style  # Sets colour for the whole window/pane.
 # window-status-style  # This is set directly in the format and hence un-needed.
+# window-style  # Sets colour for the whole window/pane.
 
 # TODO: mode-style
 # TODO: Different UI when name has been edited.
