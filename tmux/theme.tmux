@@ -14,12 +14,13 @@ set -gF status-left-style 'fg=#{@active_window}, italics, bold'
 
 ######### Window List
 set -g @separator '#[fg=#{active_window},bg=#{@background}]|#[default]'
-set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
-set -g window-status-format "#{?window_index,#{@separator},} #{window_name}"  # Default format of the window list.
-# window-status-style
 
-set -g window-status-current-format "#{?window_index,#{@separator},} #[fg=#{@background},bg=#{@active_window},italics]#{window_name}"  # Format for the the current window.
-set -gF window-status-activity-style 'underscore'  # How to style a window with activity.
+set -g @window-activity-style 'curly-underscore'
+set -g window-status-activity-style ''  # How to style a window with activity. Needs to be empty because we set it in the format itself.
+
+set -g status-justify centre  # Where to put window list. left|right|centre|absolute-centre
+set -g window-status-format "#{?window_index,#{@separator},} #[#{?window_activity_flag,#{@window-activity-style},}]#{window_name}"
+set -g window-status-current-format "#{?window_index,#{@separator},} #[fg=#{@background},bg=#{@active_window},italics]#{window_name}"
 
 ######### Status Right
 set -g status-right " %a, %b %d  %H:%M"  # Format for the right side of the status bar.
@@ -76,9 +77,9 @@ set -gF message-style "fg=#{@active_window},bg=#{@background},bold"
 # window-status-current-style # Unnecessary in the current setup because we have to manually define the colours in format again.
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
 # window-style  # Sets colour for the whole window/pane.
+# window-status-style  # This is set directly in the format and hence un-needed.
 
 # TODO: mode-style
 # TODO: Zoom indicator
 # TODO: Different UI when name has been edited.
-
 # vim: ft=tmux
