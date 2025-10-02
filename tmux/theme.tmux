@@ -30,16 +30,17 @@ set -gF status-left-style 'fg=#{@session}, italics, bold'
 ######### Window List
 set -gF @separator '#[fg=#{@separator-color}]|#[default]'
 
-set -gF @window-activity-style '#[us=#{@activity},curly-underscore]'
+set -gF @window-activity-style '#[fg=#{@activity}]'
 set -gF @window-zoom-style '#[us=#{@zoom},double-underscore]'
 
 set -g status-justify centre
 
 set -g window-status-format "\
 #{?window_index,#{@separator},} \
+#[fg=#{@text-inactive}]\
 #{?window_zoomed_flag,#{@window-zoom-style},}\
 #{?window_activity_flag,#{@window-activity-style},}\
-#[fg=#{@text-inactive}]#{window_name}\
+#{window_name}\
 "
 
 set -g window-status-current-format "\
