@@ -44,7 +44,6 @@ set -g window-status-format "\
 
 set -g window-status-current-format "\
 #{?window_index,#{@separator},} \
-#{?window_zoomed_flag,#{@window-zoom-style},}\
 #[fg=#{@text-active},bg=#{@background-active},italics,bold]#{window_name}"
 
 ######### Status Right
@@ -90,7 +89,6 @@ set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
 # clock-mode-color  # Colour when we start the clock. We already have clock in the status-bar
 # message-command-style  # I found no case where we call message-command-style. Something command mode + vi mode. 
 # message-line  # I dunno what this changes when there is only one line status. 
-# pane-active-border-style  # With arrows, only this style is used.
 # pane-border-format ''  # Format of the pane border. Useful only when enabled.
 # pane-border-lines  # How does the border look when not covered by above format. Useful only when enabled.
 # pane-border-style  # Useless when using arrows; only pane-active-border-style is applied.
