@@ -103,5 +103,4 @@ set -gF message-style "fg=#{@message},italics"
 
 # TODO: mode-style
 # TODO: Different UI when name has been edited.
-# TODO: Split the long format strings
 # vim: ft=tmux
