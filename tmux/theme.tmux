@@ -45,7 +45,9 @@ set -g window-status-format "\
 
 set -g window-status-current-format "\
 #{?window_index,#{@separator},} \
-#[fg=#{@text-active},bg=#{@background-active},italics,bold]#{window_name}"
+#[fg=#{@text-active},bg=#{@background-active},italics,bold]\
+#{window_name}\
+"
 
 ######### Status Right
 set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"
