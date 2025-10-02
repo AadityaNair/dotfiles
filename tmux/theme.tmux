@@ -52,6 +52,7 @@ set -g status-right-length 64
 ############################### Panes
 set -g pane-border-indicators arrows  # How to indicate active panes. off|colour|arrows|both
 set -g pane-border-status off  # Adds a status line to each pane. Needs work before deploying.
+set -g pane-active-border-style 'fg=#{@border-pane}'
 
 
 ############################### Others
