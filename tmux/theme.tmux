@@ -7,8 +7,9 @@ set -g @session '#9aa5ce'
 set -g @time "#2ac3de"
 set -g @message "#f7768e"
 set -g @activity "#ff9e64"
-set -g @zoom "#73daca"
+set -g @border-pane "#73daca"
 
+set -gF @zoom '#{@border-pane}'
 set -gF @date '#{@session}'
 set -gF @text-active '#{@background-primary}'
 
@@ -30,8 +31,18 @@ set -gF @window-activity-style '#[us=#{@activity},curly-underscore]'
 set -gF @window-zoom-style '#[us=#{@zoom},double-underscore]'
 
 set -g status-justify centre
-set -g window-status-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#{?window_activity_flag,#{@window-activity-style},}#[fg=#{@text-inactive}]#{window_name}"
-set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@text-active},bg=#{@background-active},italics,bold]#{window_name}"
+
+set -g window-status-format "\
+#{?window_index,#{@separator},} \
+#{?window_zoomed_flag,#{@window-zoom-style},}\
+#{?window_activity_flag,#{@window-activity-style},}\
+#[fg=#{@text-inactive}]#{window_name}\
+"
+
+set -g window-status-current-format "\
+#{?window_index,#{@separator},} \
+#{?window_zoomed_flag,#{@window-zoom-style},}\
+#[fg=#{@text-active},bg=#{@background-active},italics,bold]#{window_name}"
 
 ######### Status Right
 set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"
