@@ -1,13 +1,16 @@
 ####### Actual Theme Colours
-set -g @text-active '#ff9e64'
 set -g @text-inactive '#a9b1d6'
-set -g @background-primary '#1a1b26'
+set -g @background-primary '#24283b'
+set -g @background-active '#7dcfff'
 set -g @separator-color '#bb9af7'
 set -g @session '#9aa5ce'
 set -g @time "#2ac3de"
 set -g @message "#f7768e"
+set -g @activity "#ff9e64"
+set -g @zoom "#73daca"
 
 set -gF @date '#{@session}'
+set -gF @text-active '#{@background-primary}'
 
 
 ################################ Status Bar
@@ -23,12 +26,12 @@ set -gF status-left-style 'fg=#{@session}, italics, bold'
 ######### Window List
 set -gF @separator '#[fg=#{@separator-color}]|#[default]'
 
-set -g @window-activity-style '#[curly-underscore]'
-set -g @window-zoom-style '#[double-underscore]'
+set -gF @window-activity-style '#[us=#{@activity},curly-underscore]'
+set -gF @window-zoom-style '#[us=#{@zoom},double-underscore]'
 
 set -g status-justify centre
 set -g window-status-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#{?window_activity_flag,#{@window-activity-style},}#[fg=#{@text-inactive}]#{window_name}"
-set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@text-active},italics,bold]#{window_name}"
+set -g window-status-current-format "#{?window_index,#{@separator},} #{?window_zoomed_flag,#{@window-zoom-style},}#[fg=#{@text-active},bg=#{@background-active},italics,bold]#{window_name}"
 
 ######### Status Right
 set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"
