@@ -98,7 +98,7 @@ bind -n M-m set mouse  # Toggle enabling/disabling mouse.
 # display-panes
 # display-popup
 
-# TODO: `pane_current_path` doesn't work with symlink properly. 
+# NOTE: `pane_current_path` doesn't work with symlink properly. 
 # TODO: Keybinding to copy entire window/pane/last-prompt.
 # TODO: If set window name, disable window renaming
 # TODO: Starship (or its integration with fish) is eating up OSC 133 codes and breaking prompt-search.
