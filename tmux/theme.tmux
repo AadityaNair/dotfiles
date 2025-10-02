@@ -8,10 +8,13 @@ set -g @time "#2ac3de"
 set -g @message "#f7768e"
 set -g @activity "#ff9e64"
 set -g @border-pane "#73daca"
+set -g @copy-mark-bg "#f7768e"
 
 set -gF @zoom '#{@border-pane}'
 set -gF @date '#{@session}'
 set -gF @text-active '#{@background-primary}'
+set -gF @copy-mark-fg '#{@background-primary}'
+
 
 
 ################################ Status Bar
@@ -61,8 +64,8 @@ set -g pane-active-border-style 'fg=#{@border-pane}'
 set -gF message-style "fg=#{@message},italics"
 
 ######### Copy Mode
+set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
 # copy-mode-match-style
-# copy-mode-mark-style
 # copy-mode-current-match-style
 
 ######### Menu

@@ -59,7 +59,8 @@ bind -T copy-mode-vi r send-keys -X refresh-from-pane  # Refresh contents of pan
 # beginning of the prompt. This is to work around some fish+starship problems.
 bind -T copy-mode-vi p send-keys -X next-prompt -o
 bind -T copy-mode-vi P send-keys -X previous-prompt -o
-# set-mark/jump-to-mark
+bind -T copy-mode-vi m send-keys -X set-mark
+bind -T copy-mode-vi M send-keys -X jump-to-mark
 
 # This will create a search UI kind of thing. You enter what you want to search in command prompt
 # it will be selected in the terminal, if it exists.
