@@ -34,6 +34,7 @@ local default_lsps = {
     "lua_ls", -- Only for neovim configs
     "bashls", -- Bash scripts
     "pyright", -- Python
+    "rust_analyzer", -- Rust
 }
 local company_lsps = require("company").custom_lsps
 
