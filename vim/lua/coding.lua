@@ -168,6 +168,10 @@ function module.setup()
             python = { "ruff" },
             lua = { "stylua" },
         },
+        format_on_save = {
+            timeout_ms = 500,
+            lsp_format = "fallback",
+        },
     })
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     require("conform").formatters.ruff = {
