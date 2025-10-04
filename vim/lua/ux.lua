@@ -1,16 +1,9 @@
 module = {}
 module.plugins = {
     "numToStr/Comment.nvim",
+    "mbbill/undotree",
     { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-    {
-        -- TODO: Find an alternative undotree impl and remove telescope entirely
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "debugloop/telescope-undo.nvim",
-        },
-    },
     {
         "kevinhwang91/nvim-ufo",
         dependencies = { "kevinhwang91/promise-async" },
@@ -60,22 +53,8 @@ function module.setup()
     local ft = require("Comment.ft")
     ft.set("kdl", "//%s")
 
-    local telescope = require("telescope")
-
-    telescope.setup({
-        extensions = {
-            undo = {
-                mappings = {
-                    i = { ["<CR>"] = require("telescope-undo.actions").restore },
-                    n = { ["<CR>"] = require("telescope-undo.actions").restore },
-                },
-                -- layout_strategy = "vertical",
-                side_by_side = true,
-            },
-        },
-    })
-    telescope.load_extension("undo")
-    vim.keymap.set("n", "u", telescope.extensions.undo.undo, { silent = true })
+    vim.keymap.set("n", "u", vim.cmd.UndotreeToggle)
+    -- undodir/undolevels and set undofile are options if we are fine with double writes
 end
 
 return module
