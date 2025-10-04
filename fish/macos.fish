@@ -13,3 +13,7 @@ set -x HOMEBREW_REPOSITORY /opt/homebrew
 set -x PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH
 set -x MANPATH /opt/homebrew/share/man $MANPATH
 set -x INFOPATH /opt/homebrew/share/info $INFOPATH
+
+set -x RUSTUP_HOME ~/.config/rustup
+set -x CARGO_HOME ~/.local/share/cargo
+set -a PATH ~/.config/rustup/toolchains/stable-aarch64-apple-darwin/bin/
