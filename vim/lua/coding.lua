@@ -35,6 +35,7 @@ local default_lsps = {
     "bashls", -- Bash scripts
     "pyright", -- Python
     "rust_analyzer", -- Rust
+    "zls", -- Zig
 }
 local company_lsps = require("company").custom_lsps
 
