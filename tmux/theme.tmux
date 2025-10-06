@@ -49,6 +49,8 @@ set -g window-status-current-format "\
 #{window_name}\
 "
 
+set -g window-status-activity-style ''  # How to style a window with activity. Apparently, an empty string is required for theme to work.
+
 ######### Status Right
 set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"
 set -g status-right-length 64
@@ -99,7 +101,6 @@ set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
 # status-format  # Specify the format for each line of the status. We have only one line and we define it separately.
 # status-right-style  # We set the style directly in the format.
 # window-active-style  # Sets colour for the active window/pane.
-# window-status-activity-style ''  # How to style a window with activity. Specified in the format itself.
 # window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
 # window-status-current-style # Unnecessary in the current setup because we have to manually define the colours in format again.
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
