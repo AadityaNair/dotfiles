@@ -1,5 +1,6 @@
 command = /bin/zsh
-auto-update-channel = stable
+auto-update-channel = tip
+auto-update = off
 
 # Fonts
 font-family = JetBrainsMono Nerd Font Mono
