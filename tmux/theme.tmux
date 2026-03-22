@@ -122,6 +122,5 @@ set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
 # window-status-style  # This is set directly in the format and hence un-needed.
 # window-style  # Sets colour for the whole window/pane.
 
-# TODO: mode-style
-# TODO: Different UI when name has been edited.
+set -gF mode-style 'fg=#{@text-active},bg=#{@background-active}'
 # vim: ft=tmux
