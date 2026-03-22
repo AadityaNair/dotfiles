@@ -67,7 +67,7 @@ set -g window-status-current-format "\
 set -g window-status-activity-style ''  # How to style a window with activity. Apparently, an empty string is required for theme to work.
 
 ######### Status Right
-set -g status-right "#[fg=#{@date},italics] %a, %b %d  #[fg=#{@time}]%H:%M"
+set -g status-right "#[fg=#{@comment}] #[fg=#{@date},italics]%a, %b %d  #[fg=#{@time}]%H:%M"
 set -g status-right-length 64
 
 
