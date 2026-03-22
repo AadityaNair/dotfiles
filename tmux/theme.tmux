@@ -16,8 +16,8 @@ set -gF @date '#{@session}'
 set -gF @text-active '#{@background-primary}'
 set -gF @copy-mark-fg '#{@background-primary}'
 
-set -gF @style-copy '#[fg=#{copy-mark-bg},italics]'
-set -gF @style-prefix '#[fg=#{background-active},italics,bold]'
+set -gF @style-copy '#[fg=#{@copy-mark-bg},italics]'
+set -gF @style-prefix '#[fg=#{@background-active},italics,bold]'
 set -gF @style-session '#[fg=#{@session},italics,bold]'
 
 
