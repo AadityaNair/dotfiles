@@ -9,6 +9,7 @@ set -g @message "#f7768e"
 set -g @activity "#ff9e64"
 set -g @border-pane "#73daca"
 set -g @copy-mark-bg "#f7768e"
+set -g @comment "#565f89"
 
 set -gF @zoom '#{@border-pane}'
 set -gF @date '#{@session}'
@@ -43,16 +44,24 @@ set -g status-justify centre
 
 set -g window-status-format "\
 #{?window_index,#{@separator},} \
+#{?pane_synchronized,#[fg=#{@message}]= ,}\
+#{?renamed,#[fg=#{@comment}]* ,}\
 #[fg=#{@text-inactive}]\
-#{?window_zoomed_flag,#{@window-zoom-style},}\
+#{?window_zoomed_flag,#{@window-zoom-style}+ ,}\
 #{?window_activity_flag,#{@window-activity-style},}\
 #{window_name}\
+#{?#{!=:#{window_panes},1},#[fg=#{@comment}]:#{window_panes},}\
 "
 
 set -g window-status-current-format "\
 #{?window_index,#{@separator},} \
 #[fg=#{@text-active},bg=#{@background-active},italics,bold]\
+ #{?pane_synchronized,= ,}\
+#{?@renamed,* ,}\
+#{?window_zoomed_flag,+ ,}\
 #{window_name}\
+#{?#{!=:#{window_panes},1},:#{window_panes,} \
+#[default]\
 "
 
 set -g window-status-activity-style ''  # How to style a window with activity. Apparently, an empty string is required for theme to work.
