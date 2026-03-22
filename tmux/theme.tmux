@@ -15,6 +15,10 @@ set -gF @date '#{@session}'
 set -gF @text-active '#{@background-primary}'
 set -gF @copy-mark-fg '#{@background-primary}'
 
+set -gF @style-copy '#[fg=#{},italics]'
+set -gF @style-prefix '#[fg=${},italics,bold]'
+set -gF @style-session '#[fg=#{},italics,bold]'
+
 
 
 ################################ Status Bar
@@ -23,9 +27,11 @@ set -g status-position bottom  # The other option is top.
 set -gF status-style 'bg=#{@background-primary}'  # Default theme for the entire status line.
 
 ######### Status Left
-set -g status-left "#{session_name}"
+set -g status-left "\
+#{?pane_in_mode,#{@style-copy}Copy ,}\
+#{?client_prefix, #{@style-prefix},#{@style-session}}\
+#{session_name} "
 set -g status-left-length 32
-set -gF status-left-style 'fg=#{@session}, italics, bold'
 
 ######### Window List
 set -gF @separator '#[fg=#{@separator-color}]|#[default]'
