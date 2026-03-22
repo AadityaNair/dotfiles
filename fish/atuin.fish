@@ -37,5 +37,5 @@ function _atuin_search
 end
 
 bind ctrl-r _atuin_search
-bind up _atuin_bind_up
+bind up up-or-search
 
