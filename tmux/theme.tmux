@@ -16,9 +16,9 @@ set -gF @date '#{@session}'
 set -gF @text-active '#{@background-primary}'
 set -gF @copy-mark-fg '#{@background-primary}'
 
-set -gF @style-copy '#[fg=#{},italics]'
-set -gF @style-prefix '#[fg=${},italics,bold]'
-set -gF @style-session '#[fg=#{},italics,bold]'
+set -gF @style-copy '#[fg=#{copy-mark-bg},italics]'
+set -gF @style-prefix '#[fg=#{background-active},italics,bold]'
+set -gF @style-session '#[fg=#{@session},italics,bold]'
 
 
 
@@ -30,7 +30,7 @@ set -gF status-style 'bg=#{@background-primary}'  # Default theme for the entire
 ######### Status Left
 set -g status-left "\
 #{?pane_in_mode,#{@style-copy}Copy ,}\
-#{?client_prefix, #{@style-prefix},#{@style-session}}\
+#{?client_prefix,#{@style-prefix},#{@style-session}}\
 #{session_name} "
 set -g status-left-length 32
 
@@ -45,7 +45,7 @@ set -g status-justify centre
 set -g window-status-format "\
 #{?window_index,#{@separator},} \
 #{?pane_synchronized,#[fg=#{@message}]= ,}\
-#{?renamed,#[fg=#{@comment}]* ,}\
+#{?@renamed,#[fg=#{@comment}]* ,}\
 #[fg=#{@text-inactive}]\
 #{?window_zoomed_flag,#{@window-zoom-style}+ ,}\
 #{?window_activity_flag,#{@window-activity-style},}\
@@ -60,7 +60,7 @@ set -g window-status-current-format "\
 #{?@renamed,* ,}\
 #{?window_zoomed_flag,+ ,}\
 #{window_name}\
-#{?#{!=:#{window_panes},1},:#{window_panes,} \
+#{?#{!=:#{window_panes},1},:#{window_panes},} \
 #[default]\
 "
 

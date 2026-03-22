@@ -18,7 +18,7 @@ bind r source-file ~/.tmux.conf  # Reload file online.
 bind -n M-a new-window -c "#{pane_current_path}"  # Create a new window in the same path as the calling pane.
 
 # Allow renaming windows. Don't allow programs to rename it once renamed.
-bind -n M-w command-prompt -p "(rename-window) " "rename-window '%%'"; set -w allow-rename off; set -w @renamed 1  
+bind -n M-w command-prompt -p "(rename-window) " "rename-window '%%'; set -w allow-rename off; set -w @renamed 1"
 bind -n M-Right next-window  # Navigate to the next window.
 bind -n M-Left previous-window  # Navigate to the previous window.
 
