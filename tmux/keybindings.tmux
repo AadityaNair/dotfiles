@@ -17,7 +17,8 @@ bind r source-file ~/.tmux.conf  # Reload file online.
 ############ Windows
 bind -n M-a new-window -c "#{pane_current_path}"  # Create a new window in the same path as the calling pane.
 
-bind -n M-w command-prompt -p "(rename-window) " "rename-window '%%'"  # Allow renaming windows.
+# Allow renaming windows. Don't allow programs to rename it once renamed.
+bind -n M-w command-prompt -p "(rename-window) " "rename-window '%%'"; set -w allow-rename off; set -w @renamed 1  
 bind -n M-Right next-window  # Navigate to the next window.
 bind -n M-Left previous-window  # Navigate to the previous window.
 
@@ -100,7 +101,6 @@ bind -n M-m set mouse  # Toggle enabling/disabling mouse.
 
 # NOTE: `pane_current_path` doesn't work with symlink properly. 
 # TODO: Keybinding to copy entire window/pane/last-prompt.
-# TODO: If set window name, disable window renaming
 # TODO: Starship (or its integration with fish) is eating up OSC 133 codes and breaking prompt-search.
 # TODO: Add colour formatting for rename window/session.
 # vim: ft=tmux
