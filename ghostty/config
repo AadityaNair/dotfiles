@@ -1,3 +1,5 @@
+# TODO: Make this config better ordered and with syntax highlighting
+
 command = /bin/zsh
 auto-update-channel = tip
 auto-update = off
