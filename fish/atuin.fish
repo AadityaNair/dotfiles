@@ -38,5 +38,6 @@ function _atuin_search
 end
 
 bind ctrl-r _atuin_search
-bind up up-or-search
+# TODO: This is actually superceded by history.fish
+bind up up-or-search 
 
