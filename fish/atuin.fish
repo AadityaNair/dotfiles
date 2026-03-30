@@ -1,3 +1,4 @@
+# TODO: Update this to the latest version of atuin`
 # Atuin's init script parsed out of atuin init fish
 
 # We can't replace this for multiple reasons:

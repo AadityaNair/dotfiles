@@ -1,5 +1,10 @@
 
-
+# TODO: Always track the version of atuin within config
+# TODO: Create a theme for tokyo night
+# TODO: TMUX pop-up integration
+# TODO: Figure out command chaining
+# TODO: Ensure dotfiles/daemon/AI are disabled
+# TODO: Define keymaps concretely. I think its emacs. Validate
 style = "full"
 
 inline_height_shell_up_key_binding = 5
