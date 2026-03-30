@@ -1,3 +1,7 @@
+-- TODO: Move to nvim 0.12: plugin-manager
+-- TODO: Evaluate all the current plugins
+-- TODO: Move to autoloading configs as described in https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html#many-vim-pack-add
+
 local common = require("common")
 local TableConcat = common.TableConcat
 
