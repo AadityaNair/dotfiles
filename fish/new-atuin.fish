@@ -31,15 +31,19 @@ function _atuin_search
     if test -n "$TMUX"; and test -d "$tmpdir"
         set -l result_file "$tmpdir/result"
         set -l query (commandline -b | string replace -a "'" "'\\''")
+        set -l escaped_args ""
+        for arg in $argv
+            set escaped_args "$escaped_args '"(string replace -a "'" "'\\''" -- $arg)"'"
+        end
 
         tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -E -- \
-            sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search -i 2>'$result_file'"
+            sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
 
         if test -f "$result_file"
             set ATUIN_H "$(cat "$result_file")"
         end
     else
-        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search -i 3>&1 1>&2 2>&3)"
+        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
     end
 
     command rm -rf "$tmpdir"
