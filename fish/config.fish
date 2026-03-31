@@ -30,6 +30,7 @@ end
 # Rest of the init is available as `z` and `zi` autoloading function
 
 ### Keybindings
+set -g fish_key_bindings fish_default_key_bindings  # Emacs mode.
 bind ctrl-c cancel-commandline  # This leaves the previous commandline in place so we can refer to it.
 
 # vim: ft=fish
