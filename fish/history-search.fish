@@ -22,18 +22,19 @@ function reset_index --on-event fish_prompt --on-event fish_cancel
 end
 
 function get_command_and_update_prompt
-    set -l response $(atuin search \
+    # Quoted "$()" preserves newlines as a single string instead of splitting into a list.
+    set -l response "$(atuin search \
         --filter-mode "$FILTER" \
         --search-mode "$MODE" \
         --limit 1 --format "{command}" \
-        --offset $__hist_search_index -- "$__hist_search_orig_query")
+        --offset $__hist_search_index -- "$__hist_search_orig_query")"
 
     if test $status -eq 0
-        commandline $response
-        set __hist_search_curr_response $response
+        commandline -- "$response"
+        set __hist_search_curr_response "$response"
     else
         # If search fails, keep the last returned command
-        commandline $__hist_search_curr_response
+        commandline -- "$__hist_search_curr_response"
     end
 end
 
@@ -43,11 +44,11 @@ function atuin_history_up
         return
     end
 
-    # If we are starting a new search or if we changed the query partway through a 
+    # If we are starting a new search or if we changed the query partway through a
     # previous search, we start again from the beginning.
-    if test $__hist_search_index -eq -1; or test $__hist_search_curr_response != $(commandline)
-        set __hist_search_orig_query $(commandline)
-        set __hist_search_curr_response $__hist_search_orig_query
+    if test $__hist_search_index -eq -1; or test "$__hist_search_curr_response" != "$(commandline)"
+        set __hist_search_orig_query "$(commandline)"
+        set __hist_search_curr_response "$__hist_search_orig_query"
         set __hist_search_index -1
     end
     set __hist_search_index (math $__hist_search_index + 1)
@@ -61,15 +62,15 @@ function atuin_history_down
         return
     end
 
-    if test $__hist_search_curr_response != $(commandline)
+    if test "$__hist_search_curr_response" != "$(commandline)"
         set __hist_search_index -1
-        set __hist_search_orig_query $(commandline)
+        set __hist_search_orig_query "$(commandline)"
         return
     end
 
     set __hist_search_index (math $__hist_search_index - 1)
     if test $__hist_search_index -le -1
-        commandline $__hist_search_orig_query
+        commandline -- "$__hist_search_orig_query"
         set __hist_search_index -1
         return
     end
