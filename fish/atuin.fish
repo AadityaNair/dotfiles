@@ -1,14 +1,14 @@
-# TODO: Update this to the latest version of atuin`
-# Atuin's init script parsed out of atuin init fish
 
-# We can't replace this for multiple reasons:
-# 1. `atuin uuid` works across platforms.
-# 2. We need uuid v7 for atuin operations and AFAIK, no other platform specific application supports it
-#    UUIDv7 has some ordering advantages that atuin internally uses.
-# 3. The best platform specific application reduces the calltime by only 2ms
-# 4. We can't replace this with a static string because this is also used as the primary key for the db.
-#    If we replace it, all new history elements will just override the same row.
-set -gx ATUIN_SESSION (atuin uuid)
+# We can't replace `atuin uuid` for multiple reasons:
+# 1. It works across platforms.
+# 2. We need UUIDv7 for atuin operations — it has ordering properties atuin relies on.
+# 3. The best platform-specific alternative only saves ~2ms.
+# 4. We can't use a static string because this is the primary key for the db.
+#    A static value would cause all new history entries to overwrite the same row.
+if not set -q ATUIN_SESSION; or test "$ATUIN_SHLVL" != "$SHLVL"
+    set -gx ATUIN_SESSION (atuin uuid)
+    set -gx ATUIN_SHLVL $SHLVL
+end
 set --erase ATUIN_HISTORY_ID
 
 function _atuin_preexec --on-event fish_preexec
@@ -16,7 +16,7 @@ function _atuin_preexec --on-event fish_preexec
 end
 
 function _atuin_postexec --on-event fish_postexec
-    set -l s $status # This is done so that we have the command status before next commands override it.
+    set -l s $status
 
     if test -n "$ATUIN_HISTORY_ID"
         ATUIN_LOG=error atuin history end --exit $s -- $ATUIN_HISTORY_ID &>/dev/null &
@@ -26,18 +26,40 @@ function _atuin_postexec --on-event fish_postexec
     set --erase ATUIN_HISTORY_ID
 end
 
+set -g ATUIN_POPUP_WIDTH "80%"
+set -g ATUIN_POPUP_HEIGHT "60%"
+
 function _atuin_search
-    # TODO: Why all the shennanigans with switching STDOUT and STDERR
-    set -l ATUIN_H "$(ATUIN_LOG=error atuin search $argv -i 3>&1 1>&2 2>&3)"
+    set -l ATUIN_H
+    set -l tmpdir (mktemp -d)
+    if test -n "$TMUX"; and test -d "$tmpdir"
+        set -l result_file "$tmpdir/result"
+        set -l query (commandline -b | string replace -a "'" "'\\''")
+        set -l escaped_args ""
+        for arg in $argv
+            set escaped_args "$escaped_args '"(string replace -a "'" "'\\''" -- $arg)"'"
+        end
+
+        # In the popup, atuin's TUI goes to the terminal (stdout), and the
+        # selected result is written to stderr, which we redirect to a file.
+        tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -E -- \
+            sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
+
+        if test -f "$result_file"
+            set ATUIN_H "$(cat "$result_file")"
+        end
+    else
+        # Without tmux: swap stdout/stderr so the TUI renders to the terminal
+        # and the selected result is captured via command substitution.
+        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
+    end
+
+    command rm -rf "$tmpdir"
 
     if test -n "$ATUIN_H"
         commandline -r "$ATUIN_H"
     end
-
     commandline -f repaint
 end
 
 bind ctrl-r _atuin_search
-# TODO: This is actually superceded by history.fish
-bind up up-or-search 
-
