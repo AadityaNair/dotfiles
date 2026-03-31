@@ -22,52 +22,27 @@ function _atuin_postexec --on-event fish_postexec
     set --erase ATUIN_HISTORY_ID
 end
 
-# TODO: This can be inlined too.
-function _atuin_tmux_popup_check
-    if not test -n "$TMUX"
-        echo 0
-        return
-    end
-end
+set -g ATUIN_POPUP_WIDTH "80%"
+set -g ATUIN_POPUP_HEIGHT "60%"
 
-# TODO: There is likely a simpler way to do this too.
 function _atuin_search
-    set -l use_tmux_popup (_atuin_tmux_popup_check)
-
     set -l ATUIN_H
-    if test "$use_tmux_popup" -eq 1
-        set -l tmpdir (mktemp -d)
-        if not test -d "$tmpdir"
-            # if mktemp got errors
-            set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
-        else
-            set -l result_file "$tmpdir/result"
+    set -l tmpdir (mktemp -d)
+    if test -n "$TMUX"; and test -d "$tmpdir"
+        set -l result_file "$tmpdir/result"
+        set -l query (commandline -b | string replace -a "'" "'\\''")
 
-            set -l query (commandline -b | string replace -a "'" "'\\''")
-            set -l escaped_args ""
-            for arg in $argv
-                set escaped_args "$escaped_args '"(string replace -a "'" "'\\''" -- $arg)"'"
-            end
+        tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -E -- \
+            sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search -i 2>'$result_file'"
 
-            # In the popup, atuin goes to terminal, stderr goes to file
-            set -l cdir (pwd)
-            set -l popup_width "80%"
-            set -l popup_height "60%"
-
-            tmux display-popup -d "$cdir" -w "$popup_width" -h "$popup_height" -E -E -- \
-                sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
-
-            if test -f "$result_file"
-                set ATUIN_H (cat "$result_file" | string collect)
-            end
-
-            command rm -rf "$tmpdir"
+        if test -f "$result_file"
+            set ATUIN_H "$(cat "$result_file")"
         end
     else
-        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
+        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search -i 3>&1 1>&2 2>&3)"
     end
 
-    set ATUIN_H (string trim -- $ATUIN_H) # trim whitespace
+    command rm -rf "$tmpdir"
 
     if test -n "$ATUIN_H"
         commandline -r "$ATUIN_H"
