@@ -1,53 +1,72 @@
-# TODO: Make this config better ordered and with syntax highlighting
+######## Shell
+command = /opt/homebrew/bin/fish
+shell-integration = fish
+term = xterm-ghostty
 
-command = /bin/zsh
-auto-update-channel = tip
-auto-update = off
-
-# Fonts
+######## Font
 font-family = JetBrainsMono Nerd Font Mono
 font-size = 20
+grapheme-width-method = unicode  # Correct width calculation for Nerd Font glyphs.
 
-# Theme
+######## Theme & Colors
 theme = tokyonight
+bold-is-bright = true
+# minimum-contrast = 1.0  # Range 1.0-21.0. Auto-adjusts fg/bg to meet contrast ratio.
 
-# Mouse Usage
+######## Cursor
+cursor-style-blink = false  # Neovim controls cursor shape via escape sequences anyway.
+
+######## Window
+fullscreen = true
+window-save-state = never
+quit-after-last-window-closed = false
+confirm-close-surface = true
+# window-padding-x = 0
+# window-padding-y = 0
+
+######## Mouse
 mouse-hide-while-typing = true
 focus-follows-mouse = true
 click-repeat-interval = 500
 
-# Clipboard
-clipboard-read = allow
-clipboard-write = allow
+######## Clipboard & Selection
+clipboard-read = allow   # Allow OSC 52. Needed for nvim clipboard through tmux/SSH.
+clipboard-write = allow  # Allow OSC 52.
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true  # Warn before pasting content with newlines/control chars.
+copy-on-select = clipboard  # Auto-copy selection to system clipboard.
 
-# Window Presentation
-fullscreen = true
-window-save-state = never
+######## Scrollback
+# Tmux handles scrollback, so this is only for bare Ghostty sessions.
+scrollback-limit = 10000
 
-# Quick Terminal Stuff
+######## Quick Terminal
 quick-terminal-screen = mouse
 quick-terminal-animation-duration = 0
-keybind = global:f12=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-size = 100%
 quick-terminal-space-behavior = remain
 
-# Other Features
+######## Links & Notifications
 link-url = true
-quit-after-last-window-closed = false
-shell-integration = fish
-macos-option-as-alt = left
-bold-is-bright = true
-bell-features = no-attention
 link-previews = true
-macos-shortcuts = deny
+bell-features = no-attention
 notify-on-command-finish = never
+# desktop-notifications = true  # Allow apps to send desktop notifications via OSC 9/777.
 
+######## macOS
+macos-option-as-alt = left
+macos-shortcuts = deny
+auto-update = off
+auto-update-channel = tip
+
+######## Keybindings
+keybind = global:f12=toggle_quick_terminal
 
 # Alt+<left/right> has a weird default with Ghostty. We need to unbind
-# it to make my tmux/zellij keybindings work.
+# it to make tmux keybindings work.
 # Refer here for more: https://github.com/ghostty-org/ghostty/discussions/3681
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
-# Custom Keybindings
+# vim: ft=conf
