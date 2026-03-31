@@ -19,4 +19,3 @@ function fish_prompt
                     --cmd-duration=$STARSHIP_DURATION\
                     --jobs=$STARSHIP_JOBS
 end
-
