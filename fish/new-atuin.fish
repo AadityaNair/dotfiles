@@ -1,6 +1,10 @@
 
-# This basically maintains a single session for the entire shell session within tmux.
-# TODO: There is probably a cheaper way to do this.
+# We can't replace `atuin uuid` for multiple reasons:
+# 1. It works across platforms.
+# 2. We need UUIDv7 for atuin operations — it has ordering properties atuin relies on.
+# 3. The best platform-specific alternative only saves ~2ms.
+# 4. We can't use a static string because this is the primary key for the db.
+#    A static value would cause all new history entries to overwrite the same row.
 if not set -q ATUIN_SESSION; or test "$ATUIN_SHLVL" != "$SHLVL"
     set -gx ATUIN_SESSION (atuin uuid)
     set -gx ATUIN_SHLVL $SHLVL
@@ -36,6 +40,8 @@ function _atuin_search
             set escaped_args "$escaped_args '"(string replace -a "'" "'\\''" -- $arg)"'"
         end
 
+        # In the popup, atuin's TUI goes to the terminal (stdout), and the
+        # selected result is written to stderr, which we redirect to a file.
         tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -E -- \
             sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
 
@@ -43,6 +49,8 @@ function _atuin_search
             set ATUIN_H "$(cat "$result_file")"
         end
     else
+        # Without tmux: swap stdout/stderr so the TUI renders to the terminal
+        # and the selected result is captured via command substitution.
         set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
     end
 
