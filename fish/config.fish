@@ -16,7 +16,6 @@ set fish_greeting  # We do not need fish greeting us on every shell
 
 ### HISTORY SETTINGS
 # TODO: Export atuin config file location here.
-# TODO: Disable fish writing history
 source "$FISH_SCRIPTS/atuin.fish"  # Moved to script for perf reasons
 
 source "$FISH_SCRIPTS/history-search.fish"
