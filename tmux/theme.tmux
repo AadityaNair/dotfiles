@@ -80,7 +80,7 @@ set -g pane-active-border-style 'fg=#{@border-pane}'
 ############################### Others
 
 ######### Message
-set -gF message-style "fg=#{@message},italics"
+set -gF message-style "fg=#{@message},bg=#{@background-primary},italics"
 
 ######### Copy Mode
 set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
