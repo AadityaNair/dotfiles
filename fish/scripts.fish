@@ -59,11 +59,25 @@ function last_history_item
 end
 abbr -a !! --position anywhere --function last_history_item
 
-# TODO: Unable to bind alt-. for some reason. Pls fix.
+# Default keybindings:
+#   ctrl-a / Home          beginning-of-line
+#   ctrl-e / End           end-of-line
+#   ctrl-f / Right         forward-char
+#   ctrl-b / Left          backward-char
+#   alt-f  / alt-Right     forward-word
+#   alt-b  / alt-Left      backward-word
+#   Delete / ctrl-d        delete-char
+#   Backspace              backward-delete-char
+#   ctrl-w / alt-Backspace backward-kill-word
+#   ctrl-k                 kill-line (cursor to end)
+#   ctrl-u                 backward-kill-line (cursor to beginning)
+#   Right  / ctrl-f        accept autosuggestion
+#   alt-Right / alt-f      accept first word of autosuggestion
+#
+# alt-. is intercepted by tmux (M-. = resize-pane -Z) so it never reaches fish.
 bind alt-/ forward-word
 bind alt-comma backward-word
 bind alt-i history-token-search-backward
-# We already do alt/ctrl+backspace to kill word
 
 function mk
     mkdir -p "$argv[1]"
