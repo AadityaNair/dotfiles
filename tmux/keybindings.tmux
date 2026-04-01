@@ -104,5 +104,4 @@ bind -n M-m set mouse  # Toggle enabling/disabling mouse.
 # display-popup
 
 # NOTE: `pane_current_path` doesn't work with symlink properly.
-# TODO: Add colour formatting for rename window/session.
 # vim: ft=tmux

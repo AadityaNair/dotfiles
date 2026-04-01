@@ -25,7 +25,7 @@ set -gF @style-session '#[fg=#{@session},italics,bold]'
 ################################ Status Bar
 
 set -g status-position bottom  # The other option is top.
-set -gF status-style 'bg=#{@background-primary}'  # Default theme for the entire status line.
+set -g status-style 'bg=default'  # Let the status bar blend with the terminal background.
 
 ######### Status Left
 set -g status-left "\
