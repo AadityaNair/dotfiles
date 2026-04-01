@@ -26,8 +26,19 @@ function fish_prompt
     printf ' %s ❯' $cwd
 
     # ── Git ──
-    set -l git_out (command git status --porcelain=v1 --branch 2>/dev/null)
-    if test $status -eq 0
+    # Guard: walk up to find .git before spawning git.
+    # On this host, `git` takes ~600ms just to start, even outside a repo.
+    # This walk costs ~3ms and avoids that entirely.
+    set -l git_out
+    set -l d $PWD
+    while test "$d" != /
+        if test -d "$d/.git" -o -f "$d/.git"
+            set git_out (command git status --porcelain=v1 --branch 2>/dev/null)
+            break
+        end
+        set d (path dirname "$d")
+    end
+    if test -n "$git_out"
         set_color $c_cyan
 
         # Branch name from header: "## main...origin/main [ahead 1]"
