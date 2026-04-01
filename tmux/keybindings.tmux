@@ -63,6 +63,10 @@ bind -T copy-mode-vi P send-keys -X previous-prompt -o
 bind -T copy-mode-vi m send-keys -X set-mark
 bind -T copy-mode-vi M send-keys -X jump-to-mark
 
+# Enter copy mode, start selection, and select up to the last prompt (including the command).
+bind -n M-y copy-mode \; send-keys -X begin-selection \; send-keys -X previous-prompt
+bind -n M-Y copy-mode \; send-keys -X begin-selection \; send-keys -X next-prompt
+
 # This will create a search UI kind of thing. You enter what you want to search in command prompt
 # it will be selected in the terminal, if it exists.
 # The search reverse (N) expects that you have tried to search forward (/) first.
@@ -100,7 +104,5 @@ bind -n M-m set mouse  # Toggle enabling/disabling mouse.
 # display-popup
 
 # NOTE: `pane_current_path` doesn't work with symlink properly. 
-# TODO: Keybinding to copy entire window/pane/last-prompt.
-# TODO: Starship (or its integration with fish) is eating up OSC 133 codes and breaking prompt-search.
 # TODO: Add colour formatting for rename window/session.
 # vim: ft=tmux
