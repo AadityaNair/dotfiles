@@ -7,8 +7,8 @@
 #   3. Use `atuin_history_up` and `atuin_history_down` to increase/decrease the `index`
 #   4. Resets the index when we enter the command or cancel the command via `reset_index`
 # WARNING: Very very prone to off-by-one errors. Please be careful updating the index.
-# TODO: Underline the query text. Fish has no API to highlight part of the
-# commandline buffer without using selection mode (which breaks editing).
+# NOTE: Fish has no API to highlight part of the commandline buffer without using selection mode (which breaks editing).
+#       So we cannot hightlight the query string.
 
 # Configure atuin search
 set MODE fulltext # Possible options being: prefix, fulltext, fuzzy, skim

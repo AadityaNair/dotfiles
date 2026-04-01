@@ -15,7 +15,8 @@ set -x EDITOR nvim
 set fish_greeting  # We do not need fish greeting us on every shell
 
 ### HISTORY SETTINGS
-# TODO: Upstream: ATUIN_CONFIG_DIR should accept a file path, not just a directory.
+# NOTE: ATUIN_CONFIG_DIR should accept a file path, so we need to symlink the file to 
+#       the default folder. Ideally we just point to the config file itself.
 source "$FISH_SCRIPTS/atuin.fish"  # Moved to script for perf reasons
 
 source "$FISH_SCRIPTS/history-search.fish"

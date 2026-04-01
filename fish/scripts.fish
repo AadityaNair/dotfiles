@@ -114,5 +114,3 @@ function extract
             echo "Can't `extract` this file. Please check."
     end
 end
-
-# Far future todo: Lazyload Kubectl nvm and pnpm settings whenever you can.
