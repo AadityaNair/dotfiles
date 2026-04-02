@@ -6,7 +6,6 @@
 local common = require("common")
 local TableConcat = common.TableConcat
 
-common.setup()
 ------------------------------------------------- Plugins Setup --------------------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
