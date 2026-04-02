@@ -15,15 +15,11 @@ local ui = require("ui")
 local ux = require("ux")
 local coding = require("coding")
 
--- TODO: Auto load this file if it exists. Avoids leaving a dirty repo.
-local company = require("company")
-
 local plugins = {}
 
 plugins = TableConcat(plugins, ui.plugins)
 plugins = TableConcat(plugins, ux.plugins)
 plugins = TableConcat(plugins, coding.plugins)
-plugins = TableConcat(plugins, company.plugins)
 
 require("lazy").setup({
     spec = plugins,
@@ -35,4 +31,3 @@ require("lazy").setup({
 ui.setup()
 ux.setup()
 coding.setup()
-company.setup()

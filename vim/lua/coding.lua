@@ -37,7 +37,6 @@ local default_lsps = {
     "rust_analyzer", -- Rust
     "zls", -- Zig
 }
-local company_lsps = require("company").custom_lsps
 
 module.plugins = {
     { "nvim-treesitter/nvim-treesitter", branch = "main", build = ":TSUpdate" },
@@ -161,7 +160,7 @@ function module.setup()
         require("conform").format({ async = true, lsp_format = "fallback", range = range })
     end, { desc = "Format the whole file or selected section", range = true })
 
-    for _, lsp in ipairs(TableConcat(default_lsps, company_lsps)) do
+    for _, lsp in ipairs(default_lsps) do
         vim.lsp.enable(lsp)
     end
 
