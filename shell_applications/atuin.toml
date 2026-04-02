@@ -1,5 +1,4 @@
 
-# TODO: Create a theme for tokyo night
 # TODO: Figure out command chaining
 style = "full"
 
@@ -33,7 +32,8 @@ records = true
 [daemon]
 enabled = false
 
-# [theme]
+[theme]
+name = "tokyonight"
 ## Color theme to use for rendering in the terminal.
 ## There are some built-in themes, including the base theme ("default"),
 ## "autumn" and "marine". You can add your own themes to the "./themes" subdirectory of your
