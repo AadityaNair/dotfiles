@@ -1,6 +1,6 @@
 
-# TODO: Figure out command chaining
 style = "full"
+command_chaining = true
 
 inline_height_shell_up_key_binding = 5
 
