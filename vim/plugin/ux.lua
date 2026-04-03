@@ -1,15 +1,4 @@
-plugins = {
-    "numToStr/Comment.nvim",
-    "mbbill/undotree",
-    { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-    {
-        "kevinhwang91/nvim-ufo",
-        dependencies = { "kevinhwang91/promise-async" },
-    },
-}
-
-gh_url = require("common").gh_url
+local gh_url = require("common").gh_url
 
 vim.pack.add({
     gh_url("numToStr/Comment.nvim"),
@@ -41,10 +30,9 @@ require("ufo").setup({
 })
 
 -- TODO: Only generate indentlines when there are more than two lines indented.
--- TODO: Reenable this
--- require("ibl").setup({
---     indent = { char = "│" },
--- })
+require("ibl").setup({
+    indent = { char = "│" },
+})
 require("Comment").setup({
     padding = true,
     sticky = true,
