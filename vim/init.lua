@@ -5,6 +5,8 @@
 -- All the fancy shit in the plugin/
 -- This file should work even if everything else breaks.
 
+vim.loader.enable() -- Performance dark magic: https://github.com/neovim/neovim/pull/22668
+
 vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
