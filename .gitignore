@@ -6,3 +6,4 @@ company.sh
 *.zwc
 lazy-lock.json
 *company.lua
+nvim-pack-lock.json
