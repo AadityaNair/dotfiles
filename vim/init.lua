@@ -11,15 +11,15 @@ local TableConcat = common.TableConcat
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 vim.opt.rtp:prepend(lazypath)
 
-local ui = require("ui")
-local ux = require("ux")
-local coding = require("coding")
+-- local ui = require("ui")
+-- local ux = require("ux")
+-- local coding = require("coding")
 
-local plugins = {}
+-- local plugins = {}
 
-plugins = TableConcat(plugins, ui.plugins)
-plugins = TableConcat(plugins, ux.plugins)
-plugins = TableConcat(plugins, coding.plugins)
+-- plugins = TableConcat(plugins, ui.plugins)
+-- plugins = TableConcat(plugins, ux.plugins)
+-- plugins = TableConcat(plugins, coding.plugins)
 
 -- require("lazy").setup({
 --     spec = plugins,
@@ -28,6 +28,6 @@ plugins = TableConcat(plugins, coding.plugins)
 --     },
 -- })
 
-ui.setup()
-ux.setup()
-coding.setup()
+-- ui.setup()
+-- ux.setup()
+-- coding.setup()
