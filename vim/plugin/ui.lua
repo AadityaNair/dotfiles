@@ -1,23 +1,7 @@
-plugins = {
-    "nvim-lualine/lualine.nvim",
-    { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
-    { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim" },
-    { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {}, -- Apparently this line is important
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-    },
-}
-
-gh_url = require("common").gh_url
+local gh_url = require("common").gh_url
 vim.pack.add({
     gh_url("nvim-lualine/lualine.nvim"),
-    gh_url("folke/tokyonight.nvim"), -- TODO: LAZY
+    gh_url("folke/tokyonight.nvim"), -- TODO: NOT LAZY (high priority)
     gh_url("folke/todo-comments.nvim"),
     gh_url("nvim-lua/plenary.nvim"), -- dep to above
     gh_url("akinsho/bufferline.nvim"),
@@ -66,6 +50,8 @@ require("notify").setup({
     render = "minimal",
     stages = "fade",
 })
+
+--  TODO: Command prompt too high (not center)
 require("noice").setup({
     lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
