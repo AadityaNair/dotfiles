@@ -1,6 +1,6 @@
 local gh_url = require("common").gh_url
 vim.pack.add({
-    gh_url("nvim-lualine/lualine.nvim"),
+    gh_url("nvim-lualine/lualine.nvim"), -- TODO: Lazy loading.
     gh_url("folke/tokyonight.nvim"), -- TODO: NOT LAZY (high priority)
     gh_url("folke/todo-comments.nvim"), -- TODO: Can be replaced with simple code
     gh_url("akinsho/bufferline.nvim"),

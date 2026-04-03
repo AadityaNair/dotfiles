@@ -44,6 +44,9 @@ vim.pack.add({
     { src = gh_url("saghen/blink.cmp"), version = vim.version.range("*") },
 })
 
+-- TODO: LSP Progress: https://www.reddit.com/r/neovim/comments/1rcvliq/ghostty_lsp_progress_bar/
+-- TODO: https://jdhao.github.io/2026/04/02/nvim-v012-release/#update-highlight
+
 require("blink.cmp").setup(
     {
         -- TODO: Tab to insert the first time always and the iterate through options
