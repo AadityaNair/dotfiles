@@ -41,12 +41,13 @@ vim.pack.add({
     gh_url("stevearc/conform.nvim"), -- TODO: Only on BufWritePre. Whole thing under eval.
     gh_url("nvim-treesitter/nvim-treesitter-context"),
     gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
-    gh_url("saghen/blink.cmp"), -- TODO: Proper configuration.
+    { src = gh_url("saghen/blink.cmp"), version = vim.version.range("*") },
 })
 
 require("blink.cmp").setup(
     {
         -- TODO: Tab to insert the first time always and the iterate through options
+        -- TODO: Fully investigate config
         keymap = {
             preset = "none",
             ["<Up>"] = { "select_prev", "fallback" },
