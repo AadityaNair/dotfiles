@@ -11,6 +11,19 @@ module.plugins = {
 }
 
 function module.setup()
+    gh_url=require("common").gh_url
+
+    vim.pack.add({
+        gh_url("numToStr/Comment.nvim"),
+        gh_url("mbbill/undotree"),
+        gh_url("akinsho/bufferline.nvim"),
+        gh_url("nvim-tree/nvim-web-devicons"), -- dep to above
+        gh_url("lukas-reineke/indent-blankline.nvim"),
+        gh_url("kevinhwang91/nvim-ufo"),
+        gh_url("kevinhwang91/promise-async"), -- dep to above
+    })
+    
+
     vim.o.foldcolumn = "auto:9" -- '0' is not bad
     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
     vim.o.foldlevelstart = 99
@@ -31,9 +44,10 @@ function module.setup()
     })
 
     -- TODO: Only generate indentlines when there are more than two lines indented.
-    require("ibl").setup({
-        indent = { char = "│" },
-    })
+    -- TODO: Reenable this
+    -- require("ibl").setup({
+    --     indent = { char = "│" },
+    -- })
     require("Comment").setup({
         padding = true,
         sticky = true,

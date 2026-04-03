@@ -21,12 +21,12 @@ plugins = TableConcat(plugins, ui.plugins)
 plugins = TableConcat(plugins, ux.plugins)
 plugins = TableConcat(plugins, coding.plugins)
 
-require("lazy").setup({
-    spec = plugins,
-    rocks = {
-        enabled = false,
-    },
-})
+-- require("lazy").setup({
+--     spec = plugins,
+--     rocks = {
+--         enabled = false,
+--     },
+-- })
 
 ui.setup()
 ux.setup()

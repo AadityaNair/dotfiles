@@ -108,6 +108,16 @@ module.plugins = {
 }
 
 function module.setup()
+    gh_url = require("common").gh_url
+    vim.pack.add({
+        gh_url("nvim-treesitter/nvim-treesitter"), -- TODO: Autobuild on update
+        gh_url("stevearc/conform.nvim"),  -- TODO: Only on BufWritePre. Whole thing under eval.
+        gh_url("nvim-treesitter/nvim-treesitter-context"),
+        gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
+        gh_url("saghen/blink.cmp"),  -- TODO: Proper configuration.
+    })
+
+
     require("treesitter-context").setup({
         enable = true,
         max_lines = 2, -- Only show context upto two levels.
