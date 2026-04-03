@@ -1,5 +1,3 @@
--- module = {}
-
 local supported_langs = {
     "bash",
     "c",
@@ -37,76 +35,7 @@ local default_lsps = {
     "zls", -- Zig
 }
 
-local plugins = {
-    { "nvim-treesitter/nvim-treesitter", branch = "main", build = ":TSUpdate" },
-    { "nvim-treesitter/nvim-treesitter-context" },
-    { "xzbdmw/colorful-menu.nvim" }, -- NOTE: Plugin under evaluation
-    {
-        "saghen/blink.cmp",
-        dependencies = {},
-        version = "*",
-        opts = {
-            -- TODO: Tab to insert the first time always and the iterate through options
-            keymap = {
-                preset = "none",
-                ["<Up>"] = { "select_prev", "fallback" },
-                ["<Down>"] = { "select_next", "fallback" },
-                ["<Tab>"] = {
-                    function(cmp)
-                        if cmp.snippet_active() then
-                            return cmp.accept()
-                        else
-                            return cmp.select_and_accept()
-                        end
-                    end,
-                    "select_next",
-                    "fallback",
-                },
-                ["<S-Tab>"] = { "select_prev", "fallback" },
-                ["<Esc>"] = { "hide", "fallback" },
-            },
-            appearance = {
-                nerd_font_variant = "mono",
-            },
-            completion = {
-                documentation = { auto_show = false },
-                ghost_text = { enabled = true, show_with_menu = false },
-                list = { selection = { preselect = true, auto_insert = true } },
-                keyword = { range = "full" },
-                menu = {
-                    draw = {
-                        columns = {
-                            { "kind_icon" },
-                            { "label", "label_description", gap = 1 },
-                            { "source_name" },
-                        },
-                        components = {
-                            label = {
-                                text = function(ctx)
-                                    return require("colorful-menu").blink_components_text(ctx)
-                                end,
-                                highlight = function(ctx)
-                                    return require("colorful-menu").blink_components_highlight(ctx)
-                                end,
-                            },
-                        },
-
-                        treesitter = { "lsp" },
-                    },
-                },
-            },
-            sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
-            },
-            fuzzy = { implementation = "prefer_rust" },
-            signature = { enabled = true },
-        },
-        opts_extend = { "sources.default" },
-    },
-    { "stevearc/conform.nvim", event = { "BufWritePre" } }, -- NOTE: Plugin under evaluation.
-}
-
-gh_url = require("common").gh_url
+local gh_url = require("common").gh_url
 vim.pack.add({
     gh_url("nvim-treesitter/nvim-treesitter"), -- TODO: Autobuild on update
     gh_url("stevearc/conform.nvim"), -- TODO: Only on BufWritePre. Whole thing under eval.
@@ -114,6 +43,67 @@ vim.pack.add({
     gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
     gh_url("saghen/blink.cmp"), -- TODO: Proper configuration.
 })
+
+require("blink.cmp").setup(
+    {
+        -- TODO: Tab to insert the first time always and the iterate through options
+        keymap = {
+            preset = "none",
+            ["<Up>"] = { "select_prev", "fallback" },
+            ["<Down>"] = { "select_next", "fallback" },
+            ["<Tab>"] = {
+                function(cmp)
+                    if cmp.snippet_active() then
+                        return cmp.accept()
+                    else
+                        return cmp.select_and_accept()
+                    end
+                end,
+                "select_next",
+                "fallback",
+            },
+            ["<S-Tab>"] = { "select_prev", "fallback" },
+            ["<Esc>"] = { "hide", "fallback" },
+        },
+        appearance = {
+            nerd_font_variant = "mono",
+        },
+        completion = {
+            documentation = { auto_show = false },
+            ghost_text = { enabled = true, show_with_menu = false },
+            list = { selection = { preselect = true, auto_insert = true } },
+            keyword = { range = "full" },
+            menu = {
+                draw = {
+                    columns = {
+                        { "kind_icon" },
+                        { "label", "label_description", gap = 1 },
+                        { "source_name" },
+                    },
+                    components = {
+                        label = {
+                            text = function(ctx)
+                                return require("colorful-menu").blink_components_text(ctx)
+                            end,
+                            highlight = function(ctx)
+                                return require("colorful-menu").blink_components_highlight(ctx)
+                            end,
+                        },
+                    },
+
+                    treesitter = { "lsp" },
+                },
+            },
+        },
+        sources = {
+            default = { "lsp", "path", "snippets", "buffer" },
+        },
+        fuzzy = { implementation = "prefer_rust" },
+        signature = { enabled = true },
+    }
+    -- TODO: Figure out what this opts_extend does.
+    -- opts_extend = { "sources.default" },
+)
 
 require("treesitter-context").setup({
     enable = true,
