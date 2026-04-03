@@ -37,7 +37,7 @@ local default_lsps = {
 
 local gh_url = require("common").gh_url
 vim.pack.add({
-    gh_url("nvim-treesitter/nvim-treesitter"), -- TODO: Autobuild on update
+    gh_url("nvim-treesitter/nvim-treesitter"),
     gh_url("stevearc/conform.nvim"), -- TODO: Only on BufWritePre. Whole thing under eval.
     gh_url("nvim-treesitter/nvim-treesitter-context"),
     gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
@@ -125,6 +125,18 @@ vim.api.nvim_create_autocmd("FileType", {
         local hl_settings = vim.api.nvim_get_hl(0, { name = "String" })
         hl_settings["italic"] = true
         vim.api.nvim_set_hl(0, "String", hl_settings)
+    end,
+})
+
+vim.api.nvim_create_autocmd("PackChanged", {
+    callback = function(ev)
+        local name, kind = ev.data.spec.name, ev.data.kind
+        if name == "nvim-treesitter" and kind == "update" then
+            if not ev.data.active then
+                vim.cmd.packadd("nvim-treesitter")
+            end
+            vim.cmd("TSUpdate")
+        end
     end,
 })
 
