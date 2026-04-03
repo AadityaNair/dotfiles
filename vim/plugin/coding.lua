@@ -40,7 +40,7 @@ vim.pack.add({
     gh_url("nvim-treesitter/nvim-treesitter"),
     gh_url("stevearc/conform.nvim"), -- TODO: Only on BufWritePre. Whole thing under eval.
     gh_url("nvim-treesitter/nvim-treesitter-context"),
-    gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
+    gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Blink does the job apparently.
     { src = gh_url("saghen/blink.cmp"), version = vim.version.range("*") },
 })
 
