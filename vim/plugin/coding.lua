@@ -1,5 +1,4 @@
-module = {}
-local TableConcat = require("common").TableConcat
+-- module = {}
 
 local supported_langs = {
     "bash",
@@ -38,7 +37,7 @@ local default_lsps = {
     "zls", -- Zig
 }
 
-module.plugins = {
+local plugins = {
     { "nvim-treesitter/nvim-treesitter", branch = "main", build = ":TSUpdate" },
     { "nvim-treesitter/nvim-treesitter-context" },
     { "xzbdmw/colorful-menu.nvim" }, -- NOTE: Plugin under evaluation
@@ -107,115 +106,110 @@ module.plugins = {
     { "stevearc/conform.nvim", event = { "BufWritePre" } }, -- NOTE: Plugin under evaluation.
 }
 
-function module.setup()
-    gh_url = require("common").gh_url
-    vim.pack.add({
-        gh_url("nvim-treesitter/nvim-treesitter"), -- TODO: Autobuild on update
-        gh_url("stevearc/conform.nvim"),  -- TODO: Only on BufWritePre. Whole thing under eval.
-        gh_url("nvim-treesitter/nvim-treesitter-context"),
-        gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
-        gh_url("saghen/blink.cmp"),  -- TODO: Proper configuration.
+gh_url = require("common").gh_url
+vim.pack.add({
+    gh_url("nvim-treesitter/nvim-treesitter"), -- TODO: Autobuild on update
+    gh_url("stevearc/conform.nvim"), -- TODO: Only on BufWritePre. Whole thing under eval.
+    gh_url("nvim-treesitter/nvim-treesitter-context"),
+    gh_url("xzbdmw/colorful-menu.nvim"), -- TODO: Plugin under eval
+    gh_url("saghen/blink.cmp"), -- TODO: Proper configuration.
+})
+
+require("treesitter-context").setup({
+    enable = true,
+    max_lines = 2, -- Only show context upto two levels.
+    min_window_height = 0,
+    line_numbers = true,
+})
+
+require("nvim-treesitter").install(supported_langs)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = supported_langs,
+    callback = function()
+        vim.treesitter.start()
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        -- FIX: treesitter indent doesn't actually work. Figure out why.
+        -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        -- Set strings to be italics
+        local hl_settings = vim.api.nvim_get_hl(0, { name = "String" })
+        hl_settings["italic"] = true
+        vim.api.nvim_set_hl(0, "String", hl_settings)
+    end,
+})
+
+vim.filetype.add({
+    extension = {
+        ["zsh"] = "bash",
+        ["sh"] = "bash",
+    },
+})
+
+vim.api.nvim_create_user_command("DiagnosticToggle", function()
+    local config = vim.diagnostic.config
+    local vt = config().virtual_text
+    config({
+        virtual_text = not vt,
+        underline = not vt,
+        signs = not vt,
     })
+end, { desc = "Toggle showing LSPErrors/Hints/etc" })
 
-
-    require("treesitter-context").setup({
-        enable = true,
-        max_lines = 2, -- Only show context upto two levels.
-        min_window_height = 0,
-        line_numbers = true,
-    })
-
-    require("nvim-treesitter").install(supported_langs)
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = supported_langs,
-        callback = function()
-            vim.treesitter.start()
-            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            -- FIX: treesitter indent doesn't actually work. Figure out why.
-            -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-            -- Set strings to be italics
-            local hl_settings = vim.api.nvim_get_hl(0, { name = "String" })
-            hl_settings["italic"] = true
-            vim.api.nvim_set_hl(0, "String", hl_settings)
-        end,
-    })
-
-    vim.filetype.add({
-        extension = {
-            ["zsh"] = "bash",
-            ["sh"] = "bash",
-        },
-    })
-
-    vim.api.nvim_create_user_command("DiagnosticToggle", function()
-        local config = vim.diagnostic.config
-        local vt = config().virtual_text
-        config({
-            virtual_text = not vt,
-            underline = not vt,
-            signs = not vt,
-        })
-    end, { desc = "Toggle showing LSPErrors/Hints/etc" })
-
-    vim.api.nvim_create_user_command("Format", function(args)
-        local range = nil
-        if args.count ~= -1 then
-            local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-            range = {
-                start = { args.line1, 0 },
-                ["end"] = { args.line2, end_line:len() },
-            }
-        end
-        require("conform").format({ async = true, lsp_format = "fallback", range = range })
-    end, { desc = "Format the whole file or selected section", range = true })
-
-    for _, lsp in ipairs(default_lsps) do
-        vim.lsp.enable(lsp)
+vim.api.nvim_create_user_command("Format", function(args)
+    local range = nil
+    if args.count ~= -1 then
+        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+        range = {
+            start = { args.line1, 0 },
+            ["end"] = { args.line2, end_line:len() },
+        }
     end
+    require("conform").format({ async = true, lsp_format = "fallback", range = range })
+end, { desc = "Format the whole file or selected section", range = true })
 
-    require("conform").setup({
-        formatters_by_ft = {
-            python = { "ruff" },
-            lua = { "stylua" },
-        },
-        format_on_save = {
-            timeout_ms = 500,
-            lsp_format = "fallback",
-        },
-    })
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    require("conform").formatters.ruff = {
-        command = "uv",
-        args = {
+for _, lsp in ipairs(default_lsps) do
+    vim.lsp.enable(lsp)
+end
+
+require("conform").setup({
+    formatters_by_ft = {
+        python = { "ruff" },
+        lua = { "stylua" },
+    },
+    format_on_save = {
+        timeout_ms = 500,
+        lsp_format = "fallback",
+    },
+})
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+require("conform").formatters.ruff = {
+    command = "uv",
+    args = {
+        "run",
+        "ruff",
+        "format",
+        "--force-exclude",
+        "--stdin-filename",
+        "$FILENAME",
+        "-",
+    },
+    range_args = function(_, ctx)
+        return {
             "run",
             "ruff",
             "format",
             "--force-exclude",
+            "--range",
+            string.format(
+                "%d:%d-%d:%d",
+                ctx.range.start[1],
+                ctx.range.start[2] + 1,
+                ctx.range["end"][1],
+                ctx.range["end"][2] + 1
+            ),
             "--stdin-filename",
             "$FILENAME",
             "-",
-        },
-        range_args = function(_, ctx)
-            return {
-                "run",
-                "ruff",
-                "format",
-                "--force-exclude",
-                "--range",
-                string.format(
-                    "%d:%d-%d:%d",
-                    ctx.range.start[1],
-                    ctx.range.start[2] + 1,
-                    ctx.range["end"][1],
-                    ctx.range["end"][2] + 1
-                ),
-                "--stdin-filename",
-                "$FILENAME",
-                "-",
-            }
-        end,
-    }
-end
-
-return module
+        }
+    end,
+}
