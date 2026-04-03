@@ -5,7 +5,7 @@ vim.pack.add({
     gh_url("folke/todo-comments.nvim"), -- TODO: Can be replaced with simple code
     gh_url("akinsho/bufferline.nvim"),
     gh_url("nvim-tree/nvim-web-devicons"), -- dep to above
-    gh_url("folke/noice.nvim"), -- TODO: LAZY
+    gh_url("folke/noice.nvim"), -- TODO: LAZY, UIEnter + vim.schedule
     gh_url("MunifTanjim/nui.nvim"), -- dep to above
     gh_url("rcarriga/nvim-notify"), -- dep to above
 })
@@ -37,7 +37,7 @@ require("lualine").setup({
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },
-    extensions = { "lazy" },
+    extensions = { "lazy" }, -- TODO: Find Alternative. This was lazy.nvim specific
 })
 require("bufferline").setup({
     options = { always_show_bufferline = false },
