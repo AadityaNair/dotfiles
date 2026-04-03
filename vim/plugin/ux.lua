@@ -1,8 +1,8 @@
 local gh_url = require("common").gh_url
-
+-- TODO: Undotree stuff: https://jdhao.github.io/2026/04/02/nvim-v012-release/#builtin-undo-tree-and-diff-tool
 vim.pack.add({
-    gh_url("numToStr/Comment.nvim"),
-    gh_url("mbbill/undotree"),
+    gh_url("numToStr/Comment.nvim"), -- TODO: Replace with the internal implementation.
+    gh_url("mbbill/undotree"), -- TODO: Replace with built-in undotree implementation:
     gh_url("lukas-reineke/indent-blankline.nvim"),
     gh_url("kevinhwang91/nvim-ufo"),
     gh_url("kevinhwang91/promise-async"), -- dep to above
