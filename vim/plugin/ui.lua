@@ -1,76 +1,88 @@
 local gh_url = require("common").gh_url
+
+-- Colorscheme: Loaded at startup
 vim.pack.add({
-    gh_url("nvim-lualine/lualine.nvim"), -- TODO: Lazy loading.
-    gh_url("folke/tokyonight.nvim"), -- TODO: NOT LAZY (high priority)
-    gh_url("folke/todo-comments.nvim"), -- TODO: Can be replaced with simple code
-    gh_url("akinsho/bufferline.nvim"),
-    gh_url("nvim-tree/nvim-web-devicons"), -- dep to above
-    gh_url("folke/noice.nvim"), -- TODO: LAZY, UIEnter + vim.schedule
-    gh_url("MunifTanjim/nui.nvim"), -- dep to above
-    gh_url("rcarriga/nvim-notify"), -- dep to above
+    gh_url("folke/tokyonight.nvim"),
 })
 
 require("tokyonight").setup({
     terminal_colors = true,
     styles = {
-        -- Value is any valid attr-list value for `:help nvim_set_hl`
         comments = { italic = true },
         keywords = { italic = true },
-        functions = {},
-        variables = {},
     },
 })
 
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("tokyonight-night")
-require("lualine").setup({
-    options = {
-        theme = "tokyonight",
-        icons_enabled = true,
-        globalstatus = true,
-    },
-    sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename" },
-        lualine_x = { "searchcount", "selectioncount", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
-    },
-    extensions = { "lazy" }, -- TODO: Find Alternative. This was lazy.nvim specific
-})
-require("bufferline").setup({
-    options = { always_show_bufferline = false },
-})
--- NOTE: Use :NoiceHistory to get notification history.
-require("notify").setup({
-    background_colour = "#000000",
-    top_down = true,
-    render = "minimal",
-    stages = "fade",
-})
 
---  TODO: Command prompt too high (not center)
-require("noice").setup({
-    lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+-- Lazy UI setup
+local function setup_ui()
+    vim.pack.add({
+        gh_url("folke/todo-comments.nvim"), -- TODO: Replace with simple code.
+        gh_url("nvim-lualine/lualine.nvim"),
+        gh_url("akinsho/bufferline.nvim"),
+        gh_url("nvim-tree/nvim-web-devicons"),
+        gh_url("folke/noice.nvim"),
+        gh_url("MunifTanjim/nui.nvim"),
+        gh_url("rcarriga/nvim-notify"),
+    })
+
+    require("lualine").setup({
+        options = {
+            theme = "tokyonight",
+            icons_enabled = true,
+            globalstatus = true,
         },
-    },
-    -- you can enable a preset for easier configuration
-    presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
-    },
-})
+        sections = {
+            lualine_a = { "mode" },
+            lualine_b = { "branch", "diff", "diagnostics" },
+            lualine_c = { "filename" },
+            lualine_x = { "searchcount", "selectioncount", "filetype" },
+            lualine_y = { "progress" },
+            lualine_z = { "location" },
+        },
+    })
 
-require("todo-comments").setup({
-    signs = false,
-    highlight = { multiline = false },
+    require("bufferline").setup({
+        options = { always_show_bufferline = false },
+    })
+
+    require("notify").setup({
+        background_colour = "#000000",
+        top_down = true,
+        render = "minimal",
+        stages = "fade",
+    })
+
+    -- TODO: Command Prompt too high (not centered)
+    require("noice").setup({
+        lsp = {
+            override = {
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                ["vim.lsp.util.stylize_markdown"] = true,
+                ["cmp.entry.get_documentation"] = true,
+            },
+        },
+        presets = {
+            bottom_search = true,
+            command_palette = true,
+            long_message_to_split = true,
+            inc_rename = false,
+            lsp_doc_border = false,
+        },
+    })
+
+    require("todo-comments").setup({
+        signs = false,
+        highlight = { multiline = false },
+    })
+end
+
+-- Defer loading UI plugins until after the interface has drawn
+vim.api.nvim_create_autocmd("UIEnter", {
+    callback = function()
+        vim.schedule(setup_ui)
+    end,
+    once = true,
 })
