@@ -44,7 +44,6 @@ vim.pack.add({
 })
 
 -- TODO: LSP Progress: https://www.reddit.com/r/neovim/comments/1rcvliq/ghostty_lsp_progress_bar/
--- TODO: https://jdhao.github.io/2026/04/02/nvim-v012-release/#update-highlight
 
 require("blink.cmp").setup(
     {
@@ -124,10 +123,8 @@ vim.api.nvim_create_autocmd("FileType", {
         -- FIX: treesitter indent doesn't actually work. Figure out why.
         -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
-        -- Set strings to be italics
-        local hl_settings = vim.api.nvim_get_hl(0, { name = "String" })
-        hl_settings["italic"] = true
-        vim.api.nvim_set_hl(0, "String", hl_settings)
+        -- Set strings to be italics (update = true is a nvim 0.12 feature)
+        vim.api.nvim_set_hl(0, "String", { italic = true, update = true })
     end,
 })
 
