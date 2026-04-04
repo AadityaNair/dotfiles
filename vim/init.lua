@@ -40,7 +40,8 @@ vim.opt.clipboard = "unnamedplus" -- Integrate vim with system clipboard.
 
 vim.keymap.set("i", "kj", "<Esc>")
 vim.keymap.set("n", ";", ":")
-vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>", { silent = true })
+vim.cmd.packadd("nohlsearch") -- Builtin plugin: auto-clears search highlights when cursor moves
+vim.keymap.set("n", "<leader><space>", ":nohlsearch<CR>", { silent = true }) -- Manual fallback to clear highlights immediately
 
 vim.keymap.set("n", "<Leader>r", "<Cmd>edit!<CR>")
 
