@@ -6,24 +6,12 @@ vim.pack.add({
 
 require("blink.cmp").setup(
     {
-        -- TODO: Tab to insert the first time always and the iterate through options
-        -- TODO: Fully investigate config
         keymap = {
             preset = "none",
             ["<Up>"] = { "select_prev", "fallback" },
             ["<Down>"] = { "select_next", "fallback" },
-            ["<Tab>"] = {
-                function(cmp)
-                    if cmp.snippet_active() then
-                        return cmp.accept()
-                    else
-                        return cmp.select_and_accept()
-                    end
-                end,
-                "select_next",
-                "fallback",
-            },
-            ["<S-Tab>"] = { "select_prev", "fallback" },
+            ["<Tab>"] = { "show", "insert_next", "fallback" },
+            ["<S-Tab>"] = { "insert_prev", "fallback" },
             ["<Esc>"] = { "hide", "fallback" },
         },
         appearance = {
@@ -62,6 +50,4 @@ require("blink.cmp").setup(
         fuzzy = { implementation = "prefer_rust" },
         signature = { enabled = true },
     }
-    -- TODO: Figure out what this opts_extend does.
-    -- opts_extend = { "sources.default" },
 )
