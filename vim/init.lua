@@ -1,4 +1,3 @@
--- TODO: Investigate the UI2 stuff: https://jdhao.github.io/2026/04/02/nvim-v012-release/#ui2-no-more-press-enter
 -- TODO: Investigate incremenatal selection? https://www.reddit.com/r/neovim/comments/1s9q0pi/incremental_selection_in_neovim_012/
 -- TODO: Builtin plugins? https://neovim.io/doc/user/plugins/
 
