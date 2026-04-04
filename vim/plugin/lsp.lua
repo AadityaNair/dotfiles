@@ -4,6 +4,7 @@ local default_lsps = {
     "pyright", -- Python
     "rust_analyzer", -- Rust
     "zls", -- Zig
+    "jsonls", -- JSON
 }
 
 for _, lsp in ipairs(default_lsps) do
