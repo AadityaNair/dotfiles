@@ -6,7 +6,8 @@ term = xterm-ghostty
 ######## Font
 font-family = JetBrainsMono Nerd Font Mono
 font-size = 20
-grapheme-width-method = unicode  # Correct width calculation for Nerd Font glyphs.
+# Correct width calculation for Nerd Font glyphs.
+grapheme-width-method = unicode  
 
 ######## Theme & Colors
 theme = tokyonight
@@ -14,7 +15,8 @@ bold-is-bright = true
 # minimum-contrast = 1.0  # Range 1.0-21.0. Auto-adjusts fg/bg to meet contrast ratio.
 
 ######## Cursor
-cursor-style-blink = false  # Neovim controls cursor shape via escape sequences anyway.
+# Neovim controls cursor shape via escape sequences anyway.
+cursor-style-blink = false  
 
 ######## Window
 fullscreen = true
@@ -30,11 +32,14 @@ focus-follows-mouse = true
 click-repeat-interval = 500
 
 ######## Clipboard & Selection
-clipboard-read = allow   # Allow OSC 52. Needed for nvim clipboard through tmux/SSH.
-clipboard-write = allow  # Allow OSC 52.
+# OSC 52 Copying. 
+clipboard-read = allow
+clipboard-write = allow
 clipboard-trim-trailing-spaces = true
-clipboard-paste-protection = true  # Warn before pasting content with newlines/control chars.
-copy-on-select = clipboard  # Auto-copy selection to system clipboard.
+# Warn before pasting content with newlines/control chars.
+clipboard-paste-protection = true  
+# Auto-copy selection to system clipboard.
+copy-on-select = clipboard  
 
 ######## Scrollback
 # Tmux handles scrollback, so this is only for bare Ghostty sessions.
