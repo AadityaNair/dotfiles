@@ -20,7 +20,7 @@ vim.cmd.colorscheme("tokyonight-night")
 local function setup_ui()
     vim.pack.add({
         gh_url("folke/todo-comments.nvim"), -- TODO: Replace with simple code.
-        gh_url("nvim-lualine/lualine.nvim"),
+        gh_url("nvim-lualine/lualine.nvim"), -- TODO: Replace with custom statusline
         gh_url("akinsho/bufferline.nvim"),
         gh_url("nvim-tree/nvim-web-devicons"),
         gh_url("folke/noice.nvim"),
