@@ -10,11 +10,19 @@ update the colourscheme, these services need to be updated as well. Also update 
 wherever a new service is added or deleted.
 The services we care about are:
 * Neovim
-* Neovim Lualine plugin
+* Any neovim plugin that generates a UI, especially, LuaLine
 * Fish Shell
 * Tmux 
 * Ghostty
 * Atuin History UI
+
+For neovim plugins, the code of the plugins is directly available in ~/.local/share/nvim/site/pack/core/opt
+You can read the code there and figure out any breakages.
+For neovim lualine, validate the config using :LuaLineNotices
+
+For ghostty, if we actually have ghostty installed in the current host, run `ghostty +validate-config`
+to validate any changes. Also note that you cannot have comments in the same line as code. The line
+can either have config options or comments. Not both.
 
 We also have versions.json where we track the versions of various important software we use.
 This should help you inform decisions on what is available or not. If there are discrepencies between
