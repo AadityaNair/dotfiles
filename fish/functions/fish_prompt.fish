@@ -1,10 +1,10 @@
 # Pure fish prompt — no external dependencies.
 
-# Tokyo Night palette
-set -g __prompt_c_yellow e0af68
-set -g __prompt_c_cyan 2ac3de
-set -g __prompt_c_red f7768e
-set -g __prompt_c_orange ff9e64
+# Flexoki palette
+set -g __prompt_c_yellow AD8301
+set -g __prompt_c_cyan 24837B
+set -g __prompt_c_red AF3029
+set -g __prompt_c_orange BC5215
 
 function __prompt_directory
     set -l cwd (string replace -- $HOME '~' $PWD)
