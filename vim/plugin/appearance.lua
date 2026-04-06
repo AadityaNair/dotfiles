@@ -4,18 +4,10 @@ local gh_url = require("common").gh_url
 
 -- Colorscheme: Loaded at startup
 vim.pack.add({
-    gh_url("folke/tokyonight.nvim"),
+    gh_url("kepano/flexoki-neovim"),
 })
 
-require("tokyonight").setup({
-    terminal_colors = true,
-    styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-    },
-})
-
-vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.colorscheme("flexoki")
 
 -- Lazy UI setup
 local function setup_ui()
@@ -28,7 +20,7 @@ local function setup_ui()
 
     require("lualine").setup({
         options = {
-            theme = "tokyonight",
+            theme = "auto",
             icons_enabled = true,
             globalstatus = true,
         },
