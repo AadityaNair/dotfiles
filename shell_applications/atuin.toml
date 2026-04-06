@@ -33,7 +33,7 @@ records = true
 enabled = false
 
 [theme]
-name = "tokyonight"
+name = "flexoki_dark"
 ## Color theme to use for rendering in the terminal.
 ## There are some built-in themes, including the base theme ("default"),
 ## "autumn" and "marine". You can add your own themes to the "./themes" subdirectory of your

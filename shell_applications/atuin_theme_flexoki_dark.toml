@@ -1,0 +1,11 @@
+[theme]
+name = "flexoki_dark"
+
+[colors]
+AlertInfo = "#24837B"
+AlertWarn = "#BC5215"
+AlertError = "#AF3029"
+Annotation = "#575653"
+Base = "#CECDC3"
+Guidance = "#878580"
+Important = "#5E409D"
