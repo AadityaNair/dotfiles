@@ -10,7 +10,7 @@ font-size = 20
 grapheme-width-method = unicode  
 
 ######## Theme & Colors
-theme = tokyonight
+theme = Flexoki Dark
 bold-is-bright = true
 # minimum-contrast = 1.0  # Range 1.0-21.0. Auto-adjusts fg/bg to meet contrast ratio.
 
