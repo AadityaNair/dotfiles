@@ -2,7 +2,15 @@ local gh_url = require("common").gh_url
 
 -- Colorscheme: Loaded at startup
 vim.pack.add({
-    gh_url("kepano/flexoki-neovim"),
+    gh_url("AadityaNair/flexoki-neovim"),
+})
+
+require("flexoki").setup({
+    terminal_colors = true,
+    styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+    },
 })
 
 vim.opt.termguicolors = true
