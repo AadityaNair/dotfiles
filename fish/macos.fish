@@ -10,6 +10,7 @@ abbr -a pp pbpaste
 set -x HOMEBREW_PREFIX /opt/homebrew
 set -x HOMEBREW_CELLAR /opt/homebrew/Cellar
 set -x HOMEBREW_REPOSITORY /opt/homebrew
+set -x PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH 
 set -x MANPATH /opt/homebrew/share/man $MANPATH
 set -x INFOPATH /opt/homebrew/share/info $INFOPATH
 
