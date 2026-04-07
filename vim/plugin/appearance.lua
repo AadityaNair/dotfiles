@@ -14,7 +14,7 @@ require("flexoki").setup({
 })
 
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("flexoki")
+vim.cmd.colorscheme("flexoki-dark")
 
 -- Lazy UI setup
 local function setup_ui()
@@ -30,7 +30,7 @@ local function setup_ui()
 
     require("lualine").setup({
         options = {
-            theme = "auto",
+            theme = "flexoki-dark",
             icons_enabled = true,
             globalstatus = true,
         },
