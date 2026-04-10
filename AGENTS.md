@@ -1,42 +1,58 @@
-This is the collection of all the dotfiles I use in my setup.
+# Dotfiles Repository Context
 
-Anything I have stopped using is moved to the archive folder. We do not delete it.
-This implies to distinct services only. If we delete a config in vim/fish we don't move it.
-We rely on git history to get it back.
-For any changes requested, fully ignore the archive folder unless specifically requested.
+This repository contains the configuration files (dotfiles) for the user's development environment.
 
-We also try to maintain a uniform colourscheme for all the services involved. Whenever we 
-update the colourscheme, these services need to be updated as well. Also update this list
-wherever a new service is added or deleted.
-The services we care about are:
-* Neovim
-* Any neovim plugin that generates a UI, especially, LuaLine
-* Fish Shell
-* Tmux 
-* Ghostty
-* Atuin History UI
+## 📁 Repository Structure & Scope
 
-For neovim plugins, the code of the plugins is directly available in ~/.local/share/nvim/site/pack/core/opt
-You can read the code there and figure out any breakages.
-For neovim lualine, validate the config using :LuaLineNotices
+### Active Configurations
+- **Fish Shell:** `fish/`
+- **Ghostty:** `ghostty/`
+- **Neovim (Vim):** `vim/`
+- **Tmux:** `tmux/`
+- **Shell Applications:** `shell_applications/` (e.g., Atuin, Eza)
 
-For ghostty, if we actually have ghostty installed in the current host, run `ghostty +validate-config`
-to validate any changes. Also note that you cannot have comments in the same line as code. The line
-can either have config options or comments. Not both.
+### Retired & Archive
+- **Archive Folder:** `archive/` contains retired services. **Ignore this folder** unless specifically requested. Do not delete its contents.
+- **Deletions:** Small config deletions within active services (e.g., in `vim/` or `fish/`) are handled via Git history and do not move to `archive/`.
 
-We also have versions.json where we track the versions of various important software we use.
-This should help you inform decisions on what is available or not. If there are discrepencies between
-reality and that file, inform the user.
+### Metadata & Maintenance
+- **Versions:** `versions.json` tracks software versions (e.g., Neovim, Fish). Report any discrepancies between reality and this file.
+- **TODOs:** Proactively investigate and address `TODO` comments encountered in active configurations. Ignore `TODO`s in `archive/`.
 
-There are going to be a bunch of TODOs scattered around. Always investigate those when you can.
+---
 
-When creating changes, the commits for those changes should be small and focused. No merging multiple distinct
-changes into the same commit. Prefix the commit message with "[<application we are working with>]"
-For changes to shell_applications, prefix with "[shell_applications][<application>]". 
-Everything else should be prefixed with "[meta]". Refer to `git log` for examples.
+## 🎨 Design & Consistency
 
-For major services (currently for fish and neovim), I generally have a separate file that is not committed.
-This is where the work stuff goes. It is very important to make sure that work related config never pollute
-the rest of the config.
-For neovim and fish, we have use a plugin based approach to enable this. I can just drop the company file with
-rest of the config and it just works. For big changes or adding new major services, this needs to be remembered.
+### Uniform Color Scheme
+Maintain visual consistency across all services. When updating themes or colors, ensure synchronized updates for:
+- **Neovim:** Including UI-generating plugins (e.g., LuaLine).
+- **Fish Shell**
+- **Tmux**
+- **Ghostty**
+- **Atuin History UI**
+
+---
+
+## 🛠 Application Specifics
+
+### Neovim
+- **Plugin Source:** Plugin code is located at `~/.local/share/nvim/site/pack/core/opt`. Reference it for debugging or understanding breakages.
+- **Validation:** Always validate LuaLine configuration using the `:LuaLineNotices` command.
+
+### Ghostty
+- **Validation:** If Ghostty is installed, run `ghostty +validate-config` to verify changes.
+- **Syntax Rule:** **No inline comments.** A line can contain either a configuration option or a comment, but never both.
+
+---
+
+## 🚀 Development Workflow
+
+### Commit Standard
+Keep commits small, focused, and single-purpose. Use the following prefix conventions:
+- `[<application>]`: For changes to a specific application (e.g., `[vim]`, `[fish]`).
+- `[shell_applications][<application>]`: For changes within the `shell_applications/` directory (e.g., `[shell_applications][atuin]`).
+- `[meta]`: For repository-level changes (e.g., updating `versions.json`, `AGENTS.md`, or `.gitignore`).
+
+### Local & Work Overrides
+- **Privacy:** Never commit work-specific or private configurations.
+- **Plugin Architecture:** For major services (Fish, Neovim), use a plugin-based approach to load uncommitted local files (e.g., company-specific configs). Maintain this pattern for any new major services.
