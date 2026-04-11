@@ -48,6 +48,7 @@ local function setup_ui()
         options = { always_show_bufferline = false },
     })
 
+    -- TODO: Replace with own code/UI2
     require("notify").setup({
         background_colour = "#000000",
         top_down = true,
@@ -55,6 +56,8 @@ local function setup_ui()
         stages = "fade",
     })
 
+    -- TODO: Replace with rachartier/tiny-cmdline.nvim or just own code: https://www.reddit.com/r/neovim/s/3IcvgtxOgC
+    -- TODO: set cmdheight=0 equivalent in Lua
     require("noice").setup({
         views = {
             cmdline_popup = {

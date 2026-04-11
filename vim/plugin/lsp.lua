@@ -11,6 +11,7 @@ for _, lsp in ipairs(default_lsps) do
     vim.lsp.enable(lsp)
 end
 
+-- TODO: rachartier/tiny-inline-diagnostic.nvim for nice looking diagnostics.
 vim.api.nvim_create_user_command("DiagnosticToggle", function()
     local config = vim.diagnostic.config
     local vt = config().virtual_text
@@ -26,7 +27,9 @@ end, { desc = "Toggle showing LSPErrors/Hints/etc" })
 vim.api.nvim_create_autocmd("LspProgress", {
     callback = function(ev)
         local value = ev.data.params.value or {}
-        if not value.kind then return end
+        if not value.kind then
+            return
+        end
 
         local status = value.kind == "end" and 0 or 1
         local percent = value.percentage or 0
