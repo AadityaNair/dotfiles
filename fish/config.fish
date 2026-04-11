@@ -1,5 +1,3 @@
-# TODO: See if we care about the colourscheme for eza/fzf/bat. Add/delete configs accordingly.
-
 ### SETUP VARIABLES
 set -x INSTALL "$HOME/.config"
 set -x DOTFILES "$INSTALL/dotfiles"
