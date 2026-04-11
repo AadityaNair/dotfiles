@@ -59,6 +59,7 @@ vim.cmd("cnoreabbrev W w")
 vim.cmd("cnoreabbrev Q q")
 vim.cmd("cnoreabbrev Qall qall")
 
+-- TODO: Create a function to also clean any plugins not installed anymore.
 vim.api.nvim_create_user_command("PluginUpdate", function()
     vim.pack.update()
 end, { desc = "Update all plugins" })
