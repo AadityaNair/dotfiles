@@ -5,6 +5,7 @@ vim.pack.add({
 })
 
 -- TODO: Setting this to true conflicts with blink.cmp. Research more.
+-- TODO: Maybe we don't even need blink? https://justinhj.github.io/2026/04/06/refreshing-your-neovim-config-for-0-12-0.html
 vim.o.autocomplete = false
 
 require("blink.cmp").setup({

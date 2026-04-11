@@ -90,3 +90,6 @@ vim.api.nvim_create_autocmd("UIEnter", {
     end,
     once = true,
 })
+
+-- TODO: Have notifications and command palette managed by UI2
+require("vim._core.ui2").enable()
