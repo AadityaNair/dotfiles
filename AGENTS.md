@@ -38,6 +38,7 @@ Maintain visual consistency across all services. When updating themes or colors,
 ### Neovim
 - **Plugin Source:** Plugin code is located at `~/.local/share/nvim/site/pack/core/opt`. Reference it for debugging or understanding breakages.
 - **Validation:** Always validate LuaLine configuration using the `:LuaLineNotices` command.
+- **Validation:** Always lint the code at the end.
 
 ### Ghostty
 - **Validation:** If Ghostty is installed, run `ghostty +validate-config` to verify changes.
