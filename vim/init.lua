@@ -59,11 +59,17 @@ vim.cmd("cnoreabbrev W w")
 vim.cmd("cnoreabbrev Q q")
 vim.cmd("cnoreabbrev Qall qall")
 
+vim.api.nvim_create_user_command("PluginUpdate", function()
+    vim.pack.update()
+end, { desc = "Update all plugins" })
+
 -- Copied from https://github.com/creativenull/dotfiles/blob/main/config/nvim/init.lua#L70-L80
 -- Return to the previous cursor position.
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function(args)
-        if vim.b[args.buf].filetype == "commit" then return end
+        if vim.b[args.buf].filetype == "commit" then
+            return
+        end
 
         local mark_line = vim.fn.line([['"]])
         local last_line = vim.fn.line("$")
