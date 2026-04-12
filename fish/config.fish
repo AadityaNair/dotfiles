@@ -11,6 +11,8 @@ set -x EDITOR nvim
 ### COSMETIC SETTINGS
 # Prompt init is available as fish_prompt autoloading function.
 # Titles are set via the fish_title.fish function file.
+set -x BAT_THEME "Catppuccin Mocha"
+set 
 
 set fish_greeting  # We do not need fish greeting us on every shell
 
