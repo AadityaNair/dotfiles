@@ -124,6 +124,11 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             _cmdline_offset = 0,
         })
         vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
+        -- The original cmdline_show sets cmdheight=1 to make space for the native
+        -- bottom bar. Since we float the cmdline to center, suppress that.
+        vim._with({ noautocmd = true }, function()
+            vim.o.cmdheight = 0
+        end)
     end
     return ret
 end
