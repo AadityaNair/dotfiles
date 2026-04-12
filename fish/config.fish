@@ -4,7 +4,7 @@ set -x DOTFILES "$INSTALL/dotfiles"
 set -x FISH_SCRIPTS "$DOTFILES/fish"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
 set -x TERM xterm-ghostty
-set -x MANPAGER "less --use-color"
+set -x MANPAGER "nvim +Man!"
 set -x PAGER bat
 set -x EDITOR nvim
 
