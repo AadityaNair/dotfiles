@@ -3,10 +3,16 @@ vim.pack.add({
     gh_url("lukas-reineke/indent-blankline.nvim"),
 })
 
--- TODO: Only generate indentlines when there are more than two lines indented.
+local hooks = require("ibl.hooks")
 require("ibl").setup({
     indent = { char = "│" },
 })
+hooks.register(hooks.type.VIRTUAL_TEXT, function(_, _, _, virt_text)
+    for i = 1, math.min(2, #virt_text) do
+        virt_text[i] = { " ", { "NonText" } }
+    end
+    return virt_text
+end)
 
 -- Native Commenting
 vim.keymap.set("n", "<leader>ci", "gcc", { remap = true, desc = "Toggle line comment" })
