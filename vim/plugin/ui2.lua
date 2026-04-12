@@ -60,6 +60,7 @@ local function setup_cmdline_hl()
     local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
     local border_fg = vim.api.nvim_get_hl(0, { name = "FloatBorder" }).fg
     vim.api.nvim_set_hl(0, "UI2CmdBorder", { fg = border_fg, bg = normal_bg })
+    vim.api.nvim_set_hl(0, "UI2CmdTitle", { fg = border_fg, bg = normal_bg, italic = true })
 end
 setup_cmdline_hl()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_cmdline_hl })
@@ -85,6 +86,8 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             col = col,
             width = width,
             border = "rounded",
+            title = { { " cmdline ", "UI2CmdTitle" } },
+            title_pos = "center",
             _cmdline_offset = 0,
         })
         vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2CmdBorder"
