@@ -63,6 +63,8 @@ vim.api.nvim_create_user_command("PluginUpdate", function()
     vim.pack.update()
 end, { desc = "Update all plugins" })
 
+-- TODO: Parenthesis matching better highlighting. Look at the builtin plugin config
+
 -- Copied from https://github.com/creativenull/dotfiles/blob/main/config/nvim/init.lua#L70-L80
 -- Return to the previous cursor position.
 vim.api.nvim_create_autocmd("BufReadPost", {
