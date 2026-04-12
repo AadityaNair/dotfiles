@@ -71,16 +71,13 @@ ui2.enable({
     msg = { targets = "msg" },
 })
 
--- Wrap msg set_pos so the msg window gets a border (UI2 defaults to no border for msg).
-local msg_mod = require("vim._core.ui2.messages")
-local orig_set_pos = msg_mod.set_pos
-msg_mod.set_pos = function(tgt)
-    orig_set_pos(tgt)
-    local win = ui2.wins.msg
-    if win and vim.api.nvim_win_is_valid(win) then
-        pcall(vim.api.nvim_win_set_config, win, { border = "rounded" })
-    end
-end
+-- Match the msg window background with the editor Normal highlight.
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "msg",
+    callback = function()
+        vim.wo.winhighlight = "Normal:Normal"
+    end,
+})
 
 -- Show LSP progress as messages (Neovim 0.12 only fires LspProgress autocmds).
 vim.api.nvim_create_autocmd("LspProgress", {
