@@ -15,6 +15,28 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Wrap set_pos so the msg window width shrinks to fit current content.
+-- UI2 only grows msg.width via math.max and never shrinks it, so a short
+-- message after a long one leaves the window too wide (text looks left-aligned).
+local msg_mod = require("vim._core.ui2.messages")
+local orig_set_pos = msg_mod.set_pos
+msg_mod.set_pos = function(tgt)
+    if tgt == "msg" then
+        local win = ui2.wins.msg
+        local buf = ui2.bufs.msg
+        if win and vim.api.nvim_win_is_valid(win) and buf and vim.api.nvim_buf_is_valid(buf) then
+            local width = 1
+            local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+            for _, line in ipairs(lines) do
+                width = math.max(width, vim.fn.strdisplaywidth(line))
+            end
+            msg_mod.msg.width = width
+            pcall(vim.api.nvim_win_set_width, win, width)
+        end
+    end
+    orig_set_pos(tgt)
+end
+
 -- Show LSP progress as messages (Neovim 0.12 only fires LspProgress autocmds).
 vim.api.nvim_create_autocmd("LspProgress", {
     callback = function(ev)
