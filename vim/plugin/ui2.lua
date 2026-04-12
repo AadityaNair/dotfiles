@@ -1,40 +1,113 @@
 -- NOTE: If UI2 cmdline/messages cause too many problems, fall back to
 -- rachartier/tiny-cmdline.nvim (cmdline) and rcarriga/nvim-notify (notifications).
 
--- UI2: Route messages to bottom-right ephemeral msg window and center the cmdline.
+-- UI2: Enable ext_messages for cmdline and message handling.
 local ui2 = require("vim._core.ui2")
-ui2.enable({
-    msg = { targets = "msg" },
-})
+ui2.enable()
 
--- Match the msg window background with the editor Normal highlight.
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "msg",
-    callback = function()
-        vim.wo.winhighlight = "Normal:Normal"
-    end,
-})
+-- Custom highlights: FloatBorder fg with Normal bg, recomputed on colorscheme change.
+local function setup_ui2_hl()
+    local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+    local border_fg = vim.api.nvim_get_hl(0, { name = "FloatBorder" }).fg
+    vim.api.nvim_set_hl(0, "UI2Border", { fg = border_fg, bg = normal_bg })
+    vim.api.nvim_set_hl(0, "UI2Title", { fg = border_fg, bg = normal_bg, italic = true })
+end
+setup_ui2_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_ui2_hl })
 
--- Wrap set_pos so the msg window width shrinks to fit current content.
--- UI2 only grows msg.width via math.max and never shrinks it, so a short
--- message after a long one leaves the window too wide (text looks left-aligned).
-local msg_mod = require("vim._core.ui2.messages")
-local orig_set_pos = msg_mod.set_pos
-msg_mod.set_pos = function(tgt)
-    if tgt == "msg" then
-        local win = ui2.wins.msg
-        local buf = ui2.bufs.msg
-        if win and vim.api.nvim_win_is_valid(win) and buf and vim.api.nvim_buf_is_valid(buf) then
-            local width = 1
-            local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-            for _, line in ipairs(lines) do
-                width = math.max(width, vim.fn.strdisplaywidth(line))
-            end
-            msg_mod.msg.width = width
-            pcall(vim.api.nvim_win_set_width, win, width)
+-- Notification system: each vim.notify call gets its own floating window/buffer.
+-- Separate buffers let each notification size independently and dismiss without
+-- affecting others. To revert to UI2's single shared msg window, remove this
+-- override and pass `msg = { targets = "msg" }` to ui2.enable() above.
+local active_notifs = {}
+local TIMEOUT = 4000
+
+local function reposition_notifs()
+    local row = vim.o.lines - 2
+    for i = #active_notifs, 1, -1 do
+        local notif = active_notifs[i]
+        if vim.api.nvim_win_is_valid(notif.win) then
+            local height = vim.api.nvim_win_get_height(notif.win)
+            local width = vim.api.nvim_win_get_width(notif.win)
+            pcall(vim.api.nvim_win_set_config, notif.win, {
+                relative = "editor",
+                anchor = "SE",
+                row = row,
+                col = vim.o.columns,
+                width = width,
+                height = height,
+            })
+            row = row - height
         end
     end
-    orig_set_pos(tgt)
+end
+
+local function remove_notif(idx)
+    local notif = active_notifs[idx]
+    if not notif then
+        return
+    end
+    if notif.timer and not notif.timer:is_closing() then
+        notif.timer:stop()
+        notif.timer:close()
+    end
+    if vim.api.nvim_win_is_valid(notif.win) then
+        vim.api.nvim_win_close(notif.win, true)
+    end
+    if vim.api.nvim_buf_is_valid(notif.buf) then
+        vim.api.nvim_buf_delete(notif.buf, { force = true })
+    end
+    table.remove(active_notifs, idx)
+    reposition_notifs()
+end
+
+vim.notify = function(msg, level, opts)
+    if vim.in_fast_event() then
+        vim.schedule(function()
+            vim.notify(msg, level, opts)
+        end)
+        return
+    end
+
+    local lines = vim.split(tostring(msg), "\n")
+    local width = 1
+    for _, line in ipairs(lines) do
+        width = math.max(width, vim.fn.strdisplaywidth(line))
+    end
+
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+    local win = vim.api.nvim_open_win(buf, false, {
+        relative = "editor",
+        anchor = "SE",
+        row = vim.o.lines - 2,
+        col = vim.o.columns,
+        width = width,
+        height = #lines,
+        style = "minimal",
+        focusable = false,
+        noautocmd = true,
+    })
+    vim.wo[win].winhighlight = "Normal:Normal"
+
+    local timer = vim.uv.new_timer()
+    local idx = #active_notifs + 1
+    timer:start(
+        TIMEOUT,
+        0,
+        vim.schedule_wrap(function()
+            for i, n in ipairs(active_notifs) do
+                if n.win == win then
+                    remove_notif(i)
+                    return
+                end
+            end
+        end)
+    )
+
+    active_notifs[idx] = { win = win, buf = buf, timer = timer }
+    reposition_notifs()
 end
 
 -- Show LSP progress as messages (Neovim 0.12 only fires LspProgress autocmds).
@@ -54,16 +127,6 @@ vim.api.nvim_create_autocmd("LspProgress", {
         end
     end,
 })
-
--- Custom highlight for the cmdline border: FloatBorder fg with Normal bg.
-local function setup_cmdline_hl()
-    local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
-    local border_fg = vim.api.nvim_get_hl(0, { name = "FloatBorder" }).fg
-    vim.api.nvim_set_hl(0, "UI2CmdBorder", { fg = border_fg, bg = normal_bg })
-    vim.api.nvim_set_hl(0, "UI2CmdTitle", { fg = border_fg, bg = normal_bg, italic = true })
-end
-setup_cmdline_hl()
-vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_cmdline_hl })
 
 -- Centered cmdline: monkey-patch ui2 cmdline_show/cmdline_hide to reposition the
 -- cmd window to the center of the screen while active.
@@ -86,11 +149,11 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             col = col,
             width = width,
             border = "rounded",
-            title = { { " cmdline ", "UI2CmdTitle" } },
+            title = { { " cmdline ", "UI2Title" } },
             title_pos = "center",
             _cmdline_offset = 0,
         })
-        vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2CmdBorder"
+        vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2Border"
         vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
         -- The original cmdline_show sets cmdheight=1 to make space for the native
         -- bottom bar. Since we float the cmdline to center, suppress that.
