@@ -1,3 +1,12 @@
+-- TODO: Set keybindings for incremental selection.
+-- Current Keybindings (Visual Mode only):
+-- an -> Select [nth] child node
+-- in -> Select [nth] parent node
+-- ]n -> Select [nth] next node
+-- [n -> Select [nth] prev node
+-- You need to see it to understand
+-- Also, https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+
 local supported_langs = {
     "bash",
     "c",
@@ -46,7 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.treesitter.start()
         vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        -- FIX: treesitter indent doesn't actually work. Figure out why.
+        -- TODO: treesitter indent doesn't actually work. Figure out why.
         -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
         -- Set strings to be italics (update = true is a nvim 0.12 feature)

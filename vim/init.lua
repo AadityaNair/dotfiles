@@ -1,4 +1,3 @@
--- TODO: Investigate incremenatal selection? https://www.reddit.com/r/neovim/comments/1s9q0pi/incremental_selection_in_neovim_012/
 -- TODO: Builtin plugins? https://neovim.io/doc/user/plugins/
 -- TODO: Builtin Completions
 
