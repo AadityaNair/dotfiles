@@ -8,48 +8,55 @@ vim.pack.add({
 -- TODO: Maybe we don't even need blink? https://justinhj.github.io/2026/04/06/refreshing-your-neovim-config-for-0-12-0.html
 vim.o.autocomplete = false
 
-require("blink.cmp").setup({
-    keymap = {
-        preset = "none",
-        ["<Up>"] = { "select_prev", "fallback" },
-        ["<Down>"] = { "select_next", "fallback" },
-        ["<Tab>"] = { "show", "accept", "insert_next", "fallback" },
-        ["<S-Tab>"] = { "insert_prev", "fallback" },
-        ["<Esc>"] = { "hide", "fallback" },
-    },
-    appearance = {
-        nerd_font_variant = "mono",
-    },
-    completion = {
-        documentation = { auto_show = false },
-        ghost_text = { enabled = true, show_with_menu = false },
-        list = { selection = { preselect = true, auto_insert = true } },
-        keyword = { range = "full" },
-        menu = {
-            draw = {
-                columns = {
-                    { "kind_icon" },
-                    { "label", "label_description", gap = 1 },
-                    { "source_name" },
+vim.api.nvim_create_autocmd("UIEnter", {
+    callback = function()
+        vim.schedule(function()
+            require("blink.cmp").setup({
+                keymap = {
+                    preset = "none",
+                    ["<Up>"] = { "select_prev", "fallback" },
+                    ["<Down>"] = { "select_next", "fallback" },
+                    ["<Tab>"] = { "show", "accept", "insert_next", "fallback" },
+                    ["<S-Tab>"] = { "insert_prev", "fallback" },
+                    ["<Esc>"] = { "hide", "fallback" },
                 },
-                components = {
-                    label = {
-                        text = function(ctx)
-                            return require("colorful-menu").blink_components_text(ctx)
-                        end,
-                        highlight = function(ctx)
-                            return require("colorful-menu").blink_components_highlight(ctx)
-                        end,
+                appearance = {
+                    nerd_font_variant = "mono",
+                },
+                completion = {
+                    documentation = { auto_show = false },
+                    ghost_text = { enabled = true, show_with_menu = false },
+                    list = { selection = { preselect = true, auto_insert = true } },
+                    keyword = { range = "full" },
+                    menu = {
+                        draw = {
+                            columns = {
+                                { "kind_icon" },
+                                { "label", "label_description", gap = 1 },
+                                { "source_name" },
+                            },
+                            components = {
+                                label = {
+                                    text = function(ctx)
+                                        return require("colorful-menu").blink_components_text(ctx)
+                                    end,
+                                    highlight = function(ctx)
+                                        return require("colorful-menu").blink_components_highlight(ctx)
+                                    end,
+                                },
+                            },
+
+                            treesitter = { "lsp" },
+                        },
                     },
                 },
-
-                treesitter = { "lsp" },
-            },
-        },
-    },
-    sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-    },
-    fuzzy = { implementation = "prefer_rust" },
-    signature = { enabled = true },
+                sources = {
+                    default = { "lsp", "path", "snippets", "buffer" },
+                },
+                fuzzy = { implementation = "prefer_rust" },
+                signature = { enabled = true },
+            })
+        end)
+    end,
+    once = true,
 })
