@@ -24,9 +24,6 @@ local function setup_ui()
         gh_url("nvim-lualine/lualine.nvim"), -- TODO: Replace with custom statusline
         gh_url("akinsho/bufferline.nvim"),
         gh_url("nvim-tree/nvim-web-devicons"),
-        gh_url("folke/noice.nvim"),
-        gh_url("MunifTanjim/nui.nvim"),
-        gh_url("rcarriga/nvim-notify"),
     })
 
     require("lualine").setup({
@@ -49,38 +46,7 @@ local function setup_ui()
         options = { always_show_bufferline = false },
     })
 
-    -- TODO: Replace with own code/UI2
-    require("notify").setup({
-        background_colour = "#000000",
-        top_down = true,
-        render = "minimal",
-        stages = "fade",
-    })
-
-    vim.opt.cmdheight = 0 -- TODO: Make this work when in Cmdline mode as well as well as messages
-
-    -- TODO: Replace with rachartier/tiny-cmdline.nvim or just own code: https://www.reddit.com/r/neovim/s/3IcvgtxOgC
-    require("noice").setup({
-        views = {
-            cmdline_popup = {
-                position = { row = "50%", col = "50%" },
-            },
-        },
-        lsp = {
-            override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
-            },
-        },
-        presets = {
-            bottom_search = true,
-            command_palette = true,
-            long_message_to_split = true,
-            inc_rename = false,
-            lsp_doc_border = false,
-        },
-    })
+    vim.opt.cmdheight = 0
 
     require("todo-comments").setup({
         signs = false,
@@ -96,5 +62,85 @@ vim.api.nvim_create_autocmd("UIEnter", {
     once = true,
 })
 
--- TODO: Have notifications and command palette managed by UI2
-require("vim._core.ui2").enable()
+-- NOTE: If UI2 cmdline/messages cause too many problems, fall back to
+-- rachartier/tiny-cmdline.nvim (cmdline) and rcarriga/nvim-notify (notifications).
+
+-- UI2: Route messages to bottom-right ephemeral msg window and center the cmdline.
+local ui2 = require("vim._core.ui2")
+ui2.enable({
+    msg = { targets = "msg" },
+})
+
+-- Wrap msg set_pos so the msg window gets a border (UI2 defaults to no border for msg).
+local msg_mod = require("vim._core.ui2.messages")
+local orig_set_pos = msg_mod.set_pos
+msg_mod.set_pos = function(tgt)
+    orig_set_pos(tgt)
+    local win = ui2.wins.msg
+    if win and vim.api.nvim_win_is_valid(win) then
+        pcall(vim.api.nvim_win_set_config, win, { border = "rounded" })
+    end
+end
+
+-- Show LSP progress as messages (Neovim 0.12 only fires LspProgress autocmds).
+vim.api.nvim_create_autocmd("LspProgress", {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        local value = ev.data.params.value or {}
+        if not client or not value.kind then
+            return
+        end
+        local title = value.title or ""
+        if value.kind == "begin" then
+            vim.notify(string.format("[%s] %s", client.name, title))
+        elseif value.kind == "end" then
+            local msg = value.message or title
+            vim.notify(string.format("[%s] %s", client.name, msg))
+        end
+    end,
+})
+
+-- Centered cmdline: monkey-patch ui2 cmdline_show/cmdline_hide to reposition the
+-- cmd window to the center of the screen while active.
+local cmdline_mod = require("vim._core.ui2.cmdline")
+local orig_cmdline_show = cmdline_mod.cmdline_show
+local orig_cmdline_hide = cmdline_mod.cmdline_hide
+
+cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level, hl_id)
+    local ret = orig_cmdline_show(content, pos, firstc, prompt, indent, level, hl_id)
+    local win = ui2.wins.cmd
+    if win and vim.api.nvim_win_is_valid(win) then
+        local cols = vim.o.columns
+        local width = math.floor(cols * 0.5)
+        local row = math.floor(vim.o.lines * 0.4)
+        local col = math.floor((cols - width) / 2)
+        local border_size = 2
+        pcall(vim.api.nvim_win_set_config, win, {
+            relative = "editor",
+            row = row,
+            col = col,
+            width = width,
+            border = "rounded",
+            _cmdline_offset = 0,
+        })
+        vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
+    end
+    return ret
+end
+
+cmdline_mod.cmdline_hide = function(level, abort)
+    local ret = orig_cmdline_hide(level, abort)
+    local win = ui2.wins.cmd
+    if win and vim.api.nvim_win_is_valid(win) then
+        pcall(vim.api.nvim_win_set_config, win, {
+            relative = "laststatus",
+            row = 0,
+            col = 0,
+            width = 10000,
+            border = "none",
+            _cmdline_offset = 0,
+        })
+    end
+    vim.g.ui_cmdline_pos = nil
+    return ret
+end
