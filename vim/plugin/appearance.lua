@@ -56,8 +56,9 @@ local function setup_ui()
         stages = "fade",
     })
 
+    vim.opt.cmdheight = 0 -- TODO: Make this work when in Cmdline mode as well as well as messages
+
     -- TODO: Replace with rachartier/tiny-cmdline.nvim or just own code: https://www.reddit.com/r/neovim/s/3IcvgtxOgC
-    -- TODO: set cmdheight=0 equivalent in Lua
     require("noice").setup({
         views = {
             cmdline_popup = {
