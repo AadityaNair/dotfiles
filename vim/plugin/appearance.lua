@@ -1,3 +1,5 @@
+vim.opt.termguicolors = true
+
 local gh_url = require("common").gh_url
 
 -- Colorscheme: Loaded at startup
@@ -13,7 +15,6 @@ require("tokyonight").setup({
     },
 })
 
-vim.opt.termguicolors = true
 vim.cmd.colorscheme("tokyonight-night")
 
 -- Lazy UI setup
