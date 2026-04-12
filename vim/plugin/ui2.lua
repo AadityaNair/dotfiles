@@ -33,6 +33,15 @@ vim.api.nvim_create_autocmd("LspProgress", {
     end,
 })
 
+-- Custom highlight for the cmdline border: FloatBorder fg with Normal bg.
+local function setup_cmdline_hl()
+    local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+    local border_fg = vim.api.nvim_get_hl(0, { name = "FloatBorder" }).fg
+    vim.api.nvim_set_hl(0, "UI2CmdBorder", { fg = border_fg, bg = normal_bg })
+end
+setup_cmdline_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_cmdline_hl })
+
 -- Centered cmdline: monkey-patch ui2 cmdline_show/cmdline_hide to reposition the
 -- cmd window to the center of the screen while active.
 local cmdline_mod = require("vim._core.ui2.cmdline")
@@ -56,7 +65,7 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             border = "rounded",
             _cmdline_offset = 0,
         })
-        vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:FloatBorder"
+        vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2CmdBorder"
         vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
         -- The original cmdline_show sets cmdheight=1 to make space for the native
         -- bottom bar. Since we float the cmdline to center, suppress that.
