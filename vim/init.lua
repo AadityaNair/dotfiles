@@ -58,10 +58,47 @@ vim.cmd("cnoreabbrev W w")
 vim.cmd("cnoreabbrev Q q")
 vim.cmd("cnoreabbrev Qall qall")
 
--- TODO: Create a function to also clean any plugins not installed anymore.
 vim.api.nvim_create_user_command("PluginUpdate", function()
     vim.pack.update()
 end, { desc = "Update all plugins" })
+
+-- Find installed plugins whose source URL doesn't appear in any config file
+-- and delete them after confirmation. Scans all .lua files under stdpath("config")
+-- for "owner/repo" strings (extracted from each plugin's spec.src GitHub URL).
+-- Plugins from non-GitHub sources are skipped (never flagged as orphans).
+vim.api.nvim_create_user_command("PluginClean", function()
+    local config_dir = vim.fn.stdpath("config")
+    local lua_files = vim.fn.glob(config_dir .. "/**/*.lua", false, true)
+    local config_text = ""
+    for _, f in ipairs(lua_files) do
+        config_text = config_text .. table.concat(vim.fn.readfile(f), "\n")
+    end
+
+    local orphans = {}
+    for _, plugin in ipairs(vim.pack.get()) do
+        local repo = plugin.spec.src:match("github%.com/(.+)%.git$")
+            or plugin.spec.src:match("github%.com/(.+)$")
+        if repo and not config_text:find(repo, 1, true) then
+            table.insert(orphans, plugin.spec.name)
+        end
+    end
+
+    if #orphans == 0 then
+        vim.notify("No orphaned plugins found.")
+        return
+    end
+
+    local msg = "Plugins not referenced in config:\n"
+    for _, name in ipairs(orphans) do
+        msg = msg .. "  - " .. name .. "\n"
+    end
+    msg = msg .. "\nDelete " .. #orphans .. " plugin(s)?"
+
+    local answer = vim.fn.confirm(msg, "&Yes\n&No", 2)
+    if answer == 1 then
+        vim.pack.del(orphans)
+    end
+end, { desc = "Remove plugins not referenced in config files" })
 
 -- TODO: Parenthesis matching better highlighting. Look at the builtin plugin config
 
