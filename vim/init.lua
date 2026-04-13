@@ -1,4 +1,3 @@
--- TODO: Builtin plugins? https://neovim.io/doc/user/plugins/
 -- TODO: Builtin Completions
 
 -- Bare minimum builtin stuff to make experience tolerable.
@@ -7,11 +6,18 @@
 
 vim.loader.enable() -- Performance dark magic: https://github.com/neovim/neovim/pull/22668
 
-vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+vim.g.loaded_remote_plugins = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_nvim_net_plugin = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_shada_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
 
 vim.g.mapleader = ","
 vim.opt.number = true
