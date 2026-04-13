@@ -41,7 +41,6 @@ bind -n M-. resize-pane -Z  # The pane is zoomed to occupy the full terminal. Pr
 bind -n M-l next-layout  # Rotate through preset pane layouts.
 
 
-# TODO: Can we make keybindings match neovim's current config.
 ########## Copy Mode
 bind -n M-p copy-mode  # Enable copy mode.
 bind -n F11 copy-mode  # Alternate key to enable copy mode.

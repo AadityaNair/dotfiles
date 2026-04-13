@@ -1,5 +1,3 @@
--- TODO: Builtin Completions
-
 -- Bare minimum builtin stuff to make experience tolerable.
 -- All the fancy shit in the plugin/
 -- This file should work even if everything else breaks.
