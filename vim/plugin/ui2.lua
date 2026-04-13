@@ -1,7 +1,19 @@
 -- NOTE: If UI2 cmdline/messages cause too many problems, fall back to
 -- rachartier/tiny-cmdline.nvim (cmdline) and rcarriga/nvim-notify (notifications).
 
--- UI2: Enable ext_messages for cmdline and message handling.
+-- UI2 (Neovim 0.12+): replaces the builtin cmdline and message presentation layer
+-- with floating windows we can customize. ext_messages intercepts all msg_show and
+-- cmdline events before the TUI draws them.
+--
+-- targets = "msg" routes core Neovim messages (:echo, search counts, errors, etc.)
+-- to the ephemeral "msg" floating window instead of the default "cmd" (bottom bar).
+-- Without this, every message with cmdheight=0 triggers expand_msg and clobbers the
+-- statusline. This only affects core messages — Lua-level vim.notify is handled
+-- separately by the override below.
+--
+-- NOTE: An empty table {} is required even when using defaults. Neovim 0.12.0 has a
+-- bug where enable() declares opts as optional via vim.validate but passes it directly
+-- to vim.tbl_deep_extend, which chokes on nil. Fixed in 0.12.1.
 local ui2 = require("vim._core.ui2")
 ui2.enable({ msg = { targets = "msg" } })
 
@@ -15,10 +27,12 @@ end
 setup_ui2_hl()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_ui2_hl })
 
--- Notification system: each vim.notify call gets its own floating window/buffer.
--- Separate buffers let each notification size independently and dismiss without
--- affecting others. To revert to UI2's single shared msg window, remove this
--- override and pass `msg = { targets = "msg" }` to ui2.enable() above.
+-- Custom vim.notify override: one floating window per notification.
+-- vim.notify is the Lua-level API used by plugins (e.g. LSP progress below).
+-- It is independent of UI2's msg_show, which handles core Neovim messages
+-- (:echo, search results, errors). Both systems coexist.
+-- Each notification gets its own buffer so it can size independently and
+-- dismiss on its own timer without affecting others.
 local active_notifs = {}
 local TIMEOUT = 4000
 
@@ -128,14 +142,24 @@ vim.api.nvim_create_autocmd("LspProgress", {
     end,
 })
 
--- Centered cmdline: monkey-patch ui2 cmdline_show/cmdline_hide to reposition the
--- cmd window to the center of the screen while active.
+-- Centered cmdline: monkey-patch UI2's cmdline_show/cmdline_hide handlers.
+--
+-- UI2 manages a single "cmd" floating window (ui2.wins.cmd) for the cmdline.
+-- By default it sits at the bottom bar (relative = "laststatus"). We intercept
+-- the show/hide handlers to reposition it to the center of the screen while
+-- the cmdline is active, then restore the original position on hide.
+--
+-- This works because require() caches modules — cmdline_mod is the same table
+-- as ui2's internal M.cmd, so swapping functions here affects the UI2 event
+-- dispatch directly.
 local cmdline_mod = require("vim._core.ui2.cmdline")
 local orig_cmdline_show = cmdline_mod.cmdline_show
 local orig_cmdline_hide = cmdline_mod.cmdline_hide
 
 cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level, hl_id)
+    -- Let UI2 do its work first: set buffer text, highlight, cursor position.
     local ret = orig_cmdline_show(content, pos, firstc, prompt, indent, level, hl_id)
+    -- Then reposition the cmd window from the bottom bar to screen center.
     local win = ui2.wins.cmd
     if win and vim.api.nvim_win_is_valid(win) then
         local cols = vim.o.columns
@@ -154,9 +178,13 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             _cmdline_offset = 0,
         })
         vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2Border"
+        -- Expose position for other plugins (e.g. completion menus) that need to
+        -- know where the cmdline is drawn. Accounts for border adding 2 rows.
         vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
-        -- The original cmdline_show sets cmdheight=1 to make space for the native
-        -- bottom bar. Since we float the cmdline to center, suppress that.
+        -- The original cmdline_show calls win_config() which sets cmdheight=1 to
+        -- reserve space for the native bottom bar. Since we float the cmdline to
+        -- center, that space is unnecessary — suppress it without firing OptionSet
+        -- (which would trigger UI2's own repositioning logic).
         vim._with({ noautocmd = true }, function()
             vim.o.cmdheight = 0
         end)
@@ -165,7 +193,10 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
 end
 
 cmdline_mod.cmdline_hide = function(level, abort)
+    -- Let UI2 clear the buffer, reset state, and hide the window.
     local ret = orig_cmdline_hide(level, abort)
+    -- Restore the cmd window to its default bottom-bar position so that UI2's
+    -- internal logic (check_targets, set_pos) finds it where it expects.
     local win = ui2.wins.cmd
     if win and vim.api.nvim_win_is_valid(win) then
         pcall(vim.api.nvim_win_set_config, win, {
