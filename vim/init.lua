@@ -82,8 +82,7 @@ vim.api.nvim_create_user_command("PluginClean", function()
 
     local orphans = {}
     for _, plugin in ipairs(vim.pack.get()) do
-        local repo = plugin.spec.src:match("github%.com/(.+)%.git$")
-            or plugin.spec.src:match("github%.com/(.+)$")
+        local repo = plugin.spec.src:match("github%.com/(.+)%.git$") or plugin.spec.src:match("github%.com/(.+)$")
         if repo and not config_text:find(repo, 1, true) then
             table.insert(orphans, plugin.spec.name)
         end
