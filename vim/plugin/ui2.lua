@@ -3,7 +3,7 @@
 
 -- UI2: Enable ext_messages for cmdline and message handling.
 local ui2 = require("vim._core.ui2")
-ui2.enable({})
+ui2.enable({ msg = { targets = "msg" } })
 
 -- Custom highlights: FloatBorder fg with Normal bg, recomputed on colorscheme change.
 local function setup_ui2_hl()
