@@ -16,8 +16,12 @@ vim.api.nvim_create_autocmd("UIEnter", {
                     preset = "none",
                     ["<Up>"] = { "select_prev", "fallback" },
                     ["<Down>"] = { "select_next", "fallback" },
-                    ["<Tab>"] = { "show", "accept", "insert_next", "fallback" },
-                    ["<S-Tab>"] = { "insert_prev", "fallback" },
+                    ["<Tab>"] = {
+                        "select_next",
+                        "snippet_forward",
+                        "fallback",
+                    },
+                    ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
                     ["<Esc>"] = { "hide", "fallback" },
                 },
                 appearance = {
