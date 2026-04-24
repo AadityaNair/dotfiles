@@ -53,7 +53,9 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
         -- reserve space for the native bottom bar. Since we float the cmdline to
         -- center, that space is unnecessary — suppress it without firing OptionSet
         -- (which would trigger UI2's own repositioning logic).
-        vim._with({ noautocmd = true }, function()
+        -- splitkeep="screen" prevents visible layout jumps in split-heavy layouts
+        -- when cmdheight changes cause the screen to redistribute space.
+        vim._with({ noautocmd = true, o = { splitkeep = "screen" } }, function()
             vim.o.cmdheight = 0
         end)
     end
