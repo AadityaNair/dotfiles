@@ -1,6 +1,14 @@
 -- NOTE: If UI2 cmdline causes too many problems, fall back to
 -- rachartier/tiny-cmdline.nvim (cmdline).
 
+-- Guard: if this file is sourced more than once (e.g. :source, config reload),
+-- the monkey-patch would wrap an already-wrapped function, causing duplicate
+-- repositioning, broken state restore, and potential recursion.
+if vim.g._cmdline_patched then
+    return
+end
+vim.g._cmdline_patched = true
+
 -- Centered cmdline: monkey-patch UI2's cmdline_show/cmdline_hide handlers.
 --
 -- UI2 manages a single "cmd" floating window (ui2.wins.cmd) for the cmdline.
