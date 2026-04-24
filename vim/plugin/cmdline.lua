@@ -9,12 +9,16 @@ if vim.g._cmdline_patched then
 end
 vim.g._cmdline_patched = true
 
--- Centered cmdline: monkey-patch UI2's cmdline_show/cmdline_hide handlers.
+-- Centered cmdline: monkey-patch UI2's cmdline_show handler.
 --
 -- UI2 manages a single "cmd" floating window (ui2.wins.cmd) for the cmdline.
 -- By default it sits at the bottom bar (relative = "laststatus"). We intercept
--- the show/hide handlers to reposition it to the center of the screen while
--- the cmdline is active, then restore the original position on hide.
+-- the show handler to reposition it to the center of the screen while the
+-- cmdline is active, and use a CmdlineLeave autocmd to restore position.
+--
+-- Using CmdlineLeave + saved config instead of patching cmdline_hide is less
+-- invasive (one monkey-patch instead of two) and avoids hardcoding UI2's
+-- expected default config, which could silently drift with Neovim updates.
 --
 -- This works because require() caches modules — cmdline_mod is the same table
 -- as ui2's internal M.cmd, so swapping functions here affects the UI2 event
@@ -41,7 +45,17 @@ if not ok then
     return
 end
 local orig_cmdline_show = cmdline_mod.cmdline_show
-local orig_cmdline_hide = cmdline_mod.cmdline_hide
+
+-- Snapshot of the cmd window's original config, captured once per cmdline
+-- session and restored on CmdlineLeave. This avoids hardcoding UI2's default
+-- layout (relative, row, col, width, border) which could change across versions.
+local cmd_win_saved = nil ---@type table|nil
+
+local function set_cmdheight_0()
+    vim._with({ noautocmd = true, o = { splitkeep = "screen" } }, function()
+        vim.o.cmdheight = 0
+    end)
+end
 
 cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level, hl_id)
     -- Let UI2 do its work first: set buffer text, highlight, cursor position.
@@ -49,6 +63,21 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
     -- Then reposition the cmd window from the bottom bar to screen center.
     local win = get_cmd_win()
     if win then
+        -- Save the original config once per session so we can restore it exactly
+        -- on CmdlineLeave, rather than guessing what UI2 expects.
+        if not cmd_win_saved then
+            local current = vim.api.nvim_win_get_config(win)
+            cmd_win_saved = {
+                relative = current.relative,
+                anchor = current.anchor,
+                col = current.col,
+                row = current.row,
+                width = current.width,
+                border = current.border,
+            }
+            vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2Border"
+        end
+
         local cols = vim.o.columns
         local width = math.floor(cols * 0.5)
         local row = math.floor(vim.o.lines * 0.4)
@@ -64,7 +93,6 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             title_pos = "center",
             _cmdline_offset = 0,
         })
-        vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2Border"
         -- Expose position for other plugins (e.g. completion menus) that need to
         -- know where the cmdline is drawn. Accounts for border adding 2 rows.
         vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
@@ -74,29 +102,27 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
         -- (which would trigger UI2's own repositioning logic).
         -- splitkeep="screen" prevents visible layout jumps in split-heavy layouts
         -- when cmdheight changes cause the screen to redistribute space.
-        vim._with({ noautocmd = true, o = { splitkeep = "screen" } }, function()
-            vim.o.cmdheight = 0
-        end)
+        set_cmdheight_0()
     end
     return ret
 end
 
-cmdline_mod.cmdline_hide = function(level, abort)
-    -- Let UI2 clear the buffer, reset state, and hide the window.
-    local ret = orig_cmdline_hide(level, abort)
-    -- Restore the cmd window to its default bottom-bar position so that UI2's
-    -- internal logic (check_targets, set_pos) finds it where it expects.
-    local win = get_cmd_win()
-    if win then
-        pcall(vim.api.nvim_win_set_config, win, {
-            relative = "laststatus",
-            row = 0,
-            col = 0,
-            width = 10000,
-            border = "none",
-            _cmdline_offset = 0,
-        })
-    end
-    vim.g.ui_cmdline_pos = nil
-    return ret
-end
+local group = vim.api.nvim_create_augroup("cmdline-center", { clear = true })
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+    group = group,
+    callback = function()
+        local win = get_cmd_win()
+        -- Restore the original window config so post-command messages (e.g. echo
+        -- output) render at the bottom and UI2's internal logic finds the window
+        -- where it expects.
+        if win and cmd_win_saved then
+            pcall(vim.api.nvim_win_set_config, win, cmd_win_saved)
+            cmd_win_saved = nil
+        end
+        vim.g.ui_cmdline_pos = nil
+        -- Defer so ui2's OptionSet handler doesn't re-bump cmdheight after we
+        -- clear it.
+        vim.schedule(set_cmdheight_0)
+    end,
+})
