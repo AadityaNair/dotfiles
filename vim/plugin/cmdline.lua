@@ -77,6 +77,31 @@ local function set_cmdheight_0()
     end)
 end
 
+-- Reposition the cmd window to screen center. Extracted so it can be called
+-- from both cmdline_show and resize/tab-change events.
+local function reposition()
+    local win = get_cmd_win()
+    if not win or not cmd_win_saved then
+        return
+    end
+
+    local width, row, col = geometry()
+    local border_size = 2
+    pcall(vim.api.nvim_win_set_config, win, {
+        relative = "editor",
+        row = row,
+        col = col,
+        width = width,
+        border = "rounded",
+        title = { { " cmdline ", "UI2Title" } },
+        title_pos = "center",
+        _cmdline_offset = 0,
+    })
+    -- Expose position for other plugins (e.g. completion menus) that need to
+    -- know where the cmdline is drawn. Accounts for border adding 2 rows.
+    vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
+end
+
 cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level, hl_id)
     -- Let UI2 do its work first: set buffer text, highlight, cursor position.
     local ret = orig_cmdline_show(content, pos, firstc, prompt, indent, level, hl_id)
@@ -98,21 +123,7 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2Border"
         end
 
-        local width, row, col = geometry()
-        local border_size = 2
-        pcall(vim.api.nvim_win_set_config, win, {
-            relative = "editor",
-            row = row,
-            col = col,
-            width = width,
-            border = "rounded",
-            title = { { " cmdline ", "UI2Title" } },
-            title_pos = "center",
-            _cmdline_offset = 0,
-        })
-        -- Expose position for other plugins (e.g. completion menus) that need to
-        -- know where the cmdline is drawn. Accounts for border adding 2 rows.
-        vim.g.ui_cmdline_pos = { row + 1 + border_size, col + 1 }
+        reposition()
         -- The original cmdline_show calls win_config() which sets cmdheight=1 to
         -- reserve space for the native bottom bar. Since we float the cmdline to
         -- center, that space is unnecessary — suppress it without firing OptionSet
@@ -141,5 +152,14 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
         -- Defer so ui2's OptionSet handler doesn't re-bump cmdheight after we
         -- clear it.
         vim.schedule(set_cmdheight_0)
+    end,
+})
+
+-- Reposition the cmdline if the terminal is resized or the user switches tabs
+-- while the cmdline is active — otherwise it stays at stale coordinates.
+vim.api.nvim_create_autocmd({ "VimResized", "TabEnter" }, {
+    group = group,
+    callback = function()
+        vim.schedule(reposition)
     end,
 })
