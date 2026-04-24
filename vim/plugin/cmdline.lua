@@ -46,6 +46,26 @@ if not ok then
 end
 local orig_cmdline_show = cmdline_mod.cmdline_show
 
+-- Geometry config with min/max clamping. A fixed percentage breaks on ultrawide
+-- or very small terminals — clamping keeps the cmdline usable at any size.
+local config = {
+    width_pct = 0.5, -- fraction of vim.o.columns
+    width_min = 40, -- minimum columns
+    width_max = 80, -- maximum columns
+    y_pct = 0.4, -- vertical position (fraction of vim.o.lines)
+}
+
+--- Compute centered geometry from config + current terminal dimensions.
+local function geometry()
+    local cols = vim.o.columns
+    local lines = vim.o.lines
+    local width = math.max(config.width_min, math.min(config.width_max, math.floor(cols * config.width_pct)))
+    width = math.min(width, cols - 4) -- always leave some margin
+    local row = math.floor(lines * config.y_pct)
+    local col = math.floor((cols - width) / 2)
+    return width, row, col
+end
+
 -- Snapshot of the cmd window's original config, captured once per cmdline
 -- session and restored on CmdlineLeave. This avoids hardcoding UI2's default
 -- layout (relative, row, col, width, border) which could change across versions.
@@ -78,10 +98,7 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
             vim.wo[win].winhighlight = "Normal:Normal,FloatBorder:UI2Border"
         end
 
-        local cols = vim.o.columns
-        local width = math.floor(cols * 0.5)
-        local row = math.floor(vim.o.lines * 0.4)
-        local col = math.floor((cols - width) / 2)
+        local width, row, col = geometry()
         local border_size = 2
         pcall(vim.api.nvim_win_set_config, win, {
             relative = "editor",
