@@ -19,8 +19,27 @@ vim.g._cmdline_patched = true
 -- This works because require() caches modules — cmdline_mod is the same table
 -- as ui2's internal M.cmd, so swapping functions here affects the UI2 event
 -- dispatch directly.
-local ui2 = require("vim._core.ui2")
-local cmdline_mod = require("vim._core.ui2.cmdline")
+
+-- Lazy-load ui2 internals via pcall to avoid hard crashes if Neovim's internal
+-- module paths change. These are private APIs — defensive loading makes startup
+-- more resilient and decouples us from UI2's initialization timing.
+local ui2_mod = nil ---@type table|nil
+local function get_cmd_win()
+    if not ui2_mod then
+        local ok, mod = pcall(require, "vim._core.ui2")
+        if not ok then
+            return nil
+        end
+        ui2_mod = mod
+    end
+    local win = ui2_mod.wins and ui2_mod.wins.cmd
+    return (win and vim.api.nvim_win_is_valid(win)) and win or nil
+end
+
+local ok, cmdline_mod = pcall(require, "vim._core.ui2.cmdline")
+if not ok then
+    return
+end
 local orig_cmdline_show = cmdline_mod.cmdline_show
 local orig_cmdline_hide = cmdline_mod.cmdline_hide
 
@@ -28,8 +47,8 @@ cmdline_mod.cmdline_show = function(content, pos, firstc, prompt, indent, level,
     -- Let UI2 do its work first: set buffer text, highlight, cursor position.
     local ret = orig_cmdline_show(content, pos, firstc, prompt, indent, level, hl_id)
     -- Then reposition the cmd window from the bottom bar to screen center.
-    local win = ui2.wins.cmd
-    if win and vim.api.nvim_win_is_valid(win) then
+    local win = get_cmd_win()
+    if win then
         local cols = vim.o.columns
         local width = math.floor(cols * 0.5)
         local row = math.floor(vim.o.lines * 0.4)
@@ -67,8 +86,8 @@ cmdline_mod.cmdline_hide = function(level, abort)
     local ret = orig_cmdline_hide(level, abort)
     -- Restore the cmd window to its default bottom-bar position so that UI2's
     -- internal logic (check_targets, set_pos) finds it where it expects.
-    local win = ui2.wins.cmd
-    if win and vim.api.nvim_win_is_valid(win) then
+    local win = get_cmd_win()
+    if win then
         pcall(vim.api.nvim_win_set_config, win, {
             relative = "laststatus",
             row = 0,
