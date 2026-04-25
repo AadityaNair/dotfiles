@@ -27,7 +27,8 @@ prefers_reduced_motion = true
 [sync]
 records = true
 
-[preview]
+[logs]
+dir = "~/.local/share/atuin/logs/"
 
 [daemon]
 enabled = false
