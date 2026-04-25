@@ -56,8 +56,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.treesitter.start()
         vim.wo.foldmethod = "expr"
         vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        -- TODO: treesitter indent doesn't actually work. Figure out why.
-        -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
         -- Set strings to be italics (update = true is a nvim 0.12 feature)
         vim.api.nvim_set_hl(0, "String", { italic = true, update = true })
