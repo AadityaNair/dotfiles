@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("UIEnter", {
                 completion = {
                     documentation = { auto_show = false },
                     ghost_text = { enabled = true, show_with_menu = false },
-                    list = { selection = { preselect = true, auto_insert = true } },
+                    list = { selection = { preselect = false, auto_insert = true } },
                     keyword = { range = "full" },
                     menu = {
                         draw = {
