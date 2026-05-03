@@ -20,6 +20,7 @@ local supported_langs = {
     "javascript",
     "json",
     "kdl",
+    "latex",
     "lua",
     "markdown",
     "markdown_inline",
