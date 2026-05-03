@@ -66,6 +66,10 @@ auto-update = off
 auto-update-channel = tip
 
 ######## Keybindings
+# TODO: Disable quick-terminal entirely
+# TODO: Unbind most of the default keybindings
+# TODO: Semantic Prompt rendering (in inspector) doesnt work with tmux
+# TODO: OSC 133 hyperlink rendering doesn't work with tmux.
 keybind = global:f12=toggle_quick_terminal
 
 # Alt+<left/right> has a weird default with Ghostty. We need to unbind
