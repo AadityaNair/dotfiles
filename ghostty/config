@@ -79,13 +79,12 @@ quick-terminal-position = top
 quick-terminal-size = 100%,100%
 quick-terminal-space-behavior = remain
 quick-terminal-autohide = true
-
 # keybind = global:f12=toggle_quick_terminal
 
-# Alt+<left/right> has a weird default with Ghostty. We need to unbind
-# it to make tmux keybindings work.
+# Experiment to make allow newline in AI Agents. Apparently this is the best way.
+keybind = shift+enter=text:\x1b\r
+
+# NOTE: Alt+<left/right> has a weird default with Ghostty. We need it unbound it to make tmux keybindings work.
 # Refer here for more: https://github.com/ghostty-org/ghostty/discussions/3681
-keybind = alt+left=unbind
-keybind = alt+right=unbind
 
 # vim: ft=conf
