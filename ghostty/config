@@ -67,7 +67,7 @@ keybind = super+digit_3=goto_tab:3
 keybind = super+q=quit
 keybind = super+t=new_tab
 keybind = super+alt+i=inspector:toggle
-keybind = paste=paste_from_clipboard
+keybind = super+v=paste_from_clipboard
 
 ######## Quick Terminal
 quick-terminal-screen = mouse
