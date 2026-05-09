@@ -45,12 +45,6 @@ copy-on-select = clipboard
 # Tmux handles scrollback, so this is only for bare Ghostty sessions.
 scrollback-limit = 10000
 
-######## Quick Terminal
-quick-terminal-screen = mouse
-quick-terminal-animation-duration = 0
-quick-terminal-position = top
-quick-terminal-size = 100%
-quick-terminal-space-behavior = remain
 
 ######## Links & Notifications
 link-url = true
@@ -67,10 +61,26 @@ auto-update-channel = tip
 
 ######## Keybindings
 # TODO: Disable quick-terminal entirely
-# TODO: Unbind most of the default keybindings
 # TODO: Semantic Prompt rendering (in inspector) doesnt work with tmux
 # TODO: OSC 133 hyperlink rendering doesn't work with tmux.
-keybind = global:f12=toggle_quick_terminal
+
+keybind = clear
+keybind = super+digit_1=goto_tab:1
+keybind = super+digit_2=goto_tab:2
+keybind = super+digit_3=goto_tab:3
+keybind = super+q=quit
+keybind = super+t=new_tab
+keybind = super+alt+i=inspector:toggle
+
+######## Quick Terminal
+quick-terminal-screen = mouse
+quick-terminal-animation-duration = 0
+quick-terminal-position = top
+quick-terminal-size = 100%,100%
+quick-terminal-space-behavior = remain
+quick-terminal-autohide = true
+
+# keybind = global:f12=toggle_quick_terminal
 
 # Alt+<left/right> has a weird default with Ghostty. We need to unbind
 # it to make tmux keybindings work.
