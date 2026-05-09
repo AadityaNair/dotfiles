@@ -4,6 +4,10 @@
 
 vim.loader.enable() -- Performance dark magic: https://github.com/neovim/neovim/pull/22668
 
+if vim.fn.has("macunix") == 1 and vim.env.TERM_PROGRAM == "Ghostty" then
+    vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/nvim/site")
+end
+
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python_provider = 0

@@ -86,4 +86,4 @@ keybind = shift+enter=text:\x1b\r
 
 # TODO: Semantic Prompt rendering (in inspector) doesnt work with tmux
 # TODO: OSC 133 hyperlink rendering doesn't work with tmux.
-# vim: ft=conf
+# vim: ft=ghostty
