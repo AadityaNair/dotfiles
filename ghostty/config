@@ -60,10 +60,6 @@ auto-update = off
 auto-update-channel = tip
 
 ######## Keybindings
-# TODO: Disable quick-terminal entirely
-# TODO: Semantic Prompt rendering (in inspector) doesnt work with tmux
-# TODO: OSC 133 hyperlink rendering doesn't work with tmux.
-
 keybind = clear
 keybind = super+digit_1=goto_tab:1
 keybind = super+digit_2=goto_tab:2
@@ -71,6 +67,7 @@ keybind = super+digit_3=goto_tab:3
 keybind = super+q=quit
 keybind = super+t=new_tab
 keybind = super+alt+i=inspector:toggle
+keybind = paste=paste_from_clipboard
 
 ######## Quick Terminal
 quick-terminal-screen = mouse
@@ -79,7 +76,7 @@ quick-terminal-position = top
 quick-terminal-size = 100%,100%
 quick-terminal-space-behavior = remain
 quick-terminal-autohide = true
-# keybind = global:f12=toggle_quick_terminal
+keybind = global:f12=toggle_quick_terminal
 
 # Experiment to make allow newline in AI Agents. Apparently this is the best way.
 keybind = shift+enter=text:\x1b\r
@@ -87,4 +84,6 @@ keybind = shift+enter=text:\x1b\r
 # NOTE: Alt+<left/right> has a weird default with Ghostty. We need it unbound it to make tmux keybindings work.
 # Refer here for more: https://github.com/ghostty-org/ghostty/discussions/3681
 
+# TODO: Semantic Prompt rendering (in inspector) doesnt work with tmux
+# TODO: OSC 133 hyperlink rendering doesn't work with tmux.
 # vim: ft=conf
