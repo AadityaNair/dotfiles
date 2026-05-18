@@ -34,5 +34,7 @@ end
 set -g fish_key_bindings fish_default_key_bindings  # Emacs mode.
 bind ctrl-c cancel-commandline  # This leaves the previous commandline in place so we can refer to it.
 # TODO: Audit/clean up default keybindings.
+# TODO: Put all the XDG variables here properly.
+# TODO: Move the tmux config to .config
 
 # vim: ft=fish
