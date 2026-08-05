@@ -1,7 +1,7 @@
 local default_lsps = {
     "lua_ls", -- Only for neovim configs
     "bashls", -- Bash scripts
-    "pyright", -- Python
+    "pyrefly", -- Python
     "rust_analyzer", -- Rust
     "zls", -- Zig
     "jsonls", -- JSON
