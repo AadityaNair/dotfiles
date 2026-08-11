@@ -11,7 +11,7 @@ bind -n M-r command-prompt -p "(rename-session) " "rename-session '%%'"  # Allow
 bind -n M-Up switch-client -p  # Move to the previous session.
 bind -n M-Down switch-client -n  # Move to the next session.
 
-bind r source-file ~/.tmux.conf  # Reload file online.
+bind r source-file ~/.config/tmux/tmux.conf  # Reload file online.
 
 
 ############ Windows
