@@ -1,0 +1,16 @@
+* Plan Mode
+* Subagents
+* Agents.md / .llm/rules
+* Web Fetch
+* MCP support
+* Memory support
+* BTW
+* Cross Model routing
+* Ampcode features (model agnostic reasoning levels)
+* Integration with Phone
+* Permission support
+* Better diffs using Hunk (SKILL)
+* Reasonable English while responding (SKILL)
+* Kitty graphics protocol to generate images
+* Autosuggestions for next steps
+* Themes to match the terminal
