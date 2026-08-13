@@ -14,3 +14,4 @@
 * Kitty graphics protocol to generate images
 * Autosuggestions for next steps
 * Themes to match the terminal
+* Read System Prompt from an actual file
