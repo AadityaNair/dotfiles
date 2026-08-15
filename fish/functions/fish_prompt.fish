@@ -1,10 +1,11 @@
 # Pure fish prompt — no external dependencies.
 
-# Flexoki palette
-set -g __prompt_c_yellow AD8301
-set -g __prompt_c_cyan 24837B
-set -g __prompt_c_red AF3029
-set -g __prompt_c_orange BC5215
+# Flexoki dark palette. The 400 level is the dark-mode accent; 600 is the
+# light-mode one, matching themes/flexoki_dark.theme.
+set -g __prompt_c_yellow D0A215  # ye
+set -g __prompt_c_cyan 3AA99F    # cy
+set -g __prompt_c_red D14D41     # re
+set -g __prompt_c_orange DA702C  # or
 
 function __prompt_directory
     set -l cwd (string replace -- $HOME '~' $PWD)
