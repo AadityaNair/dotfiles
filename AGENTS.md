@@ -24,12 +24,21 @@ This repository contains the configuration files (dotfiles) for the user's devel
 ## 🎨 Design & Consistency
 
 ### Uniform Color Scheme
-Maintain visual consistency across all services. When updating themes or colors, ensure synchronized updates for:
+Everything themed here uses **Flexoki**, dark variant. **See `THEME.md`** for the
+palette, where each application's theme lives, and how to verify one — read it
+before touching any colour or theming a new application.
+
+The rule that keeps getting broken: **dark mode uses the 400 level, light mode
+uses 600.** A 600-level colour on the dark background is the light-mode palette
+in the wrong place, and usually fails contrast.
+
+When updating themes or colors, ensure synchronized updates for:
 - **Neovim:** Including UI-generating plugins (e.g., LuaLine).
-- **Fish Shell**
+- **Fish Shell:** Both the syntax theme and the prompt — they are separate files.
 - **Tmux**
 - **Ghostty**
 - **Atuin History UI**
+- **eza**
 
 ---
 
