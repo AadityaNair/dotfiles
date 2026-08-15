@@ -13,7 +13,7 @@ fish_color_param	4385be # bl
 fish_color_operator	878580 # tx-2
 fish_color_comment	575653 # tx-3
 
-fish_pager_color_description b7b5ac # tx-3
+fish_pager_color_description b7b5ac # base-300
 fish_pager_color_selected_prefix      100f0f # bg
 fish_pager_color_selected_completion  1c1b1a # bg-2
 fish_pager_color_selected_description 282726 # ui
