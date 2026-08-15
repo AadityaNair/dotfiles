@@ -1,15 +1,19 @@
 ####### Actual Theme Colours
-set -g @text-inactive '#6F6E69'
-set -g @background-primary '#100F0F'
-set -g @background-active '#205EA6'
-set -g @separator-color '#5E409D'
-set -g @session '#878580'
-set -g @time "#24837B"
-set -g @message "#AF3029"
-set -g @activity "#BC5215"
-set -g @border-pane "#66800B"
-set -g @copy-mark-bg "#AF3029"
-set -g @comment "#575653"
+# Flexoki dark. Accents are the 400 level: Flexoki uses 400 for dark mode
+# and 600 for light, so 600 here is the light-mode palette on a near-black
+# background. Trailing names are the slot each colour fills, matching the
+# keys used by the neovim theme.
+set -g @text-inactive '#6F6E69'       # base-600
+set -g @background-primary '#100F0F'  # bg
+set -g @background-active '#4385BE'   # bl
+set -g @separator-color '#8B7EC8'     # pu
+set -g @session '#878580'             # tx-2
+set -g @time "#3AA99F"                # cy
+set -g @message "#D14D41"             # re
+set -g @activity "#DA702C"            # or
+set -g @border-pane "#879A39"         # gr
+set -g @copy-mark-bg "#D14D41"        # re
+set -g @comment "#575653"             # tx-3
 
 set -gF @zoom '#{@border-pane}'
 set -gF @date '#{@session}'
