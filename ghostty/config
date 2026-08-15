@@ -11,7 +11,12 @@ grapheme-width-method = unicode
 
 ######## Theme & Colors
 theme = Flexoki Dark
-bold-is-bright = true
+
+# bold-is-bright is deliberately unset. The bundled Flexoki Dark theme maps
+# normal to the 400 level and bright to 600, so bright colours 1-6 are
+# darker than their normal counterparts; promoting bold text to them made
+# bold render dimmer than regular text. It is also deprecated as of
+# Ghostty 1.2.0 in favour of bold-color.
 # minimum-contrast = 1.0  # Range 1.0-21.0. Auto-adjusts fg/bg to meet contrast ratio.
 
 ######## Cursor
