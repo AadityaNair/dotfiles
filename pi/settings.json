@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.84.1",
 
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-sonnet-4-20250514",
-  "defaultThinkingLevel": "medium",
+  "defaultProvider": "opencode",
+  "defaultModel": "deepseek-v4-flash-free",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "showCacheMissNotices": false,
 
