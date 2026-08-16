@@ -80,7 +80,9 @@ set -g pane-active-border-style 'fg=#{@border-pane}'
 ############################### Others
 
 ######### Message
-set -gF message-style "fg=#{@message},bg=#{@background-primary},italics"
+# fill= is required since tmux 3.6ish: message-style only paints the characters written,
+# not the rest of the line, so without fill the old status-bar content bleeds through.
+set -gF message-style "fg=#{@message},bg=#{@background-primary},fill=#{@background-primary},italics"
 
 ######### Copy Mode
 set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
