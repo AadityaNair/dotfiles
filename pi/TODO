@@ -10,9 +10,9 @@ Longer TODOs:
 *. Review vendored extensions/control.ts (mitsuhiko/agent-stuff) - special subagent handoff via inter-session control sockets
 *. Review extensions/memory.ts (hand-written)
 *. Review extensions/permissions.ts (vendored + merged from pi's official examples)
+*. Review skills/better-diffs (hand-written)
 
 * Integration with Phone
-* Better diffs using difftastic/delta (SKILL)
 * Reasonable English while responding (SKILL)
 * Autosuggestions for next steps
 * Find/Refer to previous conversations.
