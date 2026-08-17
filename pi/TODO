@@ -3,9 +3,8 @@ Longer TODOs:
 *. Web Search: Have a standard solution with Exa API
 *. Kitty graphics protocol / chafa
 *. (maybe) MCP Support
+*. Review vendored extensions/subagent.ts (mitsuhiko/agent-stuff)
 
-* Subagents
-* MCP support
 * Memory support
 * BTW
 * Cross Model routing
