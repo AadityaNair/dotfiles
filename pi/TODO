@@ -12,10 +12,10 @@ Longer TODOs:
 *. Review extensions/permissions.ts (vendored + merged from pi's official examples)
 *. Review skills/better-diffs (hand-written)
 *. Review extensions/suggest.ts (hand-written)
+*. Review skills/search-sessions (hand-written)
 
 * Integration with Phone
 * Reasonable English while responding (SKILL)
-* Find/Refer to previous conversations.
 * Enter to queue messages, Enter + Enter to steer sooner.
 * Scheduled Runs
 * Special Named Subagents: Oracle, Librarian, Search
