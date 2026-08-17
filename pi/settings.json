@@ -1,12 +1,10 @@
 {
-  "lastChangelogVersion": "0.84.1",
-
+  "lastChangelogVersion": "0.84.2",
   "defaultProvider": "opencode",
   "defaultModel": "deepseek-v4-flash-free",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "showCacheMissNotices": false,
-
   "theme": "dark",
   "quietStartup": false,
   "defaultProjectTrust": "ask",
@@ -20,25 +18,20 @@
   "tuiMode": "regular",
   "fullscreenExitOutput": "transcript",
   "fullscreenScrollbar": "auto",
-
   "enableInstallTelemetry": true,
   "enableAnalytics": false,
-
   "warnings": {
     "anthropicExtraUsage": true
   },
-
   "compaction": {
     "enabled": true,
     "reserveTokens": 16384,
     "keepRecentTokens": 20000
   },
-
   "branchSummary": {
     "reserveTokens": 16384,
     "skipPrompt": false
   },
-
   "retry": {
     "enabled": true,
     "maxRetries": 3,
@@ -48,13 +41,11 @@
       "maxRetryDelayMs": 60000
     }
   },
-
   "steeringMode": "one-at-a-time",
   "followUpMode": "one-at-a-time",
   "transport": "auto",
   "httpIdleTimeoutMs": 300000,
   "websocketConnectTimeoutMs": 15000,
-
   "terminal": {
     "showImages": true,
     "imageWidthCells": 60,
@@ -64,14 +55,11 @@
     "autoResize": true,
     "blockImages": false
   },
-
   "markdown": {
     "codeBlockIndent": "  ",
     "mermaid": "streaming"
   },
-
   "enableSkillCommands": true,
-
   "_externalEditor": "",
   "_httpProxy": "",
   "_shellPath": "",
@@ -82,9 +70,17 @@
   "_enabledModels": [],
   "_thinkingBudgets": {},
   "_packages": [],
-  "_extensions": ["extensions"],
-  "_skills": ["skills"],
-  "_prompts": ["prompts"],
-  "_themes": ["themes"],
+  "_extensions": [
+    "extensions"
+  ],
+  "_skills": [
+    "skills"
+  ],
+  "_prompts": [
+    "prompts"
+  ],
+  "_themes": [
+    "themes"
+  ],
   "_trackingId": ""
 }
