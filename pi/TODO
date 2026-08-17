@@ -1,5 +1,4 @@
 * Subagents
-* Agents.md / .llm/rules
 * Web Fetch
 * MCP support
 * Memory support
@@ -16,7 +15,6 @@
 * Kitty graphics protocol to generate images
 * Autosuggestions for next steps
 * Themes to match the terminal
-* Read System Prompt from an actual file
 * Clear the terminal
 * Find/Refer to previous conversations.
 * Allow agent to parse images.
