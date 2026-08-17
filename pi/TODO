@@ -1,4 +1,4 @@
-* Plan Mode
+* Plan Mode / Explore Mode via Text
 * Subagents
 * Agents.md / .llm/rules
 * Web Fetch
@@ -16,3 +16,4 @@
 * Themes to match the terminal
 * Read System Prompt from an actual file
 * Show only a pre-allowlisted set of models.
+* Clear the terminal
