@@ -13,9 +13,11 @@ Longer TODOs:
 *. Review skills/better-diffs (hand-written)
 *. Review extensions/suggest.ts (hand-written)
 *. Review skills/search-sessions (hand-written)
+*. Review extensions/double-enter-steer.ts (hand-written, UNVERIFIED - see file header for the two specific mechanics that need live testing)
 
 * Integration with Phone
 * Reasonable English while responding (SKILL)
-* Enter to queue messages, Enter + Enter to steer sooner.
 * Scheduled Runs
 * Special Named Subagents: Oracle, Librarian, Search
+* Better status line
+* Add context view
