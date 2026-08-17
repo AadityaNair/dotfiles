@@ -9,9 +9,9 @@ Longer TODOs:
 *. Review vendored extensions/prompt-editor.ts (mitsuhiko/agent-stuff) - covers cross-model routing + reasoning levels
 *. Review vendored extensions/control.ts (mitsuhiko/agent-stuff) - special subagent handoff via inter-session control sockets
 *. Review extensions/memory.ts (hand-written)
+*. Review extensions/permissions.ts (vendored + merged from pi's official examples)
 
 * Integration with Phone
-* Permission support
 * Better diffs using difftastic/delta (SKILL)
 * Reasonable English while responding (SKILL)
 * Autosuggestions for next steps
