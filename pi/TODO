@@ -1,4 +1,4 @@
-* Plan Mode / Explore Mode via Text
+* Plan Mode / Explore Mode (via AGENTS.md / System Prompt)
 * Subagents
 * Agents.md / .llm/rules
 * Web Fetch
@@ -6,7 +6,10 @@
 * Memory support
 * BTW
 * Cross Model routing
-* Ampcode features (model agnostic reasoning levels)
+* Allow reasoning to be model agnostic (one of below)
+    * Different levels can be different models.
+    * Asking to think or something gives higher reasoning.
+    * Auto mode
 * Integration with Phone
 * Permission support
 * Better diffs using Hunk (SKILL)
@@ -17,3 +20,10 @@
 * Read System Prompt from an actual file
 * Show only a pre-allowlisted set of models.
 * Clear the terminal
+* Find/Refer to previous conversations.
+* Allow agent to parse images.
+* Enter to queue messages, Enter + Enter to steer sooner.
+* Special Subagents w/ handoff:
+    * Strong Oracle
+* Restrict number of Models to free (for now)
+* Scheduled Runs
