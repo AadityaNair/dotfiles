@@ -1,5 +1,10 @@
+Longer TODOs:
+
+*. Web Search: Have a standard solution with Exa API
+*. Kitty graphics protocol / chafa
+*. (maybe) MCP Support
+
 * Subagents
-* Web Fetch
 * MCP support
 * Memory support
 * BTW
@@ -10,11 +15,9 @@
     * Auto mode
 * Integration with Phone
 * Permission support
-* Better diffs using Hunk (SKILL)
+* Better diffs using difftastic/delta (SKILL)
 * Reasonable English while responding (SKILL)
-* Kitty graphics protocol to generate images
 * Autosuggestions for next steps
-* Clear the terminal
 * Find/Refer to previous conversations.
 * Allow agent to parse images.
 * Enter to queue messages, Enter + Enter to steer sooner.
