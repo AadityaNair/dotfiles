@@ -6,6 +6,7 @@ Longer TODOs:
 *. Review vendored extensions/subagent.ts (mitsuhiko/agent-stuff)
 *. Review vendored extensions/btw.ts (mitsuhiko/agent-stuff)
 *. Review vendored extensions/prompt-editor.ts (mitsuhiko/agent-stuff) - covers cross-model routing + reasoning levels
+*. Review vendored extensions/control.ts (mitsuhiko/agent-stuff) - special subagent handoff via inter-session control sockets
 
 * Memory support
 * Integration with Phone
@@ -16,6 +17,4 @@ Longer TODOs:
 * Find/Refer to previous conversations.
 * Allow agent to parse images.
 * Enter to queue messages, Enter + Enter to steer sooner.
-* Special Subagents w/ handoff:
-    * Strong Oracle
 * Scheduled Runs
