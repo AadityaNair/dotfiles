@@ -4,9 +4,9 @@ Longer TODOs:
 *. Kitty graphics protocol / chafa
 *. (maybe) MCP Support
 *. Review vendored extensions/subagent.ts (mitsuhiko/agent-stuff)
+*. Review vendored extensions/btw.ts (mitsuhiko/agent-stuff)
 
 * Memory support
-* BTW
 * Cross Model routing
 * Allow reasoning to be model agnostic (one of below)
     * Different levels can be different models.
