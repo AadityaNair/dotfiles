@@ -86,7 +86,9 @@
     "openrouter/poolside/laguna-s-2.1:free"
   ],
   "_thinkingBudgets": {},
-  "_packages": [],
+  "packages": [
+    "npm:pi-web-access"
+  ],
   "_extensions": [
     "extensions"
   ],
