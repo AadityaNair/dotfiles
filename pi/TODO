@@ -11,10 +11,10 @@ Longer TODOs:
 *. Review extensions/memory.ts (hand-written)
 *. Review extensions/permissions.ts (vendored + merged from pi's official examples)
 *. Review skills/better-diffs (hand-written)
+*. Review extensions/suggest.ts (hand-written)
 
 * Integration with Phone
 * Reasonable English while responding (SKILL)
-* Autosuggestions for next steps
 * Find/Refer to previous conversations.
 * Enter to queue messages, Enter + Enter to steer sooner.
 * Scheduled Runs
