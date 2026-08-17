@@ -5,13 +5,9 @@ Longer TODOs:
 *. (maybe) MCP Support
 *. Review vendored extensions/subagent.ts (mitsuhiko/agent-stuff)
 *. Review vendored extensions/btw.ts (mitsuhiko/agent-stuff)
+*. Review vendored extensions/prompt-editor.ts (mitsuhiko/agent-stuff) - covers cross-model routing + reasoning levels
 
 * Memory support
-* Cross Model routing
-* Allow reasoning to be model agnostic (one of below)
-    * Different levels can be different models.
-    * Asking to think or something gives higher reasoning.
-    * Auto mode
 * Integration with Phone
 * Permission support
 * Better diffs using difftastic/delta (SKILL)
