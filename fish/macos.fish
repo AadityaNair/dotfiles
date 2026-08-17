@@ -24,5 +24,6 @@ set -x GEMINI_CONFIG_DIR "/Users/aaditya/.config/gemini"
 set -x CLAUDE_CONFIG_DIR "/Users/aaditya/.config/claude"
 set -x COPILOT_HOME "/Users/aaditya/.config/copilot"
 set -x AMP_HOME "/Users/aaditya/.local/state/amp"
+set -x PI_CODING_AGENT_DIR "/Users/aaditya/.local/share/pi/agent"
 
 set -x XDG_CACHE_HOME "/Users/aaditya/.local/cache"  # Fish generates completions here.
