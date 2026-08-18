@@ -1,15 +1,23 @@
 ####### Actual Theme Colours
-set -g @text-inactive '#a9b1d6'
-set -g @background-primary '#24283b'
-set -g @background-active '#7dcfff'
-set -g @separator-color '#bb9af7'
-set -g @session '#9aa5ce'
-set -g @time "#2ac3de"
-set -g @message "#f7768e"
-set -g @activity "#ff9e64"
-set -g @border-pane "#73daca"
-set -g @copy-mark-bg "#f7768e"
-set -g @comment "#565f89"
+# Fallbacks first. The style options below (message-style, mode-style, ...)
+# reject an empty colour with "invalid style: fg=,bg=", unlike the format
+# strings, which tolerate it. Seeding every slot with tmux's `default` keeps a
+# missing palette merely unstyled instead of noisy.
+set -g @text-inactive default
+set -g @background-primary default
+set -g @background-active default
+set -g @separator-color default
+set -g @session default
+set -g @time default
+set -g @message default
+set -g @activity default
+set -g @border-pane default
+set -g @copy-mark-bg default
+set -g @comment default
+
+# palette.tmux is a symlink into themes/. See themes/README.md to switch.
+# -q leaves tmux working, just unstyled, if the link is missing or dangling.
+source-file -q ~/.config/dotfiles/tmux/palette.tmux
 
 set -gF @zoom '#{@border-pane}'
 set -gF @date '#{@session}'
