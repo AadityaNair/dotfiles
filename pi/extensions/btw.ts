@@ -3,10 +3,13 @@
  * https://github.com/mitsuhiko/agent-stuff/blob/main/extensions/btw.ts
  * Diff against that path to check for upstream drift.
  */
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import {
 	buildSessionContext,
 	createAgentSession,
 	createExtensionRuntime,
+	getAgentDir,
 	getMarkdownTheme,
 	SessionManager,
 	type AgentSession,
@@ -31,10 +34,18 @@ import {
 
 const BTW_ENTRY_TYPE = "btw-thread-entry";
 const BTW_RESET_TYPE = "btw-thread-reset";
+const BTW_MAIN_CONTEXT_TYPE = "btw-main-context";
 
-const BTW_SYSTEM_PROMPT = [
+const BTW_SYSTEM_PROMPT_WITH_CONTEXT = [
 	"You are BTW, a side-channel assistant embedded in the user's coding agent.",
 	"You have access to the main conversation context — use it to give informed answers.",
+	"Help with focused questions, planning, and quick explorations.",
+	"Be direct and practical.",
+].join(" ");
+
+const BTW_SYSTEM_PROMPT_WITHOUT_CONTEXT = [
+	"You are BTW, a side-channel assistant embedded in the user's coding agent.",
+	"The main conversation context is intentionally not available; rely only on this side conversation.",
 	"Help with focused questions, planning, and quick explorations.",
 	"Be direct and practical.",
 ].join(" ");
@@ -43,6 +54,39 @@ const BTW_SUMMARY_PROMPT =
 	"Summarize this side conversation for handoff into the main conversation. Keep key decisions, findings, risks, and next actions. Output only the summary.";
 
 type SessionThinkingLevel = "off" | AiThinkingLevel;
+
+type BtwConfig = {
+	fetchPreviousContext: boolean;
+	mergeOutputIntoMainContext: boolean;
+};
+
+const DEFAULT_BTW_CONFIG: BtwConfig = {
+	fetchPreviousContext: true,
+	mergeOutputIntoMainContext: true,
+};
+
+function loadBtwConfig(): BtwConfig {
+	const settingsPath = join(getAgentDir(), "settings.json");
+	try {
+		const settings = JSON.parse(readFileSync(settingsPath, "utf8")) as {
+			aadityaCustomItems?: { btw?: Partial<BtwConfig> };
+		};
+		const configured = settings.aadityaCustomItems?.btw;
+		return {
+			fetchPreviousContext:
+				typeof configured?.fetchPreviousContext === "boolean"
+					? configured.fetchPreviousContext
+					: DEFAULT_BTW_CONFIG.fetchPreviousContext,
+			mergeOutputIntoMainContext:
+				typeof configured?.mergeOutputIntoMainContext === "boolean"
+					? configured.mergeOutputIntoMainContext
+					: DEFAULT_BTW_CONFIG.mergeOutputIntoMainContext,
+		};
+	} catch (error) {
+		console.error(`BTW: Could not load ${settingsPath}: ${error instanceof Error ? error.message : String(error)}`);
+		return { ...DEFAULT_BTW_CONFIG };
+	}
+}
 
 type BtwDetails = {
 	question: string;
@@ -87,7 +131,10 @@ function stripDynamicSystemPromptFooter(systemPrompt: string): string {
 		.trim();
 }
 
-function createBtwResourceLoader(ctx: ExtensionContext, appendSystemPrompt: string[] = [BTW_SYSTEM_PROMPT]): ResourceLoader {
+function createBtwResourceLoader(
+	ctx: ExtensionContext,
+	appendSystemPrompt: string[] = [BTW_SYSTEM_PROMPT_WITH_CONTEXT],
+): ResourceLoader {
 	const extensionsResult = { extensions: [], errors: [], runtime: createExtensionRuntime() };
 	const systemPrompt = stripDynamicSystemPromptFooter(ctx.getSystemPrompt());
 
@@ -142,14 +189,22 @@ function getLastAssistantMessage(session: AgentSession): AssistantMessage | null
 	return null;
 }
 
-function buildSeedMessages(ctx: ExtensionContext, thread: BtwDetails[]): Message[] {
+function buildSeedMessages(ctx: ExtensionContext, thread: BtwDetails[], fetchPreviousContext: boolean): Message[] {
 	const seed: Message[] = [];
 
-	try {
-		const contextMessages = buildSessionContext(ctx.sessionManager.getEntries(), ctx.sessionManager.getLeafId()).messages;
-		seed.push(...(contextMessages.filter((message) => "role" in message) as Message[]));
-	} catch {
-		// Ignore context seed failures and continue with an empty side thread.
+	if (fetchPreviousContext) {
+		try {
+			const contextMessages = buildSessionContext(ctx.sessionManager.getEntries(), ctx.sessionManager.getLeafId()).messages;
+			seed.push(
+				...(contextMessages.filter(
+					(message) =>
+						"role" in message &&
+						!(message.role === "custom" && "customType" in message && message.customType === BTW_MAIN_CONTEXT_TYPE),
+				) as Message[]),
+			);
+		} catch {
+			// Ignore context seed failures and continue with only the saved side thread.
+		}
 	}
 
 	for (const item of thread) {
@@ -321,6 +376,7 @@ class BtwOverlay extends Container implements Focusable {
 }
 
 export default function (pi: ExtensionAPI) {
+	let config = loadBtwConfig();
 	let thread: BtwDetails[] = [];
 	let pendingQuestion: string | null = null;
 	let pendingAnswer = "";
@@ -565,10 +621,12 @@ export default function (pi: ExtensionAPI) {
 			modelRegistry: ctx.modelRegistry as AgentSession["modelRegistry"],
 			thinkingLevel: pi.getThinkingLevel() as SessionThinkingLevel,
 			tools: ["read", "bash", "edit", "write"],
-			resourceLoader: createBtwResourceLoader(ctx),
+			resourceLoader: createBtwResourceLoader(ctx, [
+				config.fetchPreviousContext ? BTW_SYSTEM_PROMPT_WITH_CONTEXT : BTW_SYSTEM_PROMPT_WITHOUT_CONTEXT,
+			]),
 		});
 
-		const seedMessages = buildSeedMessages(ctx, thread);
+		const seedMessages = buildSeedMessages(ctx, thread, config.fetchPreviousContext);
 		if (seedMessages.length > 0) {
 			session.agent.state.messages = seedMessages as typeof session.agent.state.messages;
 		}
@@ -781,6 +839,19 @@ export default function (pi: ExtensionAPI) {
 		}
 	}
 
+	function mergeExchangeIntoMainContext(details: BtwDetails): void {
+		pi.sendMessage({
+			customType: BTW_MAIN_CONTEXT_TYPE,
+			content: [
+				"BTW side-conversation exchange:",
+				`User: ${details.question.trim()}`,
+				`Assistant: ${details.answer.trim()}`,
+			].join("\n\n"),
+			display: false,
+			details,
+		});
+	}
+
 	async function injectSummaryIntoMain(ctx: ExtensionContext | ExtensionCommandContext): Promise<void> {
 		if (thread.length === 0) {
 			notify(ctx, "No BTW thread to summarize.", "warning");
@@ -810,7 +881,7 @@ export default function (pi: ExtensionAPI) {
 			return;
 		}
 
-		if (thread.length === 0) {
+		if (thread.length === 0 || config.mergeOutputIntoMainContext) {
 			return;
 		}
 
@@ -881,6 +952,9 @@ export default function (pi: ExtensionAPI) {
 			};
 			thread.push(details);
 			pi.appendEntry(BTW_ENTRY_TYPE, details);
+			if (config.mergeOutputIntoMainContext) {
+				mergeExchangeIntoMainContext(details);
+			}
 
 			pendingQuestion = null;
 			pendingAnswer = "";
@@ -949,6 +1023,7 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	pi.on("session_start", async (_event, ctx) => {
+		config = loadBtwConfig();
 		await restoreThread(ctx);
 	});
 

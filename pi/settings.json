@@ -3,6 +3,12 @@
   "defaultProvider": "openai",
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
+  "aadityaCustomItems": {
+    "btw": {
+      "fetchPreviousContext": true,
+      "mergeOutputIntoMainContext": true
+    }
+  },
   "hideThinkingBlock": false,
   "showCacheMissNotices": false,
   "theme": "tokyonight",
