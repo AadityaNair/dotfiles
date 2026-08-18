@@ -13,9 +13,9 @@ function isEffortLevel(value: string): value is EffortLevel {
 	return (EFFORT_LEVELS as readonly string[]).includes(value);
 }
 
-function getAvailableEffortLevels(ctx: ExtensionCommandContext): EffortLevel[] {
-	const model = ctx.model as ModelWithThinkingLevels | undefined;
-	if (!model?.reasoning) return ["off"];
+function getAvailableEffortLevels(model: ModelWithThinkingLevels | undefined): EffortLevel[] {
+	if (!model) return [...EFFORT_LEVELS];
+	if (!model.reasoning) return ["off"];
 
 	const map = model.thinkingLevelMap;
 	return EFFORT_LEVELS.filter((level) => {
@@ -50,15 +50,19 @@ function applyEffort(pi: ExtensionAPI, ctx: ExtensionCommandContext, requested: 
 }
 
 export default function effortExtension(pi: ExtensionAPI): void {
+	let activeModel: ModelWithThinkingLevels | undefined;
+
 	pi.registerCommand("effort", {
 		description: "Change the current model's reasoning effort",
 		getArgumentCompletions: (prefix: string): AutocompleteItem[] | null => {
 			const normalized = prefix.trim().toLowerCase();
-			const items = EFFORT_LEVELS.filter((level) => level.startsWith(normalized)).map((level) => ({
-				value: level,
-				label: level,
-				description: `Set model reasoning effort to ${level}`,
-			}));
+			const items = getAvailableEffortLevels(activeModel)
+				.filter((level) => level.startsWith(normalized))
+				.map((level) => ({
+					value: level,
+					label: level,
+					description: `Available reasoning effort: ${level}`,
+				}));
 			return items.length > 0 ? items : null;
 		},
 		handler: async (args, ctx) => {
@@ -79,12 +83,20 @@ export default function effortExtension(pi: ExtensionAPI): void {
 			if (!ctx.hasUI) return;
 
 			const current = pi.getThinkingLevel();
-			const available = getAvailableEffortLevels(ctx);
+			const available = getAvailableEffortLevels(ctx.model as ModelWithThinkingLevels | undefined);
 			const ordered = [current, ...available.filter((level) => level !== current)];
 			const selected = await ctx.ui.select(`Model effort (current: ${current})`, ordered);
 			if (!selected || !isEffortLevel(selected)) return;
 
 			applyEffort(pi, ctx, selected);
 		},
+	});
+
+	pi.on("session_start", (_event, ctx) => {
+		activeModel = ctx.model as ModelWithThinkingLevels | undefined;
+	});
+
+	pi.on("model_select", (event) => {
+		activeModel = event.model as ModelWithThinkingLevels;
 	});
 }
