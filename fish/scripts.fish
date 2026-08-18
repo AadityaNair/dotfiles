@@ -34,7 +34,6 @@ abbr -a awkp --position anywhere --set-cursor "awk '{print \$%}'"
 function ls --wraps ls
     eza --group-directories-first --icons --classify --color=always $argv
 end
-abbr -a sl ls
 
 function tree --wraps ls
     eza --group-directories-first --icons --classify --color=always --tree $argv
