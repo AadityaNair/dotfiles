@@ -43,12 +43,18 @@ Base tones:
 
 The base ramp has a finer grain than the three named text tones above — the
 full spec runs `50/100/150/200(tx)/300/400/500(tx-2)/600/700(tx-3)/800(ui-3)/850(ui-2)/900(ui)/950(bg-2)`.
-`tx-2` (500, `#878580`, 5.2:1 on `bg`) reads as properly *dimmed* — right for
-de-emphasis, wrong for a block of content someone needs to read (tool output,
-code blocks). For that, reach for `300` (`#B7B5AC`, 9.3:1) instead: dimmer than
-primary text but still easily legible. Pi's `fgDark` uses this — the earlier
-`tx-2` mapping made every tool-output block and code fence noticeably harder
-to read than the surrounding text.
+`tx-3` and `tx-2` are for genuine de-emphasis (comments, borders). They read as
+much too dark for anything a user is actually meant to read — a "dim" or
+"secondary" style applied to real body content (help text, tool output, code
+blocks). Pi leans on exactly that pattern (its `"dim"` style alone backs 38
+call sites: onboarding hints, the model list, resource summaries), and the
+first pass at this theme mapped `dim`/`muted` straight to `tx-3`(700)/`tx-2`(500)
+— 2.6:1 and 5.2:1 — which read as barely-there. Fixed by walking every text
+tone up one full ramp step so each still reads as *relatively* muted but stays
+legible: `fg`→200 (11.98:1), `fgDark`→300 (9.31:1), `fgGutter`("dim")→400
+(7.05:1), `comment`("muted"/borders)→500 (5.19:1). Check what a "muted"-style
+color actually renders (not just borders/punctuation) before assuming `tx-3`
+is safe — count call sites if the app's source is available.
 
 Other tiers, when a plain accent isn't enough — brighter for emphasis, or a tint
 to sit *behind* text:
