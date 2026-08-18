@@ -1,0 +1,10 @@
+# Flexoki Dark — ghostty colours.
+# Pulled in by ghostty/config via config-file, through ghostty/theme.
+
+theme = Flexoki Dark
+
+# bold-is-bright is deliberately unset here. Ghostty's bundled Flexoki Dark
+# maps normal ANSI to the 400 level but bright to 600, so bright colours 1-6
+# are darker than their normal counterparts; promoting bold text into that
+# inverted half made bold render dimmer than regular text. It is also
+# deprecated as of Ghostty 1.2.0 in favour of bold-color.
