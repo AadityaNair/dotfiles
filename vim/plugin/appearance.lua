@@ -2,20 +2,18 @@ vim.opt.termguicolors = true
 
 local gh_url = require("common").gh_url
 
--- Colorscheme: Loaded at startup
-vim.pack.add({
-    gh_url("folke/tokyonight.nvim"),
-})
+-- Colorscheme: Loaded at startup.
+-- theme.lua is a symlink into themes/. See themes/README.md to switch.
+-- Only the active colorscheme plugin is registered, so the other one costs
+-- nothing here. A missing or dangling link leaves neovim on its default colours.
+local theme_file = vim.fn.stdpath("config") .. "/theme.lua"
+local theme = vim.uv.fs_stat(theme_file) and dofile(theme_file)
 
-require("tokyonight").setup({
-    terminal_colors = true,
-    styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-    },
-})
-
-vim.cmd.colorscheme("tokyonight-night")
+if theme then
+    vim.pack.add({ gh_url(theme.plugin) })
+    theme.setup()
+    vim.cmd.colorscheme(theme.colorscheme)
+end
 
 -- Lazy UI setup
 local function setup_ui()
@@ -28,7 +26,7 @@ local function setup_ui()
 
     require("lualine").setup({
         options = {
-            theme = "tokyonight",
+            theme = theme and theme.lualine or "auto",
             icons_enabled = true,
             globalstatus = true,
         },
