@@ -13,13 +13,11 @@
  * the right gate so suggestions don't get generated (and immediately
  * thrown away) mid-retry.
  *
- * DECISION: a real (but free, capped) extra LLM call, not pure heuristics.
+ * DECISION: a real, capped extra LLM call, not pure heuristics.
  * A heuristic version (e.g. "suggest running tests if source files
- * changed") would be free but low quality and full of special cases. This
- * spends one small completion per idle turn instead, using a model already
- * in the enabledModels allowlist (see settings.json) so it costs nothing.
- * If that model becomes unavailable or the allowlist changes, this needs a
- * fallback - see SUGGESTION_MODEL below.
+ * changed") would be cheap but low quality and full of special cases. The
+ * provider, model, effort, and prompt-tail limits are configured under
+ * settings.json -> aadityaCustomItems.suggest.
  *
  * NOT implemented:
  *  - No caching/dedup of suggestions across turns - every settle re-asks.
@@ -28,24 +26,72 @@
  *    below, or adding a registerCommand("suggest") toggle like pirate.ts.
  */
 
-import { complete, type UserMessage } from "@earendil-works/pi-ai";
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
-// Free model from the enabledModels allowlist in settings.json. Picked
-// big-pickle over deepseek-v4-flash-free/etc arbitrarily - any allowlisted
-// free model works here, this just needs to be cheap and fast since it
-// runs after every idle turn.
-const SUGGESTION_PROVIDER = "opencode";
-const SUGGESTION_MODEL_ID = "big-pickle";
+import type { UserMessage } from "@earendil-works/pi-ai";
+import { getAgentDir, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
+
+const EFFORT_LEVELS = ["off", "minimal", "low", "medium", "high", "xhigh", "max"] as const;
+type EffortLevel = (typeof EFFORT_LEVELS)[number];
+
+type SuggestConfig = {
+	provider: string;
+	modelId: string;
+	effortLevel: EffortLevel;
+	maxTailMessages: number;
+	maxCharsPerMessage: number;
+};
+
+const DEFAULT_CONFIG: SuggestConfig = {
+	provider: "opencode",
+	modelId: "big-pickle",
+	effortLevel: "low",
+	maxTailMessages: 6,
+	maxCharsPerMessage: 2000,
+};
+
+function isEffortLevel(value: unknown): value is EffortLevel {
+	return typeof value === "string" && (EFFORT_LEVELS as readonly string[]).includes(value);
+}
+
+function positiveInteger(value: unknown, fallback: number): number {
+	return typeof value === "number" && Number.isSafeInteger(value) && value > 0 ? value : fallback;
+}
+
+function loadSuggestConfig(): SuggestConfig {
+	const settingsPath = join(getAgentDir(), "settings.json");
+	try {
+		const settings = JSON.parse(readFileSync(settingsPath, "utf8")) as {
+			aadityaCustomItems?: { suggest?: Partial<SuggestConfig> };
+		};
+		const configured = settings.aadityaCustomItems?.suggest;
+		return {
+			provider:
+				typeof configured?.provider === "string" && configured.provider.trim()
+					? configured.provider.trim()
+					: DEFAULT_CONFIG.provider,
+			modelId:
+				typeof configured?.modelId === "string" && configured.modelId.trim()
+					? configured.modelId.trim()
+					: DEFAULT_CONFIG.modelId,
+			effortLevel: isEffortLevel(configured?.effortLevel)
+				? configured.effortLevel
+				: DEFAULT_CONFIG.effortLevel,
+			maxTailMessages: positiveInteger(configured?.maxTailMessages, DEFAULT_CONFIG.maxTailMessages),
+			maxCharsPerMessage: positiveInteger(configured?.maxCharsPerMessage, DEFAULT_CONFIG.maxCharsPerMessage),
+		};
+	} catch (error) {
+		console.error(
+			`Suggest: Could not load ${settingsPath}: ${error instanceof Error ? error.message : String(error)}`,
+		);
+		return { ...DEFAULT_CONFIG };
+	}
+}
 
 const SUGGESTION_SYSTEM_PROMPT = `You suggest what a developer might want to do next, based on the tail of a coding-agent transcript.
 Reply with 2-3 short suggestions, one per line, each a plain imperative phrase (e.g. "Run the test suite", "Commit these changes").
 No numbering, no markdown, no explanation. If nothing sensible comes to mind, reply with a single line: (none)`;
-
-// Keep the prompt payload small - this is a cheap suggestion call, not a
-// full context replay. Last few messages are enough signal for "what's next".
-const MAX_TAIL_MESSAGES = 6;
-const MAX_CHARS_PER_MESSAGE = 2000;
 
 function summarizeContent(content: unknown): string {
 	if (typeof content === "string") return content;
@@ -58,18 +104,21 @@ function summarizeContent(content: unknown): string {
 }
 
 export default function (pi: ExtensionAPI) {
+	let config = loadSuggestConfig();
+
+	pi.on("session_start", () => {
+		config = loadSuggestConfig();
+	});
+
 	pi.on("agent_settled", async (_event, ctx) => {
 		if (!ctx.hasUI) return;
 
-		const model = ctx.modelRegistry.find(SUGGESTION_PROVIDER, SUGGESTION_MODEL_ID);
+		const model = ctx.modelRegistry.find(config.provider, config.modelId);
 		if (!model) {
-			// Allowlist/catalog drifted since this was written - fail silent
-			// rather than nag every turn. See settings.json enabledModels.
+			// Invalid or unavailable configured model: suggestions are best-effort,
+			// so fail silently rather than interrupting the main workflow.
 			return;
 		}
-
-		const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
-		if (auth.ok === false) return;
 
 		// Session entries are { type: "message", message: { role, content, ... } }
 		// per docs/session-format.md - NOT { type: "user" | "assistant" } as a
@@ -83,12 +132,15 @@ export default function (pi: ExtensionAPI) {
 					((e as { message?: { role?: unknown } }).message?.role === "user" ||
 						(e as { message?: { role?: unknown } }).message?.role === "assistant"),
 			)
-			.slice(-MAX_TAIL_MESSAGES);
+			.slice(-config.maxTailMessages);
 
 		if (messages.length === 0) return;
 
 		const transcriptTail = messages
-			.map((m) => `${m.message.role === "user" ? "User" : "Assistant"}: ${summarizeContent(m.message.content).slice(0, MAX_CHARS_PER_MESSAGE)}`)
+			.map(
+				(m) =>
+					`${m.message.role === "user" ? "User" : "Assistant"}: ${summarizeContent(m.message.content).slice(0, config.maxCharsPerMessage)}`,
+			)
 			.join("\n\n");
 
 		const userMessage: UserMessage = {
@@ -98,10 +150,10 @@ export default function (pi: ExtensionAPI) {
 		};
 
 		try {
-			const response = await complete(
+			const response = await ctx.modelRegistry.complete(
 				model,
 				{ systemPrompt: SUGGESTION_SYSTEM_PROMPT, messages: [userMessage] },
-				{ apiKey: auth.apiKey, headers: auth.headers },
+				{ reasoningEffort: config.effortLevel },
 			);
 
 			if (response.stopReason === "aborted" || response.stopReason === "error") return;

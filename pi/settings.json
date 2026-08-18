@@ -7,6 +7,13 @@
     "btw": {
       "fetchPreviousContext": true,
       "mergeOutputIntoMainContext": true
+    },
+    "suggest": {
+      "provider": "opencode",
+      "modelId": "big-pickle",
+      "effortLevel": "low",
+      "maxTailMessages": 6,
+      "maxCharsPerMessage": 2000
     }
   },
   "hideThinkingBlock": false,
