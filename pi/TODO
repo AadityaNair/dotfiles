@@ -6,9 +6,7 @@
 *. (maybe) Parse images/videos
     *. Custom agent with a vision model?
 *. Review vendored extensions/subagent.ts (mitsuhiko/agent-stuff)
-    *. Allow disabling the usage of TMUX
     *. Allow viewing the main agent itself.
-    *. A bunch of variables here can be configured
 *. Review vendored extensions/btw.ts (mitsuhiko/agent-stuff)
     *. Configure thinkingLevels
 *. Review vendored extensions/prompt-editor.ts (mitsuhiko/agent-stuff) - covers cross-model routing + reasoning levels

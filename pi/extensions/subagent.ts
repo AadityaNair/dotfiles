@@ -5,7 +5,7 @@
  */
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { mkdir, readFile, rename, stat, writeFile } from "node:fs/promises";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -30,6 +30,35 @@ const POLL_INTERVAL_MS = 500;
 const PANE_PREVIEW_LINES = 18;
 const THINKING_LEVELS = ["off", "minimal", "low", "medium", "high", "xhigh", "max"] as const;
 const EXTENSION_PATH = fileURLToPath(import.meta.url);
+
+type SubagentConfig = {
+	tmuxAgentsEnabled: boolean;
+};
+
+const DEFAULT_CONFIG: SubagentConfig = {
+	tmuxAgentsEnabled: true,
+};
+
+function loadSubagentConfig(): SubagentConfig {
+	const settingsPath = path.join(getAgentDir(), "settings.json");
+	try {
+		const settings = JSON.parse(readFileSync(settingsPath, "utf8")) as {
+			aadityaCustomItems?: { subagent?: Partial<SubagentConfig> };
+		};
+		const configured = settings.aadityaCustomItems?.subagent;
+		return {
+			tmuxAgentsEnabled:
+				typeof configured?.tmuxAgentsEnabled === "boolean"
+					? configured.tmuxAgentsEnabled
+					: DEFAULT_CONFIG.tmuxAgentsEnabled,
+		};
+	} catch (error) {
+		console.error(
+			`Subagent: Could not load ${settingsPath}: ${error instanceof Error ? error.message : String(error)}`,
+		);
+		return { ...DEFAULT_CONFIG };
+	}
+}
 
 type RunStatus = "queued" | "running" | "completed" | "failed";
 
@@ -403,6 +432,11 @@ export default function subagentExtension(pi: ExtensionAPI): void {
 			return;
 		}
 		registerChildReporter(pi, resultPath);
+		return;
+	}
+
+	const config = loadSubagentConfig();
+	if (!config.tmuxAgentsEnabled) {
 		return;
 	}
 
