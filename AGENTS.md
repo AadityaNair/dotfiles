@@ -24,12 +24,28 @@ This repository contains the configuration files (dotfiles) for the user's devel
 ## 🎨 Design & Consistency
 
 ### Uniform Color Scheme
-Maintain visual consistency across all services. When updating themes or colors, ensure synchronized updates for:
-- **Neovim:** Including UI-generating plugins (e.g., LuaLine).
-- **Fish Shell**
-- **Tmux**
-- **Ghostty**
-- **Atuin History UI**
+Themes live in `themes/`, one self-contained bundle per theme (`flexoki/`,
+`tokyonight/`). Each application reads a symlink pointing into the active
+bundle. **See `themes/README.md`** for how switching works and where every
+symlink goes — read it before touching any colour or theming a new application.
+`themes/flexoki/README.md` is the Flexoki palette reference.
+
+A colour change goes in **every** bundle, not just the active one, and the
+bundles must keep an identical key set — switching re-sources one theme over
+another in a live shell, so any key a bundle omits silently keeps the previous
+theme's value.
+
+Each bundle has one file per application:
+- **Neovim:** `nvim.lua` — the colorscheme plugin, and the LuaLine theme with it.
+- **Fish Shell:** `fish.fish` — syntax highlighting, pager, *and* prompt colours.
+- **Tmux:** `tmux.conf` — palette only; `tmux/theme.tmux` holds the structure.
+- **Ghostty:** `ghostty`
+- **Atuin History UI:** `atuin.toml`
+- **eza:** `eza.yml`
+
+The rule that keeps getting broken, for Flexoki: **dark mode uses the 400
+level, light mode uses 600.** A 600-level colour on the dark background is the
+light-mode palette in the wrong place, and usually fails contrast.
 
 ---
 
