@@ -1,0 +1,23 @@
+[theme]
+name = "flexoki_dark"
+
+# Flexoki dark. Accents are the 400 level -- Flexoki uses 400 for dark mode
+# and 600 for light. Slot names match the keys used by the neovim theme.
+[colors]
+Base = "#CECDC3"           # tx
+Muted = "#878580"          # tx-2
+Annotation = "#575653"     # tx-3
+Title = "#4385BE"          # bl
+Important = "#DA702C"      # or
+Guidance = "#878580"       # tx-2
+
+AlertInfo = "#3AA99F"      # cy
+AlertWarn = "#D0A215"      # ye
+AlertError = "#D14D41"     # re
+
+SyntaxCommand = "#DA702C"  # or
+SyntaxFlag = "#4385BE"     # bl
+SyntaxString = "#3AA99F"   # cy
+SyntaxVariable = "#CE5D97" # ma
+SyntaxOperator = "#878580" # tx-2
+SyntaxComment = "#575653"  # tx-3

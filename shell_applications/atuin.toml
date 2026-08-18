@@ -34,7 +34,9 @@ dir = "~/.local/share/atuin/logs/"
 enabled = false
 
 [theme]
-name = "tokyonight"
+## current.toml is a symlink into themes/. See themes/README.md to switch.
+## Atuin resolves themes by filename, so this name never has to change.
+name = "current"
 ## Color theme to use for rendering in the terminal.
 ## There are some built-in themes, including the base theme ("default"),
 ## "autumn" and "marine". You can add your own themes to the "./themes" subdirectory of your
