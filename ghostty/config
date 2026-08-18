@@ -10,8 +10,9 @@ font-size = 18
 grapheme-width-method = unicode  
 
 ######## Theme & Colors
-theme = tokyonight
-bold-is-bright = true
+# theme is a symlink into themes/. See themes/README.md to switch.
+# The ? prefix leaves ghostty valid if the link is missing or dangling.
+config-file = ?~/.config/dotfiles/ghostty/theme
 # minimum-contrast = 1.0  # Range 1.0-21.0. Auto-adjusts fg/bg to meet contrast ratio.
 
 ######## Cursor

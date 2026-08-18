@@ -1,0 +1,13 @@
+# TokyoNight — ghostty colours.
+# Pulled in by ghostty/config via config-file, through ghostty/theme.
+
+# Ghostty ships several TokyoNight variants. This is the plain "TokyoNight"
+# one, which differs from "TokyoNight Night" only in cursor-text and
+# selection-background, and is what this repo has always used.
+theme = tokyonight
+
+# This config used to carry bold-is-bright = true. That key no longer exists in
+# Ghostty 1.3.2 -- it is absent from all 300 keys in `ghostty +show-config`, and
+# ghostty ignores unknown keys silently rather than failing validation, so the
+# setting had quietly stopped doing anything. bold-color is the replacement if
+# the effect is ever wanted back.
