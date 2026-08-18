@@ -46,8 +46,8 @@
   "tui.altScreen.top": "home",
   "tui.altScreen.bottom": "end",
 
-  "app.interrupt": "escape",
-  "app.clear": "ctrl+c",
+  "app.interrupt": ["escape", "ctrl+c"],
+  "app.clear": "alt+c",
   "app.exit": "ctrl+d",
   "app.suspend": "ctrl+z",
   "app.editor.external": "ctrl+g",
