@@ -81,7 +81,9 @@ file rather than transcribing — two published sources disagree on `green-200`.
 | Ghostty | `ghostty/config` | `~/.config/ghostty/config` | `theme = Flexoki Dark` |
 | eza | `shell_applications/eza_theme.yml` | `~/.config/eza/theme.yml` | YAML, `"#RRGGBB"` |
 | atuin | `shell_applications/atuin_theme.toml` | `~/.config/atuin/themes/flexoki_dark.toml` | TOML, `"#RRGGBB"` |
-| Pi (coding agent) | `pi/themes/flexoki.json` | `$PI_CODING_AGENT_DIR/themes` (`~/.local/share/pi/agent/themes`) → dir symlink; `"theme"` in `pi/settings.json` | JSON, `vars`/`colors`/`export` |
+
+Pi (coding agent) is themed too, but its config now lives in the separate
+`agent-stuff` repo, not here.
 
 Neovim's colorscheme is a separate repo; its `CONTEXT.md` documents the palette
 and semantic slots in depth.
