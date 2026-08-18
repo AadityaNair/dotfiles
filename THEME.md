@@ -41,6 +41,15 @@ Base tones:
 | `tx-2` | `#878580` | dimmed text |
 | `tx` | `#CECDC3` | primary text |
 
+The base ramp has a finer grain than the three named text tones above — the
+full spec runs `50/100/150/200(tx)/300/400/500(tx-2)/600/700(tx-3)/800(ui-3)/850(ui-2)/900(ui)/950(bg-2)`.
+`tx-2` (500, `#878580`, 5.2:1 on `bg`) reads as properly *dimmed* — right for
+de-emphasis, wrong for a block of content someone needs to read (tool output,
+code blocks). For that, reach for `300` (`#B7B5AC`, 9.3:1) instead: dimmer than
+primary text but still easily legible. Pi's `fgDark` uses this — the earlier
+`tx-2` mapping made every tool-output block and code fence noticeably harder
+to read than the surrounding text.
+
 Other tiers, when a plain accent isn't enough — brighter for emphasis, or a tint
 to sit *behind* text:
 
