@@ -1,3 +1,4 @@
+# TODO: See if we care about the colourscheme for fzf/bat. Add/delete configs accordingly.
 ### SETUP VARIABLES
 set -x INSTALL "$HOME/.config"
 set -x DOTFILES "$INSTALL/dotfiles"
@@ -11,6 +12,10 @@ set -x EDITOR nvim
 ### COSMETIC SETTINGS
 set -x BAT_THEME "Catppuccin Mocha"
 set -x EZA_CONFIG_DIR ~/.config/eza
+
+# theme.fish is a symlink into themes/. See themes/README.md to switch.
+# Guarded so a missing or dangling link leaves an unthemed but working shell.
+test -f $FISH_SCRIPTS/theme.fish; and source $FISH_SCRIPTS/theme.fish
 
 set fish_greeting  # We do not need fish greeting us on every shell
 
