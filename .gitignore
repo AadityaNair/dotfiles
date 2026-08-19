@@ -8,11 +8,3 @@ lazy-lock.json
 *company.lua
 nvim-pack-lock.json
 
-# Active-theme symlinks into themes/. Per-machine, so not committed.
-# See themes/README.md.
-fish/theme.fish
-tmux/palette.tmux
-ghostty/theme
-vim/theme.lua
-shell_applications/eza_theme.yml
-shell_applications/atuin_theme.toml

@@ -1,0 +1,1 @@
+../themes/flexoki/nvim.lua
