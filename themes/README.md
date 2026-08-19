@@ -39,22 +39,21 @@ The in-repo four use relative targets, so the repo still works if it is moved.
 
 ## Switching
 
-Set `t` and run the block. `ln -sfn` creates as well as repoints, so this is
-also the install step on a fresh machine.
+`themes/switch-theme.sh <name>` re-points every symlink in the table above at
+`themes/<name>/`, creating them if they don't exist yet — so it's also the
+install step on a fresh machine. It refuses to switch to a bundle that's
+missing a required file rather than leave things half-themed.
 
 ```fish
-set -l t flexoki   # or tokyonight
-
-ln -sfn ../themes/$t/fish.fish $DOTFILES/fish/theme.fish
-ln -sfn ../themes/$t/tmux.conf $DOTFILES/tmux/palette.tmux
-ln -sfn ../themes/$t/ghostty   $DOTFILES/ghostty/theme
-ln -sfn ../themes/$t/nvim.lua  $DOTFILES/vim/theme.lua
-ln -sfn $DOTFILES/themes/$t/eza.yml    ~/.config/eza/theme.yml
-ln -sfn $DOTFILES/themes/$t/atuin.toml ~/.config/atuin/themes/current.toml
-
-tmux source-file ~/.config/dotfiles/tmux/tmux.conf   # if a server is running
-source $DOTFILES/fish/theme.fish                     # for this shell
+themes/switch-theme.sh flexoki      # or tokyonight
+themes/switch-theme.sh --list       # see what's available, and what's active
+themes/switch-theme.sh --current    # print the active theme's name
+source $DOTFILES/fish/theme.fish    # picks the new theme up in this shell
 ```
+
+It reloads tmux itself (`tmux source-file`, if a server is running). Fish,
+ghostty, eza, atuin, and neovim still need the steps in the table below —
+the script prints them as a reminder after switching.
 
 What updates when:
 
@@ -86,18 +85,24 @@ cannot be suppressed while a theme is named in its config.
    the key coverage right rather than starting from an upstream theme file —
    see the note below.
 2. Follow `flexoki/README.md` for palette discipline if the theme has a spec.
-3. Switch to it with the block above and verify — most of these fail silently,
-   so check rendered output rather than trusting the file. `flexoki/README.md`
-   has the per-application commands.
+3. Run `themes/switch-theme.sh --check` — it verifies every bundle has all six
+   required files (and flags any stray file that isn't one of them).
+4. Switch to it with `themes/switch-theme.sh <name>` and verify — most of
+   these fail silently, so check rendered output rather than trusting the
+   file. `flexoki/README.md` has the per-application commands.
 
 **Keep the key set identical across bundles.** The upstream fish themes did
 not: TokyoNight set eight keys Flexoki did not, and Flexoki set three TokyoNight
 did not. Because switching re-sources a theme over the top of the previous one
 in a live shell, any key a bundle omits keeps the *old* theme's value. Both
-bundles here now define the same 23 keys.
+bundles here now define the same 23 keys. `--check` only verifies file
+presence, not key coverage inside a file — that part is still manual.
 
 ## Adding an application
 
-Add a file to every bundle, a symlink to the tables above, a read site in the
-application's config, and — if the symlink lives in the repo — a `.gitignore`
-entry.
+1. Add a file to every existing bundle.
+2. Add a symlink to the table above, a read site in the application's config,
+   and — if the symlink lives in the repo — a `.gitignore` entry.
+3. Add the file to `required_files` and `links` at the top of
+   `switch-theme.sh`, then run `themes/switch-theme.sh --check` to confirm
+   every bundle actually has it.
