@@ -14,3 +14,5 @@ fish/theme.fish
 tmux/palette.tmux
 ghostty/theme
 vim/theme.lua
+shell_applications/eza_theme.yml
+shell_applications/atuin_theme.toml
