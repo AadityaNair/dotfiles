@@ -10,17 +10,18 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_dir="$(dirname "$script_dir")"
 themes_dir="$script_dir"
 
-# One entry per themed application: "<bundle file>|<symlink path>".
-# Paths starting with $repo_dir are relative to the repo; the two under
-# $HOME live outside it, where atuin/eza insist on finding them.
+# One entry per themed application: "<bundle file>|<symlink path>". All six
+# symlinks live in the repo; the apps that need a path outside it (atuin,
+# eza) get there via their own stable, one-time symlink — see
+# themes/README.md — so switching never has to touch $HOME.
 required_files=(fish.fish tmux.conf ghostty nvim.lua eza.yml atuin.toml)
 links=(
     "fish.fish|$repo_dir/fish/theme.fish"
     "tmux.conf|$repo_dir/tmux/palette.tmux"
     "ghostty|$repo_dir/ghostty/theme"
     "nvim.lua|$repo_dir/vim/theme.lua"
-    "eza.yml|$HOME/.config/eza/theme.yml"
-    "atuin.toml|$HOME/.config/atuin/themes/current.toml"
+    "eza.yml|$repo_dir/shell_applications/eza_theme.yml"
+    "atuin.toml|$repo_dir/shell_applications/atuin_theme.toml"
 )
 
 usage() {

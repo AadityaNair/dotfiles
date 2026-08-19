@@ -9,8 +9,8 @@ bundle: one file per themed application, all named the same way across bundles.
 | `tmux.conf` | tmux palette (`@`-variables only) | `tmux/theme.tmux` |
 | `ghostty` | ghostty colours | `ghostty/config` |
 | `nvim.lua` | neovim colorscheme + lualine | `vim/plugin/appearance.lua` |
-| `eza.yml` | eza | `EZA_CONFIG_DIR` |
-| `atuin.toml` | atuin history UI | `shell_applications/atuin.toml` |
+| `eza.yml` | eza | `EZA_CONFIG_DIR`, via `~/.config/eza/theme.yml` |
+| `atuin.toml` | atuin history UI | `shell_applications/atuin.toml`, via `~/.config/atuin/themes/current.toml` |
 
 `flexoki/README.md` documents the Flexoki palette itself — read that before
 touching any colour.
@@ -22,9 +22,8 @@ bundles. Nothing parses a config, forks a process, or branches on a variable at
 startup; the indirection is a symlink, resolved by the kernel. The symlinks
 *are* the state, so there is no separate file that can disagree with them.
 
-Four symlinks live in the repo and are gitignored, because which theme is
-active is a per-machine choice rather than something to commit. Two live
-outside it, where their application insists on finding them:
+All six symlinks live in the repo and are gitignored, because which theme is
+active is a per-machine choice rather than something to commit:
 
 | Symlink | Points at |
 |---|---|
@@ -32,10 +31,21 @@ outside it, where their application insists on finding them:
 | `tmux/palette.tmux` | `../themes/<name>/tmux.conf` |
 | `ghostty/theme` | `../themes/<name>/ghostty` |
 | `vim/theme.lua` | `../themes/<name>/nvim.lua` |
-| `~/.config/eza/theme.yml` | `~/.config/dotfiles/themes/<name>/eza.yml` |
-| `~/.config/atuin/themes/current.toml` | `~/.config/dotfiles/themes/<name>/atuin.toml` |
+| `shell_applications/eza_theme.yml` | `../themes/<name>/eza.yml` |
+| `shell_applications/atuin_theme.toml` | `../themes/<name>/atuin.toml` |
 
-The in-repo four use relative targets, so the repo still works if it is moved.
+They all use relative targets, so the repo still works if it is moved.
+
+eza and atuin insist on a fixed path outside the repo, so each gets one more
+symlink pointing at its `shell_applications/` file above. Unlike the six,
+these are per-machine **setup**, not part of switching — they don't change
+when the theme does, so `switch-theme.sh` never touches them. Create them
+once (`ln -sfn` also repoints, so re-running is harmless):
+
+```fish
+ln -sfn $DOTFILES/shell_applications/eza_theme.yml    ~/.config/eza/theme.yml
+ln -sfn $DOTFILES/shell_applications/atuin_theme.toml ~/.config/atuin/themes/current.toml
+```
 
 ## Switching
 
@@ -101,8 +111,12 @@ presence, not key coverage inside a file — that part is still manual.
 ## Adding an application
 
 1. Add a file to every existing bundle.
-2. Add a symlink to the table above, a read site in the application's config,
-   and — if the symlink lives in the repo — a `.gitignore` entry.
+2. Add an in-repo symlink (`<app>/theme.<ext>`, or a file under
+   `shell_applications/` if the app can't read the repo path directly), a
+   `.gitignore` entry for it, and a read site in the application's config. If
+   the app needs a fixed path outside the repo, point that path at the new
+   in-repo symlink as one-time setup — see the eza/atuin example above —
+   rather than having `switch-theme.sh` reach outside the repo.
 3. Add the file to `required_files` and `links` at the top of
    `switch-theme.sh`, then run `themes/switch-theme.sh --check` to confirm
    every bundle actually has it.
