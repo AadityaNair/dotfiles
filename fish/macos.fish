@@ -7,6 +7,8 @@ abbr -a capw "screencapture -i -w -c" # Capture a window
 abbr -a cc pbcopy
 abbr -a pp pbpaste
 
+function mrc; vim ~/.config/dotfiles/fish/macos.fish; end
+
 set -x HOMEBREW_PREFIX /opt/homebrew
 set -x HOMEBREW_CELLAR /opt/homebrew/Cellar
 set -x HOMEBREW_REPOSITORY /opt/homebrew

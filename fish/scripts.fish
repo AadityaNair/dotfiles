@@ -17,6 +17,8 @@ function src; nvim $DOTFILES/fish/scripts.fish; end
 function trc; nvim $DOTFILES/tmux/tmux.conf; end
 function vrc; nvim $DOTFILES/vim/init.lua; end
 
+function agnt; cd ~/.config/agent-stuff/; end
+
 function vim --wraps nvim; nvim $argv; end
 
 # CD Aliases
