@@ -53,7 +53,14 @@ require("treesitter-context").setup({
 -- Returned so the ansible provisioning task can dofile() this same file
 -- headlessly and block on the exact install it kicks off here, instead of
 -- guessing how long installation takes or duplicating this language list.
-local install_task = require("nvim-treesitter").install(supported_langs)
+--
+-- max_jobs caps concurrent compiles: install()'s default (100, effectively
+-- unbounded) spawns a C/C++ compiler per language at once. On a fresh host
+-- installing all ~28 parsers, that's 28 concurrent compiles - enough to OOM
+-- and knock the box off SSH mid-provisioning. One job per core avoids
+-- oversubscribing the machine, and naturally scales down on the small,
+-- low-core hosts that are also the ones tightest on memory.
+local install_task = require("nvim-treesitter").install(supported_langs, { max_jobs = vim.uv.available_parallelism() })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = supported_langs,
