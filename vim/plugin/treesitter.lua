@@ -50,7 +50,11 @@ require("treesitter-context").setup({
     line_numbers = true,
 })
 
-require("nvim-treesitter").install(supported_langs)
+-- Returned so the ansible provisioning task can dofile() this same file
+-- headlessly and block on the exact install it kicks off here, instead of
+-- guessing how long installation takes or duplicating this language list.
+local install_task = require("nvim-treesitter").install(supported_langs)
+
 vim.api.nvim_create_autocmd("FileType", {
     pattern = supported_langs,
     callback = function()
@@ -82,3 +86,5 @@ vim.filetype.add({
         ["sh"] = "bash",
     },
 })
+
+return install_task
