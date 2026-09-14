@@ -129,3 +129,25 @@ function extract
             echo "Can't `extract` this file. Please check."
     end
 end
+
+# Show an image in the terminal. Inside tmux, use a popup so it doesn't
+# fight with whatever owns the pane (e.g. claude code).
+function img
+    if test (count $argv) -ne 1
+        echo "Usage: img <file>"
+        return 1
+    end
+
+    if not test -f $argv[1]
+        echo "Not a file: $argv[1]"
+        return 1
+    end
+
+    set -l file (realpath $argv[1])
+
+    if set -q TMUX
+        tmux display-popup -E -w 80% -h 80% "chafa '$file'; read -n 1"
+    else
+        chafa $file
+    end
+end
