@@ -32,6 +32,7 @@ local supported_langs = {
     "starlark",
     "thrift",
     "toml",
+    "typescript",
     "vim",
     "vimdoc",
     "yaml",
