@@ -72,13 +72,8 @@ keybind = super+v=paste_from_clipboard
 keybind = super+shift+p=toggle_command_palette
 
 ######## Quick Terminal
-quick-terminal-screen = mouse
-quick-terminal-animation-duration = 0
-quick-terminal-position = top
-quick-terminal-size = 100%,100%
-quick-terminal-space-behavior = remain
-quick-terminal-autohide = true
-keybind = global:f12=toggle_quick_terminal
+# Disabled. No toggle_quick_terminal keybind is bound,
+# so the quick terminal stays off entirely.
 
 # Experiment to make allow newline in AI Agents. Apparently this is the best way.
 keybind = shift+enter=text:\x1b\r
