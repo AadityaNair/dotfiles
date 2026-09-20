@@ -2,7 +2,6 @@
 # -q leaves tmux working, just unstyled, if the link is missing or dangling.
 source-file -q ~/.config/dotfiles/tmux/palette.tmux
 
-set -gF @zoom '#{@border-pane}'
 set -gF @date '#{@session}'
 set -gF @text-active '#{@background-primary}'
 set -gF @copy-mark-fg '#{@background-primary}'
@@ -10,6 +9,12 @@ set -gF @copy-mark-fg '#{@background-primary}'
 set -gF @style-copy '#[fg=#{@copy-mark-bg},italics]'
 set -gF @style-prefix '#[fg=#{@background-active},italics,bold]'
 set -gF @style-session '#[fg=#{@session},italics,bold]'
+set -gF @style-inactive '#[default]#[fg=#{@text-inactive}]'
+set -gF @style-current '#[default]#[fg=#{@text-current},bg=#{@background-current},italics,bold]'
+set -gF @style-sync '#[fg=#{@message},bold]'
+set -gF @style-sync-current '#[fg=#{@message},bg=#{@background-current}]'
+set -gF @style-zoom '#[fg=#{@zoom},bold]'
+set -gF @style-zoom-current '#[fg=#{@zoom},bg=#{@background-current}]'
 
 
 
@@ -29,16 +34,15 @@ set -g status-left-length 32
 set -gF @separator '#[fg=#{@separator-color}]|#[default]'
 
 set -gF @window-activity-style '#[fg=#{@activity}]'
-set -gF @window-zoom-style '#[us=#{@zoom},double-underscore]'
 
 set -g status-justify centre
 
 set -g window-status-format "\
 #{?window_index,#{@separator},} \
-#{?pane_synchronized,#[fg=#{@message}]= ,}\
+#{?pane_synchronized,#{@style-sync}=#{@style-inactive} ,}\
 #{?@renamed,#[fg=#{@comment}]* ,}\
-#[fg=#{@text-inactive}]\
-#{?window_zoomed_flag,#{@window-zoom-style}+ ,}\
+#{@style-inactive}\
+#{?window_zoomed_flag,#{@style-zoom}+#{@style-inactive} ,}\
 #{?window_activity_flag,#{@window-activity-style},}\
 #{window_name}\
 #{?#{!=:#{window_panes},1},#[fg=#{@comment}]:#{window_panes},}\
@@ -46,10 +50,10 @@ set -g window-status-format "\
 
 set -g window-status-current-format "\
 #{?window_index,#{@separator},} \
-#[fg=#{@text-active},bg=#{@background-active},italics,bold]\
- #{?pane_synchronized,= ,}\
+#{@style-current}\
+ #{?pane_synchronized,#{@style-sync-current}=#{@style-current} ,}\
 #{?@renamed,* ,}\
-#{?window_zoomed_flag,+ ,}\
+#{?window_zoomed_flag,#{@style-zoom-current}+#{@style-current} ,}\
 #{window_name}\
 #{?#{!=:#{window_panes},1},:#{window_panes},} \
 #[default]\
@@ -115,5 +119,5 @@ set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
 # window-status-style  # This is set directly in the format and hence un-needed.
 # window-style  # Sets colour for the whole window/pane.
 
-set -gF mode-style 'fg=#{@text-active},bg=#{@background-active}'
+set -gF mode-style 'fg=#{@text-active},bg=#{@copy-mode-bg}'
 # vim: ft=tmux
