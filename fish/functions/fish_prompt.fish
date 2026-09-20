@@ -2,7 +2,7 @@
 
 # Colours come from the active theme, sourced by config.fish. Fall back to the
 # terminal default so a missing theme does not make set_color error every prompt.
-for c in yellow cyan red orange
+for c in directory git error duration
     set -q __prompt_c_$c; or set -g __prompt_c_$c normal
 end
 
@@ -15,7 +15,7 @@ function __prompt_directory
     if test (count $parts) -gt 3
         set cwd '…/'(string join '/' $parts[-3..-1])
     end
-    set_color $__prompt_c_yellow
+    set_color $__prompt_c_directory
     printf ' %s ❯' $cwd
 end
 
@@ -29,7 +29,7 @@ function __prompt_git
             set -l git_out (command git status --porcelain=v1 --branch 2>/dev/null)
             test -n "$git_out"; or return
 
-            set_color $__prompt_c_cyan
+            set_color $__prompt_c_git
 
             # Branch name from header: "## main...origin/main [ahead 1]"
             set -l header $git_out[1]
@@ -81,7 +81,7 @@ end
 
 function __prompt_exit_status --argument-names last_status
     if test $last_status -ne 0
-        set_color $__prompt_c_red
+        set_color $__prompt_c_error
         printf ' %s ❯' $last_status
     end
 end
@@ -89,7 +89,7 @@ end
 function __prompt_duration --argument-names duration
     if test -n "$duration"; and test "$duration" -gt 2000
         set -l secs (math --scale=0 "$duration / 1000")
-        set_color $__prompt_c_orange
+        set_color $__prompt_c_duration
         if test $secs -ge 3600
             printf ' %dh%dm%ds ❯' (math --scale=0 "$secs / 3600") (math --scale=0 "$secs % 3600 / 60") (math --scale=0 "$secs % 60")
         else if test $secs -ge 60

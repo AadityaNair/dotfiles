@@ -11,7 +11,7 @@ set -g fish_color_keyword bb9af7
 set -g fish_color_quote e0af68
 set -g fish_color_redirection c0caf5
 set -g fish_color_end ff9e64
-set -g fish_color_error f7768e
+set -g fish_color_error f7768e --underline
 set -g fish_color_param 9d7cd8
 set -g fish_color_option bb9af7
 set -g fish_color_escape bb9af7
@@ -35,9 +35,9 @@ set -g fish_pager_color_selected_completion c0caf5
 set -g fish_pager_color_selected_description 9aa5ce
 
 ### Prompt (fish/functions/fish_prompt.fish)
-set -g __prompt_c_yellow e0af68
-set -g __prompt_c_cyan 2ac3de
-set -g __prompt_c_red f7768e
-set -g __prompt_c_orange ff9e64
+set -g __prompt_c_directory e0af68
+set -g __prompt_c_git 2ac3de
+set -g __prompt_c_error f7768e
+set -g __prompt_c_duration ff9e64
 
 # vim: ft=fish
