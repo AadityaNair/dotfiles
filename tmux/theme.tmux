@@ -51,14 +51,15 @@ set -g window-status-format "\
 set -g window-status-current-format "\
 #{?window_index,#{@separator},} \
 #{@style-current}\
- #{?pane_synchronized,#{@style-sync-current}=#{@style-current} ,}\
+#{?pane_synchronized,#{@style-sync-current}=#{@style-current} ,}\
 #{?@renamed,* ,}\
 #{?window_zoomed_flag,#{@style-zoom-current}+#{@style-current} ,}\
 #{window_name}\
-#{?#{!=:#{window_panes},1},:#{window_panes},} \
+#{?#{!=:#{window_panes},1},:#{window_panes},}\
 #[default]\
 "
 
+set -g window-status-current-style 'default'  # tmux defaults this to 'underscore'. The #[default] tokens in the current format would bring that underline back, so reset it here.
 set -g window-status-activity-style ''  # How to style a window with activity. Apparently, an empty string is required for theme to work.
 
 ######### Status Right
@@ -114,7 +115,6 @@ set -g copy-mode-mark-style 'fg=#{@copy-mark-fg},bg=#{@copy-mark-bg}'
 # status-right-style  # We set the style directly in the format.
 # window-active-style  # Sets colour for the active window/pane.
 # window-status-bell-style  # Window status for bell alerts. We have disabled bell alerts
-# window-status-current-style # Unnecessary in the current setup because we have to manually define the colours in format again.
 # window-status-last-style  # Style the last active window. We don't want to make that distinction.
 # window-status-style  # This is set directly in the format and hence un-needed.
 # window-style  # Sets colour for the whole window/pane.
