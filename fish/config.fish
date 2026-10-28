@@ -4,7 +4,7 @@ set -x INSTALL "$HOME/.config"
 set -x DOTFILES "$INSTALL/dotfiles"
 set -x FISH_SCRIPTS "$DOTFILES/fish"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
-if command -q rex
+if test "$TERM_PROGRAM" = rex
     set -x TERM xterm-rex
 else
     set -x TERM xterm-ghostty
