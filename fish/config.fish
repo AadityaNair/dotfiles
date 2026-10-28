@@ -4,7 +4,11 @@ set -x INSTALL "$HOME/.config"
 set -x DOTFILES "$INSTALL/dotfiles"
 set -x FISH_SCRIPTS "$DOTFILES/fish"
 set -x XDG_CACHE_HOME "$HOME/.local/cache"
-set -x TERM xterm-ghostty
+if command -q rex
+    set -x TERM xterm-rex
+else
+    set -x TERM xterm-ghostty
+end
 set -x MANPAGER "nvim +Man!"
 set -x PAGER bat
 set -x EDITOR nvim
@@ -40,6 +44,5 @@ set -g fish_key_bindings fish_default_key_bindings  # Emacs mode.
 bind ctrl-c cancel-commandline  # This leaves the previous commandline in place so we can refer to it.
 # TODO: Audit/clean up default keybindings.
 # TODO: Put all the XDG variables here properly.
-# TODO: Move the tmux config to .config
 
 # vim: ft=fish
