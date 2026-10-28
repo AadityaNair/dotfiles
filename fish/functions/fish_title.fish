@@ -9,13 +9,13 @@
 function terminal_rename
 end
 
-if test -n "$ZELLIJ"
-    function terminal_rename
-        zellij action rename-tab "$argv[1]"
-    end
-else if test -n "$TMUX"
+if test -n "$TMUX"
     function terminal_rename
         printf "\033k%s\033\\" "$argv[1]"
+    end
+else
+    function terminal_rename
+        printf "$argv[1]"
     end
 end
 
