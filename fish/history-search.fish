@@ -72,6 +72,7 @@ function atuin_history_down
     if test "$__hist_search_curr_response" != "$(commandline)"
         set __hist_search_index -1
         set __hist_search_orig_query "$(commandline)"
+        set __hist_search_curr_response "$(commandline)"
         return
     end
 
