@@ -1,57 +1,125 @@
+### Updates
+update_check = false
+show_whats_new = false
 
-style = "full"
-command_chaining = true
+### Sync
+auto_sync = true
+sync_address = "https://api.atuin.sh"
+sync_frequency = "5m"
+network_timeout = "30s"
+network_connect_timeout = "5s"
+local_timeout = "2s"
+# extra_headers
 
-inline_height_shell_up_key_binding = 5
+### Stats
+dialect = "uk"
 
-exit_mode = "return-original"
-
-
-enter_accept = false
-
-
-
-prefers_reduced_motion = true
-
-[stats]
-
-
-[keys]
-# Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
-# scroll_exits = true
-# Defaults to true. The left arrow key will exit the TUI when scrolling before the first character
-# exit_past_line_start = true
-# Defaults to true. The right arrow key performs the same functionality as Tab and copies the selected line to the command line to be modified.
-# accept_past_line_end = true
-
-[sync]
-records = true
-
-[logs]
-dir = "~/.local/share/atuin/logs/"
-
-[daemon]
-enabled = false
-
-[theme]
-## current.toml is a symlink into themes/. See themes/README.md to switch.
-## Atuin resolves themes by filename, so this name never has to change.
-name = "current"
-## Color theme to use for rendering in the terminal.
-## There are some built-in themes, including the base theme ("default"),
-## "autumn" and "marine". You can add your own themes to the "./themes" subdirectory of your
-## Atuin config (or ATUIN_THEME_DIR, if provided) as TOML files whose keys should be one or
-## more of AlertInfo, AlertWarn, AlertError, Annotation, Base, Guidance, Important, and
-## the string values as lowercase entries from this list:
-##    https://ogeon.github.io/docs/palette/master/palette/named/index.html
-## If you provide a custom theme file, it should be  called "NAME.toml" and the theme below
-## should be the stem, i.e. `theme = "NAME"` for your chosen NAME.
-# name = "autumn"
-
-## Whether the theme manager should output normal or extra information to help fix themes.
-## Boolean, true or false. If unset, left up to the theme manager.
-# debug = true
+### Search
+# TODO: Daemon-fuzzy
+search_mode = "fuzzy" 
+filter_mode = "global"
+workspaces = false
+# search_mode_shell_up_key_binding
+# filter_mode_shell_up_key_binding
+# inline_height_shell_up_key_binding
 
 [search]
-filters = [ "global", "host"]
+    filters = [ "global", "host"]
+    shells = "all"
+# frequency_score_multiplier
+# recency_score_multiplier
+# frecency_score_multiplier
 
+
+### Output
+style = "full"
+invert = false
+show_preview = false
+show_help = true
+show_tabs = false
+exit_mode = "return-original"
+# inline_height
+# max_preview_height
+# auto_hide_height
+
+
+### History
+store_failed = true
+# history_format
+# history_filter
+# cwd_filter
+
+### Keys
+bind_up_arrow = false
+bind_ctrl_r = false
+ctrl_n_shortcuts = false
+show_numeric_shortcuts = false
+
+[keys]
+    scroll_exits = true
+# exit_past_line_start = true
+# accept_past_line_end = true
+# accept_past_line_start = false
+# accept_with_backspace = false
+
+### Others
+command_chaining = true
+enter_accept = false
+prefers_reduced_motion = true
+# keymap_mode = "emacs"
+# keymap_cursor
+
+[tmux]
+    enabled = true # TODO:
+# width = 80%
+# height = 80%
+
+
+[logs]
+    enabled = true
+    level = "trace"
+    retention = "1d"
+    dir = "~/.local/share/atuin/logs/"
+
+    [logs.ai]
+        enabled = false
+    
+    [logs.daemon]
+        enabled = false
+    
+    [logs.search]
+        enabled = true
+
+[daemon]
+    enabled = false  # TODO:
+    sync_frequency="5m"
+# socket_path
+# pidfile_path
+# systemd_socket
+# tcp_port
+
+
+[output]
+    enabled = false
+    sync = false
+# max_output_size = "1MB"
+# max_disk_usage = "10%"
+# command_filter = []
+
+
+[security]
+    redact_patterns = []
+    sensitive_files = []
+
+
+[ui]
+    columns = ["duration", "time", "command"]
+    syntax_highlight = true
+
+
+[ai]
+    enabled = false
+
+
+[theme]
+    name = "current"
