@@ -23,13 +23,6 @@ workspaces = false
 # filter_mode_shell_up_key_binding
 # inline_height_shell_up_key_binding
 
-[search]
-    filters = [ "global", "host"]
-    shells = "all"
-# frequency_score_multiplier
-# recency_score_multiplier
-# frecency_score_multiplier
-
 
 ### Output
 style = "full"
@@ -55,19 +48,28 @@ bind_ctrl_r = false
 ctrl_n_shortcuts = false
 show_numeric_shortcuts = false
 
-[keys]
-    scroll_exits = true
-# exit_past_line_start = true
-# accept_past_line_end = true
-# accept_past_line_start = false
-# accept_with_backspace = false
-
 ### Others
 command_chaining = true
 enter_accept = false
 prefers_reduced_motion = true
 # keymap_mode = "emacs"
 # keymap_cursor
+
+# NOTE: the [search] and [keys] tables live below. TOML assigns keys to
+# the most recent [header], so no top-level keys may follow a [table].
+[search]
+    filters = [ "global", "host"]
+    shells = "all"
+# frequency_score_multiplier
+# recency_score_multiplier
+# frecency_score_multiplier
+
+[keys]
+    scroll_exits = true
+# exit_past_line_start = true
+# accept_past_line_end = true
+# accept_past_line_start = false
+# accept_with_backspace = false
 
 [tmux]
     enabled = true # TODO:
