@@ -12,14 +12,14 @@ end
 set --erase ATUIN_HISTORY_ID
 
 function _atuin_preexec --on-event fish_preexec
-    set -g ATUIN_HISTORY_ID (atuin history start -- "$argv[1]")
+    set -g ATUIN_HISTORY_ID (atuin history start --hook -- "$argv[1]" 2>/dev/null)
 end
 
 function _atuin_postexec --on-event fish_postexec
     set -l s $status
 
     if test -n "$ATUIN_HISTORY_ID"
-        ATUIN_LOG=error atuin history end --exit $s -- $ATUIN_HISTORY_ID &>/dev/null &
+        atuin history end --hook --exit $s -- $ATUIN_HISTORY_ID &>/dev/null &
         disown
     end
 
