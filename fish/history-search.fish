@@ -99,7 +99,11 @@ set -g ATUIN_POPUP_HEIGHT "60%"
 
 function _atuin_search
     set -l ATUIN_H
-    set -l tmpdir (mktemp -d)
+    set -l tmp_base $TMPDIR
+    if test -z "$tmp_base"
+        set tmp_base /tmp
+    end
+    set -l tmpdir (mktemp -d "$tmp_base/atuin.XXXXXX")
     if test -n "$TMUX"; and test -d "$tmpdir"
         set -l result_file "$tmpdir/result"
         set -l query (commandline -b | string replace -a "'" "'\\''")
@@ -110,7 +114,7 @@ function _atuin_search
 
         # In the popup, atuin's TUI goes to the terminal (stdout), and the
         # selected result is written to stderr, which we redirect to a file.
-        tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -E -- \
+        tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -- \
             sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
 
         if test -f "$result_file"
@@ -122,10 +126,15 @@ function _atuin_search
         set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
     end
 
-    command rm -rf "$tmpdir"
+    if test -n "$tmpdir"
+        command rm -rf "$tmpdir"
+    end
 
     if test -n "$ATUIN_H"
-        commandline -r "$ATUIN_H"
+        commandline -r -- "$ATUIN_H"
+        # Reset inline history state so the next up/down starts a fresh
+        # search from this selection instead of continuing a stale one.
+        set -g __hist_search_index -1
     end
     commandline -f repaint
 end
