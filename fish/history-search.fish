@@ -31,12 +31,12 @@ function __hist_search_get_command
         --offset $__hist_search_index -- "$__hist_search_orig_query")"
 
     if test $status -eq 0
-        commandline -- "$response"
+        commandline -r -- "$response"
         set -g __hist_search_curr_response "$response"
         return 0
     else
         # If search fails, keep the last returned command
-        commandline -- "$__hist_search_curr_response"
+        commandline -r -- "$__hist_search_curr_response"
         return 1
     end
 end
@@ -49,8 +49,8 @@ function atuin_history_up
 
     # If we are starting a new search or if we changed the query partway through a
     # previous search, we start again from the beginning.
-    if test $__hist_search_index -eq -1; or test "$__hist_search_curr_response" != "$(commandline)"
-        set -g __hist_search_orig_query "$(commandline)"
+    if test $__hist_search_index -eq -1; or test "$__hist_search_curr_response" != "$(commandline -b)"
+        set -g __hist_search_orig_query "$(commandline -b)"
         set -g __hist_search_curr_response "$__hist_search_orig_query"
         set -g __hist_search_index -1
     end
@@ -69,16 +69,16 @@ function atuin_history_down
         return
     end
 
-    if test "$__hist_search_curr_response" != "$(commandline)"
+    if test "$__hist_search_curr_response" != "$(commandline -b)"
         set -g __hist_search_index -1
-        set -g __hist_search_orig_query "$(commandline)"
-        set -g __hist_search_curr_response "$(commandline)"
+        set -g __hist_search_orig_query "$(commandline -b)"
+        set -g __hist_search_curr_response "$(commandline -b)"
         return
     end
 
     set -g __hist_search_index (math $__hist_search_index - 1)
     if test $__hist_search_index -le -1
-        commandline -- "$__hist_search_orig_query"
+        commandline -r -- "$__hist_search_orig_query"
         set -g __hist_search_index -1
         return
     end
