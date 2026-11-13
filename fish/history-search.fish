@@ -114,8 +114,8 @@ function _atuin_search
 
         # In the popup, atuin's TUI goes to the terminal (stdout), and the
         # selected result is written to stderr, which we redirect to a file.
-        tmux display-popup -d (pwd) -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -- \
-            sh -c "ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
+        tmux display-popup -d "(pwd)" -w "$ATUIN_POPUP_WIDTH" -h "$ATUIN_POPUP_HEIGHT" -E -- \
+            sh -c "PATH='$PATH' ATUIN_SESSION='$ATUIN_SESSION' ATUIN_LOG=error ATUIN_QUERY='$query' atuin search $escaped_args -i 2>'$result_file'"
 
         if test -f "$result_file"
             set ATUIN_H "$(cat "$result_file")"
@@ -123,11 +123,15 @@ function _atuin_search
     else
         # Without tmux: swap stdout/stderr so the TUI renders to the terminal
         # and the selected result is captured via command substitution.
-        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3)"
+        set ATUIN_H "$(ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search $argv -i 3>&1 1>&2 2>&3 3>&-)"
     end
 
     if test -n "$tmpdir"
         command rm -rf "$tmpdir"
+    end
+
+    if test -n "$ATUIN_H"
+        set ATUIN_H (printf '%s' "$ATUIN_H" | string trim | string collect)
     end
 
     if test -n "$ATUIN_H"
