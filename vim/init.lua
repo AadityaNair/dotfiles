@@ -2,6 +2,8 @@
 -- All the fancy shit in the plugin/
 -- This file should work even if everything else breaks.
 
+-- TODO: Review the configuration/plugins. Consider vendoring
+-- TODO: TODO colours for flexoki matches the key
 vim.loader.enable() -- Performance dark magic: https://github.com/neovim/neovim/pull/22668
 
 if vim.fn.has("macunix") == 1 and vim.env.TERM_PROGRAM == "Ghostty" then
