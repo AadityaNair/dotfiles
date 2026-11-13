@@ -1,16 +1,10 @@
+# WARNING: Atuin by default expects `atuin uuid` for ATUIN_SESSION. This only makes sense while searching with a
+#          `session` filter. We don't use that. On top of that, `atuin uuid` is the costliest part of the startup.
+#          So, we have optimised to leave it as a static string. This definitely breaks atuin session search, making it same as global
 
-# We can't replace `atuin uuid` for multiple reasons:
-# 1. It works across platforms.
-# 2. We need UUIDv7 for atuin operations — it has ordering properties atuin relies on.
-# 3. The best platform-specific alternative only saves ~2ms.
-# 4. We can't use a static string because this is the primary key for the db.
-#    A static value would cause all new history entries to overwrite the same row.
-if not set -q ATUIN_SESSION; or test "$ATUIN_SHLVL" != "$SHLVL"
-    set -gx ATUIN_SESSION (atuin uuid)
-    set -gx ATUIN_SHLVL $SHLVL
-end
+set -gx ATUIN_SESSION "non-standard-default"
+
 set --erase ATUIN_HISTORY_ID
-
 function _atuin_preexec --on-event fish_preexec
     set -g ATUIN_HISTORY_ID (atuin history start --hook -- "$argv[1]" 2>/dev/null)
 end

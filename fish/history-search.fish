@@ -10,9 +10,11 @@
 # NOTE: Fish has no API to highlight part of the commandline buffer without using selection mode (which breaks editing).
 #       So we cannot hightlight the query string.
 
+# NOTE: The `session` search filter acts same as global until we fix the ATUIN_SESSION variable
+
 # Configure atuin search
 set -g __hist_search_mode fulltext # Possible options being: prefix, fulltext, fuzzy, skim
-set -g __hist_search_filter global # Possible options being: global, host, session, directory, workspace
+set -g __hist_search_filter global # Possible options being: global, host, directory, workspace
 
 set -g __hist_search_index -1
 set -g __hist_search_orig_query ""
