@@ -33,9 +33,11 @@ function get_command_and_update_prompt
     if test $status -eq 0
         commandline -- "$response"
         set __hist_search_curr_response "$response"
+        return 0
     else
         # If search fails, keep the last returned command
         commandline -- "$__hist_search_curr_response"
+        return 1
     end
 end
 
@@ -54,7 +56,11 @@ function atuin_history_up
     end
     set __hist_search_index (math $__hist_search_index + 1)
 
-    get_command_and_update_prompt
+    # Clamp: if there is no older match, stay where we were instead of
+    # inflating the index (which would take N dead downs to unwind).
+    if not get_command_and_update_prompt
+        set __hist_search_index (math $__hist_search_index - 1)
+    end
 end
 
 function atuin_history_down
@@ -76,7 +82,11 @@ function atuin_history_down
         return
     end
 
-    get_command_and_update_prompt
+    # Clamp: if the offset has no match (e.g. index was inflated before this
+    # fix), undo the decrement so we don't drift.
+    if not get_command_and_update_prompt
+        set __hist_search_index (math $__hist_search_index + 1)
+    end
 end
 
 bind up atuin_history_up
