@@ -16,6 +16,7 @@ local_timeout = "2s"
 dialect = "uk"
 
 ### Search
+# NOTE: The session filter mode is broken (it acts same as global). It will remain so until we fix ATUIN_SESSION
 # TODO: Daemon-fuzzy
 search_mode = "fuzzy" 
 filter_mode = "global"
