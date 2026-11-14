@@ -99,6 +99,8 @@ bind down atuin_history_down
 set -g ATUIN_POPUP_WIDTH "80%"
 set -g ATUIN_POPUP_HEIGHT "60%"
 
+
+# TODO: Rex mode
 function _atuin_search
     set -l ATUIN_H
     set -l tmp_base $TMPDIR
