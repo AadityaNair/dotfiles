@@ -1,0 +1,45 @@
+-- ~/.config/rex/init.lua (repo: dotfiles/rex/init.lua)
+--
+-- Rex reads exactly one file per account: this file. The *server* reads it,
+-- not the app, so it lives on the same machine as the server and
+-- `rex config reload` must run there too (refused over remote connections).
+--
+-- Location:
+--   macOS/Linux: $XDG_CONFIG_HOME/rex/init.lua, else ~/.config/rex/init.lua
+--   Windows:     %AppData%\rex\init.lua
+--   Override:    REX_CONFIG=<path> in the *server process* env.
+-- Setup here:  ~/.config/rex -> ~/.config/dotfiles/rex (dir symlink,
+--   same pattern as nvim/tmux in this repo). Symlink currently REMOVED, so
+--   the server keeps its last loaded config until you re-link + reload.
+--
+-- Docs (via Rex MCP / superlogical.com):
+--   Config:    /rex/docs/customize/config          (file location, reload,
+--              `rex config check`, execution model, splitting)
+--   Lua API:   /rex/docs/reference/lua             (full rex.* reference,
+--              Lua 5.1, no io.popen/os.execute -- use rex.exec)
+--   Shortcuts: /rex/docs/customize/keyboard-shortcuts  (rex.bind/unbind)
+--   Actions:   /rex/docs/customize/actions         (rex.action, rex.invoke,
+--              rex.client.queue, rex.exec)
+--
+-- Splitting (documented pattern -- Config > Splitting Configuration):
+--   `require` loads other Lua files stored *beside* this one. Each file
+--   runs top to bottom at load; load-time only defines bindings/actions.
+--   API calls (rex.session.*, rex.block.*, rex.call) only work *later* --
+--   inside an action's run(), a bound function, or an event handler --
+--   because load has no client. Mistakes are reported per-file.
+--
+-- Validate:
+--   rex config check ./init.lua   (symlink absent; check by path from rex/)
+--   rex -C <label> keymap         (server-merged keymap incl. client)
+-- Reload (server machine, symlink in place):
+--   rex config reload
+--
+-- Layout (flat -- only siblings are documented, so no subdirectories):
+--   init.lua            this entry point (requires only, no bindings)
+--   helpers.lua         shared code: apply_client_settings(SETTINGS)
+--   keybindings.lua     the complete keymap (rex.bind + explicit unbinds)
+--   client_settings.lua client settings as a data list + apply_settings
+
+require("helpers")
+require("client_settings")
+require("keybindings")
